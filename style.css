@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    background-color: #222831;
+}
+
+nav {
+    background-color: #14181E;
+}
+
+.navbar-brand {
+    color: #B55400;
+}
+
+.title {
+font-family: 'Montserrat';
+font-style: normal;
+padding: 6%;
+color: #EEE;
+animation: fadeInAnimation ease 3s;
+animation-iteration-count: 1;
+animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
