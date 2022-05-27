@@ -2,7 +2,7 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-	.title {background: red; height:100%;}
+	.title {height:100%;}
 	h1 {
 		font-size: 30px;
 	}
@@ -11,47 +11,128 @@
 		height:100%;
 		padding-top: 45vh;
 	}
+	.chart-scroll {
+		height: 645px;
+		display: flex;
+		flex-direction: column;
+	}
+	.text-scroll {
+		overflow: scroll;
+		overflow-x: hidden; /* Hide horizontal scrollbar */
+		background-color: #222831;
+	}
+	.text {
+		padding:2%;
+	}
+	.part1 {
+		height: 645px;
+		width: 100%;
+	}
   }
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
-	.title {background: green;}
+	.title {height:100%;}
 	p {
 		font-size: 15px; 
 		height:100%;
 		padding-top: 43vh;
+	}
+	.chart-scroll {
+		height: 645px;
+		display: flex;
+		flex-direction: column;
+	}
+	.text-scroll {
+		overflow: scroll;
+		overflow-x: hidden; /* Hide horizontal scrollbar */
+		background-color: #222831;
+	}
+	.text {
+		padding:2%;
+	}
+	.part1 {
+		height: 645px;
+		width: 100%;
 	}
   }
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
-	.title {
-		background-color: blue;
-	}
 	p {
 		font-size: 15px; 
 		height:100%;
 		padding-top: 43vh;
 	}
+	.chart-scroll {
+		display: flex;
+		flex-direction: row;
+		height: 645px;
+	}
+	.text-scroll {
+		overflow: scroll;
+		overflow-x: hidden; /* Hide horizontal scrollbar */
+		background-color: #222831;
+	}
+	.text {
+		padding:2%;
+	}
+	.part1 {
+		height: 645px;
+		width: 100%;
+	}
   } 
   
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px) {
-	.title {background-color: orange;}
 	p {
 		font-size: 16px; 
 		height:100%;
 		padding-top: 38vh;
 	}
+	.chart-scroll {
+		display: flex;
+		flex-direction: row;
+		height: 645px;
+	}
+	.text-scroll {
+		overflow: scroll;
+		overflow-x: hidden; /* Hide horizontal scrollbar */
+		width: 50%;
+	}
+	.text {
+		padding:2%;
+	}
+	.part1 {
+		height: 645px;
+		width: 100%;
+	}
   } 
   
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
-	.title {background-color: pink;}
 	p {
 		font-size: 18px; 
 		height:90%;
 		padding-top: 36vh;
+	}
+	.chart-scroll {
+		display: flex;
+		flex-direction: row;
+		height: 645px;
+	}
+	.text-scroll {
+		overflow: scroll;
+		overflow-x: hidden;
+		background-color: #222831;
+		width: 50%;
+	}
+	.text {
+		padding:2%;
+	}
+	.part1 {
+		height: 645px;
+		width: 100%;
 	}
   }
 
@@ -59,6 +140,7 @@
 
 body {
     background-color: #222831;
+	overflow-x: hidden;
 }
 
 nav {
