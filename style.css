@@ -25,6 +25,9 @@
 	.text {
 		padding:2%;
 	}
+	.chart {
+		padding:10%
+	}
 	.part1 {
 		height: 550px;
 		width: 100%;
