@@ -18,6 +18,7 @@
 		flex-direction: column-reverse;
 	}
 	.text-scroll {
+		margin-top:2%;
 		overflow: scroll;
 		overflow-x: hidden; /* Hide horizontal scrollbar */
 		background-color: #222831;
@@ -56,6 +57,9 @@
 	}
 	.text {
 		padding:2%;
+	}
+	.chart {
+		padding:12%
 	}
 	.part1 {
 		height: 645px;
@@ -213,4 +217,9 @@ animation-fill-mode: forwards;
 }
 .text-scroll::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
+}
+
+.sticky-top {
+	position: -webkit-sticky;
+  	position: sticky;
 }
