@@ -14,7 +14,7 @@
 	.chart-scroll {
 		height: 645px;
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 	.text-scroll {
 		overflow: scroll;
@@ -41,10 +41,11 @@
 	.chart-scroll {
 		height: 645px;
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 	}
 	.text-scroll {
 		overflow: scroll;
+		padding: 5%;
 		overflow-x: hidden; /* Hide horizontal scrollbar */
 		background-color: #222831;
 	}
@@ -71,15 +72,21 @@
 	}
 	.text-scroll {
 		overflow: scroll;
+		padding: 5%;
+		width: 50%;
 		overflow-x: hidden; /* Hide horizontal scrollbar */
 		background-color: #222831;
 	}
 	.text {
 		padding:2%;
 	}
-	.part1 {
-		height: 645px;
-		width: 100%;
+	.chart {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-left: 10%;
+		padding-right: 10%;
 	}
   } 
   
@@ -97,11 +104,20 @@
 	}
 	.text-scroll {
 		overflow: scroll;
+		padding: 5%;
 		overflow-x: hidden; /* Hide horizontal scrollbar */
 		width: 50%;
 	}
 	.text {
 		padding:2%;
+	}
+	.chart {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-left: 10%;
+		padding-right: 10%;
 	}
 	.part1 {
 		height: 645px;
@@ -121,18 +137,23 @@
 		flex-direction: row;
 		height: 645px;
 	}
+	.chart {
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-left: 10%;
+		padding-right: 10%;
+	}
 	.text-scroll {
 		overflow: scroll;
 		overflow-x: hidden;
 		background-color: #222831;
+		padding: 5%;
 		width: 50%;
 	}
 	.text {
 		padding:2%;
-	}
-	.part1 {
-		height: 645px;
-		width: 100%;
 	}
   }
 
