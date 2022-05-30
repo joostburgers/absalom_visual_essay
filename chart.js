@@ -1,9 +1,4 @@
-function isElementOnScreen(id) {
-    const element = document.getElementById(id);
-    const bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 0;
-    }
-  var ctx = document.getElementById("race").getContext('2d');
+ var ctx = document.getElementById("race").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
@@ -40,4 +35,3 @@ function isElementOnScreen(id) {
       }
     }
   });
-

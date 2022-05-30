@@ -38,31 +38,88 @@
 </nav>
 </header>
 <!-- End of Navbar -->
+
+
+
 <!-- Title -->
-<div class = "title" style = "background-color:#B55400">
-  <h2 style = "color: #222831;">Digital Supplement:</h2>
-  <em><h1 style = "color: #FFF;">Absalom, Absalom!</h1></em>
-  <em><h1 style = "color: #222831;">and The Digital Humanities</h1></em>
-  <p style = "color: #13171c;">
+<div style = "background-color:#B55400">
+  <h2 class = "title" style = "color: #222831; padding-top: 6%;">Digital Supplement:</h2>
+  <em><h1 class = "title" style = "color: #FFF;">Absalom, Absalom!</h1></em>
+  <em><h1 class = "title" style = "color: #222831;">and The Digital Humanities</h1></em>
+  <p class = "title-p-text" style = "color: #13171c;">
     This interactive essay acts as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
   </p>
 </div>
-<div style="height:40px; background-color: #222831;">
-<div class = "chart-scroll" style = "background-color: #222831;">
-<div class = "text-scroll" style = "background-color: #222831;">
-  <h1>Race</h1>
-<p class = "text">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id semper dolor. Praesent semper urna metus, et tincidunt purus mattis vitae. Ut ac hendrerit felis, et vulputate purus. Duis nec laoreet tortor. Sed blandit tortor non dignissim pulvinar. Nulla sollicitudin mi eros, ac congue mauris condimentum vitae. Morbi egestas sodales enim, sit amet fermentum ligula euismod in. Suspendisse non purus vel lectus suscipit pellentesque.
-  Pellentesque et ligula nisl. Nam ac sapien arcu. Nulla facilisi. Praesent sed enim id purus convallis consectetur vitae a ligula. Sed eu fermentum mauris. Maecenas tortor enim, dignissim a ullamcorper ut, efficitur tincidunt est. Nam sagittis mollis urna non volutpat. Sed sed eros cursus, maximus ex ut, bibendum mi. Donec vitae placerat tellus, eu ultricies tortor. Nulla varius massa eu eros luctus, vel blandit nulla pulvinar. Sed suscipit semper lorem, eget hendrerit purus semper nec. Duis posuere vel magna vel hendrerit. Donec massa augue, suscipit eu placerat pellentesque, cursus porttitor metus. Vivamus aliquam nulla et mauris maximus rhoncus. Maecenas sagittis libero eu enim lobortis, vel facilisis justo porta. Aenean venenatis pulvinar enim sed tincidunt.
-  Pellentesque eu tincidunt mauris, ac rutrum lorem. Vivamus malesuada sed nisl at lobortis. Donec quis condimentum ipsum, at tempor enim. Morbi eget dui enim. Cras eu sem justo. Sed aliquam ultricies dui ut ullamcorper. Morbi fringilla ipsum tortor, eu auctor leo sodales et. Aliquam eget lectus aliquam, volutpat lectus at, maximus odio. Quisque ut sem eros.
-  Aenean sagittis ligula non ex gravida sollicitudin. In hac habitasse platea dictumst. Integer id eros quis turpis finibus pretium. Nam euismod orci ipsum, eget fermentum nibh laoreet eget. Vivamus consectetur massa posuere nulla aliquam, nec aliquam turpis sagittis. Pellentesque libero lorem, rutrum vel laoreet ut, luctus eu sem. Mauris imperdiet purus mi, interdum semper arcu varius consequat. Curabitur bibendum erat ut velit malesuada, id suscipit sem viverra. Aliquam lectus neque, eleifend eu velit vel, scelerisque pellentesque nibh. In placerat pharetra sapien, a egestas diam aliquam vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum augue quam, suscipit vel odio vitae, porttitor mollis leo. Sed pharetra est vulputate, aliquam purus vitae, sollicitudin justo. Sed efficitur euismod urna, non lacinia libero suscipit sit amet. Sed dictum semper elit. Ut euismod volutpat diam, eget mollis metus auctor in.</p>
+<!-- Title -->
+<div class = "divider-h" style ="background-color: #222831;"></div>
+
+<!-- notebook -->
+<div class = "notebook">
+<h1 style = "text-align: center; padding: 0">Characters</h1>
+<p class = "notebook">
+The Digital Yoknapatawpha database contains every character who appears in Faulkner’s Yoknapatawpha fictions.
+Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
+With this information, we can make a literary demography of the composition of the entire character population.
+One of the most salient pieces of demographic information in Absalom, Absalom! is race.
+</p>
+<div class = "quote">
+  <blockquote class="blockquote">
+    <p class="mb-0">As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.
+      <br> 
+      The insanity of racism.</p>
+  </blockquote>
+  <figcaption class="blockquote-footer"><cite title="Source Title">Toni Morrison, <em>Conversations</em></cite>
+  </figcaption>
 </div>
-<div class = "divider" style ="background-color: #222831;"></div>
+<p class = "notebook">
+  Racial segregation was a central feature of the American South before the Civil Rights Movement.
+  Faulkner was highly sensitive to how this artificial ‘color line’ structured social relations.
+  </p>
+</div>
+<!-- notebook -->
+<div class = "chart-scroll">
+<div class = "text-scroll">
+<p class = "text">
+ <div class = "scrollbox" id = "box1" style = "background-color: #13171c; margin-bottom:20vh;">
+  <p style = "padding: 8px 8px; border-left: 6px solid whitesmoke;">There are 194 unique characters in Absalom, Absalom!.
+  The overwhelming majority of these characters are White.</p>
+ </div>
+ <div class = "scrollbox" id = "box2" style = "background-color: #13171c; margin-bottom:20vh;">
+  <p style = "padding: 8px 8px; border-left: 6px solid whitesmoke;">Simply counting the total number of characters in a text does not account for the number of times they occur in the text.
+
+    Statistically speaking, there is only one Moor in Shakespeare’s Othello, but as he appears in nearly every scene he is one of the most present characters.
+    
+    We can weight for character presence by calculating how often they occur in an event.</p>
+ </div>
+ <div class = "scrollbox" id = "box2" style = "background-color: #13171c; margin-bottom:20vh;">
+  <p style = "padding: 8px 8px; border-left: 6px solid whitesmoke;">Weighting by narrative presence actually underscores the presence of White characters more.</p>
+ </div>
+ <div class = "scrollbox" id = "box2" style = "background-color: #13171c; margin-bottom:20vh;">
+  <p style = "padding: 8px 8px; border-left: 6px solid whitesmoke;">Meanwhile, the number of Mixed Ancestry characters increases.</p>
+ </div>
+ <div class = "scrollbox" id = "box2" style = "background-color: #13171c; margin-bottom:20vh;">
+  <p style = "padding: 8px 8px; border-left: 6px solid whitesmoke;">But only because Black characters are less present.</p>
+ </div>
+</p>
+</div>
+<div class = "divider-v" style ="background-color: #222831;"></div>
 <div class = "chart" style = "background-color: #222831;">
   <canvas id="race" width="400" height="400"></canvas>
 </div>
 </div>
-<div style="height:40px; background-color: #222831;"></div>
+
+<div class = "notebook">
+  <p class = "notebook">
+    The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective.
+Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
+  </p>
+    <div class = "notebook"></div>
+    <p class = "notebook">
+It is clear from reading Absalom, Absalom! that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
+The various narrators only really care about racial passing if it threatens upper class white femininity.
+As such, they naturalize racial difference, and also circumscribe the boundaries of gender, sexuality, and class.
+In the highly fraught social circumstances of the pre-Civil Rights South, there is no way to separate race, class, gender, and sexuality.</p>
+</div>
 <!-- <div class = "part1" style = "background-color:#222831">
 </div> -->
 
@@ -84,14 +141,15 @@
 </footer>
   
 </div>
-<!-- End of .container -->
 
 <!-- End of Title -->
 <!-- Scripts -->
 <script src="https://code.highcharts.com/highcharts.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
 </body>
 <script src = chart.js></script>
+<script src = scroll.js></script>
 </html>

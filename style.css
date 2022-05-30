@@ -2,16 +2,7 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-	.title {height:100%;}
-	.divider {height:40px;}
-	h1 {
-		font-size: 30px;
-	}
-	p {
-		font-size: 13px; 
-		height:100%;
-		padding-top: 45vh;
-	}
+	.divider-v {height:40px;}
 	.chart-scroll {
 		height: 645px;
 		display: flex;
@@ -33,17 +24,26 @@
 		height: 550px;
 		width: 100%;
 	}
+	h1.title {
+		font-size: 40px;
+	}
+	h2.title {
+		font-size: 25px;
+	}
+	.title-p-text {
+		padding: 50% 6% 10% 6%;
+	}
+	.notebook {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 25px;
+	}
   }
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
-	.title {height:100%;}
-	.divider {height:40px;}
-	p {
-		font-size: 15px; 
-		height:100%;
-		padding-top: 43vh;
-	}
+	.divider-v {height:40px;}
 	.chart-scroll {
 		height: 645px;
 		display: flex;
@@ -65,16 +65,31 @@
 		height: 645px;
 		width: 100%;
 	}
+	h1.title {
+		font-size: 40px;
+	}
+	h2.title {
+		font-size: 25px;
+	}
+	.title-p-text {
+		padding: 40% 6% 10% 6%;
+	}
+	.notebook {
+		padding: 25px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	p.notebook {
+		width:60%
+	}
+	/* .quote {padding-bottom: 150px;} */
   }
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
-	.divider {height:0px;}
-	p {
-		font-size: 15px; 
-		height:100%;
-		padding-top: 43vh;
-	}
+	.divider-v {height:0px;}
 	.chart-scroll {
 		display: flex;
 		flex-direction: row;
@@ -92,26 +107,43 @@
 	}
 	.chart {
 		width: 50%;
+		height: auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding-left: 10%;
+		padding-top: 10%;
 		padding-right: 10%;
 	}
 	.part1 {
 		height: 645px;
 		width: 100%;
 	}
+	.title-p-text {
+		padding: 6%;
+	}
+	h1.title {
+		font-size: 40px;
+	}
+	h2.title {
+		font-size: 25px;
+	}
+	.title-p-text {
+		padding: 30% 6% 10% 6%;
+	}
+	.notebook {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.divider-2 {
+		height: 0px;
+	}
   } 
   
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px) {
 	.divider {height:0px;}
-	p {
-		font-size: 16px; 
-		height:100%;
-		padding-top: 38vh;
-	}
 	.chart-scroll {
 		display: flex;
 		flex-direction: row;
@@ -138,16 +170,25 @@
 		height: 645px;
 		width: 100%;
 	}
-  } 
+	h1.title {
+		font-size: 40px;
+	}
+	h2.title {
+		font-size: 25px;
+	}
+	.title-p-text {
+		padding: 20% 6% 10% 6%;
+	}
+	.notebook {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}
   
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
 	.divider {height:0px;}
-	p {
-		font-size: 18px; 
-		height:90%;
-		padding-top: 36vh;
-	}
 	.chart-scroll {
 		display: flex;
 		flex-direction: row;
@@ -175,6 +216,26 @@
 		height: 645px;
 		width: 100%;
 	}
+	h1.title {
+		font-size: 50px;
+	}
+	h2.title {
+		font-size: 30px;
+	}
+	.title-p-text {
+		padding: 18% 6% 10% 6%;
+	}
+	.notebook {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.quote {
+		width: 80%;
+	}
+	.blockquote{
+		padding: 5px 10px;
+	}
   }
 
 
@@ -195,12 +256,13 @@ nav {
 .title {
 font-family: 'Montserrat';
 font-style: normal;
-padding: 6%;
 color: #EEE;
+padding-left: 6%;
 animation: fadeInAnimation ease 3s;
 animation-iteration-count: 1;
 animation-fill-mode: forwards;
 }
+
 
 @keyframes fadeInAnimation {
 	0% {
@@ -222,4 +284,20 @@ animation-fill-mode: forwards;
 .sticky-top {
 	position: -webkit-sticky;
   	position: sticky;
+}
+.divider-h {
+	height: 40px;
+}
+
+.blockquote {
+	padding: 15px;
+	color:#B55400;
+	text-align: center;
+}
+.blockquote-footer {
+		text-align: center;
+}
+
+.quote {
+	background-color: #14181E;
 }
