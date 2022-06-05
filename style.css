@@ -301,3 +301,11 @@ animation-fill-mode: forwards;
 .quote {
 	background-color: #14181E;
 }
+
+p.notebook {
+	color: #EEE;
+}
+
+.step {
+	background-color: #222831;
+}
