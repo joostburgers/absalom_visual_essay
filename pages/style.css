@@ -286,7 +286,7 @@ animation-fill-mode: forwards;
   	position: sticky;
 }
 .divider-h {
-	height: 40px;
+	height: 120px;
 }
 
 .blockquote {
@@ -304,4 +304,8 @@ animation-fill-mode: forwards;
 
 p.notebook {
 	color: #EEE;
+}
+
+.flourish-embed {
+	width: 500px;
 }

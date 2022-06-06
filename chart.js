@@ -1,4 +1,4 @@
- var ctx = document.getElementById("race").getContext('2d');
+ var ctx = document.getElementById("1").getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
