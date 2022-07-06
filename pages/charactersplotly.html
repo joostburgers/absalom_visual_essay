@@ -229,8 +229,8 @@
                 </div>
             </article>
             <figure>
-                <canvas id="myChart"></canvas>
-                <!-- <div id = "tester" style = "height:300px"></div> -->
+                <!-- <canvas id="myChart"></canvas> -->
+                <div id = "tester" style = "height:300px"></div>
             </figure>
 
         </section>
@@ -317,32 +317,32 @@
 			
 			// document.getElementById("stepcount").innerHTML=response.index;g
 			console.log(response.index)
-			if(response.index==1){
-    		myChart.data.datasets[0].data = [12, 19, 300, 5, 2, 3]
-    		myChart.update()}
+			// if(response.index==1){
+    		// myChart.data.datasets[0].data = [12, 19, 300, 5, 2, 3]
+    		// myChart.update()}
 
 			// WORKING PLOTLY JS CODE W/O ANIMATION
 
-			// var layout = {
-  			// height: 400,
-  			// width: 500,
-			// paper_bgcolor:'rgba(0,0,0,0)',
-    		// plot_bgcolor:'rgba(0,0,0,0)'
-			// };
+			var layout = {
+  			height: 400,
+  			width: 500,
+			paper_bgcolor:'rgba(0,0,0,0)',
+    		plot_bgcolor:'rgba(0,0,0,0)'
+			};
 
-			// let data = [{
-  			// values: [19, 26, 55],
-  			// labels: ['Residential', 'Non-Residential', 'Utility'],
-  			// type: 'pie'}];
-			// if(response.index == 1)
-			// {
-			// 	data = [{
-  			// 	values: [25, 12, 63],
-  			// 	labels: ['Residential', 'Non-Residential', 'Utility'],
-  			// 	type: 'pie'}];
-			// }
+			let data = [{
+  			values: [19, 26, 55],
+  			labels: ['Residential', 'Non-Residential', 'Utility'],
+  			type: 'pie'}];
+			if(response.index == 1)
+			{
+				data = [{
+  				values: [25, 12, 63],
+  				labels: ['Residential', 'Non-Residential', 'Utility'],
+  				type: 'pie'}];
+			}
 
-			// Plotly.newPlot('myDiv', data, layout);
+			Plotly.newPlot('tester', data, layout);
 
 			// END OF PLOTLY
 
