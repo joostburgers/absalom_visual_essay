@@ -1,4 +1,10 @@
 // TREEMAP CHART (RACE HIERARCHY) BEGINS
+fetch("./data/character_demography_chart.json")
+    .then(response => {
+        return response.json();
+    })
+    .then(jsondata => console.log(jsondata));
+
 function colorFromValue(value, border) {
     var alpha = (1 + Math.log(value)) / 5;
     var color = "#b55400";
@@ -92,6 +98,8 @@ function colorFromValue(value, border) {
   // TREEMAP CHART (RACE HIERARCHY) BEGINS
 
   //SCROLLY PIE BEGINS
+
+
 const ctv = document.getElementById('scrollychart');
 const scrollychart = new Chart(ctv, {
     type: 'doughnut',
