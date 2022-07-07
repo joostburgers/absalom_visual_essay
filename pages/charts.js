@@ -56,12 +56,12 @@ function colorFromValue(value, border) {
       datasets: [
         {
           label: "Race Hierarchy Treemap",
-          data: [100, 20, 6, 6, 5, 4, 3, 2, 2, 1],
-          backgroundColor: function(ctx) {
-            return colorFromValue(ctx.dataset.data[ctx.dataIndex].v);
+          data: [100, 75, 25, 6, 6, 5, 4, 3, 2, 2, 1],
+          backgroundColor: function(cty) {
+            return colorFromValue(cty.dataset.data[cty.dataIndex].v);
           },
-          borderColor: function(ctx) {
-            return colorFromValue(ctx.dataset.data[ctx.dataIndex].v, true);
+          borderColor: function(cty) {
+            return colorFromValue(cty.dataset.data[cty.dataIndex].v, true);
           },
           spacing: 0.1,
           borderWidth: 2,
