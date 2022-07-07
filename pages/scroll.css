@@ -63,7 +63,7 @@
 		}
 
 		.step.is-active {
-			border-left: solid #EEE 12px;
+			/* border-left: solid #EEE 12px; */
 			background-color: #B55400;
 			color: #EEE;
 		}
@@ -72,5 +72,5 @@
 			text-align: center;
 			padding: 1rem;
 			text-align: left;
-			font-size: 1.2rem;
+			font-size: 1.1rem;
 		}

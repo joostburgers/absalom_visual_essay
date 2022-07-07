@@ -39,6 +39,31 @@
 		justify-content: center;
 		padding: 25px;
 	}
+	.step {
+		margin: 0 auto 2rem auto;
+		padding: 7rem 2rem;
+		background-color: #222831;
+		color: #2c3440;
+	}
+
+	.step:last-child {
+		margin-bottom: 0;
+	}
+
+	.step.is-active {
+		border-left: solid #EEE 12px;
+		background-color: #B55400;
+		color: #EEE;
+	}
+	article {
+		position: relative;
+		padding: 0 1rem;
+		max-width: 20rem;
+	}
+	figure{
+		position: absolute;
+		
+	}
   }
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
