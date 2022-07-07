@@ -309,3 +309,12 @@ p.notebook {
 .flourish-embed {
 	width: 500px;
 }
+
+html, body {
+	background-color: #222831;
+}
+
+.blockchart {
+	width: 60vh;
+	height: 40vw;
+}
