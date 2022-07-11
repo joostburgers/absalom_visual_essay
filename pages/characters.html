@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Characters in Absalom, Absalom!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- JS Packages -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
 
@@ -81,7 +82,7 @@
 				</div>
 				<div class = "divider-h" style ="background-color: #222831;height: 40px;"></div>
 					<!-- <canvas id = "race-hierarchy-map"></canvas> -->
-					<div class = "blockchart">
+					<div class = "target-container">
 						<canvas id = "racechart"></canvas>
 					</div>
 				<p class = "notebook" style = "padding-bottom: 0; margin-bottom: auto; color: #EEE;">
@@ -120,6 +121,7 @@
 			<figure> 
 				<!-- Scroll Chart BEGINS -->
 					<canvas id="scrollychart" style = "height: 200px;"></canvas>
+					<canvas id="scrollychart" style = "height: 200px;"></canvas>
 				<!-- Scroll Chart ENDS -->
 			</figure>
 		</section>
@@ -129,7 +131,7 @@
 				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective. <br><br>
 				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
 	  		</p>
-			  <div class = "blockchart">
+			  <div class = "target-container">
 				<canvas id="racechart2"></canvas>
 				</div>
 			  <p class = "notebook">
@@ -143,10 +145,12 @@
 		</div>
 		</div>
 
+		<div id = "chart"></div>
+
 		<!-- Scroll Text ENDS -->
 		  <!-- Footer -->
 		  <!-- Remove the container if you want to extend the Footer to full width. -->
-		  <div class="container my-5">
+		  <div class="container my-5" style = "color: #B55400;">
 		  
 			<footer class="text-center text-white" style="background-color: #f1f1f1;">
 		  
@@ -194,12 +198,7 @@
 
 			scroller.resize();
 
-			window.onload = function() {
-    		if ( window.orientation == 0 || window.orientation == 180 ) { 
-        	alert ('Please use your mobile device in landscape mode'); 
-    		}
-};
-		}
+}
 
 		// scrollama event handlers
 		function handleStepEnter(response) {
@@ -215,14 +214,29 @@
 			// figure.select("p").text(response.index + 1);
 			//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
 			if(response.index==1){
-    		scrollychart.data.datasets[0].data = [12, 19, 300, 5, 2, 3]
+    		scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
     		scrollychart.update()}
 			if(response.index==2){
-    		scrollychart.data.datasets[0].data = [49, 19, 300, 5, 2, 3]
+			scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
     		scrollychart.update()}
 			if(response.index==3){
-    		scrollychart.data.datasets[0].data = [49, 19, 300, 5, 2, 38]
+			scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
     		scrollychart.update()}
+
+  			var observer = new IntersectionObserver(function(entries) {
+			if(entries[0]['isIntersecting'] === true) {
+				racechart.data.datasets[0].data = ["invisible graph"]
+				racechart.update()
+				console.log("updating map")
+			}
+			else {
+				racechart.data.datasets[0].label = "visible graph"
+				racechart.update()
+				console.log("not updating map")
+			}
+			}, { threshold: [0, 0.6, 1] });
+
+			observer.observe(document.querySelector("#racechart"));
 		}
 
 		function setupStickyfill() {
@@ -256,6 +270,9 @@
 <script src="https://public.flourish.studio/resources/embed.js"></script>
 <script src = "charts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script>
+</script>
 </body>
+
 
 </html>

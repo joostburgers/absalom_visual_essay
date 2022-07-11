@@ -1,9 +1,9 @@
 // TREEMAP CHART (RACE HIERARCHY) BEGINS
-fetch("./data/character_demography_chart.json")
-    .then(response => {
-        return response.json();
-    })
-    .then(jsondata => console.log(jsondata));
+// fetch("./data/character_demography_chart.json")
+//     .then(response => {
+//         return response.json();
+//     })
+//     .then(jsondata => console.log(jsondata));
 
 function colorFromValue(value, border) {
     var alpha = (1 + Math.log(value)) / 5;
@@ -23,7 +23,7 @@ function colorFromValue(value, border) {
       datasets: [
         {
           label: "Race Hierarchy Treemap",
-          data: [100, 20, 6, 6, 5, 4, 3, 2, 2, 1],
+          data: [5, 10],
           backgroundColor: function(ctx) {
             return colorFromValue(ctx.dataset.data[ctx.dataIndex].v);
           },
@@ -108,6 +108,35 @@ const scrollychart = new Chart(ctv, {
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+});
+  //SCROLLY PIE ENDS
+  const ctu = document.getElementById('racepie');
+const racepie = new Chart(ctu, {
+    type: 'doughnut',
+    data: {
+        labels: ['Black', 'White', 'Mixed', 'Multiracial', 'Indian'],
+        datasets: [{
+            label: 'Character Demography',
+            data: [101, 36, 9, 5, 3],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
