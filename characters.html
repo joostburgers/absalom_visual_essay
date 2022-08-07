@@ -14,18 +14,30 @@
 	<link rel="stylesheet" href="css/scroll.css" />
 	<link rel="stylesheet" href="css/responsive.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 	<style>
 		html, body {
 			background-color: #222831;
 		}
 	</style>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"></script>
+
+	<script>
+        var character_demography = $.getJSON("https://github.com/arundhatibala/absalom/blob/main/data/character_demography_chart.json", function () {
+            console.log("success");
+		})		
+	</script>
+
 </head>
 
 <body>
 	<main>
 		<header class="sticky-top">
 			<nav class="navbar navbar-expand-lg navbar-dark">
+<<<<<<< HEAD
 			  <div class="container-fluid">
 				<em><a style = "color: #B55400;"class="navbar-brand" href="index.html">Absalom, Absalom!</a></em>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,128 +59,155 @@
 						<a class="nav-link" href="locations.html">Locations</a>
 					  </li>
 				  </ul>
-				</div>
-			  </div>
-			</nav>
-			</header>
-			<!-- Title Slide BEGINS-->
-		<section id="intro">
-			<div style = "background-color:#B55400">
-				<h2 class = "title" style = "color: #222831; padding-top: 6%;">Digital Supplement:</h2>
-				<em><h1 class = "title" style = "color: #FFF;">Absalom, Absalom!</h1></em>
-				<em><h1 class = "title" style = "color: #222831;">and The Digital Humanities</h1></em>
-				<p class = "title-p-text" style = "color: #13171c;">
-					This interactive essay was created using data from the <a style = "color: #13171c;"href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, Language, and Locations.				</p>
-			  </div>
-			<!-- Title Slide ENDS-->
+=======
+				<div class="container-fluid">
+					<em><a style="color: #B55400;" class="navbar-brand" href="home.html">Absalom, Absalom!</a></em>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-			<!-- Pre Scroll Text BEGINS-->
-			  <div class = "notebook">
-				<h1 style = "text-align: center; padding: 0; color: #EEE;">Characters</h1>
-				<p class = "notebook" style = "color:#EEE;">
-				The Digital Yoknapatawpha database contains every character who appears in Faulkner’s Yoknapatawpha fictions.
-				Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
-				With this information, we can make a literary demography of the composition of the entire character population.
-				One of the most salient pieces of demographic information in Absalom, Absalom! is race.
-				</p>
-				<div class = "quote">
-				  <blockquote class="blockquote">
-					<p class="mb-0">As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.
-					  <br> 
-					  The insanity of racism.</p>
-				  </blockquote>
-				  <figcaption class="blockquote-footer"><cite title="Source Title">Toni Morrison, <em>Conversations</em></cite>
-				  </figcaption>
+					<div class="collapse navbar-collapse" id="navbarColor02">
+						<ul class="navbar-nav me-auto">
+							<li class="nav-item">
+								<a class="nav-link" href="characters.html">Characters</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="events.html">Events</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="language.html">Language</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="locations.html">Locations</a>
+							</li>
+						</ul>
+					</div>
+>>>>>>> 75967b233944b20e68bbd27671b7bf95a91ca0f8
 				</div>
-				<div class = "divider-h" style ="background-color: #222831;height: 40px;"></div>
-					<!-- <canvas id = "race-hierarchy-map"></canvas> -->
-				<p class = "notebook" style = "padding-bottom: 0; margin-bottom: auto; color: #EEE;">
+			</nav>
+		</header>
+		<!-- Title Slide BEGINS-->
+		<section id="intro">
+			<div style="background-color:#B55400">
+				<h2 class="title" style="color: #222831; padding-top: 6%;">Digital Supplement:</h2>
+				<em><h1 class="title" style="color: #FFF;">Absalom, Absalom!</h1></em>
+				<em><h1 class="title" style="color: #222831;">and The Digital Humanities</h1></em>
+				<p class="title-p-text" style="color: #13171c;">
+					This interactive essay was created using data from the <a style="color: #13171c;" href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, Language, and Locations.
+				</p>
+			</div>
+			<!-- Title Slide ENDS-->
+			<!-- Pre Scroll Text BEGINS-->
+			<div class="notebook">
+				<h1 style="text-align: center; padding: 0; color: #EEE;">Characters</h1>
+				<p class="notebook" style="color:#EEE;">
+					The Digital Yoknapatawpha database contains every character who appears in Faulkner’s Yoknapatawpha fictions.
+					Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
+					With this information, we can make a literary demography of the composition of the entire character population.
+					One of the most salient pieces of demographic information in Absalom, Absalom! is race.
+				</p>
+				<div class="quote">
+					<blockquote class="blockquote">
+						<p class="mb-0">
+							As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.
+							<br>
+							The insanity of racism.
+						</p>
+					</blockquote>
+					<figcaption class="blockquote-footer">
+						<cite title="Source Title">Toni Morrison, <em>Conversations</em></cite>
+					</figcaption>
+				</div>
+				<div class="divider-h" style="background-color: #222831;height: 40px;"></div>
+				<!-- <canvas id = "race-hierarchy-map"></canvas> -->
+				<p class="notebook" style="padding-bottom: 0; margin-bottom: auto; color: #EEE;">
 					There are 194 unique characters in Absalom, Absalom!. The overwhelming majority of these characters are White.
 					<br><br>
-					Statistically speaking, there is only one Moor in Shakespeare’s Othello, but as he appears in nearly every scene he is one of the most present characters.</p>				
-				</section>
-				<!-- Pre Scroll Text ENDS-->
-
-
-				<!-- Scroll Text BEGINS -->
-		<section id="scrolly" style = "background-color: #222831;">
-			<div class = "scrolldiv">
-			<article>
-				<div class="step" data-step="1">
-					<p class = "scroll-text">
-						We can weight for character presence by calculating how often they occur in an event.					</p>
-				</div>
-				<div class="step" data-step="2">
-					<p class = "scroll-text">
-						Weighting by narrative presence actually underscores the presence of White characters more.
-					</p>
-				</div>
-				<div class="step" data-step="3">
-					<p class = "scroll-text">
-						Meanwhile, the number of Mixed Ancestry characters increases.</p>
-				</div>
-				<div class="step" data-step="4">
-					<p class = "scroll-text">
-						But only because Black characters are less present.
-					</p>
-				</div>
-			</article>
-			<div class = "fig">
-				<!-- Scroll Chart BEGINS -->
-				<div class = "chartdiv">
-					<h1 class = "charttitle">Character Demography</h1>
-					<canvas id="scrollychart1"></canvas>
-				</div>
-				<div class = "chartdiv">
-					<h1 class = "charttitle">Character Presence</h1>
-					<canvas id="scrollychart2"></canvas>
-				</div>
-					<!-- <img src="IMG_5369.jpg" style = "width: 100px; left:300px" alt=""> -->
-				<!-- Scroll Chart ENDS -->
-			</div>
-		</div>
+					Statistically speaking, there is only one Moor in Shakespeare’s Othello, but as he appears in nearly every scene he is one of the most present characters.
+				</p>
 		</section>
-		<div class = "divider-h" style ="background-color: #222831;height: 50px;"></div>
-		<div class = "notebook">
-			<p class = "notebook">
+		<!-- Pre Scroll Text ENDS-->
+		<!-- Scroll Text BEGINS -->
+		<section id="scrolly" style="background-color: #222831;">
+			<div class="scrolldiv">
+				<article>
+					<div class="step" data-step="1">
+						<p class="scroll-text">
+							We can weight for character presence by calculating how often they occur in an event.
+						</p>
+					</div>
+					<div class="step" data-step="2">
+						<p class="scroll-text">
+							Weighting by narrative presence actually underscores the presence of White characters more.
+						</p>
+					</div>
+					<div class="step" data-step="3">
+						<p class="scroll-text">
+							Meanwhile, the number of Mixed Ancestry characters increases.
+						</p>
+					</div>
+					<div class="step" data-step="4">
+						<p class="scroll-text">
+							But only because Black characters are less present.
+						</p>
+					</div>
+				</article>
+				<div class="fig">
+					<!-- Scroll Chart BEGINS -->
+					<div class="chartdiv">
+						<h1 class="charttitle">Character Demography</h1>
+						<canvas id="scrollychart1"></canvas>
+					</div>
+					<div class="chartdiv">
+						<h1 class="charttitle">Character Presence</h1>
+						<canvas id="scrollychart2"></canvas>
+					</div>
+					<!-- <img src="IMG_5369.jpg" style = "width: 100px; left:300px" alt=""> -->
+					<!-- Scroll Chart ENDS -->
+				</div>
+			</div>
+		</section>
+		<div class="divider-h" style="background-color: #222831;height: 50px;"></div>
+		<div class="notebook">
+			<p class="notebook">
 				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective. <br><br>
 				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
-	  		</p>
-			  <p class = "notebook">
-		  It is clear from reading Absalom, Absalom! that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
-		  The various narrators only really care about racial passing if it threatens upper class white femininity. <br><br><br></p>
-			<div id = "sunburst"></div>
-		 <p class = "notebook">
-		  As such, they naturalize racial difference, and also circumscribe the boundaries of gender, sexuality, and class.
-		  In the highly fraught social circumstances of the pre-Civil Rights South, there is no way to separate race, class, gender, and sexuality.<br><br><br>
-		  The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective.
-		  Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
-		</p>
+			</p>
+			<p class="notebook">
+				It is clear from reading Absalom, Absalom! that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
+				The various narrators only really care about racial passing if it threatens upper class white femininity. <br><br><br>
+			</p>
+			<div id="sunburst"></div>
+			<p class="notebook">
+				As such, they naturalize racial difference, and also circumscribe the boundaries of gender, sexuality, and class.
+				In the highly fraught social circumstances of the pre-Civil Rights South, there is no way to separate race, class, gender, and sexuality.<br><br><br>
+				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective.
+				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
+			</p>
 		</div>
 		</div>
 
-		<div id = "chart"></div>
+		<div id="chart"></div>
 
 		<!-- Scroll Text ENDS -->
-		  <!-- Footer -->
-		  <!-- Remove the container if you want to extend the Footer to full width. -->
-		  <div class="container my-5" style = "color: #B55400;">
-		  
+		<!-- Footer -->
+		<!-- Remove the container if you want to extend the Footer to full width. -->
+		<div class="container my-5" style="color: #B55400;">
+
 			<footer class="text-center text-white" style="background-color: #f1f1f1;">
-		  
-			</div>
-			<!-- Grid container -->
-		  
-			<!-- Copyright -->
-			<div class="text-center text-light p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			  © 2022 Copyright:
-			  <a class="text-light" href="https://github.com/joostburgers">Johannes Burgers</a>
-			</div>
-			<!-- Copyright -->
-		  </footer>
-			
-		  </div>
-		  
+
+		</div>
+		<!-- Grid container -->
+		<!-- Copyright -->
+		<div class="text-center text-light p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+			© 2022 Copyright:
+			<a class="text-light" href="https://github.com/joostburgers">Johannes Burgers</a>
+		</div>
+		<!-- Copyright -->
+		</footer>
+
+		</div>
+
 	</main>
 	<!-- Scroll Packages BEGIN -->
 	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
@@ -200,7 +239,7 @@
 
 			scroller.resize();
 
-}
+		}
 
 		// scrollama event handlers
 		function handleStepEnter(response) {
@@ -215,87 +254,87 @@
 			// // update chart based on step
 			// figure.select("p").text(response.index + 1);
 			//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
-			if(response.index==1){
+			if (response.index == 1) {
 				scrollychart1.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-			scrollychart2.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-    			scrollychart1.update()
+					'rgba(255, 99, 132, 0.6)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart2.data.datasets[0].backgroundColor = [
+					'rgba(255, 99, 132, 0.6)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart1.update()
 				scrollychart2.update()
 
 			}
-			else if(response.index==2){
+			else if (response.index == 2) {
 				scrollychart1.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-			scrollychart2.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.6)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-    			scrollychart1.update()
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.6)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart2.data.datasets[0].backgroundColor = [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.6)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart1.update()
 				scrollychart2.update()
 
 			}
-			else if(response.index==3){
+			else if (response.index == 3) {
 				scrollychart1.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-			scrollychart2.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-    			scrollychart1.update()
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.6)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart2.data.datasets[0].backgroundColor = [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.6)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart1.update()
 				scrollychart2.update()
 
 			}
 			else {
 				scrollychart1.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-			scrollychart2.data.datasets[0].backgroundColor = [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ]
-    			scrollychart1.update()
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart2.data.datasets[0].backgroundColor = [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				]
+				scrollychart1.update()
 				scrollychart2.update()
 			}
 
@@ -329,11 +368,28 @@
 		// kick things off
 		init();
 	</script>
+	<script>
+        var character_demography = $.getJSON("https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json", function () {
+			console.log("success");
+		})
+
+		$.getJSON("https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json", function (data) {
+			var items = [];
+			$.each(data, function (key, val) {
+				items.push(key + val);
+			});
+            console.log(items);
+		})
+			console.log(character_demography);
+		console.log(items);
+	</script>
 	<!-- JavaScript Bundle with Popper -->
-<script src = "js/charts.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-<script>
-</script>
+	<script src="js/charts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+	<script>
+	</script>
 </body>
 
 
