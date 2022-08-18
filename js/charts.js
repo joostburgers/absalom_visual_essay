@@ -91,40 +91,4 @@ const scrollychart2 = new Chart(cty, {
   //SCROLLY PIE ENDS
 
 
-//SUNBURST
-
-
-var sunburstdata = [
-  {
-    "type": "sunburst",
-    "labels": ["Characters", "Black", "White", "Indian", "Mixed", "Multiracial",
-     "Unnamed Twenty Original Sutpen Slaves", "Luster", "Unnamed Slaves of Sutpen", "Unnamed Enslaved Field Hands", "", 
-    "Thomas Sutpen", "Rosa Coldfield", "Henry Sutpen", "Judith Sutpen", "",
-    "Doom", "Unnamed Indians in Western Virginia", "",
-  "Charles Bon", "Clytemnestra", "Mrs. Thomas Sutpen(1)", "Charles Etienne Saint-Valery Bon", "",
-"Unnamed Passersby", "Unnamed Customers at Sutpen's Store", "Unnamed Four or Five Boys", "Unnamed People in the Reconstruction South", ""],
-
-    "parents": ["", "Characters", "Characters", "Characters", "Characters", "Characters", 
-    "Black", "Black", "Black", "Black", "Black", 
-    "White", "White", "White", "White", "White",
-    "Indian", "Indian", "Indian",
-    "Mixed", "Mixed", "Mixed", "Mixed", "Mixed",
-    "Multiracial", "Multiracial", "Multiracial", "Multiracial", "Multiracial",],
-    "values":  [9, 8, 7, 6, 5, 4, 3, 2, 1],
-        "leaf": {"opacity": 0.4},
-    "marker": {"line": {"width": 2}},
-    "branchvalues": 'total'
-  }];
-
-  
-  var layout = {
-    "paper_bgcolor":'rgba(0,0,0,0)',
-    "plot_bgcolor":'rgba(0,0,0,0)',
-    "margin": {"l": 0, "r": 0, "b": 0, "t": 0},
-  };
-  
-  
-  Plotly.newPlot('sunburst', sunburstdata, layout, {showSendToCloud: true})
-  
-  myPlot = document.getElementById("sunburst");
   
