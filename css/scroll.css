@@ -58,8 +58,9 @@
 		}
 
 		.step {
-			margin: 0 auto 2rem auto;
-			padding: 7rem 2rem;
+			margin: 7rem auto 2em auto;
+			padding-top:100px;
+			padding-bottom:100px;
 			background-color: #222831;
 			color: #2c3440;
 			height:fit-content;
@@ -73,6 +74,7 @@
 			/* border-left: solid #EEE 12px; */
 			background-color: #B55400;
 			color: #EEE;
+			height: 80%;
 		}
 
 		.step p {
@@ -85,3 +87,6 @@
 		.chartdiv {
 			width:50%;
 		}
+
+
+		
