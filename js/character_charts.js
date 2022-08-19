@@ -28,6 +28,9 @@ $(function () {
     });
     var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
     var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
+	var contextBar = document.getElementById('barchart').getContext("2d");
+	
+
     // examine example_data.json for expected response data
     var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
     var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
@@ -71,9 +74,41 @@ $(function () {
 
     });
 
+	var barchart1 = new Chart(contextBar, {
+        type: 'bar',
+        data: {
+            labels: ["Moby Dick (H. Melville)", "Huckleberry Finn (M. Twain)", "The Great Gatsby (F.S. Fitzgerald)", "Absalom, Absalom! (W. Faulker)", "Beloved (T. Morrison)"],
+            datasets: [{
+                data: [22, 19, 14, 50, 12],
+                backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.6)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'
+				],
+                borderColor: DefaultborderColor,
+                borderWidth: DefaultborderWidth
+            }]
+
+        },
+        options: {
+		responsive: true,
+            legend: {
+                display: false
+            },
+			scales: {
+				y: {
+					beginAtZero: true,
+				}
+			},
+
+	}});
+
+
     ajax_chart(scrollychart1, demography_chart_url);
     ajax_chart(scrollychart2, weighted_demography_chart_url);
-    console.log(scrollychart1)
 
 
 
@@ -136,17 +171,21 @@ $(function () {
 		// figure.select("p").text(response.index + 1);
 		//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
 
-		//TODO Make this into a function that coordinates with the presentation. 
+		//TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
 		reversecount = scrollychart1.data.datasets[0].backgroundColor.length - response.index -1
 
 		scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
-			 
-			console.log(reversecount)
-
-			if (index == response.index) {
-				
-				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.2", "0.6")
-				
+			if (response.index===1) {		
+				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+				scrollychart1.data.datasets[0].backgroundColor[4]= scrollychart1.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+			}
+			else if (response.index===2) {		
+				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+				scrollychart1.data.datasets[0].backgroundColor[2]= scrollychart1.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+			}
+			else if (response.index===3) {
+				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")		
+				scrollychart1.data.datasets[0].backgroundColor[0]= scrollychart1.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
 			}
 			else {
 				scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
@@ -156,103 +195,21 @@ $(function () {
         })	
 		
 		scrollychart2.data.datasets[0].backgroundColor.forEach(function (item, index) {
-
-			if (index == response.index) {
-				scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.2", "0.6")
-				
+			if (response.index===1) {		
+				scrollychart2.data.datasets[0].backgroundColor[4]= scrollychart2.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+			}
+			else if (response.index===2) {		
+				scrollychart2.data.datasets[0].backgroundColor[2]= scrollychart2.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+			}
+			else if (response.index===3) {		
+				scrollychart2.data.datasets[0].backgroundColor[0]= scrollychart2.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
 			}
 			else {
 				scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-			}
+            }
 			scrollychart2.update()
 
-		})
-
-
-		//if (response.index == 1) {
-		//	scrollychart1.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.6)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart2.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.6)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		
-		//	scrollychart2.update()
-
-		//}
-		//else if (response.index == 2) {
-		//	scrollychart1.config.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.6)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart2.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.6)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart1.update()
-		//	scrollychart2.update()
-
-		//}
-		//else if (response.index == 3) {
-		//	scrollychart1.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.6)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart2.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.6)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart1.update()
-		//	scrollychart2.update()
-
-		//}
-		//else {
-		//	scrollychart1.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart2.data.datasets[0].backgroundColor = [
-		//		'rgba(255, 99, 132, 0.2)',
-		//		'rgba(54, 162, 235, 0.2)',
-		//		'rgba(255, 206, 86, 0.2)',
-		//		'rgba(75, 192, 192, 0.2)',
-		//		'rgba(153, 102, 255, 0.2)',
-		//		'rgba(255, 159, 64, 0.2)'
-		//	]
-		//	scrollychart1.update()
-		//	scrollychart2.update()
-		//}
-
+        })	
 
 	}
 
