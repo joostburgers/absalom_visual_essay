@@ -107,7 +107,8 @@
 		align-items: center;
 	}
 	p.notebook {
-		width:60%
+		width:60%;
+		display:inline;
 	}
 	/* .quote {padding-bottom: 150px;} */
   }
@@ -160,6 +161,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+	p.notebook{
+		display: left;
 	}
 	.divider-2 {
 		height: 0px;
@@ -329,6 +333,8 @@ animation-fill-mode: forwards;
 
 p.notebook {
 	color: #EEE;
+	text-align:left;
+	display: inline;
 }
 
 .flourish-embed {
