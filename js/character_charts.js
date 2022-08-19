@@ -24,7 +24,7 @@ var DefaultborderWidth = 1
 
 $(function () {
     $.ajaxSetup({
-        async: true
+        async: false
     });
     var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
     var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
