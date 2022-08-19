@@ -56,34 +56,7 @@
 					<li class="nav-item">
 					  <a class="nav-link" href="language.html">Language</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="locations.html">Locations</a>
-					  </li>
 				  </ul>
-				<div class="container-fluid">
-					<em><a style="color: #B55400;" class="navbar-brand" href="home.html">Absalom, Absalom!</a></em>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarColor02">
-						<ul class="navbar-nav me-auto">
-							<li class="nav-item">
-								<a class="nav-link" href="characters.html">Characters</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="events.html">Events</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="language.html">Language</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="locations.html">Locations</a>
-							</li>
-						</ul>
-					</div>
-
-				</div>
 			</nav>
 		</header>
 		<!-- Title Slide BEGINS-->
@@ -93,7 +66,7 @@
 				<em><h1 class="title" style="color: #FFF;">Absalom, Absalom!</h1></em>
 				<em><h1 class="title" style="color: #222831;">and The Digital Humanities</h1></em>
 				<p class="title-p-text" style="color: #13171c;">
-					This interactive essay was created using data from the <a style="color: #13171c;" href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, Language, and Locations.
+					This interactive essay was created using data from the <a style = "color: #13171c;"href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
 				</p>
 			</div>
 			<!-- Title Slide ENDS-->
@@ -164,22 +137,25 @@
 						<h1 class="charttitle">Character Presence</h1>
 						<canvas id="scrollychart2"></canvas>
 					</div>
-					<!-- <img src="IMG_5369.jpg" style = "width: 100px; left:300px" alt=""> -->
 					<!-- Scroll Chart ENDS -->
 				</div>
 			</div>
 		</section>
 		<div class="divider-h" style="background-color: #222831;height: 50px;"></div>
-		<div class="notebook">
+		<div class = "notebook">
 			<p class="notebook">
 				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective. <br><br>
 				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
 			</p>
+			<p class = "notebook">
+				Charles Bon is more present in the text than all other Mixed Ancestry characters combined, but is simply another major character compared to the White characters.
+			</p>
+			<h1 style = "color: greenyellow;">SUNBURST GOES HERE</h1>
+			<p class = "notebook">Meanwhile, the most present Black characters are the unnamed enslaved characters.</p>
 			<p class="notebook">
 				It is clear from reading Absalom, Absalom! that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
 				The various narrators only really care about racial passing if it threatens upper class white femininity. <br><br><br>
 			</p>
-			<div id="sunburst"></div>
 			<p class="notebook">
 				As such, they naturalize racial difference, and also circumscribe the boundaries of gender, sexuality, and class.
 				In the highly fraught social circumstances of the pre-Civil Rights South, there is no way to separate race, class, gender, and sexuality.<br><br><br>
@@ -187,9 +163,7 @@
 				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
 			</p>
 		</div>
-		
-
-		<div id="chart"></div>
+		</div>
 
 		<!-- Scroll Text ENDS -->
 		<!-- Footer -->
@@ -201,12 +175,6 @@
 		</div>
 		<!-- Grid container -->
 		<!-- Copyright -->
-		<div class="text-center text-light p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			© 2022 Copyright:
-			<a class="text-light" href="https://github.com/joostburgers">Johannes Burgers</a>
-		</div>
-		<!-- Copyright -->
-		</footer>
 
 		</div>
 
@@ -222,10 +190,38 @@
 	<!-- JavaScript Bundle with Popper -->
 	<!--<script src="js/charts.js"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
-
-	<script>
-	</script>
+	<footer>
+		<div class="footer-clean">
+			<footer>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-sm-3 item">
+							<h3>About DY</h3>
+							<ul>
+								<li>A Collaboration between an International Team of Faulkner Scholars
+									and Technologists at the University of Virginia
+									Major Funding provided by the National Endowment for the Humanities</li>
+							</ul>
+						</div>
+						<div class="col-sm-3 item">
+							<h3>Quick Links</h3>
+							<ul>
+								<li><a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a></li>
+								<li><a href="http://www.iath.virginia.edu/">IATH Virginia</a></li>
+								<li><a href="http://faulkner.iath.virginia.edu/family/credits.php">DY Contributors</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-3 item social">
+							<a href="https://www.instagram.com/digyok/"><i class="bi bi-instagram"></i></a>
+							<a href="https://www.facebook.com/digyok/"><i class="bi bi-facebook"></i></a>
+							<a href="https://twitter.com/digyok"><i class="bi bi-twitter"></i></a>
+							<p class="copyright">Digital Yoknapatawpha, University of Virginia © 2022</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</footer>
 </body>
 
 
