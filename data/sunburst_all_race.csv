@@ -1,0 +1,26 @@
+labels,values,parents,ids,race,value_total,percent
+Total,418843,NA,NA,NA,NA,NA
+White,320567,Total,Total - White,Total,418843,77
+Mixed Ancestry,66452,Total,Total - Mixed Ancestry,Total,418843,16
+Black,27666,Total,Total - Black,Total,418843,7
+Multiracial Group,2083,Total,Total - Multiracial Group,Total,418843,0
+Indian,2075,Total,Total - Indian,Total,418843,0
+Thomas Sutpen,48366,Total - White,Total - White - Thomas Sutpen,White,320567,15
+Rosa Coldfield,34327,Total - White,Total - White - Rosa Coldfield,White,320567,11
+Henry Sutpen,29893,Total - White,Total - White - Henry Sutpen,White,320567,9
+Judith Sutpen,27200,Total - White,Total - White - Judith Sutpen,White,320567,8
+Charles Bon,31996,Total - Mixed Ancestry,Total - Mixed Ancestry - Charles Bon,Mixed Ancestry,66452,48
+Clytemnestra,16004,Total - Mixed Ancestry,Total - Mixed Ancestry - Clytemnestra,Mixed Ancestry,66452,24
+Mrs. Thomas Sutpen(1),7203,Total - Mixed Ancestry,Total - Mixed Ancestry - Mrs. Thomas Sutpen(1),Mixed Ancestry,66452,11
+Charles Etienne Saint-Valery Bon,5882,Total - Mixed Ancestry,Total - Mixed Ancestry - Charles Etienne Saint-Valery Bon,Mixed Ancestry,66452,9
+Unnamed Twenty Original Sutpen Slaves,7271,Total - Black,Total - Black - Unnamed Twenty Original Sutpen Slaves,Black,27666,26
+Luster,1632,Total - Black,Total - Black - Luster,Black,27666,6
+Unnamed Slaves of Sutpen,1322,Total - Black,Total - Black - Unnamed Slaves of Sutpen,Black,27666,5
+Unnamed Enslaved Field Hands,1233,Total - Black,Total - Black - Unnamed Enslaved Field Hands,Black,27666,4
+Unnamed Passersby,702,Total - Multiracial Group,Total - Multiracial Group - Unnamed Passersby,Multiracial Group,2083,34
+Unnamed Customers at Sutpen's Store,182,Total - Multiracial Group,Total - Multiracial Group - Unnamed Customers at Sutpen's Store,Multiracial Group,2083,9
+Unnamed Four or Five Boys,88,Total - Multiracial Group,Total - Multiracial Group - Unnamed Four or Five Boys,Multiracial Group,2083,4
+Unnamed People in the Reconstruction South,201,Total - Multiracial Group,Total - Multiracial Group - Unnamed People in the Reconstruction South,Multiracial Group,2083,10
+Doom,151,Total - Indian,Total - Indian - Doom,Indian,2075,7
+Unnamed Indians in Western Virginia,697,Total - Indian,Total - Indian - Unnamed Indians in Western Virginia,Indian,2075,34
+Others,165,Total - Indian,Total - Indian - Others,Indian,2075,8

@@ -43,6 +43,30 @@ html, body {
 		justify-content: center;
 		padding: 25px;
 	}
+	.full-image {
+		position: relative;
+		text-align: center;
+		color: white;
+		width:100vw;
+	}
+
+	.full-image-text-low {
+		position: absolute;
+		top: 60%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		opacity: 85%;
+		margin-left:-4%;
+	}
+
+	.quote {
+		width: 100%;
+		background-color: #14181E;
+		font-size:80%;
+		
+	}
+
 	.step {
 		margin: 0 auto 2rem auto;
 		/* padding: 4rem 2rem; */
@@ -71,38 +95,49 @@ html, body {
   }
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-	.divider-v {height:40px;}
+@media only screen and (min-width: 600px) {
+	.divider-v {
+		height: 40px;
+	}
+
 	.chart-scroll {
 		height: 645px;
 		display: flex;
 		flex-direction: column-reverse;
 	}
+
 	.text-scroll {
 		overflow: scroll;
 		padding: 5%;
 		overflow-x: hidden; /* Hide horizontal scrollbar */
 		background-color: #222831;
 	}
+
 	.text {
-		padding:2%;
+		padding: 2%;
 	}
+
 	.chart {
-		padding:12%
+		padding: 12%
 	}
+
 	.part1 {
 		height: 645px;
 		width: 100%;
 	}
+
 	h1.title {
 		font-size: 40px;
 	}
+
 	h2.title {
 		font-size: 25px;
 	}
+
 	.title-p-text {
 		padding: 40% 6% 10% 6%;
 	}
+
 	.notebook {
 		padding: 25px;
 		display: flex;
@@ -110,9 +145,41 @@ html, body {
 		justify-content: center;
 		align-items: center;
 	}
+
 	p.notebook {
-		width:60%;
-		display:inline;
+		width: 60%;
+		display: inline;
+	}
+
+	.full-image {
+		position: relative;
+		text-align: center;
+		color: white;
+		width: 100vw;
+	}
+
+	.full-image-text-low {
+		position: absolute;
+		top: 60%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		opacity: 85%;
+	}
+
+	.image-source {
+		position: absolute;
+		font-size: .7rem;
+		bottom: 10px;
+		left: 18px;
+		opacity: 85%;
+		-webkit-text-stroke: .1px black;
+	}
+
+	.quote {
+		margin-left: -4%;
+		font-size: 1.5rem;
+		background-color: #14181E;
 	}
 	/* .quote {padding-bottom: 150px;} */
   }
@@ -166,6 +233,9 @@ html, body {
 		flex-direction: column;
 		justify-content: center;
 	}
+	
+
+	
 	p.notebook{
 		display: left;
 	}
@@ -263,9 +333,7 @@ html, body {
 		flex-direction: column;
 		justify-content: center;
 	}
-	.quote {
-		width: 80%;
-	}
+	
 	.blockquote{
 		padding: 5px 10px;
 	}
@@ -331,9 +399,6 @@ animation-fill-mode: forwards;
 		text-align: center;
 }
 
-.quote {
-	background-color: #14181E;
-}
 
 p.notebook {
 	color: #EEE;
