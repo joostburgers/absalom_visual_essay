@@ -58,45 +58,20 @@
 				  </ul>
 			</nav>
 		</header>
-		<!-- Title Slide BEGINS-->
-		<section id="intro">
-			<div style="background-color:#B55400">
-				<h2 class="title" style="color: #222831; padding-top: 6%;">Digital Supplement:</h2>
-				<em><h1 class="title" style="color: #FFF;">Absalom, Absalom!</h1></em>
-				<em><h1 class="title" style="color: #222831;">and The Digital Humanities</h1></em>
-				<p class="title-p-text" style="color: #13171c;">
-					This interactive essay was created using data from the <a style = "color: #13171c;"href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
-				</p>
-			</div>
-			<!-- Title Slide ENDS-->
-			<!-- Pre Scroll Text BEGINS-->
-			<div class="notebook">
-				<h1 style="text-align: center; padding: 0; color: #EEE;">Language</h1>
-				<p class="notebook" style="color:#EEE;">
-					The language in Absalom, Absalom! is very challenging. Faulkner’s language constantly draws attention to itself.</p>
-                 <p class = "notebook" style = "color: #eee; padding: 25px; text-align: left; background-color: #13171c;"> The text reminds us that <em style = "color: #B55400;">what</em> is said cannot be separated from <em style = "color: #B55400;">how</em> it is said.</p>
-                 <p class = "notebook">
-                    Sentences in Absalom, Absalom! are very long.
-                    On average sentences are 50 words long.
-                    The longest sentence is 1124 words! That’s a 3-4 page college paper!
-                    <br>
-                    <br>
-                    Compared to other American Classics, Faulkner’s sentences are much, much longer. 
-                    <br><br><br>
-                    <canvas id = "barchart"></canvas>
-                </p>
-                 </div>
-                <div class = "divider-h" style ="background-color: #222831;height: 40px;"></div>
-				<div class = "container fluid vid" style = "background-color: #B55400; padding: 20px;">
-				<video  controls>
-						<source src="media/faulkner_blackbird.mp4" type="video/mp4">
-					</video>
-                    <p style = "padding:10px">Faulkner also concocts neologisms by combining words or adding a prefix to an existing word.</p>
-				</div>					
-		</section>
+            <section id="intro">
+                <div style = "background-color:#B55400; height: 95vh;">
+                    <h2 class = "title" style = "color: #222831; padding-top: 6%;">Digital Supplement:</h2>
+                    <em><h1 class = "title" style = "color: #FFF;">Absalom, Absalom!</h1></em>
+                    <em><h1 class = "title" style = "color: #222831;">and The Digital Humanities</h1></em>
+                    <p class = "title-p-text" style = "color: #13171c;">
+                        This interactive essay was created using data from the <a style = "color: #13171c;"href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
+					</p>
+                  </div>
+                <!-- Title Slide ENDS-->
+                    </section>
 		<!-- Pre Scroll Text ENDS-->
 		<!-- Scroll Text BEGINS -->
-		<section id="scrolly" style="background-color: #222831;">
+		<section id="scrolly">
 			<div class="scrolldiv">
 				<article>
 					<div class="step" data-step="1">
@@ -134,7 +109,7 @@
 				</div>
 			</div>
 		</section>
-		<div class="divider-h" style="background-color: #222831;height: 50px;"></div>
+		<div class="divider-h"></div>
 		<div class = "notebook">
 			<p class="notebook">
 				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective. <br><br>
@@ -161,11 +136,36 @@
 		<!-- Scroll Text ENDS -->
 		<!-- Footer -->
 		<!-- Remove the container if you want to extend the Footer to full width. -->
-		<div class="container my-5" style="color: #B55400;">
-
-			<footer class="text-center text-white" style="background-color: #f1f1f1;">
-
-		</div>
+		<div class="footer-clean">
+            <footer>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-3 item">
+                            <h3>About DY</h3>
+                            <ul>
+                                <li>A Collaboration between an International Team of Faulkner Scholars
+                                    and Technologists at the University of Virginia
+                                    Major Funding provided by the National Endowment for the Humanities</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3 item">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a></li>
+                                <li><a href="http://www.iath.virginia.edu/">IATH Virginia</a></li>
+                                <li><a href="http://faulkner.iath.virginia.edu/family/credits.php">DY Contributors</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 item social">
+                            <a href="https://www.instagram.com/digyok/"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/digyok/"><i class="bi bi-facebook"></i></a>
+                            <a href="https://twitter.com/digyok"><i class="bi bi-twitter"></i></a>
+                            <p class="copyright">Digital Yoknapatawpha, University of Virginia © 2022</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
 		<!-- Grid container -->
 		<!-- Copyright -->
 
@@ -178,38 +178,7 @@
 	<!-- JavaScript Bundle with Popper -->
 	<!--<script src="js/charts.js"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<footer>
-		<div class="footer-clean">
-			<footer>
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-sm-3 item">
-							<h3>About DY</h3>
-							<ul>
-								<li>A Collaboration between an International Team of Faulkner Scholars
-									and Technologists at the University of Virginia
-									Major Funding provided by the National Endowment for the Humanities</li>
-							</ul>
-						</div>
-						<div class="col-sm-3 item">
-							<h3>Quick Links</h3>
-							<ul>
-								<li><a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a></li>
-								<li><a href="http://www.iath.virginia.edu/">IATH Virginia</a></li>
-								<li><a href="http://faulkner.iath.virginia.edu/family/credits.php">DY Contributors</a></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 item social">
-							<a href="https://www.instagram.com/digyok/"><i class="bi bi-instagram"></i></a>
-							<a href="https://www.facebook.com/digyok/"><i class="bi bi-facebook"></i></a>
-							<a href="https://twitter.com/digyok"><i class="bi bi-twitter"></i></a>
-							<p class="copyright">Digital Yoknapatawpha, University of Virginia © 2022</p>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</footer>
+
 </body>
 
 

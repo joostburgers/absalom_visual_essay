@@ -329,8 +329,6 @@ html, body {
 		padding: 18% 6% 10% 6%;
 	}
 	.notebook {
-		display: flex;
-		flex-direction: column;
 		justify-content: center;
 	}
 	
@@ -516,3 +514,51 @@ html, body {
 	opacity:0.6;
   }
 
+
+.notebook{
+	color: #EEE;
+}
+
+.divider-h {
+	background-color: #222831;
+	height: 50px;
+}
+
+p.notebook {
+	color: #EEE;
+}
+
+.footer-clean {
+	background-color: #f1f1f1;
+	color: #222831;
+}
+
+
+.vid {
+	background-color: #B55400; padding: 20px;
+}
+
+.vid-caption {
+	padding:10px
+}
+
+h1.main {
+	text-align: center; padding: 0; color: #EEE;
+}
+.navbar-brand{
+	color: #B55400;
+}
+
+h2.title {
+	color: #222831; padding-top: 6%;
+}
+h1.title1{
+	color: #fff;
+}
+
+h1.title2{
+	color: #222831;
+}
+p.title-p-text {
+	color: #13171c;
+}
