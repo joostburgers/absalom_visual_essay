@@ -10,6 +10,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
 	<script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
 	<!--Chart Objects-->
@@ -162,7 +163,7 @@
 				Charles Bon is more present in the text than all other Mixed Ancestry characters combined, but is simply another major character compared to the White characters.
 			</p>
 			<div class="chartdiv">
-			<canvas id="sunburst"></canvas>
+			<div id="sunburst"></div>
 			</div>
 
 			<p class = "notebook">Meanwhile, the most present Black characters are the unnamed enslaved characters.</p>
@@ -198,8 +199,8 @@
 	<!-- Scroll Packages END -->
 
 	<script>
-       
-	</script>
+
+</script>
 	
 	<!-- JavaScript Bundle with Popper -->
 	<!--<script src="js/charts.js"></script>-->
@@ -236,6 +237,83 @@
 			</footer>
 		</div>
 	</footer>
+
+	<script>
+
+        function makeplot() {
+            var data;
+            $.ajax({
+                type: "GET",
+                url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sunburst_export.csv",
+                dataType: "text",
+                success: function (response) {
+                    data = $.csv.toObjects(response, { headers: true });
+                    processData(data);
+                }
+            });
+
+
+
+        };
+
+        function processData(allRows) {
+
+            console.log(allRows);
+            console.log(allRows.length)
+            var labels = []
+            var values = []
+            var parents = []
+			var ids = [];
+			var percent = [];
+			var race = [];
+
+            for (var i = 0; i < allRows.length; i++) {
+                row = allRows[i];
+                labels.push(row['labels']);
+                values.push(row['values']);
+				parents.push(row['parents']);
+				ids.push(row['ids']);
+				percent.push(row['percent']);
+				race.push(row['race']);
+               
+			}
+            console.log("Labels = ", labels, "Values =", values, "Parents = ", parents, "Ids =", ids);
+            makePlotly(labels, values, parents, ids, percent, race);
+        }
+
+        function makePlotly(labels, values, parents, ids, percent, race) {
+			var hovervariables = [percent, race]
+			
+
+
+			var data = [{
+                type: "sunburst",
+                labels: labels,
+                parents: parents,
+                values: values,
+				ids: ids,
+				customdata: percent,
+		        outsidetextfont: { size: 20, color: "#377eb8" },
+                leaf: { opacity: 0.7 },
+				marker: { line: { width: 2 } },
+                hovertemplate: '%{customdata}%<extra></extra>'
+            }];
+
+            var layout = {
+                margin: { l: 0, r: 0, b: 0, t: 0 },
+                
+			};
+
+			var config = {responsive: true}
+
+
+            Plotly.newPlot('sunburst', data, layout, config);
+
+
+        };
+        makeplot();
+	</script>
+
 </body>
 
 

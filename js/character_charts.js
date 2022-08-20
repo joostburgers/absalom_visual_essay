@@ -1,5 +1,9 @@
 // JavaScript source code
 //Configuration for charts
+$.ajaxSetup({
+	async: false
+});
+
 
 var DefaultbackgroundColor = [
     'rgba(255, 99, 132, 0.2)',
@@ -22,10 +26,39 @@ var DefaultborderWidth = 1
 
 //generate scrollychart1 through AJAX call. All variables are passed through by function after completed request
 
+function makeplot() {
+	d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv", function (data) { processData(data) });
+
+};
+
+function processData(allRows) {
+
+	console.log(allRows);
+	var x = [], y = [], standard_deviation = [];
+
+	for (var i = 0; i < allRows.length; i++) {
+		row = allRows[i];
+		x.push(row['AAPL_x']);
+		y.push(row['AAPL_y']);
+	}
+	console.log('X', x, 'Y', y, 'SD', standard_deviation);
+	makePlotly(x, y, standard_deviation);
+}
+
+function makePlotly(x, y, standard_deviation) {
+	var plotDiv = document.getElementById("plot");
+	var traces = [{
+		x: x,
+		y: y
+	}];
+
+	Plotly.newPlot('sunburst', traces,
+		{ title: 'Plotting CSV data from AJAX call' });
+};
+
+
 $(function () {
-    $.ajaxSetup({
-        async: false
-    });
+   
     var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
     var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
 	//var contextBar = document.getElementById('barchart').getContext("2d");
@@ -130,9 +163,12 @@ $(function () {
             chart.update(); // finally update our chart
 
         });
-    };
+	};
 
 	
+
+
+
 	var main = d3.select("main");
 	var scrolly = main.select("#scrolly");
 	var figure = scrolly.select("figure");
@@ -243,3 +279,4 @@ $(function () {
 
 
 });
+
