@@ -1,11 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\css",
     "\\data",
     "\\js",
+    "\\media",
+    "\\media\\images",
     "\\pages",
     "\\pages\\data"
   ],
-  "SelectedNode": "\\js\\character_charts.js",
+  "SelectedNode": "\\characters.html",
   "PreviewInSolutionExplorer": false
 }
