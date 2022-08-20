@@ -7,6 +7,16 @@ html, body {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 	.divider-v {height:40px;}
+	img {
+	width: 100vw;
+}
+	blockquote {
+		font-size: 15px;
+		color: white;
+		font-weight: 400;
+		text-align: center;
+		padding-bottom: 5px;
+	}
 	.chart-scroll {
 		height: 645px;
 		display: flex;
@@ -232,15 +242,6 @@ html, body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-	}
-	
-
-	
-	p.notebook{
-		display: left;
-	}
-	.divider-2 {
-		height: 0px;
 	}
   } 
   
@@ -552,4 +553,20 @@ h1.title2{
 }
 p.title-p-text {
 	color: #13171c;
+}
+
+.image-source {
+	font-size: 10px;
+	padding-top: 5px;
+}
+
+.full-image-text-low {
+	background-color: #B55400;
+	padding-top: 20px;
+	transition: 1s ease;
+	opacity: 0;
+}
+
+.full-image:hover .full-image-text-low {
+	opacity: 0.9;
 }

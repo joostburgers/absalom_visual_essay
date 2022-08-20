@@ -51,8 +51,12 @@ function makePlotly(x, y, standard_deviation) {
 		x: x,
 		y: y
 	}];
+	var layout = {
+		plot_bgcolor:"red",
+		paper_bgcolor:"red"
+  }
 
-	Plotly.newPlot('sunburst', traces,
+	Plotly.newPlot('sunburst', traces, 
 		{ title: 'Plotting CSV data from AJAX call' });
 };
 
