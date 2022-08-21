@@ -26,8 +26,9 @@
 	<main>
 		<header class="sticky-top">
 			<nav class="navbar navbar-expand-lg navbar-dark">
+
 			  <div class="container-fluid">
-				<em><a class="navbar-brand" href="index.html">Absalom, Absalom!</a></em>
+				<em><a style = "color: #B55400;"class="navbar-brand" href="index.html">Absalom, Absalom!</a></em>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
 				  <span class="navbar-toggler-icon"></span>
 				</button>
@@ -46,16 +47,16 @@
 				  </ul>
 			</nav>
 		</header>
-			<!-- Title Slide BEGINS-->
-			<section id="intro">
-				<div style="background-color:#B55400">
-					<h2 class="title">Digital Supplement:</h2>
-					<em><h1 class="title1" >Absalom, Absalom!</h1></em>
-					<em><h1 class="title2">and The Digital Humanities</h1></em>
-					<p class="title-p-text">
-						This interactive essay was created using data from the <a style = "color: #13171c;" href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
-					</p>
-				</div>
+		<!-- Title Slide BEGINS-->
+		<section id="intro">
+			<div style="background-color:#B55400">
+				<h2 class="title" style="color: #222831; padding-top: 6%;">Digital Supplement:</h2>
+				<em><h1 class="title" style="color: #FFF;">Absalom, Absalom!</h1></em>
+				<em><h1 class="title" style="color: #222831;">and The Digital Humanities</h1></em>
+				<p class="title-p-text" style="color: #13171c;">
+					This interactive essay was created using data from the <a style = "color: #13171c;"href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
+				</p>
+			</div>
 				<!-- Title Slide ENDS-->
 				<!-- Pre Scroll Text BEGINS-->
 
@@ -69,9 +70,9 @@
 				</p>
 						<p class = "notebook" style = "color:#EEE;">
 						Faulkner was once asked if any one of the characters has the “right view.”</p>
-						<div class = "quote">
-				  	<blockquote class="blockquote">
-					<p class="mb-0">In Absalom, Absalom! is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?</p>
+					<div class = "quote">
+				  	<blockquote>
+					<p class="blockquote">In Absalom, Absalom! is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?</p>
 				  </blockquote>
 				  <figcaption class="blockquote-footer"><cite title="Source Title">Faulkner, <em>May 8th, Virginia</em></cite>
 				  </figcaption>
@@ -93,25 +94,22 @@
 			</section>
 				<!-- Pre Scroll Text ENDS-->
 
-
+				<div class = "notebook"> 
+					<p class = "notebook">
+						Faulkner does not tell us the events in the order they occur (story). Instead, he reorganizes them into a non-linear order (plot).
+						We can see this distinction with his delayed revelations about Sutpen’s life.	
+						<br><br>
+						We can take the plot and chronology data and put them on a chart to show the structure of the narrative.
+						Chronology is placed on the y-axis, and plot is placed on the x-axis.
+						<br><br>
+						Events that are chronologically earlier are lower down, while later events are higher up.					</p>
+					</p>
+				</div>
 				<!-- Scroll Text BEGINS -->
 		<section id="scrolly" class = "scrollbg">
 			<article>
 				<div class="step" data-step="1">
-					<p class = "scroll-text">
-						Faulkner does not tell us the events in the order they occur (story). Instead, he reorganizes them into a non-linear order (plot).
-
-						We can see this distinction with his delayed revelations about Sutpen’s life.					</p>
-				</div>
-				<div class="step" data-step="2">
-					<p class = "scroll-text">
-						We can take the plot and chronology data and put them on a chart to show the structure of the narrative.
-
-						Chronology is placed on the y-axis, and plot is placed on the x-axis.
-						
-						Events that are chronologically earlier are lower down, while later events are higher up.					</p>
-				</div>
-				<div class="step" data-step="3">
+					<!-- Pause plotly -->
 					<p class = "scroll-text">
 						Following the order of events as Quentin discovers them, we learn several important details about him out of order:
 						<br><br>
@@ -119,21 +117,25 @@
 						<br>
 						<strong> Chapter 6:</strong> Sutpen is killed by Jones
 						<br>
-						<strong>Chapter 7:</strong> Sutpen is born in Virginia					</p>
+						<strong>Chapter 7:</strong> Sutpen is born in Virginia</p>
 				</div>
-				<div class="step" data-step="4">
+				<div class="step" data-step="2">
+					<!-- Play plotly -->
 					<p class = "scroll-text">
-						These should be re-sorted to tell the story.
-						<br><br>
-						<strong>Chapter 7:</strong> Sutpen is born in Virginia
-						<br>
-						<strong>Chapter 1:</strong> Sutpen arrives in Jefferson
-						<br>
-						<strong> Chapter 6:</strong> Sutpen is killed by Jones				</div>
+						<p class = "scroll-text">
+							These should be re-sorted to tell the story.
+							<br><br>
+							<strong>Chapter 7:</strong> Sutpen is born in Virginia
+							<br>
+							<strong>Chapter 1:</strong> Sutpen arrives in Jefferson
+							<br>
+							<strong> Chapter 6:</strong> Sutpen is killed by Jones			</p>
+				</div>
+	</div>
 			</article>
 			<figure> 
 				<!-- Scroll Chart BEGINS -->
-				<canvas id="scrollychart" style = "height: 200px;"></canvas>
+				<canvas id="plotchart" style = "height: 200px;"></canvas>
 				<!-- Scroll Chart ENDS -->
 			</figure>
 		</section>
@@ -147,6 +149,23 @@
 			  <p class = "notebook">
 		  The overlapping and disjointed versions of events capture Quentin’s lived experience of exploring the past. This is not a neat linear chronology told by one authority in a history book, but the collective story of multiple voices who have shaped and reshaped the events to match their version of the truth. The tellers cannot be separated from their tales. It forces us to wonder if any version of the past can ever be true, or if it is simply another story we tell ourselves.
 		</p>
+		</div>
+		<div class = "notebook">
+			<p class = "notebook">
+				Each narrator actually follows a similar pattern. They start the narration in the “deep” past and work their way into the present. They often repeat similar details, but leave out crucial information.
+			</p>
+			<h1>PLOT STRUCTURE CHART HERE</h1>
+			<p class = "notebook">
+				We can get better insight into how Faulkner structured Absalom, Absalom! by displaying which parts of the story each chapter covers. In story mode we see a very mottled line with each chapter seemingly covering all parts of the story. 
+				<br><br>
+				By clicking on each chapter legend entry, we can turn that series on and off, and determine what parts of the story each chapter covers.
+			</p>
+			<h1>PLOT STRUCTURE CHART 2 HERE</h1>
+		</div>
+		<div class = "notebook">
+			<p class = "notebook">
+				The overlapping and disjointed versions of events capture Quentin’s lived experience of exploring the past. This is not a neat linear chronology told by one authority in a history book, but the collective story of multiple voices who have shaped and reshaped the events to match their version of the truth. The tellers cannot be separated from their tales. It forces us to wonder if any version of the past can ever be true, or if it is simply another story we tell ourselves.
+	  		</p>
 		</div>
 		</div>
 
