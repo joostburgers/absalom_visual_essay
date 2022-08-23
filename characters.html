@@ -74,37 +74,35 @@
 			<!-- Pre Scroll Text BEGINS-->
 			<div class="notebook">
 				<h1 style="text-align: center; padding: 0; color: #EEE;">Characters</h1>
-				<h2 style="text-align: center; padding: 0; color: #EEE;">“money, a house, a plantation, slaves, a family — incidentally of course, a wife”</h2>
+				<div class = "divider-h"></div>
+				<h2 style="text-align: center; padding: 0; color: #B55400;">“money, a house, a plantation, slaves, a family — incidentally of course, a wife”</h2>
 				<p class="notebook">
 					The <i>Digital Yoknapatawpha</i> database contains every character who appears in Faulkner’s Yoknapatawpha fictions.
 					Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
 					With this information, we can make a literary demography of the composition of the entire character population.					
-				</p>
-				<p class="notebook">
+					<br><br><br>
 					One of the most salient pieces of demographic information in <i>Absalom, Absalom!</i> is its racial composition. The novel powerfully captures the Southern system of racial oppression that started with the enslavement of Africans before the Civil War and continued through "Jim Crow" segretation laws after the Emancipation Proclamation. This long history of racial separation and its codification into explicit laws and implicit social practices, made race appear as a real and fundamental difference between people, even, if it was entirely socially constructed. Speaking of race in America more generally, Toni Morrison remarks that, "As a reader you have been forced to hunt for a drop of black blood that means everything and nothing. The insanity of racism."
 				</p>
+				</div>
 				<div class="full-image">
-
-					<img src="media\images\whites_only_restroom.jpg" style="width: 100vw" />
+					<img src="media\images\whites_only_restroom.jpg" style="width: 100vw; height:auto" />
 					<div class="full-image-text-low">
-						<div class="quote">
-							<blockquote class="blockquote">
+							<blockquote>
 								<p class="mb-0">
 									As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.
 									<br>
 									The insanity of racism.
 								</p>
 							</blockquote>
-							<figcaption class="blockquote-footer">
+							<figcaption class="blockquote-footer" style = "color: #13171c;">
 								<cite title="Source Title">Toni Morrison, <em>Conversations</em></cite>
 							</figcaption>
-
-						</div>
 					</div>
 					<p class="image-source">Dain, Martin J. "Oxford square, image 189." (1961). Archives and Special Collections, University of Mississippi Libraries.</p>
 				</div>
 				<div class="divider-h" style="background-color: #222831;height: 40px;"></div>
 				<!-- <canvas id = "race-hierarchy-map"></canvas> -->
+				<div class = "notebook">
                 <p class="notebook" style="padding-bottom: 0; margin-bottom: auto; color: #EEE;">
                     Faulkner questions this real difference between people based on race by suggesting that Charles Bon could be both brother and other to Judith and Henry Sutpen. This obsession with race is visible in the character breakdown of the novel. There are 194 unique characters in Absalom, Absalom!. The overwhelming majority of these characters are White.
                     <br><br>
@@ -298,7 +296,12 @@
 
             var layout = {
                 margin: { l: 0, r: 0, b: 0, t: 0 },
-                
+                plot_bgcolor:"#222831",
+      			paper_bgcolor:"#222831", 
+				font: {
+    			size: 12,
+    			color: '#eee'
+  }
 			};
 
 			var config = {responsive: true}
