@@ -26,52 +26,24 @@ var DefaultborderWidth = 1
 
 //generate scrollychart1 through AJAX call. All variables are passed through by function after completed request
 
-function makeplot() {
-	d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv", function (data) { processData(data) });
 
-};
-
-function processData(allRows) {
-
-	console.log(allRows);
-	var x = [], y = [], standard_deviation = [];
-
-	for (var i = 0; i < allRows.length; i++) {
-		row = allRows[i];
-		x.push(row['AAPL_x']);
-		y.push(row['AAPL_y']);
-	}
-	console.log('X', x, 'Y', y, 'SD', standard_deviation);
-	makePlotly(x, y, standard_deviation);
-}
-
-function makePlotly(x, y, standard_deviation) {
-	var plotDiv = document.getElementById("plot");
-	var traces = [{
-		x: x,
-		y: y
-	}];
-	var layout = {
-		plot_bgcolor:"red",
-		paper_bgcolor:"red"
-  }
-
-	Plotly.newPlot('sunburst', traces, 
-		{ title: 'Plotting CSV data from AJAX call' });
-};
 
 
 $(function () {
    
     var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
     var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
-	
+	var contextDummychart = document.getElementById('dummychart').getContext("2d");
 
     // examine example_data.json for expected response data
     var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
     var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
     // draw empty chart
-    var scrollychart1 = new Chart(contextScrollychart1, {
+
+	
+
+
+	var scrollychart1 = new Chart(contextScrollychart1, {
         type: 'doughnut',
         data: {
             labels: [],
@@ -83,12 +55,29 @@ $(function () {
             }]
 
         },
-        options: {
-            legend: {
-                display: false
-            }
-        }
+		options: {
+			legend: {
+				display: false,
+				position: 'right'
+			},
+			tooltips: {
+				callbacks: {
+					label: function (tooltipItem, data) {
+						var dataset = data.datasets[tooltipItem.datasetIndex];
+						var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+							return previousValue + currentValue;
+						});
+						var currentValue = dataset.data[tooltipItem.index];
+						var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+						return percentage + "%";
+					}
+				}
+			}
+		}
     });
+
+	
+
 
     var scrollychart2 = new Chart(contextScrollychart2, {
         type: 'doughnut',
@@ -102,18 +91,52 @@ $(function () {
             }]
 
         },
-        options: {
-            legend: {
-                display: false
-            }
-        }
+		options: {
+			legend: {
+				display: false
+			},
+			tooltips: {
+				callbacks: {
+					label: function (tooltipItem, data) {
+						var dataset = data.datasets[tooltipItem.datasetIndex];
+						var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
+							return previousValue + currentValue;
+						});
+						var currentValue = dataset.data[tooltipItem.index];
+						var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
+						return percentage + "%";
+					}
+				}
+			}
+		}
+	
 
     });
 
+	var dummychart = new Chart(contextDummychart, {
+		type: 'doughnut',
+		data: {
+			labels: ["Black", "White","Blanks"],
+			datasets: [{
+				data: [],
+				backgroundColor: DefaultbackgroundColor,
+				borderColor: DefaultborderColor,
+				borderWidth: DefaultborderWidth
+			}]
+
+		},
+		options: {
+			legend: {
+				display: true,
+				position: 'right'
+			}
+		}
+	});
 
 
     ajax_chart(scrollychart1, demography_chart_url);
-    ajax_chart(scrollychart2, weighted_demography_chart_url);
+	ajax_chart(scrollychart2, weighted_demography_chart_url);
+	createLegend()
 
 
 
@@ -131,13 +154,14 @@ $(function () {
             chart.data.datasets[0].data = response.map(function (e) {
                 return e.total;
             });; // or you can iterate for multiple datasets
-            chart.update(); // finally update our chart
 
+			
+			chart.update(); // finally update our chart
+	
         });
 	};
 
 	
-
 
 
 	var main = d3.select("main");
