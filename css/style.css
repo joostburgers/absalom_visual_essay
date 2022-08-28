@@ -10,7 +10,7 @@ html, body {
 	img {
 	width: 100vw;
 }
-	blockquote {
+	.blockquote {
 		font-size: 15px;
 		color: white;
 		font-weight: 400;
@@ -93,13 +93,19 @@ html, body {
 		color: #EEE;
 		height: 100px;
 	}
-	article {
+	.article {
 		position: relative;
 		/* padding: 0 1rem; */
 		max-width: 20rem;
 	}
-	figure{
+	.figure{
 		position: absolute;
+		
+	}
+	.legend {
+		position: absolute;
+		right: 0;
+		bottom: 2%;
 		
 	}
   }
@@ -186,6 +192,11 @@ html, body {
 		-webkit-text-stroke: .1px black;
 	}
 
+	.legend {
+		position: absolute;
+		right: 0;
+		bottom: 2%;
+	}
 	.quote {
 		margin-left: -4%;
 		font-size: 1.5rem;
@@ -242,6 +253,12 @@ html, body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+
+	}
+	.legend {
+		position: absolute;
+		right: 0;
+		bottom: 2%;
 	}
   } 
   

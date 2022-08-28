@@ -29,11 +29,72 @@ var DefaultborderWidth = 1
 
 
 
+const htmlLegendPlugin = {
+	id: 'htmlLegend',
+	afterUpdate(chart, args, options) {
+		const ul = getOrCreateLegendList(chart, options.containerID);
+
+		// Remove old legend items
+		while (ul.firstChild) {
+			ul.firstChild.remove();
+		}
+
+		// Reuse the built-in legendItems generator
+		const items = chart.options.plugins.legend.labels.generateLabels(chart);
+
+		items.forEach(item => {
+			const li = document.createElement('li');
+			li.style.alignItems = 'center';
+			li.style.cursor = 'pointer';
+			li.style.display = 'flex';
+			li.style.flexDirection = 'row';
+			li.style.marginLeft = '10px';
+
+			li.onclick = () => {
+				const { type } = chart.config;
+				if (type === 'pie' || type === 'doughnut') {
+					// Pie and doughnut charts only have a single dataset and visibility is per item
+					chart.toggleDataVisibility(item.index);
+				} else {
+					chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
+				}
+				chart.update();
+			};
+
+			// Color box
+			const boxSpan = document.createElement('span');
+			boxSpan.style.background = item.fillStyle;
+			boxSpan.style.borderColor = item.strokeStyle;
+			boxSpan.style.borderWidth = item.lineWidth + 'px';
+			boxSpan.style.display = 'inline-block';
+			boxSpan.style.height = '20px';
+			boxSpan.style.marginRight = '10px';
+			boxSpan.style.width = '20px';
+
+			// Text
+			const textContainer = document.createElement('p');
+			textContainer.style.color = item.fontColor;
+			textContainer.style.margin = 0;
+			textContainer.style.padding = 0;
+			textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+			const text = document.createTextNode(item.text);
+			textContainer.appendChild(text);
+
+			li.appendChild(boxSpan);
+			li.appendChild(textContainer);
+			ul.appendChild(li);
+		});
+	}
+};
+
+
+
 $(function () {
    
     var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
     var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
-	var contextDummychart = document.getElementById('dummychart').getContext("2d");
+
 
     // examine example_data.json for expected response data
     var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
@@ -57,9 +118,10 @@ $(function () {
         },
 		options: {
 			legend: {
-				display: false,
-				position: 'right'
+				display: false
+				
 			},
+			
 			tooltips: {
 				callbacks: {
 					label: function (tooltipItem, data) {
@@ -73,7 +135,7 @@ $(function () {
 					}
 				}
 			}
-		}
+			}
     });
 
 	
@@ -113,34 +175,16 @@ $(function () {
 
     });
 
-	var dummychart = new Chart(contextDummychart, {
-		type: 'doughnut',
-		data: {
-			labels: ["Black", "White","Blanks"],
-			datasets: [{
-				data: [],
-				backgroundColor: DefaultbackgroundColor,
-				borderColor: DefaultborderColor,
-				borderWidth: DefaultborderWidth
-			}]
 
-		},
-		options: {
-			legend: {
-				display: true,
-				position: 'right'
-			}
-		}
-	});
+	
+
 
 
     ajax_chart(scrollychart1, demography_chart_url);
 	ajax_chart(scrollychart2, weighted_demography_chart_url);
-	createLegend()
+	
 
-
-
-    // function to update our chart
+	// function to update our chart
     function ajax_chart(chart, url, data) {
         var data = data || {};
 
@@ -161,7 +205,86 @@ $(function () {
         });
 	};
 
+	function chart_legend(url, data) {
+		var data = data || {};
+
+		$.getJSON(url, data).done(function (response) {
+			response = JSON.parse(response)
+
+			labels = response.map(function (e) {
+				return e.Race;
+			})
+
+			const legendContainer = document.getElementById('legend')
+
+			legendContainer.style.position = "absolute";
+			legendContainer.style.bottom = "2%";
+			legendContainer.style.left = 0;
+
+			let listContainer = legendContainer.querySelector("ul");
+
+			if (!listContainer) {
+				listContainer = document.createElement("ul");
+				listContainer.style.display = "flex";
+				listContainer.style.flexDirection = "row";
+				listContainer.style.margin = 0;
+				listContainer.style.padding = 0;
+
+				legendContainer.appendChild(listContainer);
+			}
+
+			
+
+			
+			labels.forEach((item,index)=>{
+				const li = document.createElement('li');
+				li.style.alignItems = 'center';
+				li.style.display = 'flex';
+				li.style.flexDirection = 'row';
+				li.style.marginLeft = '10px';
+
+				const boxSpan = document.createElement("span");
+				boxSpan.style.background = DefaultbackgroundColor[index];
+				boxSpan.style.borderColor = DefaultborderColor;
+				boxSpan.id = index;
+				boxSpan.style.borderWidth = '1px';
+				boxSpan.style.display = "flex";
+				boxSpan.style.alignItems = "center"
+				boxSpan.style.justifyContent = "center"
+				boxSpan.style.height = "20px";
+				boxSpan.style.marginRight = "10px";
+				boxSpan.style.width = "20px";
+
+				// Text
+				const textContainer = document.createElement("p");
+				textContainer.style.color = '#EEE';
+				textContainer.style.margin = 0;
+				textContainer.style.padding = 0;
+				
+
+				const text = document.createTextNode(item);
+				textContainer.appendChild(text);
+
+				
+				// boxSpan.appendChild(spantext);
+
+				li.appendChild(boxSpan);
+				li.appendChild(textContainer);
+			//	ul.appendChild(li);
+				listContainer.appendChild(li)
+			});
+			
+			console.log(labels)
+
+			return listContainer;
+		})
+	}
+
+
+	chart_legend(demography_chart_url)
+
 	
+
 
 
 	var main = d3.select("main");
@@ -204,7 +327,7 @@ $(function () {
 		//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
 
 		//TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
-		reversecount = scrollychart1.data.datasets[0].backgroundColor.length - response.index -1
+		
 
 		scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
 			if (response.index===1) {		
@@ -241,7 +364,32 @@ $(function () {
             }
 			scrollychart2.update()
 
-        })	
+		})	
+
+
+
+		//This highlights the legend item in correspondence with the pie piece.
+		let legend = document.getElementById('legend')
+		let spans = legend.getElementsByTagName('span')
+		
+
+		for (let span of spans) {
+			id = parseInt(span.id.slice(-1))
+			if (id === 4 && response.index === 1 ) {
+				span.style.background = span.style.background.replace("0.2", "0.8")
+			}
+			else if (response.index === 2 && id === 2) {
+				span.style.background = span.style.background.replace("0.2", "0.8")
+			}
+			else if (response.index === 3 && id === 0) {
+				span.style.background = span.style.background.replace("0.2", "0.8")
+			}
+			else {
+				span.style.background = span.style.background.replace("0.8", "0.2")
+			}
+			
+
+		}	
 
 	}
 
