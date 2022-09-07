@@ -186,7 +186,7 @@ html, body {
 	.image-source {
 		position: absolute;
 		font-size: .7rem;
-		bottom: 10px;
+		bottom: auto;
 		left: 18px;
 		opacity: 85%;
 		-webkit-text-stroke: .1px black;
@@ -579,11 +579,12 @@ p.title-p-text {
 
 .full-image-text-low {
 	background-color: #B55400;
-	padding-top: 20px;
-	transition: 1s ease;
-	opacity: 0;
+	/*padding-top: 20px;*/
+	/*visibility:hidden;
+	transition: 1s ease;*/
+		opacity: 0;
 }
 
-.full-image:hover .full-image-text-low {
+/*.full-image:hover .full-image-text-low {
 	opacity: 0.9;
-}
+}*/

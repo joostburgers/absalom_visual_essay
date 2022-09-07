@@ -91,6 +91,35 @@ const htmlLegendPlugin = {
 };
 
 
+$.fn.isInViewport = function () {
+
+	var centeringWeight = $(window).height() * .25
+
+	var elementTop = $(this).offset().top;
+	var elementBottom = elementTop + $(this).outerHeight() - centeringWeight;
+
+	var viewportTop = $(window).scrollTop()
+	var viewportBottom = viewportTop + $(window).height() - centeringWeight;
+	var windowheight = $(window).height();
+
+	//console.log("elementTop: " + elementTop + " elementBottom: " + elementBottom)
+	//console.log("viewportTop: " + viewportTop + " viewportBottom: " + viewportBottom + " Window Height: " + windowheight + " NewViewportTop: " +newViewportTop)
+
+	return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+$(window).on('resize scroll', function () {
+	if ($('.full-image-text-low ').isInViewport()) {
+		$('.full-image-text-low').fadeTo("slow", .7)
+		
+	} else {
+		//$('.full-image-text-low').fadeTo(400, 0.1) 
+		
+	//	$('.full-image-text-low').hide()
+	}
+
+});
+
 
 
 $(function () {
@@ -152,7 +181,7 @@ $(function () {
 				datalabels: {
 					color: 'white',
 					font: { size: 14 },
-					formatter: function (value, context) {
+					formatter: function (value) {
 						return value + '%';
 					}
 				}
@@ -304,6 +333,24 @@ $(function () {
 
 
 	chart_legend(demography_chart_url)
+
+	//$(window).scroll(function () {
+
+
+	//	image_top = $('.full-image-text-low').offset().top
+	//	page_top = $(window).scrollTop()
+	//	viewableOffset = image_top - page_top
+	//	console.log("image top:" +image_top)
+	//	console.log(page_top)
+	//	console.log("viewable offset: " + viewableOffset)
+
+	//	if ($(this).scrollTop() > 1200) {
+	//		$('.full-image-text-low').fadeIn();
+	//	}
+	//	else {
+	//		$('.full-image-text-low').fadeOut();
+	//	}
+	//});
 
 	
 
