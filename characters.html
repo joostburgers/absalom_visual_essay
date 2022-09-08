@@ -312,7 +312,7 @@
 				paper_bgcolor: "#222831", 
 				sunburstcolorway: DefaultborderColor,
 				font: {
-    			size: 12,
+    			size: 14,
     			color: '#eee'
   }
 			};
@@ -325,7 +325,42 @@
 
         };
         makeplot();
-	</script>
+
+    $.fn.isInViewport = function () {
+
+		//console.log("function being called")
+        var centeringWeight = $(window).height() * .25
+
+        var elementTop = $(this).offset().top;
+        var elementBottom = elementTop + $(this).outerHeight() - centeringWeight;
+
+        var viewportTop = $(window).scrollTop()
+        var viewportBottom = viewportTop + $(window).height() - centeringWeight;
+        var windowheight = $(window).height();
+
+        //console.log("elementTop: " + elementTop + " elementBottom: " + elementBottom)
+        //console.log("viewportTop: " + viewportTop + " viewportBottom: " + viewportBottom + " Window Height: " + windowheight + " NewViewportTop: " +newViewportTop)
+
+        return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
+
+    
+	$(window).on('scroll', function () {
+        
+
+
+        if ($('.full-image-text-low').isInViewport()===true) {
+            			 $('.full-image-text-low').fadeTo(20, 0.7)
+			console.log("true")
+        } else {
+            $('.full-image-text-low').fadeTo(20, 0.0)
+			console.log("false")
+            //	$('.full-image-text-low').hide()
+        }
+
+    });
+
+</script>
 
 </body>
 
