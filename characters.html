@@ -11,7 +11,10 @@
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0">
+		
+	</script>
 	<script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
 	<!--Chart Objects-->
 
@@ -155,7 +158,7 @@
 					</div>					
 					
 					
-	<!-- Scroll Chart ENDS -->
+	
 				</div>
 				
 			</div>
@@ -309,7 +312,7 @@
 				paper_bgcolor: "#222831", 
 				sunburstcolorway: DefaultborderColor,
 				font: {
-    			size: 12,
+    			size: 14,
     			color: '#eee'
   }
 			};
@@ -322,7 +325,42 @@
 
         };
         makeplot();
-	</script>
+
+    $.fn.isInViewport = function () {
+
+		//console.log("function being called")
+        var centeringWeight = $(window).height() * .25
+
+        var elementTop = $(this).offset().top;
+        var elementBottom = elementTop + $(this).outerHeight() - centeringWeight;
+
+        var viewportTop = $(window).scrollTop()
+        var viewportBottom = viewportTop + $(window).height() - centeringWeight;
+        var windowheight = $(window).height();
+
+        //console.log("elementTop: " + elementTop + " elementBottom: " + elementBottom)
+        //console.log("viewportTop: " + viewportTop + " viewportBottom: " + viewportBottom + " Window Height: " + windowheight + " NewViewportTop: " +newViewportTop)
+
+        return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
+
+    
+	$(window).on('scroll', function () {
+        
+
+
+        if ($('.full-image-text-low').isInViewport()===true) {
+            			 $('.full-image-text-low').fadeTo(20, 0.7)
+			console.log("true")
+        } else {
+            $('.full-image-text-low').fadeTo(20, 0.0)
+			console.log("false")
+            //	$('.full-image-text-low').hide()
+        }
+
+    });
+
+</script>
 
 </body>
 

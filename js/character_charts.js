@@ -26,7 +26,7 @@ var DefaultborderWidth = 1
 
 //generate scrollychart1 through AJAX call. All variables are passed through by function after completed request
 
-
+//Chart.register(ChartDataLabels);
 
 
 const htmlLegendPlugin = {
@@ -48,6 +48,7 @@ const htmlLegendPlugin = {
 			li.style.cursor = 'pointer';
 			li.style.display = 'flex';
 			li.style.flexDirection = 'row';
+			li.style.flexWrap = 'wrap';
 			li.style.marginLeft = '10px';
 
 			li.onclick = () => {
@@ -66,6 +67,7 @@ const htmlLegendPlugin = {
 			boxSpan.style.background = item.fillStyle;
 			boxSpan.style.borderColor = item.strokeStyle;
 			boxSpan.style.borderWidth = item.lineWidth + 'px';
+			boxSpan.style.borderStyle = 'solid';
 			boxSpan.style.display = 'inline-block';
 			boxSpan.style.height = '20px';
 			boxSpan.style.marginRight = '10px';
@@ -90,54 +92,53 @@ const htmlLegendPlugin = {
 
 
 
+
+
+
 $(function () {
-   
-    var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
-    var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
+
+	var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
+	var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
 
 
-    // examine example_data.json for expected response data
-    var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
-    var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
-    // draw empty chart
+	// examine example_data.json for expected response data
+	var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
+	var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
+	// draw empty chart
 
-	
+
 
 
 	var scrollychart1 = new Chart(contextScrollychart1, {
-        type: 'doughnut',
-        data: {
-            labels: [],
-            datasets: [{
-                data: [],
-                backgroundColor: DefaultbackgroundColor,
-                borderColor: DefaultborderColor,
-                borderWidth: DefaultborderWidth
-            }]
-
-        },
-		options: {
-			legend: {
-				display: false
-				
-			},
-			
-			tooltips: {
-				callbacks: {
-					label: function (tooltipItem, data) {
-						var dataset = data.datasets[tooltipItem.datasetIndex];
-						var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-							return previousValue + currentValue;
-						});
-						var currentValue = dataset.data[tooltipItem.index];
-						var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-						return percentage + "%";
+		type: 'doughnut',
+		data: {
+			labels: [],
+			datasets: [{
+				data: [],
+				backgroundColor: DefaultbackgroundColor,
+				borderColor: DefaultborderColor,
+				borderWidth: DefaultborderWidth,
+				datalabels: {
+					color: '#eee',
+					font: { size: 14 },
+					formatter: function (value, context) {
+						return value + '%';
 					}
 				}
-			}
-			}
-    });
+			}]
 
+		},
+		options: {
+			plugins: {
+				legend: {
+					display: false
+				}
+			},
+			 
+		},
+		plugins: [ChartDataLabels]
+		
+	});
 	
 
 
@@ -149,28 +150,26 @@ $(function () {
                 data: [],
                 backgroundColor: DefaultbackgroundColor,
                 borderColor: DefaultborderColor,
-                borderWidth: DefaultborderWidth
+				borderWidth: DefaultborderWidth,
+				datalabels: {
+					color: 'white',
+					font: { size: 14 },
+					formatter: function (value) {
+						return value + '%';
+					}
+				}
             }]
 
         },
 		options: {
-			legend: {
-				display: false
-			},
-			tooltips: {
-				callbacks: {
-					label: function (tooltipItem, data) {
-						var dataset = data.datasets[tooltipItem.datasetIndex];
-						var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {
-							return previousValue + currentValue;
-						});
-						var currentValue = dataset.data[tooltipItem.index];
-						var percentage = Math.floor(((currentValue / total) * 100) + 0.5);
-						return percentage + "%";
-					}
+			plugins: {
+				legend: {
+					display: false
 				}
-			}
-		}
+			},
+
+		},
+		plugins: [ChartDataLabels]
 	
 
     });
@@ -182,7 +181,6 @@ $(function () {
 
     ajax_chart(scrollychart1, demography_chart_url);
 	ajax_chart(scrollychart2, weighted_demography_chart_url);
-	
 
 	// function to update our chart
     function ajax_chart(chart, url, data) {
@@ -196,14 +194,37 @@ $(function () {
             })
 
             chart.data.datasets[0].data = response.map(function (e) {
-                return e.total;
+				console.log(e.total)
+
+				return e.total;
             });; // or you can iterate for multiple datasets
 
-			
 			chart.update(); // finally update our chart
 	
-        });
+		});
+		chart.data.datasets[0].data = value_to_percent(chart)
+		chart.update()
 	};
+
+
+	function value_to_percent(chart) {
+
+		chart_data = chart.data.datasets[0].data
+		console.log(chart_data)
+		sum = chart_data.reduce(function (previousValue, currentValue, currentIndex, array) {
+			return previousValue + currentValue;
+		})
+
+		chart_data.forEach(function (item, index, arr) {
+
+			arr[index] = Math.floor((item / sum) * 100 + .5);
+		});
+
+		return chart_data
+	}
+
+		
+
 
 	function chart_legend(url, data) {
 		var data = data || {};
@@ -217,9 +238,9 @@ $(function () {
 
 			const legendContainer = document.getElementById('legend')
 
-			legendContainer.style.position = "absolute";
-			legendContainer.style.bottom = "2%";
-			legendContainer.style.left = 0;
+			//legendContainer.style.position = "absolute";
+			//legendContainer.style.bottom = "2%";
+			//legendContainer.style.left = 0;
 
 			let listContainer = legendContainer.querySelector("ul");
 
@@ -227,6 +248,7 @@ $(function () {
 				listContainer = document.createElement("ul");
 				listContainer.style.display = "flex";
 				listContainer.style.flexDirection = "row";
+				listContainer.style.flexFlow = "wrap";
 				listContainer.style.margin = 0;
 				listContainer.style.padding = 0;
 
@@ -245,9 +267,10 @@ $(function () {
 
 				const boxSpan = document.createElement("span");
 				boxSpan.style.background = DefaultbackgroundColor[index];
-				boxSpan.style.borderColor = DefaultborderColor;
+				boxSpan.style.borderColor = DefaultborderColor[index];
 				boxSpan.id = index;
 				boxSpan.style.borderWidth = '1px';
+				boxSpan.style.borderStyle = 'solid';
 				boxSpan.style.display = "flex";
 				boxSpan.style.alignItems = "center"
 				boxSpan.style.justifyContent = "center"
@@ -282,6 +305,24 @@ $(function () {
 
 
 	chart_legend(demography_chart_url)
+
+	//$(window).scroll(function () {
+
+
+	//	image_top = $('.full-image-text-low').offset().top
+	//	page_top = $(window).scrollTop()
+	//	viewableOffset = image_top - page_top
+	//	console.log("image top:" +image_top)
+	//	console.log(page_top)
+	//	console.log("viewable offset: " + viewableOffset)
+
+	//	if ($(this).scrollTop() > 1200) {
+	//		$('.full-image-text-low').fadeIn();
+	//	}
+	//	else {
+	//		$('.full-image-text-low').fadeOut();
+	//	}
+	//});
 
 	
 
