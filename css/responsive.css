@@ -66,7 +66,8 @@
         font-size: 20px; color: #eee; font-weight: 400; text-align: center; padding-bottom: 5px;
     }
     .fig {
-        width: 950px;
+        max-width: 900px;
+        margin: 5%;
 		z-index: 5;
     }
 }
@@ -76,8 +77,5 @@
     .charttitle {
         font-size: 20px; color: #eee; font-weight: 400; text-align: center; padding-bottom: 5px;
     }
-    .fig {
-        width: 1200px;
-		z-index: 5;
-    }
+    
 }
