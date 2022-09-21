@@ -1,7 +1,7 @@
 // JavaScript source code
 //Configuration for charts
 $.ajaxSetup({
-	async: false
+    async: false
 });
 
 
@@ -15,13 +15,13 @@ var DefaultbackgroundColor = [
 ]
 
 var DefaultborderColor = [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-    ]
+    'rgba(255, 99, 132, 1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+]
 var DefaultborderWidth = 1
 
 //generate scrollychart1 through AJAX call. All variables are passed through by function after completed request
@@ -30,64 +30,64 @@ var DefaultborderWidth = 1
 
 
 const htmlLegendPlugin = {
-	id: 'htmlLegend',
-	afterUpdate(chart, args, options) {
-		const ul = getOrCreateLegendList(chart, options.containerID);
+    id: 'htmlLegend',
+    afterUpdate(chart, args, options) {
+        const ul = getOrCreateLegendList(chart, options.containerID);
 
-		// Remove old legend items
-		while (ul.firstChild) {
-			ul.firstChild.remove();
-		}
+        // Remove old legend items
+        while (ul.firstChild) {
+            ul.firstChild.remove();
+        }
 
-		// Reuse the built-in legendItems generator
-		const items = chart.options.plugins.legend.labels.generateLabels(chart);
+        // Reuse the built-in legendItems generator
+        const items = chart.options.plugins.legend.labels.generateLabels(chart);
 
-		items.forEach(item => {
-			const li = document.createElement('li');
-			li.style.alignItems = 'center';
-			li.style.cursor = 'pointer';
-			li.style.display = 'flex';
-			li.style.flexDirection = 'row';
-			li.style.flexWrap = 'wrap';
-			li.style.marginLeft = '10px';
+        items.forEach(item => {
+            const li = document.createElement('li');
+            li.style.alignItems = 'center';
+            li.style.cursor = 'pointer';
+            li.style.display = 'flex';
+            li.style.flexDirection = 'row';
+            li.style.flexWrap = 'wrap';
+            li.style.marginLeft = '10px';
 
-			li.onclick = () => {
-				const { type } = chart.config;
-				if (type === 'pie' || type === 'doughnut') {
-					// Pie and doughnut charts only have a single dataset and visibility is per item
-					chart.toggleDataVisibility(item.index);
-				} else {
-					chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
-				}
-				chart.update();
-			};
+            li.onclick = () => {
+                const { type } = chart.config;
+                if (type === 'pie' || type === 'doughnut') {
+                    // Pie and doughnut charts only have a single dataset and visibility is per item
+                    chart.toggleDataVisibility(item.index);
+                } else {
+                    chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
+                }
+                chart.update();
+            };
 
-			// Color box
-			const boxSpan = document.createElement('span');
-			boxSpan.style.background = item.fillStyle;
-			boxSpan.style.borderColor = item.strokeStyle;
-			boxSpan.style.borderWidth = item.lineWidth + 'px';
-			boxSpan.style.borderStyle = 'solid';
-			boxSpan.style.display = 'inline-block';
-			boxSpan.style.height = '20px';
-			boxSpan.style.marginRight = '10px';
-			boxSpan.style.width = '20px';
+            // Color box
+            const boxSpan = document.createElement('span');
+            boxSpan.style.background = item.fillStyle;
+            boxSpan.style.borderColor = item.strokeStyle;
+            boxSpan.style.borderWidth = item.lineWidth + 'px';
+            boxSpan.style.borderStyle = 'solid';
+            boxSpan.style.display = 'inline-block';
+            boxSpan.style.height = '20px';
+            boxSpan.style.marginRight = '10px';
+            boxSpan.style.width = '20px';
 
-			// Text
-			const textContainer = document.createElement('p');
-			textContainer.style.color = item.fontColor;
-			textContainer.style.margin = 0;
-			textContainer.style.padding = 0;
-			textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+            // Text
+            const textContainer = document.createElement('p');
+            textContainer.style.color = item.fontColor;
+            textContainer.style.margin = 0;
+            textContainer.style.padding = 0;
+            textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
 
-			const text = document.createTextNode(item.text);
-			textContainer.appendChild(text);
+            const text = document.createTextNode(item.text);
+            textContainer.appendChild(text);
 
-			li.appendChild(boxSpan);
-			li.appendChild(textContainer);
-			ul.appendChild(li);
-		});
-	}
+            li.appendChild(boxSpan);
+            li.appendChild(textContainer);
+            ul.appendChild(li);
+        });
+    }
 };
 
 
@@ -97,49 +97,44 @@ const htmlLegendPlugin = {
 
 $(function () {
 
-	var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
-	var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
+    var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
+    var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
 
+    //set URL for AJAX retrieval
+    var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
+    var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
 
-	// examine example_data.json for expected response data
-	var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
-	var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
-	// draw empty chart
+    // draw empty charts
 
+    var scrollychart1 = new Chart(contextScrollychart1, {
+        type: 'doughnut',
+        data: {
+            labels: [],
+            datasets: [{
+                data: [],
+                backgroundColor: DefaultbackgroundColor,
+                borderColor: DefaultborderColor,
+                borderWidth: DefaultborderWidth,
+                datalabels: {
+                    color: '#eee',
+                    font: { size: 14 },
+                    formatter: function (value, context) {
+                        return value + '%';
+                    }
+                }
+            }]
 
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+        },
+        plugins: [ChartDataLabels]
+    });
 
-
-	var scrollychart1 = new Chart(contextScrollychart1, {
-		type: 'doughnut',
-		data: {
-			labels: [],
-			datasets: [{
-				data: [],
-				backgroundColor: DefaultbackgroundColor,
-				borderColor: DefaultborderColor,
-				borderWidth: DefaultborderWidth,
-				datalabels: {
-					color: '#eee',
-					font: { size: 14 },
-					formatter: function (value, context) {
-						return value + '%';
-					}
-				}
-			}]
-
-		},
-		options: {
-			plugins: {
-				legend: {
-					display: false
-				}
-			},
-			 
-		},
-		plugins: [ChartDataLabels]
-		
-	});
-	
 
 
     var scrollychart2 = new Chart(contextScrollychart2, {
@@ -150,317 +145,264 @@ $(function () {
                 data: [],
                 backgroundColor: DefaultbackgroundColor,
                 borderColor: DefaultborderColor,
-				borderWidth: DefaultborderWidth,
-				datalabels: {
-					color: 'white',
-					font: { size: 14 },
-					formatter: function (value) {
-						return value + '%';
-					}
-				}
+                borderWidth: DefaultborderWidth,
+                datalabels: {
+                    color: 'white',
+                    font: { size: 14 },
+                    formatter: function (value) {
+                        return value + '%';
+                    }
+                }
             }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
 
         },
-		options: {
-			plugins: {
-				legend: {
-					display: false
-				}
-			},
-
-		},
-		plugins: [ChartDataLabels]
-	
-
+        plugins: [ChartDataLabels]
     });
 
-
-	
-
-
-
+    //Initialize charts
     ajax_chart(scrollychart1, demography_chart_url);
-	ajax_chart(scrollychart2, weighted_demography_chart_url);
+    ajax_chart(scrollychart2, weighted_demography_chart_url);
 
-	// function to update our chart
+    // function to update our chart
     function ajax_chart(chart, url, data) {
         var data = data || {};
 
         $.getJSON(url, data).done(function (response) {
             response = JSON.parse(response)
 
+            //create labels and values
             chart.data.labels = response.map(function (e) {
                 return e.Race;
             })
 
             chart.data.datasets[0].data = response.map(function (e) {
-				console.log(e.total)
-
-				return e.total;
+                return e.total;
             });; // or you can iterate for multiple datasets
 
-			chart.update(); // finally update our chart
-	
-		});
-		chart.data.datasets[0].data = value_to_percent(chart)
-		chart.update()
-	};
+            chart.update(); // finally update our chart
+        });
+        //convert data to percent
+        chart.data.datasets[0].data = value_to_percent(chart)
+        chart.update()
+    };
 
 
-	function value_to_percent(chart) {
+    function value_to_percent(chart) {
 
-		chart_data = chart.data.datasets[0].data
-		console.log(chart_data)
-		sum = chart_data.reduce(function (previousValue, currentValue, currentIndex, array) {
-			return previousValue + currentValue;
-		})
+        chart_data = chart.data.datasets[0].data
 
-		chart_data.forEach(function (item, index, arr) {
+        sum = chart_data.reduce(function (previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+        })
 
-			arr[index] = Math.floor((item / sum) * 100 + .5);
-		});
+        chart_data.forEach(function (item, index, arr) {
+            arr[index] = Math.floor((item / sum) * 100 + .5);
+        });
 
-		return chart_data
-	}
+        return chart_data
+    }
 
-		
+    function chart_legend(url, data) {
+        var data = data || {};
 
+        $.getJSON(url, data).done(function (response) {
+            response = JSON.parse(response)
 
-	function chart_legend(url, data) {
-		var data = data || {};
+            labels = response.map(function (e) {
+                return e.Race;
+            })
 
-		$.getJSON(url, data).done(function (response) {
-			response = JSON.parse(response)
+            const legendContainer = document.getElementById('legend')
 
-			labels = response.map(function (e) {
-				return e.Race;
-			})
+            let listContainer = legendContainer.querySelector("ul");
 
-			const legendContainer = document.getElementById('legend')
-
-			//legendContainer.style.position = "absolute";
-			//legendContainer.style.bottom = "2%";
-			//legendContainer.style.left = 0;
-
-			let listContainer = legendContainer.querySelector("ul");
-
-			if (!listContainer) {
-				listContainer = document.createElement("ul");
-				listContainer.style.display = "flex";
-				listContainer.style.flexDirection = "row";
-				listContainer.style.flexFlow = "wrap";
-				listContainer.style.margin = 0;
-				listContainer.style.padding = 0;
-
-				legendContainer.appendChild(listContainer);
-			}
-
-			
-
-			
-			labels.forEach((item,index)=>{
-				const li = document.createElement('li');
-				li.style.alignItems = 'center';
-				li.style.display = 'flex';
-				li.style.flexDirection = 'row';
-				li.style.marginLeft = '10px';
-
-				const boxSpan = document.createElement("span");
-				boxSpan.style.background = DefaultbackgroundColor[index];
-				boxSpan.style.borderColor = DefaultborderColor[index];
-				boxSpan.id = index;
-				boxSpan.style.borderWidth = '1px';
-				boxSpan.style.borderStyle = 'solid';
-				boxSpan.style.display = "flex";
-				boxSpan.style.alignItems = "center"
-				boxSpan.style.justifyContent = "center"
-				boxSpan.style.height = "20px";
-				boxSpan.style.marginRight = "10px";
-				boxSpan.style.width = "20px";
-
-				// Text
-				const textContainer = document.createElement("p");
-				textContainer.style.color = '#EEE';
-				textContainer.style.margin = 0;
-				textContainer.style.padding = 0;
-				
-
-				const text = document.createTextNode(item);
-				textContainer.appendChild(text);
-
-				
-				// boxSpan.appendChild(spantext);
-
-				li.appendChild(boxSpan);
-				li.appendChild(textContainer);
-			//	ul.appendChild(li);
-				listContainer.appendChild(li)
-			});
-			
-			console.log(labels)
-
-			return listContainer;
-		})
-	}
-
-
-	chart_legend(demography_chart_url)
-
-	//$(window).scroll(function () {
-
-
-	//	image_top = $('.full-image-text-low').offset().top
-	//	page_top = $(window).scrollTop()
-	//	viewableOffset = image_top - page_top
-	//	console.log("image top:" +image_top)
-	//	console.log(page_top)
-	//	console.log("viewable offset: " + viewableOffset)
-
-	//	if ($(this).scrollTop() > 1200) {
-	//		$('.full-image-text-low').fadeIn();
-	//	}
-	//	else {
-	//		$('.full-image-text-low').fadeOut();
-	//	}
-	//});
-
-	
-
-
-
-	var main = d3.select("main");
-	var scrolly = main.select("#scrolly");
-	var figure = scrolly.select("figure");
-	var article = scrolly.select("article");
-	var step = article.selectAll(".step");
-
-	// initialize the scrollama
-	var scroller = scrollama();
-
-	// generic window resize listener event
-	function handleResize() {
-		// update height of step elements
-		var stepH = Math.floor(window.innerHeight * 0.75);
-		step.style("height", stepH + "px");
-
-		var figureHeight = window.innerHeight / 1.4;
-		var figureMarginTop = (window.innerHeight - figureHeight) / 2;
-
-		figure
-			.style("height", figureHeight + "px")
-			.style("top", figureMarginTop + "px");
-
-		scroller.resize();
-
-	}
-
-	// scrollama event handlers
-	function handleStepEnter(response) {
-		console.log(response.index);
-		// response = { element, direction, index }
-
-		step.classed("is-active", function (d, i) {
-			return i === response.index;
-		});
-
-		// // update chart based on step
-		// figure.select("p").text(response.index + 1);
-		//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
-
-		//TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
-		
-
-		scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
-			if (response.index===1) {		
-				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-				scrollychart1.data.datasets[0].backgroundColor[4]= scrollychart1.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
-			}
-			else if (response.index===2) {		
-				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-				scrollychart1.data.datasets[0].backgroundColor[2]= scrollychart1.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
-			}
-			else if (response.index===3) {
-				scrollychart1.data.datasets[0].backgroundColor[index]= scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")		
-				scrollychart1.data.datasets[0].backgroundColor[0]= scrollychart1.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
-			}
-			else {
-				scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+            if (!listContainer) {
+                listContainer = document.createElement("ul");
+                listContainer.style.display = "flex";
+                listContainer.style.flexDirection = "row";
+                listContainer.style.flexFlow = "wrap";
+                listContainer.style.margin = 0;
+                listContainer.style.padding = 0;
+                legendContainer.appendChild(listContainer);
             }
-			scrollychart1.update()
 
-        })	
-		
-		scrollychart2.data.datasets[0].backgroundColor.forEach(function (item, index) {
-			if (response.index===1) {		
-				scrollychart2.data.datasets[0].backgroundColor[4]= scrollychart2.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
-			}
-			else if (response.index===2) {		
-				scrollychart2.data.datasets[0].backgroundColor[2]= scrollychart2.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
-			}
-			else if (response.index===3) {		
-				scrollychart2.data.datasets[0].backgroundColor[0]= scrollychart2.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
-			}
-			else {
-				scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+            labels.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.style.alignItems = 'center';
+                li.style.display = 'flex';
+                li.style.flexDirection = 'row';
+                li.style.marginLeft = '10px';
+
+                const boxSpan = document.createElement("span");
+                boxSpan.style.background = DefaultbackgroundColor[index];
+                boxSpan.style.borderColor = DefaultborderColor[index];
+                boxSpan.id = index;
+                boxSpan.style.borderWidth = '1px';
+                boxSpan.style.borderStyle = 'solid';
+                boxSpan.style.display = "flex";
+                boxSpan.style.alignItems = "center"
+                boxSpan.style.justifyContent = "center"
+                boxSpan.style.height = "20px";
+                boxSpan.style.marginRight = "10px";
+                boxSpan.style.width = "20px";
+
+                // Text
+                const textContainer = document.createElement("p");
+                textContainer.style.color = '#EEE';
+                textContainer.style.margin = 0;
+                textContainer.style.padding = 0;
+
+
+                const text = document.createTextNode(item);
+                textContainer.appendChild(text);
+
+
+                // boxSpan.appendChild(spantext);
+
+                li.appendChild(boxSpan);
+                li.appendChild(textContainer);
+                //	ul.appendChild(li);
+                listContainer.appendChild(li)
+            });
+            return listContainer;
+        })
+    }
+
+    //create legend
+    chart_legend(demography_chart_url)
+
+    var main = d3.select("main");
+    var scrolly = main.select("#scrolly");
+    var figure = scrolly.select("figure");
+    var article = scrolly.select("article");
+    var step = article.selectAll(".step");
+
+    // initialize the scrollama
+    var scroller = scrollama();
+
+    // generic window resize listener event
+    function handleResize() {
+        // update height of step elements
+        var stepH = Math.floor(window.innerHeight * 0.75);
+        step.style("height", stepH + "px");
+
+        var figureHeight = window.innerHeight / 1.4;
+        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+        figure
+            .style("height", figureHeight + "px")
+            .style("top", figureMarginTop + "px");
+
+        scroller.resize();
+    }
+
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        console.log(response.index);
+        // response = { element, direction, index }
+
+        step.classed("is-active", function (d, i) {
+            return i === response.index;
+        });
+
+        // // update chart based on step
+        // figure.select("p").text(response.index + 1);
+        //Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
+
+        //TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
+
+
+        scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
+            if (response.index === 1) {
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+                scrollychart1.data.datasets[0].backgroundColor[4] = scrollychart1.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
             }
-			scrollychart2.update()
+            else if (response.index === 2) {
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+                scrollychart1.data.datasets[0].backgroundColor[2] = scrollychart1.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+            }
+            else if (response.index === 3) {
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+                scrollychart1.data.datasets[0].backgroundColor[0] = scrollychart1.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
+            }
+            else {
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+            }
+            scrollychart1.update()
 
-		})	
+        })
 
+        scrollychart2.data.datasets[0].backgroundColor.forEach(function (item, index) {
+            if (response.index === 1) {
+                scrollychart2.data.datasets[0].backgroundColor[4] = scrollychart2.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+            }
+            else if (response.index === 2) {
+                scrollychart2.data.datasets[0].backgroundColor[2] = scrollychart2.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+            }
+            else if (response.index === 3) {
+                scrollychart2.data.datasets[0].backgroundColor[0] = scrollychart2.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
+            }
+            else {
+                scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+            }
+            scrollychart2.update()
 
+        })
 
-		//This highlights the legend item in correspondence with the pie piece.
-		let legend = document.getElementById('legend')
-		let spans = legend.getElementsByTagName('span')
-		
-
-		for (let span of spans) {
-			id = parseInt(span.id.slice(-1))
-			if (id === 4 && response.index === 1 ) {
-				span.style.background = span.style.background.replace("0.2", "0.8")
-			}
-			else if (response.index === 2 && id === 2) {
-				span.style.background = span.style.background.replace("0.2", "0.8")
-			}
-			else if (response.index === 3 && id === 0) {
-				span.style.background = span.style.background.replace("0.2", "0.8")
-			}
-			else {
-				span.style.background = span.style.background.replace("0.8", "0.2")
-			}
-			
-
-		}	
-
-	}
-
-	function setupStickyfill() {
-		d3.selectAll(".sticky").each(function () {
-			Stickyfill.add(this);
-		});
-	}
-
-	function init() {
-		setupStickyfill();
-
-		// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-		handleResize();
-
-		// 2. setup the scroller passing options
-		// 		this will also initialize trigger observations
-		// 3. bind scrollama event handlers (this can be chained like below)
-		scroller
-			.setup({
-				step: "#scrolly article .step",
-				offset: 0.33,
-				debug: false
-			})
-			.onStepEnter(handleStepEnter);
-	}
-
-	// kick things off
-	init();
+        //This highlights the legend item in correspondence with the pie piece.
+        let legend = document.getElementById('legend')
+        let spans = legend.getElementsByTagName('span')
 
 
+        for (let span of spans) {
+            id = parseInt(span.id.slice(-1))
+            if (id === 4 && response.index === 1) {
+                span.style.background = span.style.background.replace("0.2", "0.8")
+            }
+            else if (response.index === 2 && id === 2) {
+                span.style.background = span.style.background.replace("0.2", "0.8")
+            }
+            else if (response.index === 3 && id === 0) {
+                span.style.background = span.style.background.replace("0.2", "0.8")
+            }
+            else {
+                span.style.background = span.style.background.replace("0.8", "0.2")
+            }
+        }
+
+    }
+
+    function setupStickyfill() {
+        d3.selectAll(".sticky").each(function () {
+            Stickyfill.add(this);
+        });
+    }
+
+    function init() {
+        setupStickyfill();
+
+        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+        handleResize();
+
+        // 2. setup the scroller passing options
+        // 		this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller
+            .setup({
+                step: "#scrolly article .step",
+                offset: 0.33,
+                debug: false
+            })
+            .onStepEnter(handleStepEnter);
+    }
+    // kick things off
+    init();
 });
 
