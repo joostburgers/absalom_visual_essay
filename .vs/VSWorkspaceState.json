@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\css",
+    "\\js"
   ],
+  "SelectedNode": "\\css\\scroll.css",
   "PreviewInSolutionExplorer": false
 }
