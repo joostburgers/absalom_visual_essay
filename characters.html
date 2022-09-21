@@ -86,7 +86,7 @@
 					Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
 					With this information, we can make a literary demography of the composition of the entire character population.					
 					<br><br><br>
-					One of the most salient pieces of demographic information in <i>Absalom, Absalom!</i> is its racial composition. The novel powerfully captures the Southern system of racial oppression that started with the enslavement of Africans before the Civil War and continued through "Jim Crow" segretation laws after the Emancipation Proclamation. This long history of racial separation and its codification into explicit laws and implicit social practices, made race appear as a real and fundamental difference between people, even, if it was entirely socially constructed. Speaking of race in America more generally, Toni Morrison remarks that, "As a reader you have been forced to hunt for a drop of black blood that means everything and nothing. The insanity of racism."
+					One of the most salient pieces of demographic information in <i>Absalom, Absalom!</i> is its racial composition. The novel powerfully captures the Southern system of racial oppression that started with the enslavement of Africans before the Civil War and was continued through the creation of "Jim Crow" segretation laws after the Emancipation Proclamation. This long history of racial separation and its codification into explicit laws and implicit social practices, made race appear as a real and fundamental difference between people, even, if it was entirely socially constructed. Speaking of race in America more generally, Toni Morrison remarks that, "As a reader you have been forced to hunt for a drop of black blood that means everything and nothing. The insanity of racism."
 				</p>
 				</div>
 				<div class="full-image">
@@ -120,22 +120,22 @@
 				<article>
 					<div class="step" data-step="1">
 						<p class="scroll-text">
-							There are important differences between the raw demographic total and the weighted demographic presence.
+							There are important differences between the raw demographic total and the weighted demographic presence. Both multi-racial groups and the few Indian characters who populate the novel's world do not even register when they are weighted for their presence within the plot.
 						</p>
 					</div>
 					<div class="step" data-step="2">
 						<p class="scroll-text">
-							Weighting by narrative presence actually reveals that White characters are over-represented. They only constitute x percentage of the total characters, but are present in y percentage of events.
+							Meanwhile, weighting by narrative presence actually reveals that White characters are over-represented. They only constitute 66% of the total characters, but are present in 77% of events. This shows that the narrative is focused on relating the lives of the White characters more than the other characters present.
 						</p>
 					</div>
 					<div class="step" data-step="3">
 						<p class="scroll-text">
-							Likewise, the number of Mixed Ancestry characters increases.
+							Likewise, by accounting for how often characters actually appear in the text, the number of of mixed ancestry characters goes up. Intuitively, this makes sense because while there are relatively few of these characters in the world of the text, characters like Clytemnestra and Charles Bon appear quite often.
 						</p>
 					</div>
 					<div class="step" data-step="4">
 						<p class="scroll-text">
-							But only because Black characters are less present.
+							Importantly, the increased focus on mixed ancestry characters comes at the cost of the Black characters. As individuals these characters recede into the background and do not have the same narrative presence as the white and the mixed ancestry characters. This distinction highlights the fact that novel is focused on showing White characters interact with characters of Mixed Ancestry. 
 						</p>
 					</div>
 				</article>
@@ -156,31 +156,25 @@
 					<div>
 						<div id="legend"></div>
 					</div>					
-					
-					
-	
 				</div>
-				
 			</div>
 			
 		</section>
 		<div class="divider-h" style="background-color: #222831;height: 50px;"></div>
 		<div class="notebook">
 			<p class="notebook">
-				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective. <br><br>
-				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
+				The data suggest that while <i>Absalom, Absalom!</i> is concerned with the ‘color line’, it is decidedly from a White perspective. Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community. This is visible with the presence of Charles Bon. He is the most ubiquitous Mixed Ancestry character by far. Still, compared to the other White characters he is simply another major character. Quite tellingly, the most present Black characters are the unnamed enslaved people, Sutpen transports to Jefferson to build his estate.
 			</p>
 			<p class="notebook">
-				Charles Bon is more present in the text than all other Mixed Ancestry characters combined, but is simply another major character compared to the White characters.
+				The sunburst chart below divides character presence by race and character. Clicking on the large pie pieces will show the character breakdowns in more detail.
 			</p>
 			<div class="chartdiv">
 				<div id="sunburst"></div>
 			</div>
 			
-			<p class="notebook">Meanwhile, the most present Black characters are the unnamed enslaved characters.</p>
 			<p class="notebook">
-				It is clear from reading Absalom, Absalom! that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
-				The various narrators only really care about racial passing if it threatens upper class white femininity. <br><br><br>
+				It is clear from reading <i>Absalom, Absalom!</i> that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
+				The various narrators only really care about racial passing if it threatens upper class white femininity. 
 			</p>
 
 			<p class="notebook">
@@ -300,9 +294,12 @@
                 values: values,
 				ids: ids,
 				customdata: percent,
-		        outsidetextfont: { size: 20, color: "#377eb8" },
-                leaf: { opacity: 0.7 },
-				marker: { line: { width: 2 } },
+		        outsidetextfont: { size: 20, color: "white" },
+                leaf: { opacity: 0.8 },
+				marker: {
+					line: { width: 2 }
+				},
+				branchvalues:'remainder',
                 hovertemplate: '%{customdata}%<extra></extra>'
             }];
 
@@ -313,8 +310,8 @@
 				sunburstcolorway: DefaultborderColor,
 				font: {
     			size: 14,
-    			color: '#eee'
-  }
+    			color: '#FFF'
+				}
 			};
 
 			var config = {responsive: true}
@@ -328,35 +325,30 @@
 
     $.fn.isInViewport = function () {
 
-		//console.log("function being called")
-        var centeringWeight = $(window).height() * .25
-
-        var elementTop = $(this).offset().top;
-        var elementBottom = elementTop + $(this).outerHeight() - centeringWeight;
-
-        var viewportTop = $(window).scrollTop()
-        var viewportBottom = viewportTop + $(window).height() - centeringWeight;
+		
+       var elementCenter = $(this).offset().top + $(this).outerHeight() / 2
+	   var viewportTop = $(window).scrollTop()
+       var viewportBottom = viewportTop + $(window).height();
         var windowheight = $(window).height();
 
-        //console.log("elementTop: " + elementTop + " elementBottom: " + elementBottom)
-        //console.log("viewportTop: " + viewportTop + " viewportBottom: " + viewportBottom + " Window Height: " + windowheight + " NewViewportTop: " +newViewportTop)
+		var percent_from_center = ((viewportTop+viewportBottom)/2 - elementCenter) / (windowheight/2)
 
-        return elementBottom > viewportTop && elementTop < viewportBottom;
+		  
+
+        return percent_from_center;
     };
 
     
 	$(window).on('scroll', function () {
         
+		distance = 1 - Math.abs($('.full-image-text-low').isInViewport())
+		
 
-
-        if ($('.full-image-text-low').isInViewport()===true) {
-            			 $('.full-image-text-low').fadeTo(20, 0.7)
-			console.log("true")
-        } else {
-            $('.full-image-text-low').fadeTo(20, 0.0)
-			console.log("false")
-            //	$('.full-image-text-low').hide()
-        }
+		if (distance > 0) {
+			opacity = (distance-.2).toString()
+            $('.full-image-text-low').css('opacity', opacity)
+			\
+        } 
 
     });
 
