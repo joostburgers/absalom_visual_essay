@@ -8,13 +8,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- JS Packages -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/scroll.css" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 	<style>
 		html, body {
 			background-color: #222831;
@@ -59,48 +62,50 @@
 			</div>
 				<!-- Title Slide ENDS-->
 				<!-- Pre Scroll Text BEGINS-->
-				<div class="notebook">
-					<h1 class = "main">Language</h1>
-					<p class="notebook">
-						The language in Absalom, Absalom! is very challenging. Faulkner’s language constantly draws attention to itself.</p>
-					 <p class = "notebook">
-						Sentences in Absalom, Absalom! are very long.
-						On average sentences are 50 words long.
-						The longest sentence is 1124 words! That’s a 3-4 page college paper!
-						<br>
-						<br>
-						Compared to other American Classics, Faulkner’s sentences are much, much longer. 
-						<br><br><br>
-						<canvas id = "barchart"></canvas>
+			
 
-			<!-- Title Slide ENDS-->
+		
 
 			<!-- Pre Scroll Text BEGINS-->
-			  <div class = "notebook">
-				<h1 style = "text-align: center; padding: 0; color: #EEE;">Events</h1>
-				<p class = "notebook" style = "color:#EEE;">
-					<i>Absalom, Absalom!</i> resists summary. It is told from multiple, contradictory perspectives that each re-tell the same set of historical events: Thomas Sutpen arrives in Jefferson and starts a family with Ellen Coldfield. He has a son, Henry, and a daughter, Judith. Judith falls in love with Henry’s friend from college Charles Bon. On the day Judith and Charles are supposed to marry, Henry kills him and disappears.
-					<br><br><br>
-					No one knows why, but everyone has a theory.
+			<div class="notebook">
+				<h1 style="text-align: center; padding: 0; color: #EEE;">Events</h1>
+				<div class="divider-h"></div>
+				<h2 style="text-align: center; padding: 0; color: #B55400;">“maybe happen is never once”</h2>
+				<p class="notebook" style="color:#EEE;">
+					<i>Absalom, Absalom!</i> resists summary. It is told from multiple, contradictory perspectives that each re-tell the same set of historical events. 
+					</p>
+					<div class="fade_text">Thomas Sutpen arrives in Jefferson and starts a family with Ellen Coldfield. </div>
+					<div class="fade_text">
+						He has a son, Henry, and a daughter, Judith. </div>
+						<div class="fade_text">Judith falls in love with Henry’s friend from college Charles Bon.</div>
+					<div class="fade_text">
+						On the day Judith and Charles are supposed to marry, Henry kills him and disappears.</div>
+					<div class="fade_text">
+						No one knows why.</div>
+					<div class="fade_text">
+						Everyone has a theory.
+					</div>
+				<p class="notebook" style="color:#EEE;">
+					Faulkner was once asked if any one of the characters has the “right view.”
 				</p>
-						<p class = "notebook" style = "color:#EEE;">
-						Faulkner was once asked if any one of the characters has the “right view.”</p>
-					<div class = "quote">
-				  	<blockquote>
-					<p class="blockquote">In Absalom, Absalom! is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?</p>
-				  </blockquote>
-				  <figcaption class="blockquote-footer"><cite title="Source Title">Faulkner, <em>May 8th, Virginia</em></cite>
-				  </figcaption>
-				  </div>
-				  <p class = "notebook" style = "color:#EEE;">
+				<div class="quote">
+					<blockquote>
+						<p class="blockquote">In Absalom, Absalom! is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?</p>
+					</blockquote>
+					<figcaption class="blockquote-footer">
+						<cite title="Source Title">Faulkner, <em>May 8th, Virginia</em></cite>
+					</figcaption>
+				</div>
+				<p class="notebook" style="color:#EEE;">
 					Though the plot can be very confusing, it is clear from Faulkner’s notes that he had an underlying structure.
 					<br><br><br>
-					This underlying structure is sometimes referred to as the chronology or story.	</p>
-					<p class = "notebook" style = "color:#EEE;">
-						Often used interchangeable, story and plot describe two different aspects of a narrative.
-<!-- >>>>>>> 156a51dcc12e748e35d6a5374c9d933e3eced1dd -->
-					</p>
-					 </div>
+					This underlying structure is sometimes referred to as the chronology or story.
+				</p>
+				<p class="notebook" style="color:#EEE;">
+					Often used interchangeable, story and plot describe two different aspects of a narrative.
+
+				</p>
+			</div>
 					<div class = "divider-h"></div>
 					</div>
 					<video controls width = 100%>
@@ -224,7 +229,7 @@
 	<!-- Scroll Packages BEGIN -->
 	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
 	<script src="js/scrollama.min.js"></script>
-	<script src = "js/charts.js"></script>
+	<!--<script src = "js/charts.js"></script>-->
 
 	<!-- Scroll Packages END -->
 
@@ -325,6 +330,48 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src = "js/scroll_vid.js">
 </script>
+	<script>
+        $.fn.isInViewport = function () {
+
+
+            var elementCenter = $(this).offset().top + $(this).outerHeight() / 2
+            var viewportTop = $(window).scrollTop()
+            var viewportBottom = viewportTop + $(window).height();
+            var windowheight = $(window).height();
+
+            var percent_from_center = ((viewportTop + viewportBottom) / 2 - elementCenter) / (windowheight / 2)
+
+
+
+            return percent_from_center;
+        };
+
+
+		$(window).on('scroll', function () {
+		
+			$('.fade_text').each(function (i) {
+
+				distance = 1 - Math.abs($(this).isInViewport())
+				console.log("distance: " + distance)
+				
+
+				size = distance*50 + 100 + '%'
+				console.log(size)
+				//margin=distance*5+'%'
+
+				if (distance > 0) {
+					
+					opacity = (distance*distance).toString()
+					$(this).css('opacity', opacity)
+					$(this).css('font-size', size)
+                    
+
+				}
+			})
+		})
+
+	</script>
+
 </body>
 
 

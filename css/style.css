@@ -101,8 +101,12 @@ html, body {
 		position: absolute;
 		right: 0;
 		bottom: 2%;
-		
 	}
+	.fade_text {
+		margin: 5%
+	}
+
+
   }
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -198,6 +202,10 @@ html, body {
 		background-color: #14181E;
 	}
 	/* .quote {padding-bottom: 150px;} */
+	.fade_text {
+		margin: 5%
+	}
+
   }
   
   /* Medium devices (landscape tablets, 768px and up) */
