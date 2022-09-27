@@ -71,20 +71,26 @@
 				<h1 style="text-align: center; padding: 0; color: #EEE;">Events</h1>
 				<div class="divider-h"></div>
 				<h2 style="text-align: center; padding: 0; color: #B55400;">“maybe happen is never once”</h2>
-				<p class="notebook" style="color:#EEE;">
-					<i>Absalom, Absalom!</i> resists summary. It is told from multiple, contradictory perspectives that each re-tell the same set of historical events. 
-					</p>
-					<div class="fade_text">Thomas Sutpen arrives in Jefferson and starts a family with Ellen Coldfield. </div>
-					<div class="fade_text">
-						He has a son, Henry, and a daughter, Judith. </div>
-						<div class="fade_text">Judith falls in love with Henry’s friend from college Charles Bon.</div>
-					<div class="fade_text">
-						On the day Judith and Charles are supposed to marry, Henry kills him and disappears.</div>
-					<div class="fade_text">
-						No one knows why.</div>
-					<div class="fade_text">
-						Everyone has a theory.
-					</div>
+                <p class="notebook" style="color:#EEE;">
+                    <i>Absalom, Absalom!</i> resists summary. It is told from multiple, contradictory perspectives that each re-tell the same set of historical events:
+
+            
+                        <div class="fade_text">Thomas Sutpen arrives in Jefferson and starts a family with Ellen Coldfield. </div>
+                        <div class="fade_text">
+                            He has a son, Henry, and a daughter, Judith.
+                        </div>
+                        <div class="fade_text">Judith falls in love with Henry’s friend from college Charles Bon.</div>
+                        <div class="fade_text">
+                            On the day Judith and Charles are supposed to marry, Henry kills him and disappears.
+                        </div>
+                        <div class="fade_text">
+                            No one knows why.
+                        </div>
+                        <div class="fade_text">
+                            Everyone has a theory.
+                        </div>
+                    
+                </p>
 				<p class="notebook" style="color:#EEE;">
 					Faulkner was once asked if any one of the characters has the “right view.”
 				</p>
@@ -350,23 +356,30 @@
 		$(window).on('scroll', function () {
 		
 			$('.fade_text').each(function (i) {
-
+		
 				distance = 1 - Math.abs($(this).isInViewport())
 				console.log("distance: " + distance)
 				
 
-				size = distance*50 + 100 + '%'
+				size = (distance*distance)*50 + 100 + '%'
 				console.log(size)
-				//margin=distance*5+'%'
+				
 
-				if (distance > 0) {
+				if (distance > 0.61) {
 					
 					opacity = (distance*distance).toString()
 					$(this).css('opacity', opacity)
 					$(this).css('font-size', size)
-                    
-
 				}
+
+				if (distance < 0.60) {
+
+                    $(this).css('opacity', 0)
+                    $(this).css('font-size', 0)
+                }
+
+                
+
 			})
 		})
 
