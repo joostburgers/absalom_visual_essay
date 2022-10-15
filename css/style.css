@@ -22,6 +22,10 @@ html, body {
         padding-bottom: 5px;
     }
 
+  .narrow {
+            width: 60%;
+   }
+
     .chart-scroll {
         height: 645px;
         display: flex;
@@ -178,7 +182,7 @@ html, body {
     p.notebook {
         width: 60%;
         display: inline;
-        font-size: 1.1em;
+        font-size: 1.25em;
     }
 
     .full-image {
@@ -221,7 +225,7 @@ html, body {
     .fade_text {
         margin: 25% 10% 25% 10%;
         opacity: 0;
-        font-size: 200%;
+        font-size: 300%;
     }
     /*	.slide-container {
 		scroll-snap-type: x mandatory;
@@ -448,6 +452,11 @@ html, body {
 
     .blockquote {
         padding: 5px 10px;
+    }
+
+    .narrow {
+        width: 60%;
+        margin:0;
     }
 }
 
