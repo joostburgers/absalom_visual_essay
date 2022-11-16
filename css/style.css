@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
 html, body {
     background-color: #222831;
 }
@@ -10,10 +9,6 @@ html, body {
     
     .divider-v {
         height: 40px;
-    }
-
-    img {
-        width: 100vw;
     }
 
     .blockquote {
@@ -507,9 +502,9 @@ nav {
     position: sticky;
 }
 
-.divider-h {
+/* .divider-h {
     height: 120px;
-}
+} */
 
 .blockquote {
     padding: 15px;
@@ -693,6 +688,12 @@ p.title-p-text {
 	transition: 1s ease;*/
     opacity: 0;
 }
+
+img {
+    width: 100vw;
+    height: auto;
+}
+
 
 /*.full-image:hover .full-image-text-low {
 	opacity: 0.9;
