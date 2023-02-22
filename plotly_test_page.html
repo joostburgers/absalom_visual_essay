@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+</head>
+<body>
+
+    <div id="plotchart" style="width:700px;height:450px;"></div>
+    <div id="myDiv" style="width:600px;height:250px;"></div>
+    <script>
+        function makeplot() {
+            var data;
+            $.ajax({
+                type: "GET",
+                url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/major_events_sutpen.csv",
+                dataType: "text",
+                success: function (response) {
+                    data = $.csv.toObjects(response, { headers: true });
+                    processData(data);
+                }
+            });
+        };
+
+        function processData(allRows) {
+
+            console.log(allRows);
+            console.log(allRows.length)
+            var chrono = []
+            var value = []
+            var series = []
+            var text = [];
+            var xoffset = [];
+            var yoffset = [];
+
+            for (var i = 0; i < allRows.length; i++) {
+                row = allRows[i];
+                chrono.push(parseInt(row['Chrono']));
+                value.push(parseInt(row['value']));
+                series.push(row['series']);
+                text.push(row['name']);
+                xoffset.push(row['xoffset']);
+                yoffset.push(row['yoffset']);
+
+            }
+            console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);
+            makePlotly(chrono, value, series, text, xoffset, yoffset);
+        }
+
+        function makePlotly(chrono, value, series, text, xoffset, yoffset) {
+
+            //Create two different data sets for the frames
+            y = chrono.filter((v,i) => i % 2) //This is the default y variable
+
+            //x values switch
+            plot_value = value.filter((v, i) => i % 2)
+            story_value = value.filter((v, i) => !(i % 2))
+
+            //text values switch
+            plot_text = text.filter((v, i) => i % 2)
+            story_text = text.filter((v, i) => !(i % 2))
+
+
+            console.log(y, plot_value, story_value)
+            
+            //make helper functions to simplify this
+
+            var data = [{
+                type: "scatter",
+                mode: "markers+text",
+                x: plot_value,
+                y: y,
+                name:series[0]
+               // text: plot_text,
+              //  textposition: ['top left',
+              //      'bottom left',
+              //      'top right'
+              //      ]
+                
+            }];
+
+            var frames = [
+                {
+                    name: series[0],
+                    data: [{
+                        x: plot_value
+                    }]
+                },
+                {
+                    name: series[1],
+                    data: [{
+                        x: story_value
+                        
+                    }]
+                }
+            ]
+            
+
+            var layout = {
+                title: { text: "Plot Structure Chart: Major Events Sutpen" },
+                showlegend: false,
+                xaxis: {
+                    showgrid: false,
+                    title: { text: "Chapter" },
+                    autotick: false,
+                    tickmode: 'array',
+                    tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    range: [0,9]
+                },
+                yaxis: {
+                    title: { text: "Chronology" },
+                    showgrid: false,
+                    tickmode: 'array',
+                    tickvals: [1, 2, 3]
+                },
+
+                sliders: [{
+                    pad: { t: 30 },
+                    x: 0.05,
+                    len: 0.95,
+                    currentvalue: {
+                        xanchor: 'right',
+                        prefix: 'color: ',
+                        font: {
+                            color: '#888',
+                            size: 20
+                        }
+                    },
+                    transition: { duration: 500 },
+                    // By default, animate commands are bound to the most recently animated frame:
+                    steps: [{
+                        label: 'Plot',
+                        method: 'animate',
+                        args: [['Plot'], {
+                            mode: 'immediate',
+                            frame: { redraw: false, duration: 500 },
+                            transition: { duration: 500 }
+                        }]
+                    },  {
+                        label: 'Story',
+                        method: 'animate',
+                        args: [['Story'], {
+                            mode: 'immediate',
+                            frame: { redraw: false, duration: 500 },
+                            transition: { duration: 500 }
+                        }]
+                    }]
+                }],
+                updatemenus: [{
+                    type: 'buttons',
+                    showactive: false,
+                    x: 0.05,
+                    y: 0,
+                    xanchor: 'right',
+                    yanchor: 'top',
+                    pad: { t: 60, r: 20 },
+                    buttons: [{
+                        label: 'Play',
+                        method: 'animate',
+                        args: [null, {
+                            fromcurrent: true,
+                            frame: { redraw: false, duration: 1000 },
+                            transition: { duration: 500 }
+                        }]
+                    }]
+                }]
+            };
+
+
+            // var config = { responsive: true }
+
+
+            Plotly.newPlot('plotchart', {
+                data: data,
+                layout: layout,
+                frames: frames
+            });
+
+
+        };
+        makeplot()
+
+        Plotly.newPlot('myDiv', {
+            data: [{
+                x: [1, 2, 3],
+                y: [2, 1, 3],
+                line: {
+                    color: 'red',
+                    simplify: false,
+                }
+            }],
+            layout: {
+                sliders: [{
+                    pad: { t: 30 },
+                    x: 0.05,
+                    len: 0.95,
+                    currentvalue: {
+                        xanchor: 'right',
+                        prefix: 'color: ',
+                        font: {
+                            color: '#888',
+                            size: 20
+                        }
+                    },
+                    transition: { duration: 500 },
+                    // By default, animate commands are bound to the most recently animated frame:
+                    steps: [{
+                        label: 'red',
+                        method: 'animate',
+                        args: [['red'], {
+                            mode: 'immediate',
+                            frame: { redraw: false, duration: 500 },
+                            transition: { duration: 500 }
+                        }]
+                    }, {
+                        label: 'green',
+                        method: 'animate',
+                        args: [['green'], {
+                            mode: 'immediate',
+                            frame: { redraw: false, duration: 500 },
+                            transition: { duration: 500 }
+                        }]
+                    }, {
+                        label: 'blue',
+                        method: 'animate',
+                        args: [['blue'], {
+                            mode: 'immediate',
+                            frame: { redraw: false, duration: 500 },
+                            transition: { duration: 500 }
+                        }]
+                    }]
+                }],
+                updatemenus: [{
+                    type: 'buttons',
+                    showactive: false,
+                    x: 0.05,
+                    y: 0,
+                    xanchor: 'right',
+                    yanchor: 'top',
+                    pad: { t: 60, r: 20 },
+                    buttons: [{
+                        label: 'Play',
+                        method: 'animate',
+                        args: [null, {
+                            fromcurrent: true,
+                            frame: { redraw: false, duration: 1000 },
+                            transition: { duration: 500 }
+                        }]
+                    }]
+                }]
+            },
+            // The slider itself does not contain any notion of timing, so animating a slider
+            // must be accomplished through a sequence of frames. Here we'll change the color
+            // and the data of a single trace:
+            frames: [{
+                name: 'red',
+                data: [{
+                    y: [2, 1, 3],
+                    'line.color': 'red'
+                }]
+            }, {
+                name: 'green',
+                data: [{
+                    y: [3, 2, 1],
+                    'line.color': 'green'
+                }]
+            }, {
+                name: 'blue',
+                data: [{
+                    y: [1, 3, 2],
+                    'line.color': 'blue'
+                }]
+            }]
+        });
+    </script>
+</body>
+</html>

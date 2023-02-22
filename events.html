@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html>
 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Events in Absalom, Absalom!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- JS Packages -->
-	<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-treemap@0.2.3"></script>-->
+	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-	<script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
-	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
-	<script src="js/scrollama.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>
 
+
+
+	<script src="js/scroll_vid.js"></script>
+	<script src="js/scrollama.min.js"></script>
+	<script src="js/chart_styles.js"></script>
+	<script src="js/event_charts.js"></script>
+	
+	<!--Style Sheets-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-
-
 	<link rel="stylesheet" href="css/scroll.css" />
 	<link rel="stylesheet" href="css/style.css" />
 
@@ -49,6 +52,8 @@
 								<a class="nav-link" href="language.html">Language</a>
 							</li>
 						</ul>
+						</div>
+					</div>
 			</nav>
 		</header>
 		<!-- Title Slide BEGINS-->
@@ -61,9 +66,7 @@
 					This interactive essay was created using data from the <a style="color: #13171c;" href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the Norton Critical Edition of Absalom, Absalom!. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores Absalom, Absalom! along three different axes: Characters, Events, and Language.
 				</p>
 			</div>
-			<!-- Title Slide ENDS-->
-			<!-- Pre Scroll Text BEGINS-->
-			<!-- Pre Scroll Text BEGINS-->
+			
 			<div class="notebook">
 				<h1>Events</h1>
 				<h2 style="text-align: center; padding: 0; color: #B55400;">“maybe happen is never once”</h2>
@@ -144,45 +147,7 @@
 			</div>
 		</section>
 		<!-- Scroll Text BEGINS -->
-		<section id="scrolly" class="scrollbg">
-			<article>
-				<div class="step" data-step="1">
-					<!-- Pause plotly -->
-					<h2 class="scroll-text">Plot Order</h2>
-					<p class="scroll-text">
-						Following the order of events as Quentin discovers them, we learn several important details about him out of order:
-						<ul>
-							<li><strong>Chapter 1:</strong> Sutpen arrives in Jefferson</li>
-
-							<li>
-								<strong> Chapter 6:</strong> Sutpen is killed by Jones
-							</li>
-							<li>
-								<strong>Chapter 7:</strong> Sutpen is born in Virginia
-							</li>
-						</ul>
-					</p>
-				</div>
-				<div class="step" data-step="2">
-
-					<h2 class="title">Story Order</h2>
-					<p class="scroll-text">
-						These should be re-sorted to tell the story.
-						<strong>Chapter 7:</strong> Sutpen is born in Virginia
-
-						<strong>Chapter 1:</strong> Sutpen arrives in Jefferson
-
-						<strong> Chapter 6:</strong> Sutpen is killed by Jones
-					</p>
-				</div>
-				<figure>
-					<!-- Scroll Chart BEGINS -->
-					<div id="plotchart"></div>
-					<!-- Scroll Chart ENDS -->
-				</figure>
-			</article>
-			
-		</section>
+		
 
 		<div class="notebook">
 			<p class="notebook">
@@ -190,21 +155,31 @@
 				An event is any time there is one or more characters at one location for a discrete period of time.<br>
 				Each of the 644 events in the novel was also assigned a number that indicates its order in the plot and in the story/chronology.<br>
 			</p>
+			<figure>
+				<div id="plotchart"></div>
+			</figure>
 			<p class="notebook">
 				The overlapping and disjointed versions of events capture Quentin’s lived experience of exploring the past. This is not a neat linear chronology told by one authority in a history book, but the collective story of multiple voices who have shaped and reshaped the events to match their version of the truth. The tellers cannot be separated from their tales. It forces us to wonder if any version of the past can ever be true, or if it is simply another story we tell ourselves.
+
+
 			</p>
+
+
+
+
+
 		</div>
 		<div class="notebook">
 			<p class="notebook">
 				Each narrator actually follows a similar pattern. They start the narration in the “deep” past and work their way into the present. They often repeat similar details, but leave out crucial information.
 			</p>
-			<h1>PLOT STRUCTURE CHART HERE</h1>
+		
 			<p class="notebook">
 				We can get better insight into how Faulkner structured Absalom, Absalom! by displaying which parts of the story each chapter covers. In story mode we see a very mottled line with each chapter seemingly covering all parts of the story.
 				<br><br>
 				By clicking on each chapter legend entry, we can turn that series on and off, and determine what parts of the story each chapter covers.
 			</p>
-			
+
 		</div>
 		<div class="notebook">
 			<p class="notebook">
@@ -253,146 +228,60 @@
 
 	</main>
 	<!-- Scroll Packages BEGIN -->
-	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
-	<script src="js/scrollama.min.js"></script>
-	<!--<script src = "js/charts.js"></script>-->
+	
 	<!-- Scroll Packages END -->
 
 	<script>
-		var main = d3.select("main");
-		var scrolly = main.select("#scrolly");
-		var figure = scrolly.select("figure");
-		var article = scrolly.select("article");
-		var step = article.selectAll(".step");
+		
 
-		// initialize the scrollama
-		var scroller = scrollama();
+		
 
-		// generic window resize listener event
-		function handleResize() {
-			// update height of step elements
-			var stepH = Math.floor(window.innerHeight * 0.75);
-			step.style("height", stepH + "px");
-
-			var figureHeight = window.innerHeight / 1.4;
-			var figureMarginTop = (window.innerHeight - figureHeight) / 2;
-
-			figure
-				.style("height", figureHeight + "px")
-				.style("top", figureMarginTop + "px");
-
-			scroller.resize();
-
-		}
-
-		//// scrollama event handlers
-		//function handleStepEnter(response) {
-
-
-
-		//	step.classed("is-active", function (d, i) {
-		//		return i === response.index;
-		//	});
-
-		//	// // update chart based on step
-		//	// figure.select("p").text(response.index + 1);
-		//	//Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
-		//	if (response.index == 1) {
-		//		scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
-		//		scrollychart.update()
-		//	}
-		//	if (response.index == 2) {
-		//		scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
-		//		scrollychart.update()
-		//	}
-		//	if (response.index == 3) {
-		//		scrollychart.data.datasets[0].backgroundColor = "rgba(181, 84, 0, 0.7)"
-		//		scrollychart.update()
-		//	}
-
-		//	var observer = new IntersectionObserver(function (entries) {
-		//		if (entries[0]['isIntersecting'] === true) {
-		//			racechart.data.datasets[0].data = ["invisible graph"]
-		//			racechart.update()
-
-		//		}
-		//		else {
-		//			racechart.data.datasets[0].label = "visible graph"
-		//			racechart.update()
-
-		//		}
-		//	}, { threshold: [0, 0.6, 1] });
-
-		//	observer.observe(document.querySelector("#racechart"));
-		//}
-
-		//function setupStickyfill() {
-		//	d3.selectAll(".sticky").each(function () {
-		//		Stickyfill.add(this);
-		//	});
-		//}
-
-		//function init() {
-		//	setupStickyfill();
-
-		//	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-		//	handleResize();
-
-		//	// 2. setup the scroller passing options
-		//	// 		this will also initialize trigger observations
-		//	// 3. bind scrollama event handlers (this can be chained like below)
-		//	scroller
-		//		.setup({
-		//			step: "#scrolly article .step",
-		//			offset: 0.33,
-		//			debug: false
-		//		})
-		//		.onStepEnter(handleStepEnter);
-		//}
-
-		//// kick things off
-		//init();
+		
 	</script>
 	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<script src="js/scroll_vid.js">
-	</script>
+		<!--<script src="js/scroll_vid.js">-->
+	<!--</script>-->
 	<script>
-		$.fn.isInViewport = function () {
+		$('document').ready(function () {
+			$.fn.isInViewport = function () {
 
 
-			var elementCenter = $(this).offset().top + $(this).outerHeight() / 2
-			var viewportTop = $(window).scrollTop()
-			var viewportBottom = viewportTop + $(window).height();
-			var windowheight = $(window).height();
+				var elementCenter = $(this).offset().top + $(this).outerHeight() / 2
+				var viewportTop = $(window).scrollTop()
+				var viewportBottom = viewportTop + $(window).height();
+				var windowheight = $(window).height();
 
-			var percent_from_center = ((viewportTop + viewportBottom) / 2 - elementCenter) / (windowheight / 2)
-
-
-
-			return percent_from_center;
-		};
+				var percent_from_center = ((viewportTop + viewportBottom) / 2 - elementCenter) / (windowheight / 2)
 
 
-        $(window).on('scroll', function () {
-			$('.fade_text').each(function (i) {
-				distance = 1 - Math.abs($(this).isInViewport())
-				size = (distance) * 25 + 100 + '%'
 
-				if (distance > 0.46) {
+				return percent_from_center;
+			};
+
+
+			$(window).on('scroll', function () {
+				$('.fade_text').each(function (i) {
+					distance = 1 - Math.abs($(this).isInViewport())
+					size = (distance) * 25 + 100 + '%'
+
+					if (distance > 0.46) {
 						opacity = (distance * distance).toString()
 						$(this).css('opacity', opacity)
-				}
+					}
 
-                if (distance < 0.45) {
-					$(this).css('opacity', 0)
-                }
-            })
-        })
+					if (distance < 0.45) {
+						$(this).css('opacity', 0)
+					}
+				})
+			})
 
+			makeplot()
+			
+		})
 	</script>
-	<script src="js/chart_styles.js"></script>
-	<script src="js/event_charts.js"></script>
+
+
+	
 </body>
 
 

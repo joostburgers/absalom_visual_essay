@@ -1,8 +1,8 @@
 // JavaScript source code
-
 $.ajaxSetup({
-    async: false
+    async: true
 });
+
 
 function makeplot() {
     var data;
@@ -24,7 +24,7 @@ function processData(allRows) {
     var chrono = []
     var value = []
     var series = []
-    var name = [];
+    var text = [];
     var xoffset = [];
     var yoffset = [];
 
@@ -33,117 +33,279 @@ function processData(allRows) {
         chrono.push(parseInt(row['Chrono']));
         value.push(parseInt(row['value']));
         series.push(row['series']);
-        name.push(row['name']);
+        text.push(row['name']);
         xoffset.push(row['xoffset']);
         yoffset.push(row['yoffset']);
 
     }
-    console.log("chrono =", chrono, "value = ", value, "series = ", series, "name =", name);
-    makePlotly(chrono, value, series, name, xoffset, yoffset);
+    console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);
+    makePlotly(chrono, value, series, text, xoffset, yoffset);
 }
 
-function makePlotly(chrono, value, series, name, xoffset, yoffset) {
-    //var hovervariables = [percent, race]
+function makePlotly(chrono, value, series, text, xoffset, yoffset) {
+
+    //Create two different data sets for the frames
+    y = chrono.filter((v, i) => i % 2) //This is the default y variable
+
+    //x values switch
+    plot_value = value.filter((v, i) => !(i % 2))
+    story_value = value.filter((v, i) => i % 2)
+
+    //text values switch
+    plot_text = text.filter((v, i) => i % 2)
+    story_text = text.filter((v, i) => !(i % 2))
+
+
+    console.log(y, plot_value, story_value)
+
+    //make helper functions to simplify this
 
     var data = [{
         type: "scatter",
         mode: "markers+text",
-        x: value,
-        y: chrono,
-        text: name,
+        x: plot_value,
+        y: y,
+        name: series[0],
+        text: plot_text,
         textposition: ['top right',
-            'top left',
-            'bottom left',
-            'bottom left',
-            'top left',
-            'top right'],
-        frame: series
+             'bottom left',
+              'top left'
+              ]
+
     }];
 
-    var sliderSteps = [];
-    for (i = 0; i < series.length; i++) {
-        sliderSteps.push({
-            method: 'animate',
-            label: series[i],
-            args: [[series[i]], {
-                mode: 'immediate',
-                transition: { duration: 300 },
-                frame: { duration: 300, redraw: false },
+    var frames = [
+        {
+            name: series[0],
+            data: [{
+                x: plot_value,
+                textposition: ['top right',
+                    'bottom left',
+                    'top left'
+                ]
             }]
-        });
-    }
+        },
+        {
+            name: series[1],
+            data: [{
+                x: story_value,
+                textposition: ['top right',
+                    'bottom left',
+                    'top right'
+                ]
+            }]
+        }
+    ]
 
 
     var layout = {
-        title: { text: "Plot Structure Chart: Major Events Sutpen" },
+        title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
         showlegend: false,
         xaxis: {
             showgrid: false,
-            title: {text: "Chapter"}
-    },
+            title: { text: "Chapter" },
+            autotick: false,
+            tickmode: 'array',
+            tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            range: [0.5, 9]
+        },
         yaxis: {
             title: { text: "Chronology" },
             showgrid: false,
             tickmode: 'array',
-            tickvals: [1, 2, 3]
+            tickvals: [1, 2, 3],
+            zeroline: false
         },
-        //colorway = faulkner_colorway,
-        //font = plot_font,
-        //margin = m,
-        //autosize = FALSE,
-        width: 640,
-        //paper_bgcolor = faulkner_paperbackground,
-        //plot_bgcolor = faulkner_plotcolor,
-        //modebar = list(bgcolor = faulkner_paperbackground)
 
-         updatemenus: [{
-            x: 0,
-            y: 0,
-            yanchor: 'top',
-            xanchor: 'left',
-            showactive: false,
-            direction: 'left',
-            type: 'buttons',
-            pad: { t: 87, r: 10 },
-            buttons: [{
+        sliders: [{
+            pad: { t: 0 },
+            x: 0.05,
+            len: 1,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: ' ',
+                font: {
+                    color: '#FFF',
+                    size: 40
+                }
+            },
+            transition: { duration: 500 },
+            // By default, animate commands are bound to the most recently animated frame:
+            steps: [{
+                label: 'Plot',
                 method: 'animate',
-                args: [null, {
+                args: [['Plot'], {
                     mode: 'immediate',
-                    fromcurrent: true,
-                    transition: { duration: 300 },
-                    frame: { duration: 500, redraw: false }
-                }],
-                label: 'Play'
+                    frame: { redraw: false, duration: 500 },
+                    transition: { duration: 500 }
+                }]
             }, {
+                label: 'Story',
                 method: 'animate',
-                args: [[null], {
+                args: [['Story'], {
                     mode: 'immediate',
-                    transition: { duration: 0 },
-                    frame: { duration: 0, redraw: false }
-                }],
-                label: 'Pause'
+                    frame: { redraw: false, duration: 500 },
+                    transition: { duration: 500 }
+                }]
             }]
         }],
-        // Finally, add the slider and use `pad` to position it
-        // nicely next to the buttons.
-        sliders: [{
-            pad: { l: 130, t: 55 },
-            currentvalue: {
-                visible: true,
-                prefix: 'Year:',
-                xanchor: 'right',
-                font: { size: 20, color: '#666' }
-            },
-            steps: sliderSteps
-        }]
+
+        annotations: [
+            {
+                x: 0,
+                y: 0,
+                xref: 'paper',
+                yref: 'paper',
+                text: 'Move the slider between Plot and Story to see the different event orders',
+                 }
+        ]
     };
-    
-
-    var config = { responsive: true }
 
 
-    Plotly.newPlot('plotchart', data, layout, config);
+    var config = {
+        responsive: true,
+        displayModeBar: false    }
+
+
+    Plotly.newPlot('plotchart', {
+        data: data,
+        layout: layout,
+        frames: frames,
+        config: config
+    });
 
 
 };
-makeplot();
+
+var main = d3.select("main");
+var scrolly = main.select("#scrolly");
+var figure = scrolly.select("figure");
+var article = scrolly.select("article");
+var step = article.selectAll(".step");
+
+// initialize the scrollama
+var scroller = scrollama();
+
+// generic window resize listener event
+function handleResize() {
+    // update height of step elements
+    var stepH = Math.floor(window.innerHeight * 0.75);
+    step.style("height", stepH + "px");
+
+    var figureHeight = window.innerHeight / 1.4;
+    var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+    figure
+        .style("height", figureHeight + "px")
+        .style("top", figureMarginTop + "px");
+
+    scroller.resize();
+}
+
+// scrollama event handlers
+function handleStepEnter(response) {
+    console.log(response.index);
+    // response = { element, direction, index }
+
+    step.classed("is-active", function (d, i) {
+        return i === response.index;
+    });
+
+    if (response.index === 1) {
+        makeplot()            
+        }
+
+
+    // // update chart based on step
+    // figure.select("p").text(response.index + 1);
+    //Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
+
+    //TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
+
+
+    //scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
+    //    if (response.index === 1) {
+    //        scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+    //        scrollychart1.data.datasets[0].backgroundColor[4] = scrollychart1.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+    //    }
+    //    else if (response.index === 2) {
+    //        scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+    //        scrollychart1.data.datasets[0].backgroundColor[2] = scrollychart1.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+    //    }
+    //    else if (response.index === 3) {
+    //        scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+    //        scrollychart1.data.datasets[0].backgroundColor[0] = scrollychart1.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
+    //    }
+    //    else {
+    //        scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+    //    }
+    //    scrollychart1.update()
+
+    //})
+
+    //scrollychart2.data.datasets[0].backgroundColor.forEach(function (item, index) {
+    //    if (response.index === 1) {
+    //        scrollychart2.data.datasets[0].backgroundColor[4] = scrollychart2.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+    //    }
+    //    else if (response.index === 2) {
+    //        scrollychart2.data.datasets[0].backgroundColor[2] = scrollychart2.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+    //    }
+    //    else if (response.index === 3) {
+    //        scrollychart2.data.datasets[0].backgroundColor[0] = scrollychart2.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
+    //    }
+    //    else {
+    //        scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+    //    }
+    //    scrollychart2.update()
+
+    //})
+
+    //This highlights the legend item in correspondence with the pie piece.
+    //let legend = document.getElementById('legend')
+    //let spans = legend.getElementsByTagName('span')
+
+
+    //for (let span of spans) {
+    //    id = parseInt(span.id.slice(-1))
+    //    if (id === 4 && response.index === 1) {
+    //        span.style.background = span.style.background.replace("0.2", "0.8")
+    //    }
+    //    else if (response.index === 2 && id === 2) {
+    //        span.style.background = span.style.background.replace("0.2", "0.8")
+    //    }
+    //    else if (response.index === 3 && id === 0) {
+    //        span.style.background = span.style.background.replace("0.2", "0.8")
+    //    }
+    //    else {
+    //        span.style.background = span.style.background.replace("0.8", "0.2")
+    //    }
+    //}
+
+}
+
+function setupStickyfill() {
+    d3.selectAll(".sticky").each(function () {
+        Stickyfill.add(this);
+    });
+}
+
+function init() {
+    setupStickyfill();
+
+    // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+    handleResize();
+
+    // 2. setup the scroller passing options
+    // 		this will also initialize trigger observations
+    // 3. bind scrollama event handlers (this can be chained like below)
+    scroller
+        .setup({
+            step: "#scrolly article .step",
+            offset: 0.33,
+            debug: false
+        })
+        .onStepEnter(handleStepEnter);
+}
+// kick things off
+
+
