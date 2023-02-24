@@ -19,8 +19,8 @@ function makeplot() {
 
 function processData(allRows) {
 
-    console.log(allRows);
-    console.log(allRows.length)
+   /* console.log(allRows);
+    console.log(allRows.length)*/
     var chrono = []
     var value = []
     var series = []
@@ -38,7 +38,7 @@ function processData(allRows) {
         yoffset.push(row['yoffset']);
 
     }
-    console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);
+   /* console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);*/
     makePlotly(chrono, value, series, text, xoffset, yoffset);
 }
 
@@ -56,7 +56,7 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
     story_text = text.filter((v, i) => !(i % 2))
 
 
-    console.log(y, plot_value, story_value)
+/*    console.log(y, plot_value, story_value)*/
 
     //make helper functions to simplify this
 
@@ -289,7 +289,7 @@ function makeplotAA() {
     var data;
     $.ajax({
         type: "GET",
-        url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/plot_structure_absalom.csv",
+        url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/absalom_plot_labels.csv",
         dataType: "text",
         success: function (response) {
             data = $.csv.toObjects(response, { headers: true });
@@ -303,56 +303,80 @@ function processDataAA(allRows) {
 
     console.log(allRows);
     console.log(allRows.length)
-    var chrono = []
-    var value = []
+
+    //plot variables y-variables
+    var hypothesized = []
+    var narrated = []
+    var narratedconscious = []
+    var remembered = []
+    var told = []
+
+    //x-variable
+    var xvalue = []
+
+    //frame
     var series = []
+
+    //hover values
     var text = [];
-    var xoffset = [];
-    var yoffset = [];
+    var position = [];
+    var summary = [];
+    var startdate = [];
 
     for (var i = 0; i < allRows.length; i++) {
         row = allRows[i];
-        chrono.push(parseInt(row['Chrono']));
-        value.push(parseInt(row['value']));
-        series.push(row['series']);
-        text.push(row['name']);
-        xoffset.push(row['xoffset']);
-        yoffset.push(row['yoffset']);
+        //plot variables
+        hypothesized.push(parseInt(row['Hypothesized']));
+        narrated.push(parseInt(row['Narrated']));
+        narratedconscious.push(parseInt(row['NarratedConsciousness']));
+        remembered.push(parseInt(row['Remembered']));
+        told.push(parseInt(row['Told']));
 
+        //x and frame values
+        xvalue.push(parseInt(row['values']));
+        series.push(row['Order']);
+
+        // hover values
+        text.push(row['event']);
+        position.push(row['position'])
+        startdate.push(row['StartDate'])
+        summary.push(row['Summary'])
     }
-    console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);
-    makePlotly(chrono, value, series, text, xoffset, yoffset);
+    console.log("narrated =", narrated, "xvalue = ", xvalue, "series = ", series, "text = ", text, "position = ", position);
+    makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
+    text,position, summary);
 }
 
-function makePlotly(chrono, value, series, text, xoffset, yoffset) {
+function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
+    text, position, summary) {
 
     //Create two different data sets for the frames
-    y = chrono.filter((v, i) => i % 2) //This is the default y variable
+    y_narrated = narrated.filter((v, i) => i % 2) //This is the default y variable
 
     //x values switch
-    plot_value = value.filter((v, i) => !(i % 2))
-    story_value = value.filter((v, i) => i % 2)
+    story_narrated = xvalue.filter((v, i) => !(i % 2))
+    plot_narrated = xvalue.filter((v, i) => i % 2)
+
+    console.log("y = ", y_narrated, "story_narrated = ", story_narrated, "plot_narrated = ", plot_narrated)
 
     //text values switch
     plot_text = text.filter((v, i) => i % 2)
     story_text = text.filter((v, i) => !(i % 2))
 
-
-    console.log(y, plot_value, story_value)
+    //position values switch
+    plot_position = text.filter((v, i) => i % 2)
+    story_position = text.filter((v, i) => !(i % 2))
 
     //make helper functions to simplify this
 
     var data = [{
         type: "scatter",
         mode: "markers+text",
-        x: plot_value,
-        y: y,
-        name: series[0],
+        x: plot_narrated,
+        y: y_narrated,
+        name: "Narrated",
         text: plot_text,
-        textposition: ['top right',
-            'bottom left',
-            'top left'
-        ]
+        textposition: plot_position
 
     }];
 
@@ -360,21 +384,16 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
         {
             name: series[0],
             data: [{
-                x: plot_value,
-                textposition: ['top right',
-                    'bottom left',
-                    'top left'
-                ]
+                x: plot_narrated,
+                textposition: plot_position
+                
             }]
         },
         {
             name: series[1],
             data: [{
-                x: story_value,
-                textposition: ['top right',
-                    'bottom left',
-                    'top right'
-                ]
+                x: story_narrated,
+                textposition: story_position
             }]
         }
     ]
@@ -385,18 +404,18 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
         showlegend: false,
         xaxis: {
             showgrid: false,
-            title: { text: "Chapter" },
+            title: { text: "Page" }/*
             autotick: false,
             tickmode: 'array',
             tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            range: [0.5, 9]
+            range: [0.5, 9]*/
         },
         yaxis: {
             title: { text: "Chronology" },
-            showgrid: false,
+            showgrid: false/*,
             tickmode: 'array',
             tickvals: [1, 2, 3],
-            zeroline: false
+            zeroline: false*/
         },
 
         sliders: [{
