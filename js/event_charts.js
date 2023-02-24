@@ -152,12 +152,14 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
 
         annotations: [
             {
-                x: 0,
-                y: 0,
+                x: .5,
+                y: -.52,
                 xref: 'paper',
                 yref: 'paper',
-                text: 'Move the slider between Plot and Story to see the different event orders',
-                 }
+                text: 'Move the slider between Plot and Story<br>to see the different event orders',
+                showarrow: false
+            }
+
         ]
     };
 
