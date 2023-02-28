@@ -19,8 +19,8 @@ function makeplot() {
 
 function processData(allRows) {
 
-   /* console.log(allRows);
-    console.log(allRows.length)*/
+    /* console.log(allRows);
+     console.log(allRows.length)*/
     var chrono = []
     var value = []
     var series = []
@@ -38,7 +38,7 @@ function processData(allRows) {
         yoffset.push(row['yoffset']);
 
     }
-   /* console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);*/
+    /* console.log("chrono =", chrono, "value = ", value, "series = ", series, "xoffset = ", xoffset, "yoffset = ", yoffset);*/
     makePlotly(chrono, value, series, text, xoffset, yoffset);
 }
 
@@ -56,7 +56,7 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
     story_text = text.filter((v, i) => !(i % 2))
 
 
-/*    console.log(y, plot_value, story_value)*/
+    /*    console.log(y, plot_value, story_value)*/
 
     //make helper functions to simplify this
 
@@ -68,9 +68,9 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
         name: series[0],
         text: plot_text,
         textposition: ['top right',
-             'bottom left',
-              'top left'
-              ]
+            'bottom left',
+            'top left'
+        ]
 
     }];
 
@@ -166,7 +166,8 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
 
     var config = {
         responsive: true,
-        displayModeBar: false    }
+        displayModeBar: false
+    }
 
 
     Plotly.newPlot('plotchart', {
@@ -214,8 +215,8 @@ function handleStepEnter(response) {
     });
 
     if (response.index === 1) {
-        makeplot()            
-        }
+        makeplot()
+    }
 
 
     // // update chart based on step
@@ -289,7 +290,7 @@ function makeplotAA() {
     var data;
     $.ajax({
         type: "GET",
-        url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/absalom_plot_labels.csv",
+        url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/absalom_plot_chart.csv",
         dataType: "text",
         success: function (response) {
             data = $.csv.toObjects(response, { headers: true });
@@ -344,7 +345,7 @@ function processDataAA(allRows) {
     }
     console.log("narrated =", narrated, "xvalue = ", xvalue, "series = ", series, "text = ", text, "position = ", position);
     makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
-    text,position, summary);
+        text, position, summary);
 }
 
 function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
@@ -352,63 +353,199 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
 
     //Create two different data sets for the frames
     y_narrated = narrated.filter((v, i) => i % 2) //This is the default y variable
+    y_hypothesized = hypothesized.filter((v, i) => i % 2)
+    y_narratedconscious = narratedconscious.filter((v, i) => i % 2)
+    y_remembered = remembered.filter((v, i) => i % 2)
+    y_told = told.filter((v, i) => i % 2)
 
     //x values switch
-    story_narrated = xvalue.filter((v, i) => !(i % 2))
-    plot_narrated = xvalue.filter((v, i) => i % 2)
 
-    console.log("y = ", y_narrated, "story_narrated = ", story_narrated, "plot_narrated = ", plot_narrated)
+
+    plot_order = xvalue.filter((v, i) => !(i % 2))
+    story_order = xvalue.filter((v, i) => i % 2)
+
+    console.log("y = ", y_narrated, "story_narrated = ", story_order, "plot_narrated = ", plot_order)
 
     //text values switch
-    plot_text = text.filter((v, i) => i % 2)
-    story_text = text.filter((v, i) => !(i % 2))
+    plot_text = text.filter((v, i) => !(i % 2))
+    story_text = text.filter((v, i) => i % 2)
+
+    told_plot_text = text.filter((v, i) => !(i % 2))
+    told_story_text = text.filter((v, i) => i % 2)
+
 
     //position values switch
-    plot_position = text.filter((v, i) => i % 2)
-    story_position = text.filter((v, i) => !(i % 2))
+    plot_position = position.filter((v, i) => !(i % 2))
+    story_position = position.filter((v, i) => i % 2)
+    
 
     //make helper functions to simplify this
 
-    var data = [{
+    var hypothesized_trace = {
         type: "scatter",
         mode: "markers+text",
-        x: plot_narrated,
+        marker: { opacity: .5 },
+        x: plot_order,
+        y: y_hypothesized,
+        name: "Hypothesized",
+        text: plot_text,
+        textposition: plot_position
+    }
+
+    var narrated_trace = {
+        type: "scatter",
+        mode: "markers+text",
+        marker: {opacity:.5},
+        x: plot_order,
         y: y_narrated,
         name: "Narrated",
         text: plot_text,
         textposition: plot_position
+    }
 
-    }];
+
+    var narratedconscious_trace = {
+        type: "scatter",
+        mode: "markers+text",
+        marker: { opacity: .5 },
+        x: plot_order,
+        y: y_narratedconscious,
+        name: "Narrated+Conscious",
+        text: plot_text,
+        textposition: plot_position
+    }
+
+    var remembered_trace = {
+        type: "scatter",
+        mode: "markers+text",
+        marker: { opacity: .5 },
+        x: plot_order,
+        y: y_remembered,
+        name: "Remembered",
+        text: plot_text,
+        textposition: plot_position
+    }
+
+    var told_trace = {
+        type: "scatter",
+        mode: "markers+text",
+        marker: { opacity: .5 },
+        x: plot_order,
+        y: y_told,
+        name: "Told",
+        text: plot_text,
+        textposition: plot_position
+    }
+
+    var data = [hypothesized_trace, narrated_trace, narratedconscious_trace, remembered_trace, told_trace];
+
+    //TODO this whole chart is too complex. It should be reduced to only 5 or so major plot points from the chronology
+
+
 
     var frames = [
         {
             name: series[0],
-            data: [{
-                x: plot_narrated,
+            data: [
+                {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    x: plot_order,
+                    y: y_hypothesized,
+                    name: "Hypothesized",
+                    text: plot_text,
+                    textposition: plot_position
+                },
+                {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    x: plot_order,
+                    y: y_narrated,
+                    name: "Narrated",
+                    text: plot_text,
+                    textposition: plot_position
+                }
+                , {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    x: plot_order,
+                    y: y_narratedconscious,
+                    name: "Narrated+Conscious",
+                    text: plot_text,
+                    textposition: plot_position
+                }, {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    x: plot_order,
+                    y: y_remembered,
+                    name: "Remembered",
+                    text: plot_text,
+                    textposition: plot_position
+                },
+                /*{
+                    mode: "markers+text",
+                    x: plot_order,
+                    text: told_plot_text,
                 textposition: plot_position
-                
-            }]
+                },*/
+                {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    x: plot_order,
+                    y: y_told,
+                    name: "Told",
+                    text: plot_text,
+                    textposition: plot_position
+                }            ]
         },
         {
             name: series[1],
-            data: [{
-                x: story_narrated,
-                textposition: story_position
-            }]
+
+            data: [
+                {
+                    x: story_order,
+                    text: story_text,
+                    textposition: story_position
+                }, {
+                    x: story_order,
+                    text: story_text,
+                    textposition: story_position
+                },
+                {
+                    x: story_order,
+                    text: story_text,
+                    textposition: story_position
+                },
+                /*{
+                    x: story_order,
+                    text: story_text,
+                    textposition: story_position
+                },*/
+                {
+                    x: story_order,
+                    text: told_story_text,
+                    textposition: story_position
+                }]
         }
     ]
 
 
     var layout = {
         title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
-        showlegend: false,
+        showlegend: true,
         xaxis: {
             showgrid: false,
-            title: { text: "Page" }/*
-            autotick: false,
+            title: { text: "Chapter" },
+            gridwidth: 1.5,
             tickmode: 'array',
-            tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            range: [0.5, 9]*/
+            tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+            ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            /*range: [0.5, 9]*/
         },
         yaxis: {
             title: { text: "Chronology" },
@@ -417,6 +554,10 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
             tickvals: [1, 2, 3],
             zeroline: false*/
         },
+
+        autosize: false,
+        width: 1024,
+        height: 400,
 
         sliders: [{
             pad: { t: 0 },
@@ -467,7 +608,7 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
 
     var config = {
         responsive: true,
-        displayModeBar: false
+        displayModeBar: true
     }
 
 
