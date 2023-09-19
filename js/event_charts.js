@@ -4,6 +4,17 @@ $.ajaxSetup({
 });
 
 
+
+
+var temp_data = [];
+var allRows = null
+
+Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/solar.csv', function (err, data) {
+    allRows = data
+}); 
+
+console.log(temp_data)
+
 function makeplot() {
     var data;
     $.ajax({
@@ -116,39 +127,6 @@ function makePlotly(chrono, value, series, text, xoffset, yoffset) {
             tickvals: [1, 2, 3],
             zeroline: false
         },
-
-        sliders: [{
-            pad: { t: 0 },
-            x: 0.05,
-            len: 1,
-            currentvalue: {
-                xanchor: 'right',
-                prefix: ' ',
-                font: {
-                    color: '#FFF',
-                    size: 40
-                }
-            },
-            transition: { duration: 500 },
-            // By default, animate commands are bound to the most recently animated frame:
-            steps: [{
-                label: 'Plot',
-                method: 'animate',
-                args: [['Plot'], {
-                    mode: 'immediate',
-                    frame: { redraw: false, duration: 500 },
-                    transition: { duration: 500 }
-                }]
-            }, {
-                label: 'Story',
-                method: 'animate',
-                args: [['Story'], {
-                    mode: 'immediate',
-                    frame: { redraw: false, duration: 500 },
-                    transition: { duration: 500 }
-                }]
-            }]
-        }],
 
         annotations: [
             {
@@ -286,7 +264,345 @@ function handleStepEnter(response) {
 
 }
 
-function makeplotAA() {
+//function makeplotAA() {
+//    var data;
+//    $.ajax({
+//        type: "GET",
+//        url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/absalom_plot_chart.csv",
+//        dataType: "text",
+//        success: function (response) {
+//            data = $.csv.toObjects(response, { headers: true });
+//            processDataAA(data);
+//        }
+//    });
+//};
+
+
+//function processDataAA(allRows) {
+
+//    console.log(allRows);
+//    console.log(allRows.length)
+
+//    //plot variables y-variables
+//    var hypothesized = []
+//    var narrated = []
+//    var narratedconscious = []
+//    var remembered = []
+//    var told = []
+
+//    //x-variable
+//    var xvalue = []
+
+//    //frame
+//    var series = []
+
+//    //hover values
+//    var text = [];
+//    var position = [];
+//    var summary = [];
+//    var startdate = [];
+
+//    for (var i = 0; i < allRows.length; i++) {
+//        row = allRows[i];
+//        //plot variables
+//        hypothesized.push(parseInt(row['Hypothesized']));
+//        narrated.push(parseInt(row['Narrated']));
+//        narratedconscious.push(parseInt(row['NarratedConsciousness']));
+//        remembered.push(parseInt(row['Remembered']));
+//        told.push(parseInt(row['Told']));
+
+//        //x and frame values
+//        xvalue.push(parseInt(row['values']));
+//        series.push(row['Order']);
+
+//        // hover values
+//        text.push(row['event']);
+//        position.push(row['position'])
+//        startdate.push(row['StartDate'])
+//        summary.push(row['Summary'])
+//    }
+//    console.log("narrated =", narrated, "xvalue = ", xvalue, "series = ", series, "text = ", text, "position = ", position);
+//    makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
+//        text, position, summary);
+//}
+
+//function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, told, xvalue, series,
+//    text, position, summary) {
+
+//    //Create two different data sets for the frames
+//    y_narrated = narrated.filter((v, i) => i % 2) //This is the default y variable
+//    y_hypothesized = hypothesized.filter((v, i) => i % 2)
+//    y_narratedconscious = narratedconscious.filter((v, i) => i % 2)
+//    y_remembered = remembered.filter((v, i) => i % 2)
+//    y_told = told.filter((v, i) => i % 2)
+
+//    //x values switch
+
+
+//    plot_order = xvalue.filter((v, i) => !(i % 2))
+//    story_order = xvalue.filter((v, i) => i % 2)
+
+//    console.log("y = ", y_narrated, "story_narrated = ", story_order, "plot_narrated = ", plot_order)
+
+//    //text values switch
+//    plot_text = text.filter((v, i) => !(i % 2))
+//    story_text = text.filter((v, i) => i % 2)
+
+//    told_plot_text = text.filter((v, i) => !(i % 2))
+//    told_story_text = text.filter((v, i) => i % 2)
+
+
+//    //position values switch
+//    plot_position = position.filter((v, i) => !(i % 2))
+//    story_position = position.filter((v, i) => i % 2)
+    
+
+//    //make helper functions to simplify this
+
+//    var hypothesized_trace = {
+//        type: "scatter",
+//        mode: "markers+text",
+//        marker: { opacity: .5 },
+//        x: plot_order,
+//        y: y_hypothesized,
+//        name: "Hypothesized",
+//        text: plot_text,
+//        textposition: plot_position
+//    }
+
+//    var narrated_trace = {
+//        type: "scatter",
+//        mode: "markers+text",
+//        marker: {opacity:.5},
+//        x: plot_order,
+//        y: y_narrated,
+//        name: "Narrated",
+//        text: plot_text,
+//        textposition: plot_position
+//    }
+
+
+//    var narratedconscious_trace = {
+//        type: "scatter",
+//        mode: "markers+text",
+//        marker: { opacity: .5 },
+//        x: plot_order,
+//        y: y_narratedconscious,
+//        name: "Narrated+Conscious",
+//        text: plot_text,
+//        textposition: plot_position
+//    }
+
+//    var remembered_trace = {
+//        type: "scatter",
+//        mode: "markers+text",
+//        marker: { opacity: .5 },
+//        x: plot_order,
+//        y: y_remembered,
+//        name: "Remembered",
+//        text: plot_text,
+//        textposition: plot_position
+//    }
+
+//    var told_trace = {
+//        type: "scatter",
+//        mode: "markers+text",
+//        marker: { opacity: .5 },
+//        x: plot_order,
+//        y: y_told,
+//        name: "Told",
+//        text: plot_text,
+//        textposition: plot_position
+//    }
+
+//    var data = [hypothesized_trace, narrated_trace, narratedconscious_trace, remembered_trace, told_trace];
+
+//    //TODO this whole chart is too complex. It should be reduced to only 5 or so major plot points from the chronology
+
+
+
+//    var frames = [
+//        {
+//            name: series[0],
+//            data: [
+//                {
+//                    type: "scatter",
+//                    mode: "markers+text",
+//                    marker: { opacity: .5 },
+//                    x: plot_order,
+//                    y: y_hypothesized,
+//                    name: "Hypothesized",
+//                    text: plot_text,
+//                    textposition: plot_position
+//                },
+//                {
+//                    type: "scatter",
+//                    mode: "markers+text",
+//                    marker: { opacity: .5 },
+//                    x: plot_order,
+//                    y: y_narrated,
+//                    name: "Narrated",
+//                    text: plot_text,
+//                    textposition: plot_position
+//                }
+//                , {
+//                    type: "scatter",
+//                    mode: "markers+text",
+//                    marker: { opacity: .5 },
+//                    x: plot_order,
+//                    y: y_narratedconscious,
+//                    name: "Narrated+Conscious",
+//                    text: plot_text,
+//                    textposition: plot_position
+//                }, {
+//                    type: "scatter",
+//                    mode: "markers+text",
+//                    marker: { opacity: .5 },
+//                    x: plot_order,
+//                    y: y_remembered,
+//                    name: "Remembered",
+//                    text: plot_text,
+//                    textposition: plot_position
+//                },
+//                /*{
+//                    mode: "markers+text",
+//                    x: plot_order,
+//                    text: told_plot_text,
+//                textposition: plot_position
+//                },*/
+//                {
+//                    type: "scatter",
+//                    mode: "markers+text",
+//                    marker: { opacity: .5 },
+//                    x: plot_order,
+//                    y: y_told,
+//                    name: "Told",
+//                    text: plot_text,
+//                    textposition: plot_position
+//                }            ]
+//        },
+//        {
+//            name: series[1],
+
+//            data: [
+//                {
+//                    x: story_order,
+//                    text: story_text,
+//                    textposition: story_position
+//                }, {
+//                    x: story_order,
+//                    text: story_text,
+//                    textposition: story_position
+//                },
+//                {
+//                    x: story_order,
+//                    text: story_text,
+//                    textposition: story_position
+//                },
+//                {
+//                    x: story_order,
+//                    text: story_text,
+//                    textposition: story_position
+//                },
+//                {
+//                    x: story_order,
+//                    text: told_story_text,
+//                    textposition: story_position
+//                }]
+//        }
+//    ]
+
+
+//    var layout = {
+//        title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
+//        showlegend: true,
+//        xaxis: {
+//            showgrid: false,
+//            title: { text: "Chapter" },
+//            gridwidth: 1.5,
+//            tickmode: 'array',
+//            tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+//            ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+//            /*range: [0.5, 9]*/
+//        },
+//        yaxis: {
+//            title: { text: "Chronology" },
+//            showgrid: false/*,
+//            tickmode: 'array',
+//            tickvals: [1, 2, 3],
+//            zeroline: false*/
+//        },
+
+//        autosize: true,
+//        width: 1024,
+//       height: 400,
+
+//        sliders: [{
+//            pad: { t: 0 },
+//            x: 0.05,
+//            len: 1,
+//            currentvalue: {
+//                xanchor: 'right',
+//                prefix: ' ',
+//                font: {
+//                    color: '#FFF',
+//                    size: 40
+//                }
+//            },
+//            transition: { duration: 500 },
+//            // By default, animate commands are bound to the most recently animated frame:
+//            steps: [{
+//                label: 'Plot',
+//                method: 'animate',
+//                args: [['Plot'], {
+//                    mode: 'immediate',
+//                    frame: { redraw: false, duration: 500 },
+//                    transition: { duration: 500 }
+//                }]
+//            }, {
+//                label: 'Story',
+//                method: 'animate',
+//                args: [['Story'], {
+//                    mode: 'immediate',
+//                    frame: { redraw: false, duration: 500 },
+//                    transition: { duration: 500 }
+//                }]
+//            }]
+//        }],
+
+//        annotations: [
+//            {
+//                x: .5,
+//                y: -.52,
+//                xref: 'paper',
+//                yref: 'paper',
+//                text: 'Move the slider between Plot and Story<br>to see the different event orders',
+//                showarrow: false
+//            }
+
+//        ]
+//    };
+
+
+//    var config = {
+//        responsive: true,
+//        displayModeBar: true
+//    }
+
+
+//    Plotly.newPlot('plotchartAA2', {
+//        data: data,
+//        layout: layout,
+//        frames: frames,
+//        config: config
+//    });
+
+
+//};
+
+
+
+function makeplotAAlong() {
     var data;
     $.ajax({
         type: "GET",
@@ -294,13 +610,14 @@ function makeplotAA() {
         dataType: "text",
         success: function (response) {
             data = $.csv.toObjects(response, { headers: true });
-            processDataAA(data);
+            
+            processDataAAlong(data);
         }
     });
 };
 
-
-function processDataAA(allRows) {
+console.log(chart_data)
+function processDataAAlong(allRows) {
 
     console.log(allRows);
     console.log(allRows.length)
@@ -377,7 +694,7 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
     //position values switch
     plot_position = position.filter((v, i) => !(i % 2))
     story_position = position.filter((v, i) => i % 2)
-    
+
 
     //make helper functions to simplify this
 
@@ -395,7 +712,7 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
     var narrated_trace = {
         type: "scatter",
         mode: "markers+text",
-        marker: {opacity:.5},
+        marker: { opacity: .5 },
         x: plot_order,
         y: y_narrated,
         name: "Narrated",
@@ -501,17 +818,28 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
                     name: "Told",
                     text: plot_text,
                     textposition: plot_position
-                }            ]
+                }]
         },
         {
             name: series[1],
 
             data: [
                 {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                    y: y_hypothesized,
+                    name: "Hypothesized",
                     x: story_order,
                     text: story_text,
                     textposition: story_position
                 }, {
+                    type: "scatter",
+                    mode: "markers+text",
+                    marker: { opacity: .5 },
+                
+                    y: y_narrated,
+                    name: "Narrated",
                     x: story_order,
                     text: story_text,
                     textposition: story_position
@@ -521,14 +849,14 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
                     text: story_text,
                     textposition: story_position
                 },
-                /*{
+                {
                     x: story_order,
                     text: story_text,
                     textposition: story_position
-                },*/
+                },
                 {
                     x: story_order,
-                    text: told_story_text,
+                    text: story_text,
                     textposition: story_position
                 }]
         }
@@ -536,7 +864,7 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
 
 
     var layout = {
-        title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
+        title: { text: "<b>Plot Structure Chart 2</b> <br>Major Events in Sutpen's Life" },
         showlegend: true,
         xaxis: {
             showgrid: false,
@@ -621,7 +949,6 @@ function makePlotlyAA(hypothesized, narrated, narratedconscious, remembered, tol
 
 
 };
-
 
 
 function setupStickyfill() {
