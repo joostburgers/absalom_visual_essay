@@ -294,7 +294,7 @@
 			const absalom_y_narrated = data['absalom_y_narrated'];
 			const absalom_y_told = data['absalom_y_told'];
 			const absalom_y_other = data['absalom_y_other'];
-
+			/*const absalom_*/
 
 			var data = [{
 				type: "scatter",
@@ -359,7 +359,7 @@
 			};
 
 			var layout_absalom_plot = {
-				title: { text: "<b>Narrative Structure Chart</b> <br>Absalom, Abasalom in Plot Order" },
+				title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Abasalom!</i> in Plot Order" },
 				showlegend: false,
 				xaxis: {
 					showgrid: false,
@@ -408,6 +408,35 @@
 				},
 				
 			}
+
+			var layout_absalom_narrated_told = {
+				title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Abasalom!</i> Narrated and Told Events" },
+				showlegend: true,
+				legend: {
+					title:
+						{ text: "Legend" }
+				},
+				xaxis: {
+					showgrid: false,
+					title: { text: "Chapter" },
+					autotick: false,
+					tickmode: 'array',
+					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+					range: [0, 650]
+				},
+				yaxis: {
+					title: { text: "Chronology" },
+					showgrid: false,
+					autotick: true,
+					tickmode: 'array',
+					tickvals: [100, 200, 300, 400, 500, 600, 700],
+					range: [0, 699],
+					zeroline: false
+				},
+
+			}
+
 				var layout_absalom_story = {
 					title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
 					showlegend: false,
@@ -510,7 +539,17 @@
 							}
 						},
 							{
-								visible: false,
+								type: "scatter",
+								mode: "markers+text",
+								x: absalom_x_plot,
+								y: absalom_y_all,
+								text: absalom_label,
+								textposition: absalom_textposition_plot,
+								marker:
+								{
+									color: scatterPlotColors[1],
+									opacity: .5
+								},
 							},
 							{ visible: false }],
 						layout: layout_absalom_plot
@@ -572,7 +611,7 @@
 							}
 
 						],
-						layout: layout_absalom_narrated
+						layout: layout_absalom_narrated_told
 					},
 					{
 						name: 'frame5',
@@ -651,7 +690,7 @@
 													
 					var allData = {};
 					allData = processData(response)
-					console.log(allData)
+					console.log("All data", allData)
 					makePlotly(allData);
 					
 
@@ -696,6 +735,7 @@
 			plotData.sutpen_label = data.map(function (d) { return d['sutpen_label']; });
 			plotData.textposition_sutpen_plot = data.map(function (d) { return d['textposition_sutpen_plot']; });
 			plotData.textposition_sutpen_story = data.map(function (d) { return d['textposition_sutpen_story']; });
+
 
 
 			console.log(plotData)
