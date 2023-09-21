@@ -294,7 +294,8 @@
 			const absalom_y_narrated = data['absalom_y_narrated'];
 			const absalom_y_told = data['absalom_y_told'];
 			const absalom_y_other = data['absalom_y_other'];
-			/*const absalom_*/
+			const absalom_major_event = data['absalom_major_event'];
+
 
 			var data = [{
 				type: "scatter",
@@ -527,7 +528,8 @@
 						name: 'frame2',
 						data: [{
 							type: "scatter",
-							mode: "markers+text",
+							mode: "markers",
+							name:"all",
 							x: absalom_x_plot,
 							y: absalom_y_all,
 							text: absalom_label,
@@ -536,22 +538,28 @@
 							{
 								color: scatterPlotColors[1],
 								opacity: .5
-							}
+							},
+							text: null,
+							textposition: null,
 						},
 							{
+								visible:true,
 								type: "scatter",
 								mode: "markers+text",
+								name: "Major Events",
 								x: absalom_x_plot,
-								y: absalom_y_all,
+								y: absalom_major_event,
 								text: absalom_label,
 								textposition: absalom_textposition_plot,
 								marker:
 								{
-									color: scatterPlotColors[1],
-									opacity: .5
+									size:20,
+									color: scatterPlotColors[0],
+									opacity: .7
 								},
 							},
-							{ visible: false }],
+							{ visible: false }
+						],
 						layout: layout_absalom_plot
 					},
 					{
@@ -683,10 +691,10 @@
 			;
 			$.ajax({
 				type: "GET",
-				url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sutpen_absalom_plot.csv",
+				url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sutpen_absalom_plot_major_events.csv",
 				dataType: "text",
 				success: function (response) {
-				
+				    console.log(response)
 													
 					var allData = {};
 					allData = processData(response)
@@ -707,6 +715,9 @@
 
 			/* console.log(allRows);
 			 console.log(allRows.length)*/
+			plotData.absalom_eventid = data.map(function (d) {
+				return parseInt(d['absalom_eventid']) || null;
+			});
 
 			plotData.absalom_startdate = data.map(function (d) { return d['absalom_startdate']; });
 		
@@ -727,7 +738,8 @@
 			plotData.absalom_textposition_plot = data.map(function (d) { return d['absalom_textposition_plot']; });
 			plotData.absalom_textposition_story = data.map(function (d) { return d['absalom_textposition_story']; });
 			plotData.absalom_label = data.map(function (d) { return d['absalom_label']; });
-			plotData.x_sutpen_plot = data.map(function (d) { return parseInt(d['x_sutpen_plot'])||null; });
+			plotData.absalom_major_event = data.map(function (d) { return parseInt(d['absalom_major_event']) || null});
+			plotData.x_sutpen_plot = data.map(function (d) { return parseInt(d['x_sutpen_plot']) || null; });
 			plotData.x_sutpen_story = data.map(function (d) { return parseInt(d['x_sutpen_story'])||null; });
 			plotData.y_sutpen = data.map(function (d) { return parseInt(d['y_sutpen'])||null; });
 			plotData.series_sutpen_plot = data.map(function (d) { return d['series_sutpen_plot']; });
