@@ -121,7 +121,10 @@
 					<p>STEP 5: story</p>
 				</div>
 				<div class="step" data-step="5" style="height: 814px;" data-scrollama-index="5">
-					<p>STEP 5: story</p>
+					<p>STEP 6: all narrative status</p>
+				</div>
+				<div class="step" data-step="6" style="height: 814px;" data-scrollama-index="6">
+					<p>STEP 7: story</p>
 				</div>
 			</article>
 
@@ -205,42 +208,20 @@
 
 		makePlot();
 
-/*
-		Plotly.plot('plotchart', [{
-			x: [0, 0],
-			y: [-1, 1],
-		}], {
-			xaxis: { range: [-Math.PI, Math.PI] },
-			yaxis: { range: [-1.3, 1.3] }
-		}, { showSendToCloud: true }).then(function () {
-			Plotly.addFrames('graph', [
-				{
-					data: [{ x: [1, -.5], y: [0, .5] }],
-					name: 'frame1'
-				}, {
-					data: [{ x: [0, 0], y: [-.25, .35] }],
-					name: 'frame2'
-				},
-				{
-					data: [{ x: [0, 1,2,4], y: [-1,4,-2, 1] }],
-					name: 'frame3'
-				}
-			]);
-		})*/
-		
+
 
 		function startAnimation(i) {
 		
 			var currentFrame = 'frame' + i
-			console.log(currentFrame)
+			
 
-			if (i < 3) {
+			if (i < 3 || i>5) {
 				Plotly.animate('plotchart', [currentFrame], {
 					frame: [
 						{ duration: 500 }
 					],
 					transition: [
-						{ duration: 500, easing: 'circle' }
+						{ duration: 750, easing: 'linear' }
 					],
 					mode: 'afterall',
 					ordering: 'traces first',
@@ -249,16 +230,16 @@
 			} else {
 				Plotly.animate('plotchart', [currentFrame], {
 					frame: [
-						{ duration: 0 }
+						{ duration: 200 }
 					],
 					transition: [
-						{ duration: 0, easing: 'circle' }
+						{ duration: 0, easing: 'elastic' }
 					],
 					mode: 'afterall',
 					ordering: 'traces first',
 					redraw: true
 				})
-			}
+			} 
 		}
 
 		function makePlotly(data) {
@@ -290,14 +271,13 @@
 			const absalom_x_story = data['absalom_x_story'];
 			const absalom_label = data['absalom_label'];
 			const absalom_textposition_plot = data['absalom_textposition_plot'];
-			const absalom_textposition_story = data['absalom_textposition_story'];
 			const absalom_y_narrated = data['absalom_y_narrated'];
 			const absalom_y_told = data['absalom_y_told'];
 			const absalom_y_other = data['absalom_y_other'];
 			const absalom_major_event = data['absalom_major_event'];
 
-
-			var data = [{
+			
+		var data = [{
 				type: "scatter",
 				mode: "markers+text",
 				x: x_sutpen_plot,
@@ -305,13 +285,19 @@
 				marker:
 				{
 					color: scatterPlotColors[1],
-					opacity:.5
+					opacity: .5,
+					size: 20,
+					line: {
+						width: 1,
+						color: 'rgba(88, 88, 88, 0.26)'
+					}
 				},
 				text: sutpen_label,
 				textposition: textposition_sutpen_plot
 				
-
 			}];
+
+			//Layouts
 
 			var layout_sutpen_plot = {
 				title: { text: "<b>Narrative Structure Chart</b> <br>Major Events in Sutpen's Life in Plot Order" },
@@ -332,8 +318,6 @@
 					range:[.5,3.5],
 					zeroline: false
 				},
-
-				
 			};
 
 			var layout_sutpen_story = {
@@ -374,10 +358,10 @@
 				yaxis: {
 					title: { text: "Chronology" },
 					showgrid: false,
-					autotick:true,
+					autotick:false,
 					tickmode: 'array',
 					tickvals: [100,200,300,400,500,600,700],
-					range:[0,699],
+					range:[-50,699],
 					zeroline: false
 				}
 			}
@@ -404,7 +388,7 @@
 					autotick:true,
 					tickmode: 'array',
 					tickvals: [100,200,300,400,500,600,700],
-					range:[0,699],
+					range:[-50,699],
 					zeroline: false
 				},
 				
@@ -438,8 +422,36 @@
 
 			}
 
+			var layout_absalom_narrated_told_other = {
+				title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Abasalom!</i> Narrated, Told, and Other Events" },
+				showlegend: true,
+				legend: {
+					title:
+						{ text: "Legend" }
+				},
+				xaxis: {
+					showgrid: false,
+					title: { text: "Chapter" },
+					autotick: false,
+					tickmode: 'array',
+					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+					range: [0, 650]
+				},
+				yaxis: {
+					title: { text: "Chronology" },
+					showgrid: false,
+					autotick: true,
+					tickmode: 'array',
+					tickvals: [100, 200, 300, 400, 500, 600, 700],
+					range: [0, 699],
+					zeroline: false
+				},
+
+			}
+
 				var layout_absalom_story = {
-					title: { text: "<b>Plot Structure Chart</b> <br>Major Events in Sutpen's Life" },
+					title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Story Order with Major Events" },
 					showlegend: false,
 					xaxis: {
 						showgrid: false,
@@ -476,50 +488,67 @@
 			})
 
 			Plotly.addTraces('plotchart',
-				{
-				x: [0, 0],
-				y: [0, 0]
-				}
-			);
-			Plotly.addTraces('plotchart',
-				{
+				[{
 					x: [0, 0],
-					y: [0, 0]
+					y: [0, 0],
+					visible: false
+				},
+					{
+						x: [0, 0],
+						y: [0, 0],
+						visible: false
+					},
+					{
+					x: [0, 0],
+						y: [0, 0],
+						visible: false
 				}
+			]
 			);
+			
 
 
 				Plotly.addFrames('plotchart', [
 					{
 						name: 'frame0',
 						data: [{
+							type: "scatter",
+							mode: "markers+text",
 							x: x_sutpen_plot,
 							y: y_sutpen,
 							text: sutpen_label,
 							textposition: textposition_sutpen_plot,
 							marker: {
 								color: scatterPlotColors[1],
-								opacity:.5
+								opacity: .5,
+								size: 20
 							}
-						}],
+						},
+							{ visible: false },
+							{visible: false}],
 						layout: layout_sutpen_plot
 					},
 					{
 						name: 'frame1',
 						data: [{
+							type: "scatter",
+							mode: "markers+text",
 							x: x_sutpen_story,
 							y: y_sutpen,
-							text: sutpen_label,
-							textposition: textposition_sutpen_story,
+							
 							marker:
 							{
 								color: scatterPlotColors[1],
-								opacity: .5
-							}
+								opacity: .5,
+								size: 20,
+							},
+							text: sutpen_label,
+							textposition: textposition_sutpen_story
 						},
 							{
 								visible:false,
 							},
+							{ visible: false },
 							{ visible: false }
 						],
 						layout: layout_sutpen_story
@@ -537,10 +566,9 @@
 							marker:
 							{
 								color: scatterPlotColors[1],
-								opacity: .5
-							},
-							text: null,
-							textposition: null,
+								opacity: .5,
+								size: 5
+							}
 						},
 							{
 								visible:true,
@@ -555,9 +583,10 @@
 								{
 									size:20,
 									color: scatterPlotColors[0],
-									opacity: .7
+									opacity: .8
 								},
 							},
+							{ visible: false },
 							{ visible: false }
 						],
 						layout: layout_absalom_plot
@@ -579,6 +608,7 @@
 							{
 								visible: false,
 							},
+							{ visible: false },
 							{ visible: false }],
 						layout: layout_absalom_narrated
 					},
@@ -594,11 +624,11 @@
 
 								marker: {
 									color: scatterPlotColors[2],
-									opacity: .2
+									opacity: .2,
+									size:5
 								},
 								name: "Narrated",
-								text: null,
-								textposition: null,
+								
 							},
 							{
 								type: "scatter",
@@ -607,7 +637,8 @@
 								y: absalom_y_told,
 								marker: {
 									color: scatterPlotColors[3],
-									opacity: .5
+									opacity: .5,
+									size:5
 								},
 								name: "Told",
 								text: null,
@@ -616,8 +647,10 @@
 							},
 							{
 								visible:false
+							},
+							{
+								visible: false
 							}
-
 						],
 						layout: layout_absalom_narrated_told
 					},
@@ -630,7 +663,8 @@
 							y: absalom_y_narrated,
 							marker: {
 								color: scatterPlotColors[2],
-								opacity:.2
+								opacity: .2,
+								size:5
 							},
 							name: "Narrated"
 							/*text: absalom_label,
@@ -643,7 +677,8 @@
 							y: absalom_y_told,
 							marker: {
 								color: scatterPlotColors[3],
-								opacity:.2
+								opacity: .2,
+								size: 5
 							},
 							name: "Told",
 							visible:true
@@ -655,34 +690,56 @@
 								y: absalom_y_other,
 								marker: {
 									color: scatterPlotColors[4],
-									opacity:.5
+									opacity: .5,
+									size:5
 								},
 								name: "Other",
 								visible:true
+							},
+							{
+								visible: false
+							},
+							{
+								visible: false
 							}
 
 						],
-						layout: layout_absalom_narrated
+						layout: layout_absalom_narrated_told_other
 					},
 					{
 						name: 'frame6',
-						data: [{
-							mode: "markers+text",
-							text: absalom_label,
-							textposition: absalom_textposition_story,
-							x: absalom_x_story,
-							y: absalom_y_all,
-							
-						}],
+						data: [
+							{
+								mode: "markers+text",
+								x: absalom_x_story,
+								y: absalom_y_narrated,
+							},
+							{
+								x: absalom_x_story,
+								y: absalom_y_told },
+							{
+								x: absalom_x_story,
+								y: absalom_y_other
+							},
+							{
+								visible: true,
+								type: "scatter",
+								mode: "markers+text",
+								name: "Major Events",
+								x: absalom_x_story,
+								y: absalom_major_event,
+								text: absalom_label,
+								textposition: absalom_textposition_plot,
+								marker:
+								{
+									size: 20,
+									color: scatterPlotColors[0],
+									opacity: .8
+								},
+							}],
 						layout: layout_absalom_story
 					}
 				]);
-			
-/*
-			plotly.addTrace('plotchart', {
-				x: [0, 0],
-				y: [0,0]
-			});*/
 
 		};
 
@@ -755,6 +812,35 @@
 			return plotData
 		}
 		
+
+	/*	function createStoryData(array) {
+			// Find the indices of the non-null values
+			// Find the indices of the non-null values
+			var tempArray = Array.from(array)
+			var nonNullIndices = [];
+
+			array.map(function (val, index) {
+				if (val !== null) nonNullIndices.push(index);
+			});
+
+			// Create a new array with only the non-null values sorted
+			var sortedValues = nonNullIndices.sort();
+
+			// Update the original array with the sorted values
+			for (var i = 0; i < nonNullIndices.length; i++) {
+				tempArray[nonNullIndices[i]] = sortedValues[i];
+			}
+
+			return tempArray
+// Rest of the function code...
+			
+			// Rest of the function code...
+		}*/
+
+
+
 		
+
+
 	</script>
 </body>
