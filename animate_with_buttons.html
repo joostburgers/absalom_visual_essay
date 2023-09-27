@@ -62,6 +62,7 @@
 			margin: 0 auto 2rem auto;
 			background-color: #3b3b3b;
 			color: #fff;
+			height:450px;
 		}
 
 			.step:last-child {
@@ -71,6 +72,7 @@
 			.step.is-active {
 				background-color: goldenrod;
 				color: #3b3b3b;
+				height:450px;
 			}
 
 			.step p {
@@ -84,17 +86,7 @@
 </head>
 <body>
 	<main>
-		<nav>
-			<a href="https://github.com/russellsamora/scrollama">scrollama.js</a>
-			<div class="nav__examples">
-				<p>Examples:</p>
-				<a href="https://russellsamora.github.io/scrollama/basic">Basic</a>
-				<a href="https://russellsamora.github.io/scrollama/progress">Progress</a>
-				<a href="https://russellsamora.github.io/scrollama/sticky-side">Sticky Side</a>
-				<a href="https://russellsamora.github.io/scrollama/sticky-overlay">Sticky Overlay</a>
-				<a href="https://russellsamora.github.io/scrollama/mobile-pattern">Mobile Pattern</a>
-			</div>
-		</nav>
+		
 		<section id="intro">
 			<h1 class="intro__hed">Sticky Side Example</h1>
 			<p class="intro__dek">
@@ -104,31 +96,34 @@
 
 		<section id="scrolly">
 			<article>
-				<div class="step is-active" data-step="1" style="height: 814px;" data-scrollama-index="0">
+				<div class="step is-active" data-step="1"  data-scrollama-index="0">
 					<p>STEP 1: This is the plot of Sutpen's life in AA'</p>
 				</div>
-				<div class="step" data-step="2" style="height: 814px;" data-scrollama-index="1">
+				<div class="step" data-step="2" data-scrollama-index="1">
 					<p>STEP 2: This is what this would look like in the order of events as they actually occur in his life.</p>
 				</div>
 
-				<div class="step" data-step="3" style="height: 814px;" data-scrollama-index="2">
+				<div class="step" data-step="3" data-scrollama-index="2">
 					<p>STEP 3</p>
 				</div>
-				<div class="step" data-step="3" style="height: 814px;" data-scrollama-index="3">
+				<div class="step" data-step="3"  data-scrollama-index="3">
 					<p>STEP 4</p>
 				</div>
-				<div class="step" data-step="4" style="height: 814px;" data-scrollama-index="4">
+				<div class="step" data-step="4" data-scrollama-index="4">
 					<p>STEP 5: story</p>
 				</div>
-				<div class="step" data-step="5" style="height: 814px;" data-scrollama-index="5">
+				<div class="step" data-step="5"  data-scrollama-index="5">
 					<p>STEP 6: all narrative status</p>
 				</div>
-				<div class="step" data-step="6" style="height: 814px;" data-scrollama-index="6">
+				<div class="step" data-step="6"  data-scrollama-index="6">
 					<p>STEP 7: story</p>
+				</div>
+				<div class="step" data-step="7"  data-scrollama-index="7">
+					<p>STEP 8: by dates</p>
 				</div>
 			</article>
 
-			<figure style="height: 543px; top: 271.5px;">
+			<figure style="height: 465px; top: 232.5px;">
 				<div id="plotchart"></div>
 			</figure>
 		</section>
@@ -221,7 +216,7 @@
 						{ duration: 500 }
 					],
 					transition: [
-						{ duration: 750, easing: 'linear' }
+						{ duration: 500, easing: 'cubic' }
 					],
 					mode: 'afterall',
 					ordering: 'traces first',
@@ -230,10 +225,10 @@
 			} else {
 				Plotly.animate('plotchart', [currentFrame], {
 					frame: [
-						{ duration: 200 }
+						{ duration: 0 }
 					],
 					transition: [
-						{ duration: 0, easing: 'elastic' }
+						{ duration: 200, easing: 'cubic' }
 					],
 					mode: 'afterall',
 					ordering: 'traces first',
@@ -255,6 +250,10 @@
 				'rgba(255, 159, 64, 1.0)'
 			]
 
+			const sutpen_x_range = [0.5, 9];
+			const sutpen_y_range = [.5, 3.5];
+			const absalom_x_range = [-25, 660];
+			const absalom_y_range = [-50, 699];
 
 		//Sutpen Variables from frame0 and frame1. These have to be read in as pure arrays rather than arrays in an object. Not sure why, but plotly does not like the object format.
 			const x_sutpen_plot = data['x_sutpen_plot'];
@@ -275,6 +274,23 @@
 			const absalom_y_told = data['absalom_y_told'];
 			const absalom_y_other = data['absalom_y_other'];
 			const absalom_major_event = data['absalom_major_event'];
+			const absalom_summary = data['absalom_summary'];
+			const absalom_startdate = data['absalom_startdate'];
+			const absalom_eventid = data['absalom_eventid'];
+
+			const absalom_sentence_words = data['absalom_sentence_words'];
+			const absalom_pagenumber = data['absalom_pagenumber'];
+			const absalom_orderwithinpage=data['absalom_orderwithinpage']
+			const absalom_major_event_date = data['absalom_major_event_date'];
+
+			const hoverstring = [];
+
+			for (i = 0; i < absalom_sentence_words.length; i++) {
+				hoverstring[i] = "<b>Date: </b> " + absalom_startdate[i]+
+					"<br><b>Page: </b> " + absalom_pagenumber[i] + " <b>Event on page: </b>" + absalom_orderwithinpage[i] + "<br><b>First Words: </b>" + absalom_sentence_words[i] +
+					"<br><b>Summary: </b>" +absalom_summary[i]	+"<extra></extra>"		}
+
+			console.log(hoverstring)
 
 			
 		var data = [{
@@ -291,7 +307,8 @@
 						width: 1,
 						color: 'rgba(88, 88, 88, 0.26)'
 					}
-				},
+			},
+				
 				text: sutpen_label,
 				textposition: textposition_sutpen_plot
 				
@@ -308,14 +325,14 @@
 					autotick: false,
 					tickmode: 'array',
 					tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range: [0.5, 9]
+					range: sutpen_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
 					showgrid: false,
 					tickmode: 'array',
 					tickvals: [1, 2, 3],
-					range:[.5,3.5],
+					range: sutpen_y_range,
 					zeroline: false
 				},
 			};
@@ -329,14 +346,14 @@
 					autotick: false,
 					tickmode: 'array',
 					tickvals: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range: [0.5, 9]
+					range: sutpen_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
 					showgrid: false,
 					tickmode: 'array',
 					tickvals: [1, 2, 3],
-					range: [.5, 3.5],
+					range: sutpen_y_range,
 					zeroline: false
 				},
 
@@ -345,15 +362,20 @@
 
 			var layout_absalom_plot = {
 				title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Abasalom!</i> in Plot Order" },
-				showlegend: false,
+				showlegend: true,
+				legend: {
+					title:
+						{ text: "Legend" }
+				},
 				xaxis: {
 					showgrid: false,
 					title: { text: "Chapter" },
 					autotick: false,
+					zeroline: false,
 					tickmode: 'array',
 					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
 					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range:[0,650]
+					range: absalom_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
@@ -361,7 +383,7 @@
 					autotick:false,
 					tickmode: 'array',
 					tickvals: [100,200,300,400,500,600,700],
-					range:[-50,699],
+					range: absalom_y_range,
 					zeroline: false
 				}
 			}
@@ -378,9 +400,10 @@
 					title: { text: "Chapter" },
 					autotick: false,
 					tickmode: 'array',
+					zeroline: false,
 					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
 					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range:[0,650]
+					range: absalom_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
@@ -388,7 +411,7 @@
 					autotick:true,
 					tickmode: 'array',
 					tickvals: [100,200,300,400,500,600,700],
-					range:[-50,699],
+					range: absalom_y_range,
 					zeroline: false
 				},
 				
@@ -405,10 +428,11 @@
 					showgrid: false,
 					title: { text: "Chapter" },
 					autotick: false,
+					zeroline: false,
 					tickmode: 'array',
 					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
 					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range: [0, 650]
+					range: absalom_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
@@ -416,7 +440,7 @@
 					autotick: true,
 					tickmode: 'array',
 					tickvals: [100, 200, 300, 400, 500, 600, 700],
-					range: [0, 699],
+					range: absalom_y_range,
 					zeroline: false
 				},
 
@@ -434,9 +458,10 @@
 					title: { text: "Chapter" },
 					autotick: false,
 					tickmode: 'array',
+					zeroline: false,
 					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
 					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-					range: [0, 650]
+					range: absalom_x_range
 				},
 				yaxis: {
 					title: { text: "Chronology" },
@@ -444,7 +469,7 @@
 					autotick: true,
 					tickmode: 'array',
 					tickvals: [100, 200, 300, 400, 500, 600, 700],
-					range: [0, 699],
+					range: absalom_y_range,
 					zeroline: false
 				},
 
@@ -452,26 +477,62 @@
 
 				var layout_absalom_story = {
 					title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Story Order with Major Events" },
-					showlegend: false,
+					showlegend: true,
+					legend: {
+						title:
+							{ text: "Legend" }
+					},
 					xaxis: {
 						showgrid: false,
 						title: { text: "Chapter" },
 						tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
 						ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-						
+						zeroline: false,
 						tickmode: 'array',
 						
-						range: [0.5, 644]
+						range: absalom_x_range
 					},
 					yaxis: {
+						type:'linear',
 						title: { text: "Chronology" },
 						showgrid: false,
 						autotick: true,
 						tickmode: 'array',
 						tickvals: [100, 200, 300, 400, 500, 600, 700],
-						range: [0, 699],
+						range: absalom_y_range,
 						zeroline: false
 					}
+
+			};
+
+
+			var layout_absalom_date = {
+				title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Date Order" },
+				showlegend: true,
+				legend: {
+					title:
+						{ text: "Legend" }
+				},
+				xaxis: {
+					showgrid: false,
+					title: { text: "Chapter" },
+					tickvals: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+					ticktext: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+					zeroline: false,
+					tickmode: 'array',
+
+					range: absalom_x_range
+				},
+				yaxis: {
+					title: { text: "Date" },
+					type:'date',
+					showgrid: false,
+					tickmode:'auto',
+					autosize:true,
+					rangemode: 'normal',
+					range:[new Date(1800, 0, 1), new Date(1920, 0, 1)],
+					zeroline: false
+				}
 
 			};
 
@@ -487,20 +548,26 @@
 				config: config
 			})
 
+
+	
+
 			Plotly.addTraces('plotchart',
 				[{
 					x: [0, 0],
 					y: [0, 0],
+					
 					visible: false
 				},
 					{
 						x: [0, 0],
 						y: [0, 0],
+					
 						visible: false
 					},
 					{
 					x: [0, 0],
 						y: [0, 0],
+					
 						visible: false
 				}
 			]
@@ -542,6 +609,7 @@
 								opacity: .5,
 								size: 20,
 							},
+							
 							text: sutpen_label,
 							textposition: textposition_sutpen_story
 						},
@@ -558,12 +626,10 @@
 						data: [{
 							type: "scatter",
 							mode: "markers",
-							name:"all",
+							name:"All Events",
 							x: absalom_x_plot,
 							y: absalom_y_all,
-							text: absalom_label,
-							textposition: absalom_textposition_plot,
-							marker:
+				            hovertemplate:hoverstring,					marker:
 							{
 								color: scatterPlotColors[1],
 								opacity: .5,
@@ -577,6 +643,7 @@
 								name: "Major Events",
 								x: absalom_x_plot,
 								y: absalom_major_event,
+								hovertemplate: "<b>Major Event: </b>%{text}<extra></extra>",
 								text: absalom_label,
 								textposition: absalom_textposition_plot,
 								marker:
@@ -597,13 +664,17 @@
 							x: absalom_x_plot,
 							y: absalom_y_narrated,
 							name: "Narrated",
-							mode: "markers+text",
+							mode: "markers",
 							marker: {
 								color: scatterPlotColors[2],
-								opacity:.5
+								opacity: .5,
+								size: 5,
+								line: {
+									width: 1,
+									color: 'rgba(88, 88, 88, 0.26)'
+								}
 							},
-							text: null,
-							textposition: null,
+							hovertemplate: hoverstring,	
 						},
 							{
 								visible: false,
@@ -621,11 +692,15 @@
 								mode: "markers",
 								x: absalom_x_plot,
 								y: absalom_y_narrated,
-
+								hovertemplate: hoverstring,
 								marker: {
 									color: scatterPlotColors[2],
 									opacity: .2,
-									size:5
+									size: 5,
+									line: {
+										width: 1,
+							color: 'rgba(88, 88, 88,0.26)'
+									}
 								},
 								name: "Narrated",
 								
@@ -635,10 +710,16 @@
 								mode: "markers",
 								x: absalom_x_plot,
 								y: absalom_y_told,
+								
+								hovertemplate:hoverstring,
 								marker: {
 									color: scatterPlotColors[3],
 									opacity: .5,
-									size:5
+									size: 5,
+									line: {
+										width: 1,
+										color: 'rgba(88, 88, 88, 0.26)'
+									}
 								},
 								name: "Told",
 								text: null,
@@ -664,9 +745,11 @@
 							marker: {
 								color: scatterPlotColors[2],
 								opacity: .2,
-								size:5
+								size: 5
+								
 							},
-							name: "Narrated"
+							name: "Narrated",
+							hovertemplate: hoverstring
 							/*text: absalom_label,
 							textposition: absalom_textposition_plot*/
 						},
@@ -681,7 +764,8 @@
 								size: 5
 							},
 							name: "Told",
-							visible:true
+							visible: true,
+							hovertemplate: hoverstring
 							},
 							{
 								type: "scatter",
@@ -693,6 +777,7 @@
 									opacity: .5,
 									size:5
 								},
+								hovertemplate: hoverstring,
 								name: "Other",
 								visible:true
 							},
@@ -710,16 +795,41 @@
 						name: 'frame6',
 						data: [
 							{
-								mode: "markers+text",
+								mode: "markers",
 								x: absalom_x_story,
 								y: absalom_y_narrated,
+								marker: {
+									color: scatterPlotColors[2],
+									opacity: .2,
+									size: 5
+								},
+								name: "Narrated",
+								hovertemplate: hoverstring,
+								visible:true
 							},
 							{
 								x: absalom_x_story,
-								y: absalom_y_told },
+								y: absalom_y_told,
+								marker: {
+									color: scatterPlotColors[3],
+									opacity: .2,
+									size: 5
+								},
+								name: "Told",
+								hovertemplate: hoverstring,
+								visible: true
+							},
 							{
 								x: absalom_x_story,
-								y: absalom_y_other
+								y: absalom_y_other,
+								marker: {
+									color: scatterPlotColors[4],
+									opacity: .5,
+									size: 5
+								},
+								name: "Other",
+								hovertemplate: hoverstring,
+								visible: true
 							},
 							{
 								visible: true,
@@ -734,10 +844,56 @@
 								{
 									size: 20,
 									color: scatterPlotColors[0],
-									opacity: .8
+									opacity: .8,
+									line: {
+										width: 1,
+										color: 'rgba(88, 88, 88, 0.26)'
+									}
 								},
 							}],
 						layout: layout_absalom_story
+					},
+					{
+						name: 'frame7',
+						data: [{
+							mode: "markers",
+							x: absalom_x_plot,
+							y: absalom_startdate,
+							marker:{
+								color: scatterPlotColors[5],
+								opacity: .5,
+								size: 5,
+								line: {
+									width: 1,
+									color: 'rgba(88, 88, 88, 0.26)'
+								}
+							},
+							hovertemplate: hoverstring,
+							name: "Date Order"
+						},
+							{
+								visible: true,
+								mode: "markers+text",
+								x: absalom_x_plot,
+								y: absalom_major_event_date,
+								hovertemplate: "<b>Date: </b> %{y} <br> <b>Major Event: </b> %{text} <extra></extra> ",
+								text: absalom_label,
+								textposition: absalom_textposition_plot,
+								marker:
+								{
+									size: 20,
+									color: scatterPlotColors[0],
+									opacity: .8,
+									line: {
+										width: 1,
+										color: 'rgba(88, 88, 88, 0.26)'
+									}
+								},
+								name:"Major Events",
+							},
+							{ visible: false },
+							{ visible: false }],
+						layout: layout_absalom_date
 					}
 				]);
 
@@ -804,8 +960,10 @@
 			plotData.sutpen_label = data.map(function (d) { return d['sutpen_label']; });
 			plotData.textposition_sutpen_plot = data.map(function (d) { return d['textposition_sutpen_plot']; });
 			plotData.textposition_sutpen_story = data.map(function (d) { return d['textposition_sutpen_story']; });
-
-
+			plotData.absalom_pagenumber = data.map(function (d) { return parseInt(d['absalom_pagenumber']) || null; });
+			plotData.absalom_sentence_words = data.map(function (d) { return d['absalom_sentence_words']; });
+			plotData.absalom_orderwithinpage = data.map(function (d) { return parseInt(d['absalom_orderwithinpage']) || null; });
+			plotData.absalom_major_event_date = data.map(function (d) { return d['absalom_major_event_date']; });
 
 			console.log(plotData)
 						
