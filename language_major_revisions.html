@@ -43,6 +43,79 @@
 	<link rel="stylesheet" href="css/visual_essay.css" />
 	<link rel="stylesheet" href="css/scroll_chart_style.css" />
 
+	<style>
+
+		#scrolly-neologisms {
+			position: relative;
+			width:70%;
+			
+			margin-left:auto;
+			margin-right:auto;
+		}
+
+		article {
+			position: relative;
+			padding: 0;
+			max-width: 20rem;
+			margin: 0 auto;
+		}
+
+		figure.scroll_video {
+			position: -webkit-sticky;
+			position: sticky;
+			left: 0;
+			width: 100%;
+			margin: 0;
+			-webkit-transform: translate3d(0, 0, 0);
+			-moz-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			
+			z-index: 0;
+		}
+
+			figure p {
+				text-align: center;
+				padding: 1rem;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				-moz-transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				font-size: 8rem;
+				font-weight: 900;
+				color: #fff;
+			}
+
+		#neologisms{
+		max-width:100%;
+		margin:0;
+		}
+
+		.step {
+			margin: 0 auto 2rem auto;
+			color: #fff;
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+
+			.step:last-child {
+				margin-bottom: 0;
+			}
+
+			.step.is-active p {
+				background-color: rgba(206, 206, 206, 0.78);
+				color: #3b3b3b;
+			}
+
+			.step p {
+				text-align: center;
+				color: rgba(206, 206, 206, 0.0);
+				padding: 1rem;
+				font-size: 1.5rem;
+				/*background-color: #3b3b3b;*/
+			}
+	
+	</style>
 
 </head>
 
@@ -170,7 +243,7 @@
 						The language in <i>Absalom, Absalom!</i> is very challenging. Faulkner’s language constantly draws attention to itself.
 						The text reminds us that <i>what</i>is said cannot be separated from <i>how</i> it is said.
 					</p>
-					
+
 				</div>
 			</section>
 			<section>
@@ -178,7 +251,7 @@
 					<h2 class="content_sub_title">The Long Sentence</h2>
 					<p>Sentences in <i>Absalom, Absalom!</i> are very long. On average, sentences are around 50 words long. The longest sentence is 1,124 words. That’s a 3-4 page college paper in one sentence! Compared to other American Classics, Faulkner’s sentences are much, much longer.</p>
 					<div id="wordchart"></div>
-					For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as “was” because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:  (Faulkner 84). 
+					For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as “was” because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:  (Faulkner 84).
 					<figure>
 						<div class="blockquote-outline">
 							<blockquote class="blockquote">“a man, a character in a story at any moment of action is not just himself as he is then, he is all that made him, and the long sentence is an attempt to get his past and possibly his future into the instant in which he does something”</blockquote>
@@ -187,25 +260,60 @@
 							</figcaption>
 						</div>
 					</figure>
-				In a sense, the prose complements the narrative structure, which also sees the past continuously returning.
+					In a sense, the prose complements the narrative structure, which also sees the past continuously returning.
 				</div>
-				
+
 
 
 			</section>
 			<section>
 				<div class="essay_section">
 					<h2 class="content_sub_title">Neologisms</h2>
-					<p>Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word.There are 30 of such words.
-					Though their number is low, they force the reader to consider their meaning.</p>
+					<p>
+						Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word.There are 30 of such words.
+						Though their number is low, they force the reader to consider their meaning.
+					</p>
 					<p>Often their meaning tarries between simple binaries, collapsing the neat distinctions created by language.</p>
-					<p>How is Charles a "nothusband"? </p>
-					<p>How can Quentin speak in "notlanguage"</p>
-					<p>Is an "unorganism" alive or dead?</p>
-					<div class="essay_video">
-						<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
-							<source src="media/video/neologism.mp4" type="video/mp4">
-						</video>
+				</div>
+			</section>
+			<section>
+				<div class="scroll_lock">
+					<div id="scrolly-neologisms">
+						<div class="essay_video sticky_scroll">
+							<figure class="scroll_video">
+								<!--style="height: 465.5px; top: 232.75px;"-->
+
+								<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
+									<source src="media/video/neologism.mp4" type="video/mp4">
+								</video>
+
+
+							</figure>
+
+							<article>
+								<div class="step is-active" data-step="1" style="height: 250px;" data-scrollama-index="0">
+									<p>How is Charles a "nothusband"? </p>
+								</div>
+								<div class="step" data-step="2" style="height: 250px;" data-scrollama-index="1">
+									<p>How can Quentin speak in "notlanguage"</p>
+								</div>
+								<div class="step" data-step="3" style="height: 250px;" data-scrollama-index="2">
+									<p>Is an "unorganism" alive or dead?</p>
+								</div>
+								<div class="step" data-step="4" style="height: 250px;" data-scrollama-index="3">
+									<p>STEP 4</p>
+								</div>
+							</article>
+						</div>
+
+
+						<!--
+		<div class="essay_video">
+			<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
+				<source src="media/video/neologism.mp4" type="video/mp4">
+			</video>
+
+		</div>-->
 
 					</div>
 				</div>
@@ -222,18 +330,82 @@
 				</div>
 			</section>
 
-	
-		
-			
 
-	</main>
+
+
+
+</main>
 	<!-- Scroll Packages BEGIN -->
 	<!-- Scroll Packages END -->
 	<!-- JavaScript Bundle with Popper -->
 	<script>
 		$('document').ready(function () {
 
-			Plotly.newPlot('wordchart', data);
+			Plotly.newPlot('wordchart', data,layout_words_per_sentence);
+
+
+
+			// using d3 for convenience
+			var main = d3.select("main");
+			var scrolly = main.select("#scrolly-neologisms");
+			var figure = scrolly.select("figure");
+			var article = scrolly.select("article");
+			var step = article.selectAll(".step");
+
+			// initialize the scrollama
+			var scroller = scrollama();
+
+			// generic window resize listener event
+			function handleResize() {
+				// 1. update height of step elements
+				var stepH = Math.floor(window.innerHeight * 0.25);
+				step.style("height", stepH + "px");
+
+				var figureHeight = window.innerHeight / 2;
+				var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+				figure
+					.style("height", figureHeight + "px")
+					.style("top", figureMarginTop + "px");
+
+				// 3. tell scrollama to update new element dimensions
+				scroller.resize();
+			}
+
+			// scrollama event handlers
+			function handleStepEnter(response) {
+				console.log(response);
+				// response = { element, direction, index }
+
+				// add color to current step only
+				step.classed("is-active", function (d, i) {
+					return i === response.index;
+				});
+
+				// update graphic based on step
+				/*figure.select("p").text(response.index + 1);*/
+			}
+
+
+			function init() {
+
+				// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+				handleResize();
+
+				// 2. setup the scroller passing options
+				// 		this will also initialize trigger observations
+				// 3. bind scrollama event handlers (this can be chained like below)
+				scroller
+					.setup({
+						step: "#scrolly-neologisms article .step",
+						offset: 0.8,
+						debug: false
+					})
+					.onStepEnter(handleStepEnter);
+			}
+
+			// kick things off
+			init();
 
 		});
 	</script>
