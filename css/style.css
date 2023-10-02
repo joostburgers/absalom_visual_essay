@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 html, body {
-    background-color: #222831;
+   /* background-color: #222831;*/
 }
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -11,13 +11,13 @@ html, body {
         height: 40px;
     }
 
-    .blockquote {
+   /* .blockquote {
         font-size: 15px;
         color: white;
         font-weight: 400;
         text-align: center;
         padding-bottom: 5px;
-    }
+    }*/
 
   .narrow {
             width: 60%;
@@ -33,7 +33,7 @@ html, body {
         margin-top: 2%;
         overflow: scroll;
         overflow-x: hidden; /* Hide horizontal scrollbar */
-        background-color: #222831;
+       /* background-color: #222831;*/
     }
 
     .text {
@@ -72,8 +72,9 @@ html, body {
 
     .notebook {
         background-color: #222831;
+        color: #EEE;
         flex-direction: column;
-        justify-content: center;
+        justify-content: left;
         padding: 25px;
     }
 
@@ -393,7 +394,8 @@ html, body {
     .notebook {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: left;
+        color:#EEE;
     }
 }
 

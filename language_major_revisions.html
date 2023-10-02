@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Language in Absalom, Absalom!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- JS Packages -->
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Events in Absalom, Absalom!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- JS Packages -->
+	<script src="https://unpkg.com/scrollama"></script>
+	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-2.26.0.min.js" charset="utf-8"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+
+	<!--    <script src="js/scroll_vid.js"></script>-->
+	<script src="js/scrollama.min.js"></script>
+	<script src="js/chart_styles.js"></script>
+	<script src="js/language_charts.js"></script>
+
+
+	<!--Style Sheets-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+
+
+	<link rel="stylesheet" href="css/family.css" />
+	<link rel="stylesheet" href="css/visual_essay.css" />
+	<link rel="stylesheet" href="css/scroll_chart_style.css" />
+
+
+</head>
+
+<body>
+	<main>
+		<div id="page_header">
+			<div id="header_logo"><a class="logo" href="http://faulkner.iath.virginia.edu/"><span class="digital">DIGITAL</span> Yoknapatawpha</a> · Teaching &amp; Learning</div>
+			<div id="main-menu">
+				<ul id="main-menu-links">
+					<li>
+						<a href="http://faulkner.iath.virginia.edu/family/index-about.php">About</a>
+						<ul>
+							<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/credits.php">Credits</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/dedication" target="_blank">Dedication</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/digital-yoknapatawpha-bibliography" target="_blank">Bibliography</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/dysocialmedia.php">DY on Social Media</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/digital-yoknapatawpha-articles-presentations" target="_blank">Re-Presenting DY</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/videos-2016demos.php">2016 Demos</a></li>
+						</ul>
+					</li>
+					<li class="bullet-link">
+						<a href="http://faulkner.iath.virginia.edu/family/index-search.php">Search</a>
+						<ul>
+							<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/events/">Events</a></li>
+							<li>
+								<span class="nav-blank">Characters</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/characters/">By Text</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/cumulative_characters/">Cumulative</a></li>
+								</ul>
+							</li>
+							<li>
+								<span class="nav-blank">Locations</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/locations/">By Text</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/cumulative_locations/">Cumulative</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="bullet-link">
+						<a href="http://faulkner.iath.virginia.edu/family/index-visualizations.php">Visualizations</a>
+						<ul>
+							<li class="first-item">
+								<span class="nav-blank">Location-Character</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/characters-force.html">Force Directed</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/characters-bipart.html">Bipartite</a></li>
+								</ul>
+							</li>
+							<li><a href="http://faulkner.iath.virginia.edu/char-char-force.html">Character-Character</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/characters-graph.html">Character-Event</a></li>
+							<li>
+								<span class="nav-blank">Heatmaps</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/heatmaps/spatial_heatmaps.php">Spatial</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/heatmaps/temporal_heatmaps.php">Temporal</a></li>
+								</ul>
+							</li>
+							<li>
+								<span class="nav-blank">Photographs</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/photograph_locations.php">by Location</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/photograph_repositories.php">by Repository</a></li>
+								</ul>
+							</li>
+							<li><a href="http://faulkner.iath.virginia.edu/narrativeanalysis.html" target="_blank">Narrative Analysis</a></li>
+						</ul>
+					</li>
+					<li class="bullet-link">
+						<a href="http://faulkner.iath.virginia.edu/family/index-commentaries.php">Commentaries</a>
+						<ul>
+							<li class="first-item"><a href="http://faulkner.iath.virginia.edu/media/resources/DISPLAYS/FaulknerMapsHP.html" target="_blank">Faulkner &amp; Maps</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/YokCemeteries.html">Cemeteries</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/">Genealogies</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/racial_demography/">Race &amp; Place</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/aa_sources.php">Analyzing <em>Absalom, Absalom!</em></a></li>
+						</ul>
+					</li>
+					<li class="bullet-link">
+						<a href="http://faulkner.iath.virginia.edu/family/index-teaching_and_learning.php">Teaching &amp; Learning</a>
+						<ul>
+							<li class="first-item">
+								<span class="nav-blank">Resources by Text</span>
+								<ul>
+									<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/resources-re.php">"A Rose for Emily"</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/resources-ld.php">As I Lay Dying</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/resources-sf.php">The Sound and the Fury</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/resources-aa.php">Absalom, Absalom!</a></li>
+									<li><a href="http://faulkner.iath.virginia.edu/family/resources-ds.php">"Dry September"</a></li>
+								</ul>
+							</li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/videos-teaching_and_learning.php">Videos</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/pedagogyarticles" target="_blank">Articles</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/tlworksheethomepage" target="_blank">Worksheets</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/swhomepage" target="_blank">Student Work</a></li>
+						</ul>
+					</li>
+					<li class="bullet-link">
+						<a href="http://faulkner.iath.virginia.edu/family/index-indexes.php">Indexes</a>
+						<ul>
+							<li class="first-item"><a href="http://faulkner.iath.virginia.edu/family/cumulative_characters.php">Cumulative Characters</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/cumulative_locations.php">Cumulative Locations</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/recurring_events.php">Recurring Events</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/indexofmssetc" target="_blank">Manuscripts</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/indexofmagazineillustrations" target="_blank">Illustrations</a></li>
+							<li><a href="https://faulkner.drupal.shanti.virginia.edu/content/indexofaudioclips" target="_blank">Audio Clips</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/contributors.php">Scholarly Collaborators</a></li>
+							<li><a href="http://faulkner.iath.virginia.edu/family/videos-index.php">DY Videos</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+
+			<!-- Pre Scroll Text ENDS-->
+			<section>
+				<h1 class="content_title">Language</h1>
+				<h2 class="content_sub_title text-center">
+					<small class="text-center text-body-secondary">“it struck word by word, the resonant strings of remembering”</small>
+				</h2>
+				<div class="essay_section">
+					<p>
+						The language in <i>Absalom, Absalom!</i> is very challenging. Faulkner’s language constantly draws attention to itself.
+						The text reminds us that <i>what</i>is said cannot be separated from <i>how</i> it is said.
+					</p>
+					
+				</div>
+			</section>
+			<section>
+				<div class="essay_section">
+					<h2 class="content_sub_title">The Long Sentence</h2>
+					<p>Sentences in <i>Absalom, Absalom!</i> are very long. On average, sentences are around 50 words long. The longest sentence is 1,124 words. That’s a 3-4 page college paper in one sentence! Compared to other American Classics, Faulkner’s sentences are much, much longer.</p>
+					<div id="wordchart"></div>
+					For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as “was” because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:  (Faulkner 84). 
+					<figure>
+						<div class="blockquote-outline">
+							<blockquote class="blockquote">“a man, a character in a story at any moment of action is not just himself as he is then, he is all that made him, and the long sentence is an attempt to get his past and possibly his future into the instant in which he does something”</blockquote>
+							<figcaption class="blockquote-footer">
+								Faulkner in the University: Class Conferences at the University of Virginia, 1957-1958<cite title="Do any of the story tellers have the right view?"><i>Faulkner at Virginia.</i> University of Virginia. <a href="https://faulkner.lib.virginia.edu/display/wfaudio29_1.html#wfaudio29_1.11"></a>wfaudio29_1.11</cite>
+							</figcaption>
+						</div>
+					</figure>
+				In a sense, the prose complements the narrative structure, which also sees the past continuously returning.
+				</div>
+				
+
+
+			</section>
+			<section>
+				<div class="essay_section">
+					<h2 class="content_sub_title">Neologisms</h2>
+					<p>Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word.There are 30 of such words.
+					Though their number is low, they force the reader to consider their meaning.</p>
+					<p>Often their meaning tarries between simple binaries, collapsing the neat distinctions created by language.</p>
+					<p>How is Charles a "nothusband"? </p>
+					<p>How can Quentin speak in "notlanguage"</p>
+					<p>Is an "unorganism" alive or dead?</p>
+					<div class="essay_video">
+						<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
+							<source src="media/video/neologism.mp4" type="video/mp4">
+						</video>
+
+					</div>
+				</div>
+			</section>
+			<section>
+				<div class="essay_section">
+					<h2 class="content_sub_title">Parentheticals</h2>
+					<p>
+						Perhaps the most unique feature of the text is Faulkner’s use of parentheses.<br>
+						There are 1278 total or 639 pairs.
+						These parentheses occur across the text, and also nest within each other four levels deep:
+					</p>
+
+				</div>
+			</section>
+
+	
+		
+			
+
+	</main>
+	<!-- Scroll Packages BEGIN -->
+	<!-- Scroll Packages END -->
+	<!-- JavaScript Bundle with Popper -->
+	<script>
+		$('document').ready(function () {
+
+			Plotly.newPlot('wordchart', data);
+
+		});
+	</script>
+
+</body>
+
+
+
+</html>
