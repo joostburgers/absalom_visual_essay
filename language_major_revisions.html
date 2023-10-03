@@ -45,6 +45,10 @@
 
 	<style>
 
+		.scroll_lock{
+		margin-bottom:100px;
+		
+		}
 		#scrolly-neologisms {
 			position: relative;
 			width:70%;
@@ -95,7 +99,7 @@
 		.step {
 			margin: 0 auto 2rem auto;
 			color: #fff;
-			background-color: rgba(0, 0, 0, 0.1);
+			/*background-color: rgba(0, 0, 0, 0.1);*/
 		}
 
 			.step:last-child {
@@ -103,8 +107,8 @@
 			}
 
 			.step.is-active p {
-				background-color: rgba(206, 206, 206, 0.78);
-				color: #3b3b3b;
+				background-color: rgba(206, 206, 206, 0.28);
+				color: rgba(229, 229, 229, 0.92);
 			}
 
 			.step p {
@@ -308,12 +312,12 @@
 
 
 						<!--
-		<div class="essay_video">
-			<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
-				<source src="media/video/neologism.mp4" type="video/mp4">
-			</video>
+				<div class="essay_video">
+					<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
+						<source src="media/video/neologism.mp4" type="video/mp4">
+					</video>
 
-		</div>-->
+				</div>-->
 
 					</div>
 				</div>
@@ -322,13 +326,28 @@
 				<div class="essay_section">
 					<h2 class="content_sub_title">Parentheticals</h2>
 					<p>
-						Perhaps the most unique feature of the text is Faulkner’s use of parentheses.<br>
-						There are 1278 total or 639 pairs.
-						These parentheses occur across the text, and also nest within each other four levels deep:
+						Perhaps the most unique feature of the text is Faulkner’s use of parentheses.There are 1278 total or 639 pairs. These parentheses occur across the text, and also nest within each other four levels deep.
+					</p>
+					<ul class="text-center">
+						<li>() Level 1 </li>
+						<li>(()) Level 2</li>
+						<li>((())) Level 3</li>
+						<li>(((()))) Level 4</li>
+					</ul>
+					<p>
+						The nestings offer a network of digressions, modifications, amplifications, and dead ends. They represent the constant search for words to tell the story of the Sutpen family.
 					</p>
 
 				</div>
 			</section>
+			<section>
+				<div class="essay_section">
+					<h2 class="content_sub_title">Faulkner's Language</h2>
+					<p>The complexity of Faulkner’s language forces the reader to consider the meaning of every word, in every long sentence, throughout the entire work. One cannot pull at any thread in the novel without loosening others. The past existed as a reality, but it can only be translated into the present in and through language.</p>
+					</div>
+					
+
+				</section>
 
 
 
@@ -358,7 +377,7 @@
 			// generic window resize listener event
 			function handleResize() {
 				// 1. update height of step elements
-				var stepH = Math.floor(window.innerHeight * 0.25);
+				var stepH = Math.floor(window.innerHeight * 0.5);
 				step.style("height", stepH + "px");
 
 				var figureHeight = window.innerHeight / 2;
@@ -398,7 +417,7 @@
 				scroller
 					.setup({
 						step: "#scrolly-neologisms article .step",
-						offset: 0.8,
+						offset: .33,
 						debug: false
 					})
 					.onStepEnter(handleStepEnter);

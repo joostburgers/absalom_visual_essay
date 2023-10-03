@@ -6,9 +6,10 @@
     "\\js",
     "\\media",
     "\\media\\images",
+    "\\media\\video",
     "\\pages",
     "\\pages\\data"
   ],
-  "SelectedNode": "\\css\\scroll_chart_style.css",
+  "SelectedNode": "\\js\\bar.js",
   "PreviewInSolutionExplorer": false
 }
