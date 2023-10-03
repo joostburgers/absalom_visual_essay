@@ -46,3 +46,102 @@ var layout_words_per_sentence = {
 
 };
 
+
+
+function makeParenthesisPlot() {
+	$.ajax({
+		type: "GET",
+		url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/parenthetical_nesting.csv",
+		dataType: "text",
+		success: function (response) {
+			var allData = {};
+			allData = processParenthesisData(response)
+			makeParenthesisPlotly(allData);
+		}
+	}).done(function () {
+		console.log("Data loaded successfully");
+	}).fail(function () {
+		console.warn("Data could not be loaded");
+	});;
+};
+
+function processParenthesisData(response) {
+
+	data = $.csv.toObjects(response, { headers: true });
+
+	plotData = {};
+	plotData.depth = data.map(function (d) {
+		return parseInt(d['depth']) || null;
+	});
+
+	plotData.start = data.map(function (d) { return d['start']; });
+
+
+	return plotData
+}
+
+function makeParenthesisPlotly(data){
+
+	const scatterPlotColors = [
+		'rgba(255, 99, 132, 1)',
+		'rgba(54, 162, 235, 1)',
+		'rgba(255, 206, 86, 1)',
+		'rgba(75, 192, 192, 1)',
+		'rgba(153, 102, 255, 1)',
+		'rgba(255, 159, 64, 1)'
+	]
+
+	const plotFont = {
+		family: "Georgia",
+		size: 14,
+		color: '#363636'
+	}
+
+	const depth = data['depth'];
+	const start = data['start'];
+	const chapter = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	const chapter_marker = [1,46000,99402,156765,245268,328114,412488,558423, 686037]
+
+	var data = [{
+		x: start,
+		y: depth,
+		groupby: depth,
+		/*color: scatterPlotColors,*/
+		type: 'scatter',
+		mode: 'lines+markers',
+		marker: { size: 4 },
+		line: { width: 1, dash: 'dot' }
+	}
+	]
+
+	var layout_parenthesis = {
+		title:{ text: "Parenthesis Nesting Levels in <i>Absalom, Absalom!</i>" },
+		xaxis: {
+			gridwidth: 1,
+			zeroline:false,
+			showline:false,
+			tickmode: 'array',
+			tickvals: chapter_marker,
+			ticktext: chapter,
+		},
+		yaxis: {
+			text: "Nesting Level",
+			showgrid: false,
+			zeroline: false,
+			showline: false,
+			linewidth: 0,
+			tickmode: "array",
+			tickvals: [0, 1, 2, 3, 4],
+			ticktext: ["Main Text", "1: ()", "2: (())", "3: ((()))", "4: (((())))"]
+		},
+		font: plotFont,
+		colorway: scatterPlotColors
+
+	}
+
+	Plotly.newPlot('parenthesisChart', {
+		data: data,
+		layout: layout_parenthesis
+		
+	})
+}
