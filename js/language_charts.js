@@ -51,7 +51,7 @@ var layout_words_per_sentence = {
 function makeParenthesisPlot() {
 	$.ajax({
 		type: "GET",
-		url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/parenthetical_nesting.csv",
+		url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/parenthetical_staggered_wide.csv",
 		dataType: "text",
 		success: function (response) {
 			var allData = {};
@@ -69,13 +69,29 @@ function processParenthesisData(response) {
 
 	data = $.csv.toObjects(response, { headers: true });
 
+	console.log(response)
+
 	plotData = {};
 	plotData.depth = data.map(function (d) {
 		return parseInt(d['depth']) || null;
 	});
 
-	plotData.start = data.map(function (d) { return d['start']; });
+	plotData.start = data.map(function (d) { return parseInt(d['start']) || null; });
 
+	plotData.level_1 = data.map(function (d) {
+		return parseInt(d['level_1']) || null;
+	});
+	plotData.level_2 = data.map(function (d) {
+		return parseInt(d['level_2']) || null;
+	})
+
+	plotData.level_3 = data.map(function (d) {
+		return parseInt(d['level_3']) || null;
+	})
+
+	plotData.level_4 = data.map(function (d) {
+		return parseInt(d['level_4']) || null;
+	})
 
 	return plotData
 }
@@ -96,30 +112,71 @@ function makeParenthesisPlotly(data){
 		size: 14,
 		color: '#363636'
 	}
+	console.log("Date revision: ", data)
 
 	const depth = data['depth'];
-	const start = data['start'];
-	const chapter = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	const chapter_marker = [1,46000,99402,156765,245268,328114,412488,558423, 686037]
+	const level_1 = data['level_1'];
+	const level_2 = data['level_2'];
+	const level_3 = data['level_3'];
+	const level_4 = data['level_4'];
+
+	const x_long_break = [334038, 355880, 394110, 394224];
+	const y_long_break = [1, 2, 3, 4];
+	const break_text = ['(then Shreve again, "Wait. Wait. You mean...")', '("How was it?" Shreve said. "You told...', "(Because there was love Mr Compson said...", "(Quentin)"]
+	const chapter = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+	const chapter_marker = [1, 46000, 99402, 156765, 245268, 328114, 412488, 558423, 686037];
+
 
 	var data = [{
-		x: start,
+		x: level_1,
 		y: depth,
-		groupby: depth,
+		name: "Level 1: ()",
 		/*color: scatterPlotColors,*/
 		type: 'scatter',
 		mode: 'lines+markers',
+		hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
 		marker: { size: 4 },
 		line: { width: 1, dash: 'dot' }
-	}
+	},
+		{
+			x: level_2,
+			y: depth,
+			name: "Level 2: (())",
+			/*color: scatterPlotColors,*/
+			type: 'scatter',
+			mode: 'lines+markers',
+			hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+			marker: { size: 4 },
+			line: { width: 1, dash: 'dot' }
+		},
+		{
+			x: level_3,
+			y: depth,
+			name: "Level 3: ((()))",
+			hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+			type: 'scatter',
+			mode: 'lines+markers',
+			marker: { size: 4 },
+			line: { width: 1, dash: 'dot' }
+		},
+		{
+			x: level_4,
+			y: depth,
+			name: "Level 4: (((())))",
+			hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+			type: 'scatter',
+			mode: 'lines+markers',
+			marker: { size: 4 },
+			line: { width: 1, dash: 'dot' }
+		}
 	]
 
 	var layout_parenthesis = {
-		title:{ text: "Parenthesis Nesting Levels in <i>Absalom, Absalom!</i>" },
+		title: { text: "Parenthesis Nesting Levels in <i>Absalom, Absalom!</i>" },
 		xaxis: {
-			gridwidth: 1,
-			zeroline:false,
-			showline:false,
+			showgrid:false,
+			zeroline: false,
+			showline: false,
 			tickmode: 'array',
 			tickvals: chapter_marker,
 			ticktext: chapter,
@@ -135,7 +192,17 @@ function makeParenthesisPlotly(data){
 			ticktext: ["Main Text", "1: ()", "2: (())", "3: ((()))", "4: (((())))"]
 		},
 		font: plotFont,
-		colorway: scatterPlotColors
+		colorway: scatterPlotColors[1, 2, 3, 4],
+		annotations: [
+			{ x: x_long_break[0], y: y_long_break[0], text: break_text[0], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor:"left" },
+		 {
+			 x: x_long_break[1], y: y_long_break[1], text: break_text[1], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left"
+			}, {
+			 x: x_long_break[2], y: y_long_break[2], text: break_text[2], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left"
+			}, {
+			 x: x_long_break[3], y: y_long_break[3], text: break_text[3], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left"
+
+			}],
 
 	}
 

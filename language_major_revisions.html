@@ -46,15 +46,16 @@
 	<style>
 
 		.scroll_lock{
-		margin-bottom:100px;
+		/*margin-bottom:100px;*/
 		
 		}
 		#scrolly-neologisms {
 			position: relative;
-			width:70%;
-			
-			margin-left:auto;
-			margin-right:auto;
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+			display: flex; /* add this property to center the section */
+			justify-content: center; 
 		}
 
 		article {
@@ -92,23 +93,36 @@
 			}
 
 		#neologisms{
-		max-width:100%;
-		margin:0;
+		
+		
 		}
 
 		.step {
 			margin: 0 auto 2rem auto;
-			color: #fff;
+			/*color: #fff;*/
 			/*background-color: rgba(0, 0, 0, 0.1);*/
+			opacity: 0;
+			transition: opacity 1s ease;
 		}
 
 			.step:last-child {
-				margin-bottom: 0;
+				margin-bottom: 0px;
+				height:250px;
+			}
+
+			.step:first-child {
+				margin:auto;
+				
+			}
+
+			.step.is-active{
+			 opacity:1;
+
 			}
 
 			.step.is-active p {
 				background-color: rgba(206, 206, 206, 0.28);
-				color: rgba(229, 229, 229, 0.92);
+				color: rgba(0, 0, 0, 0.80);
 			}
 
 			.step p {
@@ -274,8 +288,8 @@
 				<div class="essay_section">
 					<h2 class="content_sub_title">Neologisms</h2>
 					<p>
-						Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word.There are 30 of such words.
-						Though their number is low, they force the reader to consider their meaning.
+						Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word. There are 30 of such words and many other words that are uncommon or archaic.
+						
 					</p>
 					<p>Often their meaning tarries between simple binaries, collapsing the neat distinctions created by language.</p>
 				</div>
@@ -283,43 +297,34 @@
 			<section>
 				<div class="scroll_lock">
 					<div id="scrolly-neologisms">
-						<div class="essay_video sticky_scroll">
+						<div class="sticky_scroll">
 							<figure class="scroll_video">
-								<!--style="height: 465.5px; top: 232.75px;"-->
-
-								<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
-									<source src="media/video/neologism.mp4" type="video/mp4">
+								<video id="neologisms" muted loop>
+									<source src="media/video/neologism_large.mp4" type="video/mp4">
 								</video>
-
-
 							</figure>
 
 							<article>
 								<div class="step is-active" data-step="1" style="height: 250px;" data-scrollama-index="0">
-									<p>How is Charles a "nothusband"? </p>
+									<p>They force the reader to consider their meaning. </p>
 								</div>
 								<div class="step" data-step="2" style="height: 250px;" data-scrollama-index="1">
-									<p>How can Quentin speak in "notlanguage"</p>
+									<p>Is an "unorganism" alive or dead??</p>
 								</div>
 								<div class="step" data-step="3" style="height: 250px;" data-scrollama-index="2">
-									<p>Is an "unorganism" alive or dead?</p>
+									<p>How can Quentin speak in "notlanguage"?</p>
 								</div>
 								<div class="step" data-step="4" style="height: 250px;" data-scrollama-index="3">
-									<p>STEP 4</p>
-								</div>
-							</article>
-						</div>
-
-
-						<!--
-				<div class="essay_video">
-					<video id="neologisms" class="object-fit-contain border rounded" autoplay muted loop>
-						<source src="media/video/neologism.mp4" type="video/mp4">
-					</video>
-
-				</div>-->
-
-					</div>
+									<p>How can Charles be a "nothusband"?</p>
+									</div>
+								<!--	<div class="step" data-step="5" style="height: 250px;" data-scrollama-index="4"><p>closing text</p>
+									</div>-->
+</article>
+			</div>
+			</div>
+				</div>
+				<div class="essay_section">
+					<p>Faulkner's recondite vocabulary draws attention to the fact that each individual fact disclosed by the teller is composed of individual words. These words can only be understood in context.</p>
 				</div>
 			</section>
 			<section>
@@ -328,12 +333,14 @@
 					<p>
 						Perhaps the most unique feature of the text is Faulkner’s use of parentheses.There are 1278 total or 639 pairs. These parentheses occur across the text, and also nest within each other four levels deep.
 					</p>
-					<ul class="text-center">
-						<li>() Level 1 </li>
-						<li>(()) Level 2</li>
-						<li>((())) Level 3</li>
-						<li>(((()))) Level 4</li>
-					</ul>
+					<div class="my-4">
+						<ul class="text-center">
+							<li>() Level 1 </li>
+							<li>(()) Level 2</li>
+							<li>((())) Level 3</li>
+							<li>(((()))) Level 4</li>
+						</ul>
+					</div>
 					<p>
 						The nestings offer a network of digressions, modifications, amplifications, and dead ends. They represent the constant search for words to tell the story of the Sutpen family.
 					</p>
@@ -350,7 +357,7 @@
 
 				</section>
 
-
+				</div>
 
 
 
@@ -369,9 +376,11 @@
 			var main = d3.select("main");
 			var scrolly = main.select("#scrolly-neologisms");
 			var figure = scrolly.select("figure");
+			var video = figure.select("video");
 			var article = scrolly.select("article");
 			var step = article.selectAll(".step");
-
+			var firstStep = article.select(".step:first-child");
+			var lastStep = article.select(".step:last-child");
 			// initialize the scrollama
 			var scroller = scrollama();
 
@@ -384,10 +393,20 @@
 				var figureHeight = window.innerHeight / 2;
 				var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
+				firstStep
+					.style("margin-top", 0 - figureHeight/2+"px")
+
+				lastStep
+					.style("margin-bottom", 0 - figureHeight/2+"px")
+
 				figure
 					.style("height", figureHeight + "px")
 					.style("top", figureMarginTop + "px");
 
+				video
+					.style("height", figureHeight + "px")
+					.style("top", figureMarginTop + "px")
+					/*.style("width", window.innerWidth+"px");*/
 				// 3. tell scrollama to update new element dimensions
 				scroller.resize();
 			}
@@ -401,6 +420,20 @@
 				step.classed("is-active", function (d, i) {
 					return i === response.index;
 				});
+
+				if (response.index >= 0 && response.index < 3) {
+					const video = document.getElementById("neologisms");
+					video.play();
+					video.loop=true
+				}
+				else {
+					const video = document.getElementById("neologisms");
+					
+					video.currentTime = 45;
+					video.play()
+					video.loop = false
+				
+				}
 
 				// update graphic based on step
 				/*figure.select("p").text(response.index + 1);*/
@@ -418,7 +451,7 @@
 				scroller
 					.setup({
 						step: "#scrolly-neologisms article .step",
-						offset: .33,
+						offset: .7,
 						debug: false
 					})
 					.onStepEnter(handleStepEnter);
