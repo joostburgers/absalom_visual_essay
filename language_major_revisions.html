@@ -421,7 +421,7 @@
 					return i === response.index;
 				});
 
-				if (response.index >= 0 && response.index < 3) {
+				if (response.index >= 1 && response.index < 3) {
 					const video = document.getElementById("neologisms");
 					video.play();
 					video.loop=true
@@ -429,11 +429,12 @@
 				else {
 					const video = document.getElementById("neologisms");
 					
-					video.currentTime = 45;
+					video.currentTime = 47;
 					video.play()
 					video.loop = false
-				
 				}
+
+			
 
 				// update graphic based on step
 				/*figure.select("p").text(response.index + 1);*/

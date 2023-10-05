@@ -1,4 +1,4 @@
-// JavaScript source code
+/*// JavaScript source code
 var DefaultbackgroundColor = [
     'rgba(255, 99, 132, 0.2)',
     'rgba(54, 162, 235, 0.2)',
@@ -16,4 +16,4 @@ var DefaultborderColor = [
     'rgba(153, 102, 255, 1)',
     'rgba(255, 159, 64, 1)'
 ]
-var DefaultborderWidth = 1
+var DefaultborderWidth = 1*/
