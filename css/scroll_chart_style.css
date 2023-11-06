@@ -84,3 +84,21 @@ text-align:center;
 		max-width: 100%;
 		word-wrap: break-word;
 	}
+
+
+#legend {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+#legend p {
+	font-size:1rem;
+	text-align:left;
+	top:revert;
+	left:revert;
+	position:relative;
+	-webkit-transform:revert;
+	transform:revert;
+	font-weight:revert;
+	color:#000;
+}

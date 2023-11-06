@@ -41,12 +41,51 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
+	<!--<link rel="stylesheet" href="css/style.css" />-->
 
 
 	<link rel="stylesheet" href="css/family.css" />
 	<link rel="stylesheet" href="css/visual_essay.css" />
 	<link rel="stylesheet" href="css/scroll_chart_style.css" />
+	<!--<link rel="stylesheet" href="css/scroll.css" />
+	<link rel="stylesheet" href="css/responsive.css" />-->
 	<style>
+		#menu-bar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background-color: #f2f2f2;
+			padding: 10px;
+		}
+
+			#menu-bar ul {
+				display: flex;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				width:100%
+			}
+
+			#menu-bar li {
+				flex:1;
+				
+				margin-right: 20px;
+				text-align:center;
+			}
+
+			#menu-bar a {
+				text-decoration: none;
+				color: #333;
+				font-weight: bold;
+				font-size: 16px;
+				width: 100%;
+			}
+
+			.banner {
+			padding: 20px 0px;
+			margin:20px 0px;
+			}
+
 	</style>
 
 
@@ -164,21 +203,40 @@
 				</ul>
 			</div>
 		</div>
-		<!-- Title Slide BEGINS-->
-		<section>
-			
-			<!-- Title Slide ENDS-->
-			<!-- Pre Scroll Text BEGINS-->
-			
-				<h1 class = "content_title">Characters</h1>
+		
+
+		<div class="container">
+			<section>
+				<div class="banner">
+					<div class="h2 text-left py-4">Digital Supplement</div>
+					<div class="h4 text-left pb-3"><em>Absalom, Absalom! </em> and the Digital Humanities: Charting Characters, Events, and Language</div>
 				
-				<h2 class ="content_sub_title text-center"><small class="text-center text-body-secondary">“money, a house, a plantation, slaves, a family — incidentally of course, a wife”</small></h2>
+					<p class="pb-4">
+						This interactive essay was created using data from the <a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> Database. It serves as a supplement to the long-form essay available in the <a href="https://wwnorton.com/books/9780393422580">Norton Critical Edition of Absalom, Absalom!</a>. It includes visualizations that are not possible to represent in print, and also functions as a standalone essay that explores <em>Absalom, Absalom!</em> along three different axes: Characters, Events, and Language.
+					</p>
+					
+					<div id="menu-bar">
+						<ul>
+							<li><a href="#">Characters</a></li>
+							<li><a href="#">Events</a></li>
+							<li><a href="#">Language</a></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section>
+
+				<h1 class="content_title">Characters</h1>
+
+				<h2 class="content_sub_title text-center"><small class="text-center text-body-secondary">“money, a house, a plantation, slaves, a family — incidentally of course, a wife”</small></h2>
 				<div class="essay_section">
 					<p>
 						The <i>Digital Yoknapatawpha</i> database contains every character who appears in Faulkner’s Yoknapatawpha fictions.
 						Each character has a set of attribute information, including their race, class, gender, number, rank, and vitality.
 						With this information, we can make a literary demography of the composition of the entire character population.
 					</p>
+					<h2 class="content_sub_title">Racial Composition</h2>
 					<p>
 						One of the most salient pieces of demographic information in <i>Absalom, Absalom!</i> is its racial composition. The novel powerfully captures the Southern system of racial oppression that started with the enslavement of Africans before the Civil War and was continued through the creation of "Jim Crow" segretation laws after the Emancipation Proclamation. This long history of racial separation and its codification into explicit laws and implicit social practices, made race appear as a real and fundamental difference between people, even, if it was entirely socially constructed. Speaking of race in America more generally, Toni Morrison remarks that, "As a reader you have been forced to hunt for a drop of black blood that means everything and nothing. The insanity of racism."
 					</p>
@@ -186,9 +244,7 @@
 					<figure>
 						<div class="blockquote-outline">
 							<blockquote class="blockquote">
-
 								<p>As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.</p>
-
 								<p>
 									The insanity of racism.
 								</p>
@@ -199,226 +255,202 @@
 						</div>
 					</figure>
 				</div>
-				<!-- <canvas id = "race-hierarchy-map"></canvas> -->
-				<div class = "essay_section">
-                <p>
-                    Faulkner questions the difference between people based on race by suggesting that Charles Bon could be both brother and other to Judith and Henry Sutpen. This troubling of racial categories is visible in the character breakdown of the novel. There are 194 unique characters in <i>Absalom, Absalom!</i>. These characters can in turn be grouped by race. Doing so creates a raw demographic total for each group. This indicates the relative percentage of each racial group of the entire cast of characters. Notably, this breakdown does not take into account how often characters occur. By calculating how often characters of a particular race occur in an event across the novel, we can capture how present they are in the novel. If <i>Absalom, Absalom!</i> were a movie, this would be the relative screen-time dedicated to each racial group.
-                </p>
-			</div>
-		</section>
-		<!-- Pre Scroll Text ENDS-->
-		<!-- Scroll Text BEGINS -->
-		<section id="scrolly">
-			<div class="scrolldiv">
+
+				<div class="essay_section">
+
+					<h2 class="content_sub_title">Racial Presence</h2>
+					<p>
+						Faulkner questions the difference between people based on race by suggesting that Charles Bon could be both brother and other to Judith and Henry Sutpen. This troubling of racial categories is visible in the character breakdown of the novel. There are 194 unique characters in <i>Absalom, Absalom!</i>. These characters can in turn be grouped by race. Doing so creates a raw demographic total for each group. This indicates the relative percentage of each racial group of the entire cast of characters.
+					</p>
+					<p>
+						Notably, this breakdown does not take into account how often characters occur. By calculating how often characters of a particular race occur in an event across the novel, we can capture how present they are in the novel. If <i>Absalom, Absalom!</i> were a movie, this would be the relative screen-time dedicated to each racial group.
+					</p>
+				</div>
+			</section>
+
+			<section id="scrolly">
 				<article>
 					<div class="step" data-step="1">
-						<p class="scroll-text">
-							There are important differences between the raw demographic total and the weighted demographic presence. Both multi-racial groups and the few Indian characters who populate the novel's world do not even register when they are weighted for their presence within the plot.
+						<div class="step_header">Raw vs. Weighted Demographics</div>
+						<p>
+							There are important differences between the raw demographic total and the weighted demographic presence.
+						</p>
+						<p>
+							Both multi-racial groups and the few Indian characters who populate the novel's world do not even register when they are weighted for their presence within the plot.
 						</p>
 					</div>
 					<div class="step" data-step="2">
-						<p class="scroll-text">
-							Meanwhile, weighting by narrative presence actually reveals that White characters are over-represented. They only constitute 66% of the total characters, but are present in 77% of events. This shows that the narrative is focused on relating the lives of the White characters more than the other characters present.
+						<div class="step_header">Over-representation</div>
+						<p>
+							Meanwhile, weighting by narrative presence actually reveals that White characters are over-represented. They only constitute 66% of the total characters, but are present in 77% of events.
+						</p>
+						<p>
+							This shows that the narrative is focused on relating the lives of the White characters more than the other characters present.
 						</p>
 					</div>
 					<div class="step" data-step="3">
-						<p class="scroll-text">
-							Likewise, by accounting for how often characters actually appear in the text, the number of of mixed ancestry characters goes up. Intuitively, this makes sense because while there are relatively few of these characters in the world of the text, characters like Clytemnestra and Charles Bon appear quite often.
+						<div class="step_header">Mixed Ancestry</div>
+						<p>
+							Likewise, by accounting for how often characters actually appear in the text, the number of of mixed ancestry characters goes up.
+						</p> <p>
+							Intuitively, this makes sense because while there are relatively few of these characters in the world of the text, characters like Clytemnestra and Charles Bon appear quite often.
 						</p>
 					</div>
 					<div class="step" data-step="4">
-						<p class="scroll-text">
-							Importantly, the increased focus on mixed ancestry characters comes at the cost of the Black characters. As individuals these characters recede into the background and do not have the same narrative presence as the white and the mixed ancestry characters. This distinction highlights the fact that novel is focused on showing White characters interact with characters of Mixed Ancestry. 
+						<div class="step_header">Erasing Blackness</div>
+						<p>
+							Importantly, the increased focus on mixed ancestry characters comes at the cost of the Black characters. As individuals these characters recede into the background and do not have the same narrative presence as the white and the mixed ancestry characters.
+						</p>
+						<p>
+							This distinction highlights the fact that novel is focused on showing White characters interact with characters of Mixed Ancestry.
 						</p>
 					</div>
 				</article>
-				
-				<div class="fig">
-					<!-- Scroll Chart BEGINS -->
-					
-					<div class="chartdiv">
-						<h1 class="charttitle">Raw Demographic Total</h1>
-						<canvas id="scrollychart1"></canvas>
-					</div>
 
-					<div class="chartdiv">
-						<h1 class="charttitle">Weighted Demographic Presence</h1>
-						<canvas id="scrollychart2"></canvas>
+
+				<figure class="chart">
+
+					<div class="row w-75">
+						<div class="col">
+							<div class="h5 text-center">Raw Demographic Total</div>
+							<canvas id="scrollychart1"></canvas>
+						</div>
+
+						<div class="col">
+							<div class="h5 text-center">Weighted Demographic Presence</div>
+							<canvas id="scrollychart2"></canvas>
+						</div>
 					</div>
-					
-					<div>
+					<div class="row w-90">
+
 						<div id="legend"></div>
-					</div>					
-				</div>
-			</div>
-			
-		</section>
-		
-		<div class="notebook">
-			<p class="notebook">
-				The data suggest that while <i>Absalom, Absalom!</i> is concerned with the ‘color line’, it is decidedly from a White perspective. Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community. This is visible with the presence of Charles Bon. He is the most ubiquitous Mixed Ancestry character by far. Still, compared to the other White characters he is simply another major character. Quite tellingly, the most present Black characters are the unnamed enslaved people, Sutpen transports to Jefferson to build his estate.
-			</p>
-			<p class="notebook">
-				The sunburst chart below divides character presence by race and character. Clicking on the large pie pieces will show the character breakdowns in more detail.
-			</p>
-			<div class="chartdiv">
-				<div id="sunburst"></div>
-			</div>
-			
-			<p class="notebook">
-				It is clear from reading <i>Absalom, Absalom!</i> that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
-				The various narrators only really care about racial passing if it threatens upper class white femininity. 
-			</p>
+					</div>
 
-			<p class="notebook">
-				As such, they naturalize racial difference, and also circumscribe the boundaries of gender, sexuality, and class.
-				In the highly fraught social circumstances of the pre-Civil Rights South, there is no way to separate race, class, gender, and sexuality.<br><br><br>
-				The data suggest that while Absalom, Absalom! is concerned with the ‘color line’, it is decidedly from a White perspective.
-				Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community.
-			</p>
-			<div id="legend"></div>
+				</figure>
+
+			</section>
+			<section>
+				<div class="essay_section">
+
+					<h2 class="content_sub_title">Individual Character Presence</h2>
+					<p>
+						The data suggest that while <i>Absalom, Absalom!</i> is concerned with the ‘color line’, it is decidedly from a White perspective. Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community. This is visible with the presence of Charles Bon. He is the most ubiquitous Mixed Ancestry character by far. Still, compared to the other White characters he is simply another major character. Quite tellingly, the most present Black characters are the unnamed enslaved people, Sutpen transports to Jefferson to build his estate.
+					</p>
+
+					<h2 class="content_sub_title">Visualizing Character Presence</h2>
+					<p>
+						The sunburst chart below divides character presence by race and character. Clicking on the large pie pieces will show the character breakdowns in more detail.
+					</p>
+					<div class="chartdiv">
+						<div id="sunburst"></div>
+					</div>
+					<h2 class="content_sub_title">Questioning the Color Line</h2>
+					<p>
+						It is clear from reading <i>Absalom, Absalom!</i> that the novel is about Charles Bon’s potential transgression across the ‘color line.’ The data reveal that the novel attends to this issue from a predominantly White perspective, and at the exclusion of all other non-white characters.
+					</p>
+					<p>
+						The various narrators only really care about racial passing if it threatens upper class white femininity. There is never a consideration as to how passing might affect the Black community.
+					</p>
+
+				</div>
+			</section>
 		</div>
-		
 
 		<!-- Scroll Text ENDS -->
 		<!-- Footer -->
 		<!-- Remove the container if you want to extend the Footer to full width. -->
-		<div class="container my-5" style="color: #B55400;">
-
-			<footer class="text-center text-white" style="background-color: #f1f1f1;"></footer>
-
+		<div id="page_footer">
+			<div id="footer_iath_link"><a href="http://www.iath.virginia.edu/">IATH</a></div>
 		</div>
-		<!-- Grid container -->
-		<!-- Copyright -->
 
-		
 	</main>
 	<!-- Scroll Packages BEGIN -->
-	
 	<!-- Scroll Packages END -->
 
 	<script>
 
-</script>
-	
-	<!-- JavaScript Bundle with Popper -->
-	<!--<script src="js/charts.js"></script>-->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<footer>
-		<div class="footer-clean">
-			<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-sm-3 item">
-							<h3>About DY</h3>
-							<ul>
-								<li>A Collaboration between an International Team of Faulkner Scholars
-									and Technologists at the University of Virginia
-									Major Funding provided by the National Endowment for the Humanities</li>
-							</ul>
-						</div>
-						<div class="col-sm-3 item">
-							<h3>Quick Links</h3>
-							<ul>
-								<li><a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a></li>
-								<li><a href="http://www.iath.virginia.edu/">IATH Virginia</a></li>
-								<li><a href="http://faulkner.iath.virginia.edu/family/credits.php">DY Contributors</a></li>
-							</ul>
-						</div>
-						<div class="col-lg-3 item social">
-							<a href="https://www.instagram.com/digyok/"><i class="bi bi-instagram"></i></a>
-							<a href="https://www.facebook.com/digyok/"><i class="bi bi-facebook"></i></a>
-							<a href="https://twitter.com/digyok"><i class="bi bi-twitter"></i></a>
-							<p class="copyright">Digital Yoknapatawpha, University of Virginia © 2022</p>
-						</div>
-					</div>
-				</div>
-			</div>
-	</footer>
+		function makeplot() {
+			var data;
+			$.ajax({
+				type: "GET",
+				url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sunburst_export.csv",
+				dataType: "text",
+				success: function (response) {
+					data = $.csv.toObjects(response, { headers: true });
+					processData(data);
+				}
+			});
+		};
 
-<script>
+		function processData(allRows) {
 
-        function makeplot() {
-            var data;
-            $.ajax({
-                type: "GET",
-                url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sunburst_export.csv",
-                dataType: "text",
-                success: function (response) {
-                    data = $.csv.toObjects(response, { headers: true });
-                    processData(data);
-                }
-            });
-        };
-
-        function processData(allRows) {
-
-            console.log(allRows);
-            console.log(allRows.length)
-            var labels = []
-            var values = []
-            var parents = []
+			console.log(allRows);
+			console.log(allRows.length)
+			var labels = []
+			var values = []
+			var parents = []
 			var ids = [];
 			var percent = [];
 			var race = [];
 
-            for (var i = 0; i < allRows.length; i++) {
-                row = allRows[i];
-                labels.push(row['labels']);
-                values.push(row['values']);
+			for (var i = 0; i < allRows.length; i++) {
+				row = allRows[i];
+				labels.push(row['labels']);
+				values.push(row['values']);
 				parents.push(row['parents']);
 				ids.push(row['ids']);
 				percent.push(row['percent']);
 				race.push(row['race']);
-               
-			}
-            console.log("Labels = ", labels, "Values =", values, "Parents = ", parents, "Ids =", ids);
-            makePlotly(labels, values, parents, ids, percent, race);
-        }
 
-        function makePlotly(labels, values, parents, ids, percent, race) {
+			}
+			console.log("Labels = ", labels, "Values =", values, "Parents = ", parents, "Ids =", ids);
+			makePlotly(labels, values, parents, ids, percent, race);
+		}
+
+		function makePlotly(labels, values, parents, ids, percent, race) {
 			var hovervariables = [percent, race]
-			
+
 
 
 			var data = [{
-                type: "sunburst",
-                labels: labels,
-                parents: parents,
-                values: values,
+				type: "sunburst",
+				labels: labels,
+				parents: parents,
+				values: values,
 				ids: ids,
 				customdata: percent,
-		        outsidetextfont: { size: 20, color: "white" },
-                leaf: { opacity: 0.8 },
+				outsidetextfont: { size: 20, color: "white" },
+				leaf: { opacity: 0.8 },
 				marker: {
 					line: { width: 2 }
 				},
-				branchvalues:'remainder',
-                hovertemplate: '%{customdata}%<extra></extra>'
-            }];
+				branchvalues: 'remainder',
+				hovertemplate: '%{customdata}%<extra></extra>'
+			}];
 
-            var layout = {
-                margin: { l: 0, r: 0, b: 0, t: 0 },
-                plot_bgcolor:"#222831",
-				paper_bgcolor: "#222831", 
+			var layout = {
+				margin: { l: 0, r: 0, b: 0, t: 0 },
+				plot_bgcolor: "#FFF",
+				paper_bgcolor: "#FFF",
 				sunburstcolorway: DefaultborderColor,
 				font: {
-    			size: 14,
-    			color: '#FFF'
+					size: 14,
+					color: '#FFF'
 				}
 			};
 
-			var config = {responsive: true}
+			var config = { responsive: true }
 
 
-            Plotly.newPlot('sunburst', data, layout, config);
+			Plotly.newPlot('sunburst', data, layout, config);
 
 
-        };
-        makeplot();
+		};
+		makeplot();
 
 
 
-</script>
+	</script>
 
 </body>
 

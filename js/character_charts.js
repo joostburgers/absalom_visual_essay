@@ -6,12 +6,12 @@ $.ajaxSetup({
 
 
 const DefaultbackgroundColor = [
-    'rgba(255, 99, 132, 0.2)',
-    'rgba(54, 162, 235, 0.2)',
-    'rgba(255, 206, 86, 0.2)',
-    'rgba(75, 192, 192, 0.2)',
-    'rgba(153, 102, 255, 0.2)',
-    'rgba(255, 159, 64, 0.2)'
+    'rgba(255, 99, 132, 0.3)',
+    'rgba(54, 162, 235, 0.3)',
+    'rgba(255, 206, 86, 0.3)',
+    'rgba(75, 192, 192, 0.3)',
+    'rgba(153, 102, 255, 0.3)',
+    'rgba(255, 159, 64, 0.3)'
 ]
 
 var DefaultborderColor = [
@@ -75,7 +75,7 @@ const htmlLegendPlugin = {
 
             // Text
             const textContainer = document.createElement('p');
-            textContainer.style.color = item.fontColor;
+            
             textContainer.style.margin = 0;
             textContainer.style.padding = 0;
             textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
@@ -116,8 +116,11 @@ $(function () {
                 borderColor: DefaultborderColor,
                 borderWidth: DefaultborderWidth,
                 datalabels: {
-                    color: '#eee',
-                    font: { size: 14 },
+                    color: '#000',
+                    font: {
+                        family: 'Georgia',
+                        size: 14
+                    },
                     formatter: function (value, context) {
                         return value + '%';
                     }
@@ -147,8 +150,11 @@ $(function () {
                 borderColor: DefaultborderColor,
                 borderWidth: DefaultborderWidth,
                 datalabels: {
-                    color: 'white',
-                    font: { size: 14 },
+                    color: '#000',
+                    font: {
+                        family: 'Georgia',
+                        size: 14
+                    },
                     formatter: function (value) {
                         return value + '%';
                     }
@@ -255,9 +261,7 @@ $(function () {
 
                 // Text
                 const textContainer = document.createElement("p");
-                textContainer.style.color = '#EEE';
-                textContainer.style.margin = 0;
-                textContainer.style.padding = 0;
+                
 
 
                 const text = document.createTextNode(item);
@@ -293,7 +297,7 @@ $(function () {
         var stepH = Math.floor(window.innerHeight * 0.75);
         step.style("height", stepH + "px");
 
-        var figureHeight = window.innerHeight / 1.4;
+        var figureHeight = window.innerHeight / 2;
         var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
         figure
@@ -321,19 +325,19 @@ $(function () {
 
         scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
             if (response.index === 1) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-                scrollychart1.data.datasets[0].backgroundColor[4] = scrollychart1.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
+                scrollychart1.data.datasets[0].backgroundColor[4] = scrollychart1.data.datasets[0].backgroundColor[4].replace("0.3", "0.7")
             }
             else if (response.index === 2) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-                scrollychart1.data.datasets[0].backgroundColor[2] = scrollychart1.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
+                scrollychart1.data.datasets[0].backgroundColor[2] = scrollychart1.data.datasets[0].backgroundColor[2].replace("0.3", "0.7")
             }
             else if (response.index === 3) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-                scrollychart1.data.datasets[0].backgroundColor[0] = scrollychart1.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
+                scrollychart1.data.datasets[0].backgroundColor[0] = scrollychart1.data.datasets[0].backgroundColor[0].replace("0.3", "0.7")
             }
             else {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
+                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
             }
             scrollychart1.update()
 

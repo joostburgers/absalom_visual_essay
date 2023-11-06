@@ -9,11 +9,6 @@ $.ajaxSetup({
 var temp_data = [];
 var allRows = null
 
-Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/solar.csv', function (err, data) {
-    allRows = data
-}); 
-
-console.log(temp_data)
 
 function makeplot() {
     var data;
