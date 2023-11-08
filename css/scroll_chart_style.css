@@ -89,16 +89,27 @@ text-align:center;
 #legend {
 	display: flex;
 	flex-flow: row wrap;
+	padding: 20px 0px 0px 0px;
 }
 
 #legend p {
 	font-size:1rem;
 	text-align:left;
-	top:revert;
-	left:revert;
+	top:0;
+	left:0;
 	position:relative;
 	-webkit-transform:revert;
 	transform:revert;
 	font-weight:revert;
 	color:#000;
+	padding:0;
+}
+
+.chartdiv {
+	width: 45%;
+	margin: 2%;
+}
+
+.container-piechart{
+/*max-width:400px;*/
 }
