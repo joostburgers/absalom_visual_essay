@@ -6,13 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Language in Absalom, Absalom!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!-- JS Packages -->
+	<!-- Remote JS Packages -->
 
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Events in Absalom, Absalom!</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!-- JS Packages -->
 	<script src="https://unpkg.com/scrollama"></script>
 	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -23,39 +18,33 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-
-
-	<!--    <script src="js/scroll_vid.js"></script>-->
-	<script src="js/scrollama.min.js"></script>
-	<script src="js/chart_styles.js"></script>
+	<!--Local JS script-->
+	
 	<script src="js/language_charts.js"></script>
 
 
-	<!--Style Sheets-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<!--Bootstrap-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
-
-
+	<!--Local style sheets-->
 	<link rel="stylesheet" href="css/family.css" />
 	<link rel="stylesheet" href="css/visual_essay.css" />
 	<link rel="stylesheet" href="css/scroll_chart_style.css" />
 
 	<style>
 
-		.scroll_lock{
-		/*margin-bottom:100px;*/
-		
+		.scroll_lock {
+			/*margin-bottom:100px;*/
 		}
+
 		#scrolly-neologisms {
 			position: relative;
 			width: 70%;
 			margin-left: auto;
 			margin-right: auto;
 			display: flex; /* add this property to center the section */
-			justify-content: center; 
+			justify-content: center;
 		}
 
 		article {
@@ -74,27 +63,24 @@
 			-webkit-transform: translate3d(0, 0, 0);
 			-moz-transform: translate3d(0, 0, 0);
 			transform: translate3d(0, 0, 0);
-			
 			z-index: 0;
 		}
 
-			figure p {
-				text-align: center;
-				padding: 1rem;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				-moz-transform: translate(-50%, -50%);
-				-webkit-transform: translate(-50%, -50%);
-				transform: translate(-50%, -50%);
-				font-size: 8rem;
-				font-weight: 900;
-				color: #fff;
-			}
+		figure p {
+			text-align: center;
+			padding: 1rem;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			-moz-transform: translate(-50%, -50%);
+			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			font-size: 8rem;
+			font-weight: 900;
+			color: #fff;
+		}
 
-		#neologisms{
-		
-		
+		#neologisms {
 		}
 
 		.step {
@@ -107,23 +93,21 @@
 
 			.step:last-child {
 				margin-bottom: 0px;
-				height:250px;
+				height: 250px;
 			}
 
 			.step:first-child {
-				margin:auto;
-				
+				margin: auto;
 			}
 
-			.step.is-active{
-			 opacity:1;
-
+			.step.is-active {
+				opacity: 1;
 			}
 
-			.step.is-active p {
-				background-color: rgba(206, 206, 206, 0.28);
-				color: rgba(0, 0, 0, 0.80);
-			}
+				.step.is-active p {
+					background-color: rgba(206, 206, 206, 0.28);
+					color: rgba(0, 0, 0, 0.80);
+				}
 
 			.step p {
 				text-align: center;
@@ -132,7 +116,6 @@
 				font-size: 1.5rem;
 				/*background-color: #3b3b3b;*/
 			}
-	
 	</style>
 
 </head>
@@ -286,7 +269,7 @@
 					<h2 class="content_sub_title">The Long Sentence</h2>
 					<p>Sentences in <i>Absalom, Absalom!</i> are very long. On average, sentences are around 50 words long. The longest sentence is 1,124 words. That’s a 3-4 page college paper in one sentence! Compared to other American Classics, Faulkner’s sentences are much, much longer.</p>
 					<div id="wordchart"></div>
-					For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as “was” because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:  
+					For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as “was” because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:
 					<figure>
 						<div class="blockquote-outline">
 							<blockquote class="blockquote">“a man, a character in a story at any moment of action is not just himself as he is then, he is all that made him, and the long sentence is an attempt to get his past and possibly his future into the instant in which he does something”</blockquote>
@@ -334,8 +317,7 @@
 								<div class="step" data-step="4" style="height: 250px;" data-scrollama-index="3">
 									<p>How can Charles be a "nothusband"?</p>
 								</div>
-								<!--	<div class="step" data-step="5" style="height: 250px;" data-scrollama-index="4"><p>closing text</p>
-							</div>-->
+
 							</article>
 						</div>
 					</div>
@@ -368,13 +350,10 @@
 				<div class="essay_section">
 					<h2 class="content_sub_title">Faulkner's Language</h2>
 					<p>The complexity of Faulkner’s language forces the reader to consider the meaning of every word, in every long sentence, throughout the entire work. One cannot pull at any thread in the novel without loosening others. The past existed as a reality, but it can only be translated into the present in and through language.</p>
-
 				</div>
-
-
 			</section>
-
 		</div>
+
 		<div class="pt-4"></div>
 
 		<div id="page_footer">
@@ -383,15 +362,11 @@
 
 
 	</main>
-	<!-- Scroll Packages BEGIN -->
-	<!-- Scroll Packages END -->
-	<!-- JavaScript Bundle with Popper -->
+	
 	<script>
 		$('document').ready(function () {
 
-			Plotly.newPlot('wordchart', data,layout_words_per_sentence);
-
-
+			Plotly.newPlot('wordchart', data, layout_words_per_sentence);
 
 			// using d3 for convenience
 			var main = d3.select("main");
@@ -415,10 +390,10 @@
 				var figureMarginTop = (window.innerHeight - figureHeight) / 2;
 
 				firstStep
-					.style("margin-top", 0 - figureHeight/2+"px")
+					.style("margin-top", 0 - figureHeight / 2 + "px")
 
 				lastStep
-					.style("margin-bottom", 0 - figureHeight/2+"px")
+					.style("margin-bottom", 0 - figureHeight / 2 + "px")
 
 				figure
 					.style("height", figureHeight + "px")
@@ -427,17 +402,14 @@
 				video
 					.style("height", figureHeight + "px")
 					.style("top", figureMarginTop + "px")
-					/*.style("width", window.innerWidth+"px");*/
+				/*.style("width", window.innerWidth+"px");*/
 				// 3. tell scrollama to update new element dimensions
 				scroller.resize();
 			}
 
 			// scrollama event handlers
 			function handleStepEnter(response) {
-				console.log(response);
-				// response = { element, direction, index }
-
-				// add color to current step only
+			
 				step.classed("is-active", function (d, i) {
 					return i === response.index;
 				});
@@ -445,31 +417,19 @@
 				if (response.index >= 1 && response.index < 3) {
 					const video = document.getElementById("neologisms");
 					video.play();
-					video.loop=true
+					video.loop = true
 				}
 				else {
 					const video = document.getElementById("neologisms");
-					
 					video.currentTime = 47;
 					video.play()
 					video.loop = false
 				}
-
-			
-
-				// update graphic based on step
-				/*figure.select("p").text(response.index + 1);*/
 			}
 
 
 			function init() {
-
-				// 1. force a resize on load to ensure proper dimensions are sent to scrollama
 				handleResize();
-
-				// 2. setup the scroller passing options
-				// 		this will also initialize trigger observations
-				// 3. bind scrollama event handlers (this can be chained like below)
 				scroller
 					.setup({
 						step: "#scrolly-neologisms article .step",
@@ -479,14 +439,9 @@
 					.onStepEnter(handleStepEnter);
 			}
 
-			// kick things off
 			init();
 			makeParenthesisPlot();
 		});
 	</script>
-
 </body>
-
-
-
 </html>
