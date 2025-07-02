@@ -1,412 +1,443 @@
 // JavaScript source code
-//Configuration for charts
-$.ajaxSetup({
-    async: false
-});
+// Configuration for charts
 
+// ==========================================================================
+// CONFIGURATION CONSTANTS
+// ==========================================================================
+const CONFIG = {
+    ANIMATION: {
+        OPACITY_STEPS: ['50', '90', 'B0', 'FF'],
+        STEP_DELAY: 70,
+        BASE_OPACITY: '33',
+        FULL_OPACITY: 'FF'
+    },
+    STEP_MAPPINGS: {
+        1: { race: 'White', chart1Index: 4, colorIndex: 4 },
+        2: { race: 'Mixed Ancestry', chart1Index: 2, colorIndex: 2 },
+        3: { race: 'Black', chart1Index: 0, colorIndex: 0 }
+    },
+    SCROLLAMA: {
+        OFFSET: 0.5,
+        DEBUG: false
+    },
+    RESIZE_DELAY: 100,
+    DEBOUNCE_DELAY: 250
+};
 
-const DefaultbackgroundColor = [
-    'rgba(255, 99, 132, 0.3)',
-    'rgba(54, 162, 235, 0.3)',
-    'rgba(255, 206, 86, 0.3)',
-    'rgba(75, 192, 192, 0.3)',
-    'rgba(153, 102, 255, 0.3)',
-    'rgba(255, 159, 64, 0.3)'
-]
+// ==========================================================================
+// DATA CONSTANTS
+// ==========================================================================
+const demographyChartData = [
+    {"Race": "Black", "total": 36, "percent": 0.23},
+    {"Race": "Indian", "total": 3, "percent": 0.02},
+    {"Race": "Mixed Ancestry", "total": 9, "percent": 0.06},
+    {"Race": "Multiracial Group", "total": 5, "percent": 0.03},
+    {"Race": "White", "total": 101, "percent": 0.66}
+];
 
-var DefaultborderColor = [
-    'rgba(255, 99, 132, 1)',
-    'rgba(54, 162, 235, 1)',
-    'rgba(255, 206, 86, 1)',
-    'rgba(75, 192, 192, 1)',
-    'rgba(153, 102, 255, 1)',
-    'rgba(255, 159, 64, 1)'
-]
-var DefaultborderWidth = 1
+const demographyPresentData = [
+    {"Race": "Black", "total": 27666, "percent": 0.07},
+    {"Race": "Indian", "total": 2075, "percent": 0},
+    {"Race": "Mixed Ancestry", "total": 66452, "percent": 0.16},
+    {"Race": "Multiracial Group", "total": 2083, "percent": 0},
+    {"Race": "White", "total": 320567, "percent": 0.77}
+];
 
-//generate scrollychart1 through AJAX call. All variables are passed through by function after completed request
+// Filtered data for second chart (removes 0% entries)
+const demographyPresentDataFiltered = demographyPresentData.filter(item => 
+    item.Race !== "Indian" && item.Race !== "Multiracial Group"
+);
 
-//Chart.register(ChartDataLabels);
+// ==========================================================================
+// UTILITY FUNCTIONS
+// ==========================================================================
+function getColorIndex(race) {
+    const raceToIndexMap = {
+        "Black": 0,
+        "Indian": 1, 
+        "Mixed Ancestry": 2,
+        "Multiracial Group": 3,
+        "White": 4
+    };
+    return raceToIndexMap[race];
+}
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-const htmlLegendPlugin = {
-    id: 'htmlLegend',
-    afterUpdate(chart, args, options) {
-        const ul = getOrCreateLegendList(chart, options.containerID);
+// ==========================================================================
+// DEPENDENCY CHECK FUNCTION
+// ==========================================================================
+function waitForDependencies() {
+    return new Promise((resolve) => {
+        const checkDependencies = () => {
+            if (typeof faulknerChartStyles !== 'undefined' && 
+                typeof faulknerBaseLayout !== 'undefined' && 
+                typeof Plotly !== 'undefined' && 
+                typeof $ !== 'undefined' &&
+                typeof d3 !== 'undefined' &&
+                typeof scrollama !== 'undefined') {
+                resolve();
+            } else {
+                setTimeout(checkDependencies, 50);
+            }
+        };
+        checkDependencies();
+    });
+}
 
-        // Remove old legend items
-        while (ul.firstChild) {
-            ul.firstChild.remove();
+// ==========================================================================
+// MAIN APPLICATION
+// ==========================================================================
+waitForDependencies().then(() => {
+    $(function () {
+        // ==========================================================================
+        // CACHED DOM ELEMENTS
+        // ==========================================================================
+        const chartElements = {
+            chart1: null,
+            chart2: null,
+            legend: null,
+            scrolly: null
+        };
+
+        // Cache DOM elements after DOM is ready
+        function cacheElements() {
+            chartElements.chart1 = document.getElementById('scrollychart1');
+            chartElements.chart2 = document.getElementById('scrollychart2');
+            chartElements.legend = document.getElementById('legend');
+            chartElements.scrolly = d3.select("#scrolly");
         }
 
-        // Reuse the built-in legendItems generator
-        const items = chart.options.plugins.legend.labels.generateLabels(chart);
+        // ==========================================================================
+        // PRE-CALCULATED COLOR MAPPINGS
+        // ==========================================================================
+        let colorMappings = {};
 
-        items.forEach(item => {
-            const li = document.createElement('li');
-            li.style.alignItems = 'center';
-            li.style.cursor = 'pointer';
-            li.style.display = 'flex';
-            li.style.flexDirection = 'row';
-            li.style.flexWrap = 'wrap';
-            li.style.marginLeft = '10px';
-
-            li.onclick = () => {
-                const { type } = chart.config;
-                if (type === 'pie' || type === 'doughnut') {
-                    // Pie and doughnut charts only have a single dataset and visibility is per item
-                    chart.toggleDataVisibility(item.index);
-                } else {
-                    chart.setDatasetVisibility(item.datasetIndex, !chart.isDatasetVisible(item.datasetIndex));
-                }
-                chart.update();
+        function calculateColorMappings() {
+            colorMappings = {
+                chart1Base: demographyChartData.map((_, index) => 
+                    faulknerChartStyles.colorway[index] + CONFIG.ANIMATION.BASE_OPACITY
+                ),
+                chart1Borders: demographyChartData.map((_, index) => 
+                    faulknerChartStyles.colorway[index]
+                ),
+                chart2Base: demographyPresentDataFiltered.map(item => 
+                    faulknerChartStyles.colorway[getColorIndex(item.Race)] + CONFIG.ANIMATION.BASE_OPACITY
+                ),
+                chart2Borders: demographyPresentDataFiltered.map(item => 
+                    faulknerChartStyles.colorway[getColorIndex(item.Race)]
+                )
             };
+        }
 
-            // Color box
-            const boxSpan = document.createElement('span');
-            boxSpan.style.background = item.fillStyle;
-            boxSpan.style.borderColor = item.strokeStyle;
-            boxSpan.style.borderWidth = item.lineWidth + 'px';
-            boxSpan.style.borderStyle = 'solid';
-            boxSpan.style.display = 'inline-block';
-            boxSpan.style.height = '20px';
-            boxSpan.style.marginRight = '10px';
-            boxSpan.style.width = '20px';
+        // ==========================================================================
+        // CHART CONFIGURATION
+        // ==========================================================================
+        let animationTimeouts = [];
+        
+        const baseLayout = {
+            showlegend: false,
+            margin: { l: 10, r: 10, b: 0, t: 0, pad: 0 },
+            paper_bgcolor: faulknerBaseLayout.paperBackground,
+            plot_bgcolor: faulknerBaseLayout.plotBackground,
+            autosize: true,
+            width: undefined,
+            height: undefined,
+            font: {
+                family: faulknerBaseLayout.font.family,
+                size: 14,
+                color: faulknerBaseLayout.font.color
+            }
+        };
 
-            // Text
-            const textContainer = document.createElement('p');
+        const plotlyConfig = {
+            displayModeBar: false,
+            responsive: true,
+            staticPlot: false
+        };
+
+        // ==========================================================================
+        // CHART CREATION FUNCTIONS
+        // ==========================================================================
+        function createPieData(data, useFiltered = false, chartTitle = '') {
+            const colors = data.map((item, index) => {
+                const colorIndex = useFiltered ? getColorIndex(item.Race) : index;
+                return faulknerChartStyles.colorway[colorIndex] + CONFIG.ANIMATION.BASE_OPACITY;
+            });
+
+            return [{
+                type: 'pie',
+                hole: 0.4,
+                values: data.map(d => d.total),
+                labels: data.map(d => d.Race),
+                textinfo: 'percent',
+                texttemplate: '%{percent:.0%}',
+                textposition: 'inside',
+                textfont: {
+                    family: faulknerBaseLayout.font.family,
+                    size: 15
+                },
+                marker: {
+                    colors: colors,
+                    line: {
+                        color: data.map((item, index) => {
+                            const colorIndex = useFiltered ? getColorIndex(item.Race) : index;
+                            return faulknerChartStyles.colorway[colorIndex];
+                        }),
+                        width: 1
+                    }
+                },
+                hovertemplate: '<b>%{label}</b><br>' +
+                              (chartTitle.includes('Raw') ? 'Count: %{value}' : 'Words: %{value:,}') + '<br>' +
+                              'Percentage: %{percent}<br>' +
+                              '<extra></extra>',
+                hoverlabel: {
+                    font: {
+                        family: faulknerBaseLayout.font.family,
+                        size: 13
+                    }
+                }
+            }];
+        }
+
+        function initializeCharts() {
+            const charts = [
+                {
+                    id: 'scrollychart1',
+                    element: chartElements.chart1,
+                    data: createPieData(demographyChartData, false, 'Raw Demographic Total'),
+                    layout: { ...baseLayout }
+                },
+                {
+                    id: 'scrollychart2',
+                    element: chartElements.chart2,
+                    data: createPieData(demographyPresentDataFiltered, true, 'Weighted Demographic Presence'),
+                    layout: { ...baseLayout }
+                }
+            ];
             
-            textContainer.style.margin = 0;
-            textContainer.style.padding = 0;
-            textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+            charts.forEach(chart => {
+                if (chart.element) {
+                    Plotly.newPlot(chart.id, chart.data, chart.layout, plotlyConfig);
+                }
+            });
+        }
 
-            const text = document.createTextNode(item.text);
-            textContainer.appendChild(text);
+        // ==========================================================================
+        // LEGEND CREATION
+        // ==========================================================================
+        function createLegendItem(item, index) {
+            const li = document.createElement('li');
+            
+            Object.assign(li.style, {
+                alignItems: 'center',
+                display: 'flex',
+                flexDirection: 'row',
+                marginLeft: '10px'
+            });
+
+            const boxSpan = document.createElement("span");
+            Object.assign(boxSpan.style, {
+                background: faulknerChartStyles.colorway[index] + CONFIG.ANIMATION.BASE_OPACITY,
+                borderColor: faulknerChartStyles.colorway[index],
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '20px',
+                marginRight: '10px',
+                width: '20px',
+                transition: 'all 0.3s ease'
+            });
+            boxSpan.id = index;
+
+            const textContainer = document.createElement("p");
+            Object.assign(textContainer.style, {
+                margin: '0',
+                padding: '0'
+            });
+            textContainer.appendChild(document.createTextNode(item.Race));
 
             li.appendChild(boxSpan);
             li.appendChild(textContainer);
-            ul.appendChild(li);
-        });
-    }
-};
+            return li;
+        }
 
+        function createLegend() {
+            if (!chartElements.legend) {
+                console.error('Legend container not found!');
+                return;
+            }
 
-
-
-
-
-$(function () {
-
-    var contextScrollychart1 = document.getElementById('scrollychart1').getContext("2d");
-    var contextScrollychart2 = document.getElementById('scrollychart2').getContext("2d");
-
-    //set URL for AJAX retrieval
-    var demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_chart.json";
-    var weighted_demography_chart_url = "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/character_demography_present.json";
-
-    // draw empty charts
-
-    var scrollychart1 = new Chart(contextScrollychart1, {
-        type: 'doughnut',
-        data: {
-            labels: [],
-            datasets: [{
-                data: [],
-                backgroundColor: DefaultbackgroundColor,
-                borderColor: DefaultborderColor,
-                borderWidth: DefaultborderWidth,
-                datalabels: {
-                    color: '#000',
-                    font: {
-                        family: 'Georgia',
-                        size: 14
-                    },
-                    formatter: function (value, context) {
-                        return value + '%';
-                    }
-                }
-            }]
-
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-        },
-        plugins: [ChartDataLabels]
-    });
-
-
-
-    var scrollychart2 = new Chart(contextScrollychart2, {
-        type: 'doughnut',
-        data: {
-            labels: [],
-            datasets: [{
-                data: [],
-                backgroundColor: DefaultbackgroundColor,
-                borderColor: DefaultborderColor,
-                borderWidth: DefaultborderWidth,
-                datalabels: {
-                    color: '#000',
-                    font: {
-                        family: 'Georgia',
-                        size: 14
-                    },
-                    formatter: function (value) {
-                        return value + '%';
-                    }
-                }
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-
-        },
-        plugins: [ChartDataLabels]
-    });
-
-    //Initialize charts
-    ajax_chart(scrollychart1, demography_chart_url);
-    ajax_chart(scrollychart2, weighted_demography_chart_url);
-
-    // function to update our chart
-    function ajax_chart(chart, url, data) {
-        var data = data || {};
-
-        $.getJSON(url, data).done(function (response) {
-            response = JSON.parse(response)
-
-            //create labels and values
-            chart.data.labels = response.map(function (e) {
-                return e.Race;
-            })
-
-            chart.data.datasets[0].data = response.map(function (e) {
-                return e.total;
-            });; // or you can iterate for multiple datasets
-
-            chart.update(); // finally update our chart
-        });
-        //convert data to percent
-        chart.data.datasets[0].data = value_to_percent(chart)
-        chart.update()
-    };
-
-
-    function value_to_percent(chart) {
-
-        chart_data = chart.data.datasets[0].data
-
-        sum = chart_data.reduce(function (previousValue, currentValue, currentIndex, array) {
-            return previousValue + currentValue;
-        })
-
-        chart_data.forEach(function (item, index, arr) {
-            arr[index] = Math.floor((item / sum) * 100 + .5);
-        });
-
-        return chart_data
-    }
-
-    function chart_legend(url, data) {
-        var data = data || {};
-
-        $.getJSON(url, data).done(function (response) {
-            response = JSON.parse(response)
-
-            labels = response.map(function (e) {
-                return e.Race;
-            })
-
-            const legendContainer = document.getElementById('legend')
-
-            let listContainer = legendContainer.querySelector("ul");
+            let listContainer = chartElements.legend.querySelector("ul");
 
             if (!listContainer) {
                 listContainer = document.createElement("ul");
-                listContainer.style.display = "flex";
-                listContainer.style.flexDirection = "row";
-                listContainer.style.flexFlow = "wrap";
-                listContainer.style.margin = 0;
-                listContainer.style.padding = 0;
-                legendContainer.appendChild(listContainer);
+                Object.assign(listContainer.style, {
+                    display: "flex",
+                    flexDirection: "row",
+                    flexFlow: "wrap",
+                    margin: "0",
+                    padding: "0"
+                });
+                chartElements.legend.appendChild(listContainer);
             }
 
-            labels.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.style.alignItems = 'center';
-                li.style.display = 'flex';
-                li.style.flexDirection = 'row';
-                li.style.marginLeft = '10px';
-
-                const boxSpan = document.createElement("span");
-                boxSpan.style.background = DefaultbackgroundColor[index];
-                boxSpan.style.borderColor = DefaultborderColor[index];
-                boxSpan.id = index;
-                boxSpan.style.borderWidth = '1px';
-                boxSpan.style.borderStyle = 'solid';
-                boxSpan.style.display = "flex";
-                boxSpan.style.alignItems = "center"
-                boxSpan.style.justifyContent = "center"
-                boxSpan.style.height = "20px";
-                boxSpan.style.marginRight = "10px";
-                boxSpan.style.width = "20px";
-
-                // Text
-                const textContainer = document.createElement("p");
-                
-
-
-                const text = document.createTextNode(item);
-                textContainer.appendChild(text);
-
-
-                // boxSpan.appendChild(spantext);
-
-                li.appendChild(boxSpan);
-                li.appendChild(textContainer);
-                //	ul.appendChild(li);
-                listContainer.appendChild(li)
+            const fragment = document.createDocumentFragment();
+            demographyChartData.forEach((item, index) => {
+                fragment.appendChild(createLegendItem(item, index));
             });
-            return listContainer;
-        })
-    }
+            listContainer.appendChild(fragment);
+        }
 
-    //create legend
-    chart_legend(demography_chart_url)
-
-    var main = d3.select("main");
-    var scrolly = main.select("#scrolly");
-    var figure = scrolly.select("figure");
-    var article = scrolly.select("article");
-    var step = article.selectAll(".step");
-
-    // initialize the scrollama
-    var scroller = scrollama();
-
-    // generic window resize listener event
-    function handleResize() {
-        // update height of step elements
-        var stepH = Math.floor(window.innerHeight * 0.75);
-        step.style("height", stepH + "px");
-
-        var figureHeight = window.innerHeight / 2;
-        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
-
-        figure
-            .style("height", figureHeight + "px")
-            .style("top", figureMarginTop + "px");
-
-        scroller.resize();
-    }
-
-    // scrollama event handlers
-    function handleStepEnter(response) {
-        console.log(response.index);
-        // response = { element, direction, index }
-
-        step.classed("is-active", function (d, i) {
-            return i === response.index;
-        });
-
-        // // update chart based on step
-        // figure.select("p").text(response.index + 1);
-        //Probably not the best place to store these steps. Might want to tuck them into a file with chart definitions later.
-
-        //TODO Make this into a function that coordinates with the presentation. - DONE (1:28)
-
-
-        scrollychart1.data.datasets[0].backgroundColor.forEach(function (item, index) {
-            if (response.index === 1) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
-                scrollychart1.data.datasets[0].backgroundColor[4] = scrollychart1.data.datasets[0].backgroundColor[4].replace("0.3", "0.7")
+        // ==========================================================================
+        // ANIMATION FUNCTIONS
+        // ==========================================================================
+        function createColorArrays(targetOpacity, stepIndex) {
+            const chart1Colors = [...colorMappings.chart1Base];
+            const chart2Colors = [...colorMappings.chart2Base];
+            
+            const stepConfig = CONFIG.STEP_MAPPINGS[stepIndex];
+            if (stepConfig) {
+                chart1Colors[stepConfig.chart1Index] = faulknerChartStyles.colorway[stepConfig.colorIndex] + targetOpacity;
+                
+                const chart2Index = demographyPresentDataFiltered.findIndex(item => item.Race === stepConfig.race);
+                if (chart2Index >= 0) {
+                    chart2Colors[chart2Index] = faulknerChartStyles.colorway[stepConfig.colorIndex] + targetOpacity;
+                }
             }
-            else if (response.index === 2) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
-                scrollychart1.data.datasets[0].backgroundColor[2] = scrollychart1.data.datasets[0].backgroundColor[2].replace("0.3", "0.7")
-            }
-            else if (response.index === 3) {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
-                scrollychart1.data.datasets[0].backgroundColor[0] = scrollychart1.data.datasets[0].backgroundColor[0].replace("0.3", "0.7")
-            }
-            else {
-                scrollychart1.data.datasets[0].backgroundColor[index] = scrollychart1.data.datasets[0].backgroundColor[index].replace("0.7", "0.3")
-            }
-            scrollychart1.update()
+            
+            return { chart1Colors, chart2Colors };
+        }
 
-        })
+        function updateChartHighlighting(stepIndex) {
+            animationTimeouts.forEach(clearTimeout);
+            animationTimeouts.length = 0;
 
-        scrollychart2.data.datasets[0].backgroundColor.forEach(function (item, index) {
-            if (response.index === 1) {
-                scrollychart2.data.datasets[0].backgroundColor[4] = scrollychart2.data.datasets[0].backgroundColor[4].replace("0.2", "0.6")
+            if (stepIndex === 0) {
+                const resetColors = createColorArrays(CONFIG.ANIMATION.BASE_OPACITY, 0);
+                Promise.all([
+                    Plotly.restyle('scrollychart1', {'marker.colors': [resetColors.chart1Colors]}),
+                    Plotly.restyle('scrollychart2', {'marker.colors': [resetColors.chart2Colors]})
+                ]);
+                return;
             }
-            else if (response.index === 2) {
-                scrollychart2.data.datasets[0].backgroundColor[2] = scrollychart2.data.datasets[0].backgroundColor[2].replace("0.2", "0.6")
-            }
-            else if (response.index === 3) {
-                scrollychart2.data.datasets[0].backgroundColor[0] = scrollychart2.data.datasets[0].backgroundColor[0].replace("0.2", "0.6")
-            }
-            else {
-                scrollychart2.data.datasets[0].backgroundColor[index] = scrollychart2.data.datasets[0].backgroundColor[index].replace("0.6", "0.2")
-            }
-            scrollychart2.update()
+            
+            CONFIG.ANIMATION.OPACITY_STEPS.forEach((opacity, index) => {
+                const timeout = setTimeout(() => {
+                    const colors = createColorArrays(opacity, stepIndex);
+                    Promise.all([
+                        Plotly.restyle('scrollychart1', {'marker.colors': [colors.chart1Colors]}),
+                        Plotly.restyle('scrollychart2', {'marker.colors': [colors.chart2Colors]})
+                    ]);
+                }, index * CONFIG.ANIMATION.STEP_DELAY);
+                
+                animationTimeouts.push(timeout);
+            });
+            
+            console.log(`Chart colors smoothly animated for step ${stepIndex}`);
+        }
 
-        })
+        function updateLegendHighlighting(stepIndex) {
+            if (!chartElements.legend) return;
+            
+            const spans = chartElements.legend.getElementsByTagName('span');
 
-        //This highlights the legend item in correspondence with the pie piece.
-        let legend = document.getElementById('legend')
-        let spans = legend.getElementsByTagName('span')
+            Array.from(spans).forEach(span => {
+                const id = parseInt(span.id);
+                Object.assign(span.style, {
+                    background: faulknerChartStyles.colorway[id] + CONFIG.ANIMATION.BASE_OPACITY,
+                    borderWidth: '1px',
+                    boxShadow: 'none',
+                    transform: 'scale(1)'
+                });
+            });
 
-
-        for (let span of spans) {
-            id = parseInt(span.id.slice(-1))
-            if (id === 4 && response.index === 1) {
-                span.style.background = span.style.background.replace("0.2", "0.8")
-            }
-            else if (response.index === 2 && id === 2) {
-                span.style.background = span.style.background.replace("0.2", "0.8")
-            }
-            else if (response.index === 3 && id === 0) {
-                span.style.background = span.style.background.replace("0.2", "0.8")
-            }
-            else {
-                span.style.background = span.style.background.replace("0.8", "0.2")
+            const stepConfig = CONFIG.STEP_MAPPINGS[stepIndex];
+            if (stepConfig && spans[stepConfig.chart1Index]) {
+                Object.assign(spans[stepConfig.chart1Index].style, {
+                    background: faulknerChartStyles.colorway[stepConfig.colorIndex] + CONFIG.ANIMATION.FULL_OPACITY,
+                    borderWidth: '2px',
+                    boxShadow: '0 0 8px rgba(0,0,0,0.3)',
+                    transform: 'scale(1.05)'
+                });
             }
         }
 
-    }
+        // ==========================================================================
+        // SCROLLAMA FUNCTIONS
+        // ==========================================================================
+        function handleResize() {
+            setTimeout(() => {
+                if (chartElements.chart1) Plotly.Plots.resize('scrollychart1');
+                if (chartElements.chart2) Plotly.Plots.resize('scrollychart2');
+            }, CONFIG.RESIZE_DELAY);
+            
+            if (window.scroller) {
+                window.scroller.resize();
+            }
+        }
 
-    function setupStickyfill() {
-        d3.selectAll(".sticky").each(function () {
-            Stickyfill.add(this);
-        });
-    }
+        function handleStepEnter(response) {
+            console.log('Step entered:', response.index);
 
-    function init() {
-        setupStickyfill();
+            const stepTexts = document.querySelectorAll('.step-text');
+            stepTexts.forEach(text => text.classList.remove('active'));
+            
+            const activeText = document.querySelector(`.step-text[data-step="${response.index}"]`);
+            if (activeText) {
+                activeText.classList.add('active');
+            }
 
-        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-        handleResize();
+            updateChartHighlighting(response.index);
+            updateLegendHighlighting(response.index);
+        }
 
-        // 2. setup the scroller passing options
-        // 		this will also initialize trigger observations
-        // 3. bind scrollama event handlers (this can be chained like below)
-        scroller
-            .setup({
-                step: "#scrolly article .step",
-                offset: 0.5,
-                debug: false
-            })
-            .onStepEnter(handleStepEnter);
-    }
-    // kick things off
-    init();
+        function setupStickyfill() {
+            d3.selectAll(".sticky").each(function () {
+                Stickyfill.add(this);
+            });
+        }
+
+        // ==========================================================================
+        // INITIALIZATION
+        // ==========================================================================
+        function init() {
+            cacheElements();
+            calculateColorMappings();
+            setupStickyfill();
+            initializeCharts();
+            createLegend();
+            
+            const scroller = scrollama();
+            
+            scroller
+                .setup({
+                    step: ".scroll-triggers .step",
+                    offset: CONFIG.SCROLLAMA.OFFSET,
+                    debug: CONFIG.SCROLLAMA.DEBUG
+                })
+                .onStepEnter(handleStepEnter);
+
+            window.scroller = scroller;
+            
+            const debouncedResize = debounce(handleResize, CONFIG.DEBOUNCE_DELAY);
+            window.addEventListener('resize', debouncedResize);
+            
+            handleResize();
+        }
+
+        init();
+    });
 });
-
