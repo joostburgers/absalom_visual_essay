@@ -410,10 +410,10 @@ section:not(#scrolly) {
    ========================================================================== */
 
 /* Force Plotly responsiveness */
-.js-plotly-plot, .plotly, .svg-container {
+/*.js-plotly-plot, .plotly, .svg-container {
 	width: 100% !important;
 	height: 100% !important;
-}
+}*/
 
 figure.chart {
 	display: flex;
