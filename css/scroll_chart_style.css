@@ -4,7 +4,9 @@
    BASE STYLES (Mobile First - applies to all screen sizes)
    ========================================================================== */
 
-#scrolly {
+/* OPTIMIZED: Combined selectors for both scrolly sections */
+#characters-scrolly,
+#event-scrolly {
 	position: relative;
 	margin-top: 2rem;
 	margin-bottom: 1rem;
@@ -22,6 +24,7 @@
 	overflow: hidden;
 	will-change: transform;
 	z-index: 10;
+	/*pointer-events: none;*/
 }
 
 /* Text container - Mobile base */
@@ -32,8 +35,91 @@
 	position: relative;
 }
 
+.scrollytell-header-minimal {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+	padding: 0;
+	background: none;
+	border: none;
+	box-shadow: none;
+}
+
+.scrollytell-title {
+	margin: 0;
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: black;
+	text-align: left;
+}
+
+/* Progress Tiles */
+.scrollytell-tiles {
+	display: flex;
+	gap:2rem;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
+	padding: 0;
+}
+
+.progress-tile {
+	flex:1;
+	height: 2px;
+	background-color: rgba(52, 88, 77, 0.30);
+	border-radius: 2px;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+	position: relative;
+	border: 4px transparent;
+}
+
+	.progress-tile:hover {
+		background-color: rgba(52, 88, 77, 0.30);
+		transform: scale(1.1);
+	}
+
+	/*.progress-tile:focus {
+		
+		border-color: rgba(52, 88, 77, 1);
+		background-color: rgba(52, 88, 77, 0.20);
+	}*/
+
+	.progress-tile:active {
+		transform: scale(0.95);
+		transition-duration: 0.1s;
+	}
+
+	.progress-tile.active {
+		background-color: rgba(52, 88, 77, 0.70);
+		transform: scale(1.2);
+	}
+
+		.progress-tile.active:hover {
+			background-color: rgba(52, 88, 77, 0.90);
+		}
+
+/* Add a subtle animation when tiles become clickable */
+@keyframes tileReady {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.05);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.progress-tile[role="button"] {
+	animation: tileReady 0.6s ease-in-out;
+}
+
 /* Individual text steps - Mobile base */
-/* Alternative fix - keep all steps absolutely positioned */
 .step-text {
 	opacity: 0;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,11 +144,12 @@
 		z-index: 2;
 		/* Remove margin-bottom since we're not in document flow */
 	}
+
 .step_header {
 	font-size: 1.1rem;
 	font-weight: 700;
 	color: #fff;
-	text-align: center;
+	text-align: left;
 	margin-bottom: 0.4rem;
 }
 
@@ -85,7 +172,7 @@
 }
 
 /* Charts container - Mobile base */
-	.scrolly-charts-container {
+.scrolly-charts-container {
 	flex: 0 0 auto;
 	display: flex;
 	align-items: flex-start;
@@ -101,7 +188,7 @@
 }
 
 /* Chart sizing - Mobile base */
-#scrollychart1, #scrollychart2 {
+#scrollychart1, #scrollychart2, #plotchart {
 	width: 100% !important;
 	height: 160px !important;
 	will-change: auto;
@@ -149,29 +236,54 @@
 		flex-shrink: 0;
 	}
 
-/* Scroll triggers - Mobile base */
-.scroll-triggers {
+/* Events specific scroll triggers - more spacing to prevent loops */
+#event-scrolly .scroll-triggers {
+	height: 600vh; /* INCREASED: Much more scroll distance */
+	position: relative;
+	z-index: 1;
+}
+
+	#event-scrolly .scroll-triggers .step {
+		height: 60vh; /* INCREASED: Larger individual steps */
+		opacity: 0;
+		pointer-events: none;
+		position: relative;
+		/* Add margin to prevent overlap */
+		margin-bottom: 10vh;
+	}
+
+/* Characters scroll triggers - keep current working values */
+#characters-scrolly .scroll-triggers {
 	height: 400vh;
 }
 
-	.scroll-triggers .step {
+	#characters-scrolly .scroll-triggers .step {
 		height: 100vh;
 		opacity: 0;
 		pointer-events: none;
 	}
 
-/* Content flow */
-#scrolly + section,
-#scrolly + * {
+/* OPTIMIZED: Content flow for both scrolly sections */
+#characters-scrolly + section,
+#characters-scrolly + *,
+#event-scrolly + section,
+#event-scrolly + * {
 	margin-top: 1rem;
 	position: relative;
 	z-index: 1;
 }
 
-section:not(#scrolly) {
+/* OPTIMIZED: Section background for both */
+section:not(#characters-scrolly):not(#event-scrolly) {
 	position: relative;
 	z-index: 1;
 	background: white;
+}
+
+/* Target Plotly scatter plot text elements with white glow shadow */
+#plotchart .scatterlayer .textpoint text {
+	text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white, 0 -1px 0 white, 0 1px 0 white, -1px 0 0 white, 1px 0 0 white !important;
+	font-weight: 500 !important;
 }
 
 /* ==========================================================================
@@ -180,7 +292,7 @@ section:not(#scrolly) {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-	#scrollychart1, #scrollychart2 {
+	#scrollychart1, #scrollychart2, #plotchart {
 		height: 200px !important;
 	}
 
@@ -208,6 +320,16 @@ section:not(#scrolly) {
 
 	#legend p {
 		font-size: 1rem;
+	}
+
+	.progress-tile {
+		
+		height: 2px;
+	}
+
+	.scrollytell-tiles {
+		gap: 2.5rem;
+		padding: 0 1.5rem;
 	}
 
 	.scroll-triggers {
@@ -261,12 +383,11 @@ section:not(#scrolly) {
 		margin-bottom: 0.5rem;
 	}
 
-	#scrollychart1, #scrollychart2 {
+	#scrollychart1, #scrollychart2, #plotchart {
 		height: 260px !important;
 	}
 
 	.chart-title {
-		
 		margin-bottom: 0.25rem;
 	}
 
@@ -281,6 +402,14 @@ section:not(#scrolly) {
 		#legend li {
 			margin: 0.25rem;
 		}
+
+	.progress-tile {
+		height: 3px;
+	}
+
+	.scrollytell-title {
+		font-size: 1.2rem;
+	}
 
 	.scroll-triggers {
 		height: 200vh;
@@ -303,7 +432,7 @@ section:not(#scrolly) {
 	}
 
 	.step_header {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 
 	.step-text p {
@@ -327,8 +456,20 @@ section:not(#scrolly) {
 			margin: 0.5rem;
 		}
 
-	#scrollychart1, #scrollychart2 {
+	#scrollychart1, #scrollychart2, #plotchart {
 		height: 290px !important;
+	}
+
+	.scrollytell-tiles {
+		gap: 3rem;
+	}
+
+	.progress-tile {
+		height: 4px;
+	}
+
+	.scrollytell-title-left {
+		font-size: 1.3rem;
 	}
 
 	.scroll-triggers {
@@ -336,17 +477,17 @@ section:not(#scrolly) {
 	}
 
 		.scroll-triggers .step {
-			height:40vh;
+			height: 40vh;
 		}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 	.step_header {
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 	}
 
-	#scrollychart1, #scrollychart2 {
+	#scrollychart1, #scrollychart2, #plotchart {
 		height: 320px !important;
 	}
 
@@ -364,8 +505,63 @@ section:not(#scrolly) {
 }
 
 /* ==========================================================================
+   SECTION-SPECIFIC OVERRIDES (if needed)
+   ========================================================================== */
+
+/* Characters section specific styles (if any differences needed) */
+#characters-scrolly {
+	/* Add any character-specific styles here if needed */
+}
+
+/* Events section specific styles (if any differences needed) */
+#event-scrolly {
+	/* Add any event-specific styles here if needed */
+}
+
+/* Events chart specific sizing (larger than pie charts) */
+#plotchart {
+	min-height: 300px !important;
+}
+
+@media (min-width: 768px) {
+	#plotchart {
+		height: 400px !important;
+	}
+}
+
+@media (min-width: 992px) {
+	#plotchart {
+		height: 450px !important;
+	}
+}
+
+@media (min-width: 1200px) {
+	#plotchart {
+		height: 500px !important;
+	}
+}
+
+/* ==========================================================================
    SPECIAL CASES & OPTIMIZATIONS
    ========================================================================== */
+
+/* Responsive adjustments for mobile */
+@media (max-width: 767px) {
+	.scrollytell-header-minimal {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+	}
+
+	.scrollytell-title-left {
+		font-size: 1rem;
+	}
+
+	.progress-tile {
+		width: 16px;
+		height: 6px;
+	}
+}
 
 /* Touch devices */
 @media (hover: none) and (pointer: coarse) {
@@ -375,6 +571,15 @@ section:not(#scrolly) {
 
 	#legend {
 		-webkit-overflow-scrolling: touch;
+	}
+
+	.progress-tile:hover {
+		background-color: #d6d8db; /* Remove hover effect on touch devices */
+		transform: none;
+	}
+
+	.progress-tile.active:hover {
+		background-color: #495057;
 	}
 }
 
@@ -403,6 +608,75 @@ section:not(#scrolly) {
 	#legend ul {
 		transition: none;
 	}
+
+	.progress-tile {
+		transition: background-color 0.2s ease;
+		transform: none;
+	}
+
+		.progress-tile:hover,
+		.progress-tile:active,
+		.progress-tile.active {
+			transform: none;
+		}
+
+		.progress-tile[role="button"] {
+			animation: none;
+		}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	.step-text.active .step_header,
+	.step-text.active p {
+		color: #f0f0f0;
+	}
+
+	.chart-title {
+		color: #e0e0e0;
+	}
+
+	.scrollytell-title-left {
+		color: #f8f9fa;
+	}
+
+	.progress-tile {
+		background-color: #6c757d;
+	}
+
+		.progress-tile:hover {
+			background-color: #868e96;
+		}
+
+		.progress-tile:focus {
+			border-color: #66d9ff;
+			box-shadow: 0 0 0 2px rgba(102, 217, 255, 0.25);
+		}
+
+		.progress-tile.active {
+			background-color: #adb5bd;
+		}
+
+			.progress-tile.active:hover {
+				background-color: #ced4da;
+			}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.progress-tile {
+		border: 2px solid currentColor;
+		background-color: transparent;
+	}
+
+		.progress-tile.active {
+			background-color: currentColor;
+		}
+
+		.progress-tile:focus {
+			outline: 3px solid currentColor;
+			outline-offset: 2px;
+		}
 }
 
 /* ==========================================================================
@@ -437,17 +711,9 @@ figure.chart {
 	.scroll-triggers {
 		display: none;
 	}
-}
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-	.step-text.active .step_header,
-	.step-text.active p {
-		color: #f0f0f0;
-	}
-
-	.chart-title {
-		color: #e0e0e0;
+	.progress-tile {
+		display: none;
 	}
 }
 
