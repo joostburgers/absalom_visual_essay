@@ -9,7 +9,7 @@ const plotFont = {
 // JavaScript source code
 var data = [
     {
-        x: ["<i>Moby Dick</i><br>Herman Melville", "<i>Huckleberry Finn</i><br>Mark Twain", "<i>The Great Gatsby</i><br>F. Scott Fitzgerald", "<i>Absalom, Absalom!<i><br>William Faulker", "<i>Beloved</i><br> Toni Morrison"],
+        x: ["<i>Moby Dick</i><br> Herman Melville", "<i>Huckleberry Finn</i><br>Mark Twain", "<i>The Great Gatsby</i><br>F. Scott Fitzgerald", "<i>Absalom, Absalom!<i><br>William Faulker", "<i>Beloved</i><br> Toni Morrison"],
         y: [22, 19, 14, 50, 12],
         type: 'bar',
         marker: {
