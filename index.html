@@ -5,7 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Digital Supplement About</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!-- JS Packages -->
+	
+
 	<!-- JS Packages -->
 	<script src="https://unpkg.com/scrollama"></script>
 	<script src="https://unpkg.com/d3@5.9.1/dist/d3.min.js"></script>
@@ -21,23 +22,17 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<script src="https://cdn.plot.ly/plotly-2.26.0.min.js" charset="utf-8"></script>
 
-	
+
 	<script src="js/faulkner_chart_styles.js"></script>
 	<script src="js/character_charts.js"></script>
-<!--	<script src="js/scroll_charts.js"></script>-->
-
-	<!--Style Sheets-->
-	<!--<link rel="stylesheet" href="css/style.css" />-->
+	
 
 	<link rel="stylesheet" href="https://faulkner.iath.virginia.edu/family/family.css">
 	<link rel="stylesheet" href="https://faulkner.iath.virginia.edu/learning_modules/css/learning_module.css">
 
 	<link rel="stylesheet" href="css/scroll_chart_style.css" />
 
-	<style>
-	</style>
-
-	<link rel="stylesheet" href="css/visual_essay.css" />
+		<!--<link rel="stylesheet" href="css/visual_essay.css" />-->
 
 </head>
 <body>
@@ -182,7 +177,7 @@
 			<div class="lesson-section" id="about">
 				<h1 class="content_title">About</h1>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<div class="activity-instructions">
 							<p>
 								This interactive essay was created using data from the <a href="http://faulkner.iath.virginia.edu/">Digital Yoknapatawpha</a> database. It complements the long-form essay available in the <a href="https://wwnorton.com/books/9780393422580">Norton Critical Edition of Absalom, Absalom!</a>. It includes visualizations that are not possible to represent in print. It also functions as a standalone essay that explores how characters, event, and language and events in <em>Absalom, Absalom!</em>. <!--add a sentence on each heading--> Each section can be read seperately, but also forms part of a larger argument about the text: the characters, events, and language all refuse to let America's racial legacy stay neatly cordoned away in the past. Instead, they continue to haunt the present.
@@ -197,11 +192,12 @@
 			<section id="characters">
 
 				<h1 class="content_title">Characters</h1>
-				<div class="activity-quote-epigraph">
-					<p>"money, a house, a plantation, slaves, a family — incidentally of course, a wife"</p>
-				</div>
+
+				<h2 class="content_sub_title text-center">
+					<small class="text-center text-body-secondary">"money, a house, a plantation, slaves, a family — incidentally of course, a wife"</small>
+				</h2>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<div class="activity-instructions">
 							<p>
 								The <em>Digital Yoknapatawpha</em> database contains every character who appears in Faulkner's Yoknapatawpha fictions.
@@ -214,7 +210,7 @@
 				</div>
 				<h2 class="content_sub_title">Racial Composition</h2>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<div class="activity-instructions">
 							<p>
 								One of the most salient pieces of demographic information in <i>Absalom, Absalom!</i> is its racial composition. The novel powerfully captures the Southern system of racial oppression that started with the enslavement of Africans before the Civil War and was continued through the creation of "Jim Crow" segretation laws after the Emancipation Proclamation. This long history of racial separation and its codification into explicit laws and implicit social practices, made race appear as a real and fundamental difference between people, even, if it was entirely socially constructed. Speaking of race in America more generally, Toni Morrison remarks that, "As a reader you have been forced to hunt for a drop of black blood that means everything and nothing. The insanity of racism."
@@ -223,7 +219,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<blockquote class="activity-quote-epigraph">
 							<p>As a reader you have been forced to hunt for a drop of black blood that means everything and nothing.</p>
 							<p>
@@ -239,7 +235,7 @@
 
 				<h2 class="content_sub_title">Racial Presence</h2>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<div class="activity-instructions">
 							<p>
 								Faulkner questions the difference between people based on race by suggesting that Charles Bon could be both brother and other to Judith and Henry Sutpen. This troubling of racial categories is visible in the character breakdown of the novel. There are 194 unique characters in <i>Absalom, Absalom!</i>. These characters can in turn be grouped by race. Doing so creates a raw demographic total for each group. This indicates the relative percentage of each racial group of the entire cast of characters.
@@ -252,7 +248,7 @@
 				</div>
 
 				<section id="characters-scrolly">
-					
+
 					<div class="container-fluid">
 
 						<div class="row justify-content-center">
@@ -261,7 +257,7 @@
 								<div class="scrolly-sticky-container">
 									<div class="scrollytell-header-minimal">
 										<h3 class="scrollytell-title">Visualizing Character Demographics</h3>
-										
+
 									</div>
 									<!-- Text area that changes -->
 									<div class="scrolly-text-container">
@@ -322,7 +318,7 @@
 												<!-- Tiles will be generated by JavaScript -->
 											</div>
 										</div>
-										
+
 									</div>
 								</div>
 
@@ -340,7 +336,7 @@
 
 				<h2 class="content_sub_title">Individual Character Presence</h2>
 				<div class="row">
-					<div class="column">
+					<div class="col">
 						<div class="activity-instructions">
 							<p>
 								The data suggest that while <i>Absalom, Absalom!</i> is concerned with the 'color line', it is decidedly from a White perspective. Race and racial passing is only conceived in how it might trouble Whiteness and not how it might affect the Black community. This is visible with the presence of Charles Bon. He is the most ubiquitous Mixed Ancestry character by far. Still, compared to the other White characters he is simply another major character. Quite tellingly, the most present Black characters are the unnamed enslaved people, Sutpen transports to Jefferson to build his estate.
@@ -403,15 +399,27 @@
 					<small class="text-center text-body-secondary">"maybe happen is never once"</small>
 				</h2>
 				<div class="lesson-section">
+				<div class="row">
+				<div class="col">
+				<div class="activity-instructions">
 					<p><i>Absalom, Absalom!</i> resists summary. It is told from multiple, contradictory perspectives that each re-tell the same set of historical events. As each narrator tries to understand <i>why</i> the events happened they fundamentally reshape <i>what</i> happens. The basic facts are outlined cryptically in the opening pages:</p>
-					<figure>
-						<div class="blockquote-outline">
-							<blockquote class="blockquote">"Sunday morning in June in 1833 when he [Sutpen] first rode into town out of no discernible past and acquired his land no one knew how and built his house, his mansion, apparently out of nothing and married Ellen Coldfield and begot his two children - the son who widowed the daughter who had not yet been a bride - and so accomplished his allotted course to its violent...end"</blockquote>
-							<figcaption class="blockquote-footer">
-								William Faulkner <cite title="Absalom, Absalom!"><i>Absalom, Absalom!</i></cite>
-							</figcaption>
-						</div>
-					</figure>
+				</div>
+				</div>
+				</div>
+					
+				<div class="row">
+					<div class="col">
+						<blockquote class="activity-quote-epigraph">
+							<p>
+								"Sunday morning in June in 1833 when he [Sutpen] first rode into town out of no discernible past and acquired his land no one knew how and built his house, his mansion, apparently out of nothing and married Ellen Coldfield and begot his two children - the son who widowed the daughter who had not yet been a bride - and so accomplished his allotted course to its violent...end"
+							</p>
+							<footer class="activity-quote-epigraph-footer">William Faulkner - <em>Absalom, Absalom!</em></footer>
+						</blockquote>
+					</div>
+				</div>
+				<div class="row">
+				<div class="col">
+				<div class="activity-instructions">
 
 					<p>
 						More simply, Sutpen arrives in Jefferson in 1833, marries Ellen Coldfield, has two children, and the son, Henry, makes a widow of the daughter, Judith. Why Henry shoots his sister's fiance is one of the central mysteries of <i>Absalom, Absalom!</i>
@@ -420,154 +428,288 @@
 						The different tellers of the tale - Miss Rosa, Mr. Compson, Quentin, and Shreve - all take these basic facts and arrange them to tell their versions of the story and give their explanation of the <i>why</i>. What is revealing is not just what the narrators say, but also what they do not say. Each teller leaves out important clues that might help understand what happened. There is no way to ever get the "whole" story.
 					</p>
 				</div>
-
+				</div>
+				</div>
 				<h2 class="content_sub_title">Blackbirds</h2>
 				<div class="lesson-section">
+				<div class="row">
+				<div class="col">
 					<p>While discussing <i>Absalom, Absalom!</i> at the University of Virginia in 1958, an audience member asked if any of the narrators had the right view. In other words, was there a way to get the "whole" story.</p>
-					<figure>
-						<div class="blockquote-outline">
-							<blockquote class="blockquote">In <i>Absalom, Absalom!</i> is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?</blockquote>
-							<figcaption class="blockquote-footer">
-								"Do any of the story tellers have the right view?"<cite title="Do any of the story tellers have the right view?"><i>Faulkner at Virginia.</i> University of Virginia. <a href="https://faulkner.lib.virginia.edu/display/wfaudio29_1.html#wfaudio29_1.11">wfaudio29_1.11</a></cite>
-							</figcaption>
-						</div>
-					</figure>
-
-					<p class="text-center">
-						Faulkner's response was telling...
-					</p>
-
-					<div class="essay_video">
-						<video id="blackbird-video" class="object-fit-contain border rounded" poster="media/images/faulkner_blackbird_thumbnail.png" controls muted>
-							<source src="media/video/faulkner_blackbird.mp4" type="video/mp4">
-						</video>
 					</div>
-				</div>
+					</div>
 
-				<h2 class="content_sub_title">Narratology</h2>
+				<div class="row">
+					<div class="col">
+						<blockquote class="activity-quote-epigraph">
+							<p>
+								In <em>Absalom, Absalom!</em> is any one of the people who talk about Sutpen have the right view, or is it more or less a case of thirteen ways of looking at a blackbird with none of them [getting it?] right?
+							</p>
+							<footer class="activity-quote-epigraph-footer"><em>Faulkner at Virginia.</em> "Do any of the story tellers have the right view?" University of Virginia. <a href="https://faulkner.lib.virginia.edu/display/wfaudio29_1.html#wfaudio29_1.11">wfaudio29_1.11</a></footer>
+						</blockquote>
+					</div>
+					</div>
+				<div class="row">
+					<div class="col">
+						<div class="activity-instructions">
+							<p>
+								Faulkner's response was telling...
+							</p>
+						</div>
+						</div>
+						</div>
+						<div class="activity-video">
+							<video id="blackbird-video" class="object-fit-contain border rounded" poster="media/images/faulkner_blackbird_thumbnail.png" controls muted>
+								<source src="media/video/faulkner_blackbird.mp4" type="video/mp4">
+							</video>
+						</div>
+					</div>
+
+					<h2 class="content_sub_title">Narratology</h2>
+					<div class="lesson-section">
+					<div class="row">
+					<div class="col">
+					<div class="activity-instructions">
+						<p>Though the plot can be very confusing, it is clear from Faulkner's notes that he had an underlying structure. This underlying structure is sometimes referred to as the <em>chronology</em> or <em>story</em>. In fiction, the story is different than the plot. Though often used interchangeably, the story refers to the order of events as they happen chronologically, while the plot indicates the order in which they are told.</p>
+						<p>
+							If the events in the novel were related in the order they occured, rather out of order, <em>Absalom, Absalom!</em> would be much easier to understand. Actually, since the novel was so confusing even Faulkner's publishers asked him to include a chronology in the first edition of the text, so readers could get some grasp of the basic structure of the story. The structure of this chronology is already visible in the <a href="http://faulkner.iath.virginia.edu/media/resources/MANUSCRIPTS/AAMS1.html">early manuscript</a> pages of <em>Absalom, Absalom!</em>
+						</p>
+
+						<p>
+							Narratology is the study of narrative, and provides insight into how <em>Absalom, Absalom!</em> is structured. By distinguishing between the order events as they occur (story) and the order in which they are told (plot), it is possible to create a chart of the narrative structure. In such a chart, the story is placed on the y-axis and the plot indicated by page numbers is placed on the x-axis. As the chart moves to the right, it moves forward in the progression of the text. Whenever something is plot higher or lower on the y-axis, it indicates when something is happening earlier (lower) or later (higher) chronologically. This concept is easier to grasp by looking at some major events in <em>Absalom, Absalom!</em> in <b>plot</b> and <b>story</b> order.
+						</p>
+					</div>
+					</div>
+					</div>
+					</div>
+					<!-- UPDATED: Change section ID from "scrolly" to "event-scrolly" -->
+					<section id="event-scrolly">
+						<div class="container-fluid">
+							<div class="row justify-content-center">
+								<div class="col-12">
+									<div class="scrolly-sticky-container">
+										<div class="scrollytell-header-minimal">
+											<h3 class="scrollytell-title">Visualizing Narrative Structure</h3>
+
+										</div>
+										<div class="scrolly-text-container">
+											<div class="step-text-content">
+												<!-- FIXED: Start from data-step="0" to match frame0 -->
+												<div class="step-text active" data-step="0">
+													<div class="step_header">Plot Order</div>
+													<p>Thomas Sutpen's life can be reduced to three events: he is born, comes to Jefferson, and dies. In the novel, these events are out of order. Sutpen arrives in Jefferson in chapter 1, dies in chapter 6, and is born in chapter 7. Looking at the narrative structure, the plot starts in the middle of Sutpen's life moves to his death and then jumps back in time to cover his birth and early life.</p>
+												</div>
+												<div class="step-text" data-step="1">
+													<div class="step_header">Story Order</div>
+													<p>Viewed in story order, the events move from the bottom left to the top right. This is because x=y.</p>
+												</div>
+
+												<div class="step-text" data-step="2">
+													<div class="step_header">All Events</div>
+													<p>Digital Yoknapatawpha has broken down <i>Absalom, Absalom!</i> into 644 individual events. These points can be plotted using the same narrative structure method.</p>
+													<p>It looks like an overwhelming jumble! </p>
+													<p>The major events provide some context as to what might be going on.</p>
+													<p class="fst-italic"> Hover over the chart to see the description of each event.</p>
+												</div>
+												<div class="step-text" data-step="3">
+													<div class="step_header">Narrated Events</div>
+													<p> The structure of the narrative becomes a bit clearer when the events are broken down by the way in which they are related to the reader.</p>  <p>Digital Yoknapatawpha calls this <i>narrative status</i>.</p>
+													<p>The narrated events mostly run in a regular pattern from left to right at the top of the chart. These are the moments when the Quentin speaks to the different narrators. </p>
+												</div>
+												<div class="step-text" data-step="4">
+													<div class="step_header">Told Events</div>
+													<p>The told events show the tales of each individual storyteller.</p>
+													<p>They make a pronounced "S" curve.</p>
+													<p>The tellers each start their stories in the deep past and make their way to the present.</p>
+													<p>Even though, they repeat, change, and omit details that occur in the other versions. The chronologies of the individual stories are actually fairly regular.</p>
+												</div>
+												<div class="step-text" data-step="5">
+													<div class="step_header">Other Events</div>
+													<p>Digital Yoknapatawpha also encodes three other types of events: Remembered, Hypothesized, and narrated+consciousness which is unique to Faulkner.</p>
+													<p>These types of events are much fewer in number, but their presence adds another layer of mediation between the tellers and their tales. </p>
+												</div>
+												<div class="step-text" data-step="6">
+													<div class="step_header">Story Order</div>
+													<p>Story order makes the distinction between narrated and told events clearer.</p>
+													<p>The narrated events all happen towards the end chronologically, when Quentin is gathering the story.</p>
+													<p>It is also notable that the bulk of the events are about the time between when Sutpen marries Ellen to when Henry shoots Charles. In part, this is because the narrators all repeat and rework the events before this major event.</p>
+												</div>
+												<div class="step-text" data-step="7">
+													<div class="step_header">Chronology by Date</div>
+													<p>Digital Yoknapatawpha also encodes likely dates for when events happened.</p>
+													<p>Ordering the events by their chronological dates changes the distances between the events because they are now determined by date and not by their chronological rank.</p>
+													<p>This heightens the distance between the story of Sutpen and Quentin's narrative present.</p>
+													<p>Past and present appear disconnected.</p>
+												</div>
+												<div class="step-text" data-step="8">
+													<div class="step_header">Chronology in Order by Date</div>
+													<p>Placing the entire chronology in order by date instead shows the continuity between past and present.</p>
+													<p>Quentin is not so comfortably removed from Sutpen as it might seem.</p>
+													<p>It also stresses the importance of the Civil War as a pivot for the narrative.</p>
+													<p>For the South, and indeed the United States more broadly, this is was a cataclysmic event whose meaning, fifty years later in Quentin's time, is still not settled.</p>
+													<p>Understanding why Henry shoots Charles cannot be disentangled from this history.</p>
+												</div>
+											</div>
+										</div>
+
+										<div class="scrolly-charts-container">
+											<div class="container-piechart">
+												<figure class="chart" style="height: 465px; top: 232.5px;">
+													<div id="plotchart"></div>
+												</figure>
+											</div>
+										</div>
+										<div class="scrollytell-tiles" id="events-progress-tiles">
+											<!-- Tiles will be generated by JavaScript -->
+										</div>
+									</div>
+
+									<!-- FIXED: Start from data-step="0" to match frame indices -->
+									<div class="scroll-triggers">
+										<div class="step" data-step="0"></div>
+										<div class="step" data-step="1"></div>
+										<div class="step" data-step="2"></div>
+										<div class="step" data-step="3"></div>
+										<div class="step" data-step="4"></div>
+										<div class="step" data-step="5"></div>
+										<div class="step" data-step="6"></div>
+										<div class="step" data-step="7"></div>
+										<div class="step" data-step="8"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<h2 class="content_sub_title">Stories</h2>
+					<div class="lesson-section">
+						<p>The overlapping and disjointed versions of events capture Quentin's lived experience of exploring the past. This is not a neat linear chronology told by one authority in a history book, but the collective story of multiple voices who have shaped and reshaped the events to match their version of the truth. The tellers cannot be separated from their tales. It forces us to wonder if any version of the past can ever be true, or if it is simply another story we tell ourselves.</p>
+					</div>
+</section>
+			<section id="language">
+				<h1 class="content_title">Language</h1>
+				<h2 class="content_sub_title text-center">
+					<small class="text-center text-body-secondary">"it struck word by word, the resonant strings of remembering"</small>
+				</h2>
 				<div class="lesson-section">
-					<p>Though the plot can be very confusing, it is clear from Faulkner's notes that he had an underlying structure. This underlying structure is sometimes referred to as the <em>chronology</em> or <em>story</em>. In fiction, the story is different than the plot. Though often used interchangeably, the story refers to the order of events as they happen chronologically, while the plot indicates the order in which they are told.</p>
 					<p>
-						If the events in the novel were related in the order they occured, rather out of order, <em>Absalom, Absalom!</em> would be much easier to understand. Actually, since the novel was so confusing even Faulkner's publishers asked him to include a chronology in the first edition of the text, so readers could get some grasp of the basic structure of the story. The structure of this chronology is already visible in the <a href="http://faulkner.iath.virginia.edu/media/resources/MANUSCRIPTS/AAMS1.html">early manuscript</a> pages of <em>Absalom, Absalom!</em>
-					</p>
-
-					<p>
-						Narratology is the study of narrative, and provides insight into how <em>Absalom, Absalom!</em> is structured. By distinguishing between the order events as they occur (story) and the order in which they are told (plot), it is possible to create a chart of the narrative structure. In such a chart, the story is placed on the y-axis and the plot indicated by page numbers is placed on the x-axis. As the chart moves to the right, it moves forward in the progression of the text. Whenever something is plot higher or lower on the y-axis, it indicates when something is happening earlier (lower) or later (higher) chronologically. This concept is easier to grasp by looking at some major events in <em>Absalom, Absalom!</em> in <b>plot</b> and <b>story</b> order.
+						The language in <i>Absalom, Absalom!</i> is very challenging. Faulkner's language constantly draws attention to itself.
+						The text reminds us that <i>what</i> is said cannot be separated from <i>how</i> it is said.
 					</p>
 				</div>
 
-				<!-- UPDATED: Change section ID from "scrolly" to "event-scrolly" -->
-				<section id="event-scrolly">
+				<h2 class="content_sub_title">The Long Sentence</h2>
+				<div class="lesson-section">
+					<p>Sentences in <i>Absalom, Absalom!</i> are very long. On average, sentences are around 50 words long. The longest sentence is 1,124 words. That's a 3-4 page college paper in one sentence! Compared to other American Classics, Faulkner's sentences are much, much longer.</p>
+
 					<div class="container-fluid">
 						<div class="row justify-content-center">
 							<div class="col-12">
-								<div class="scrolly-sticky-container">
-									<div class="scrollytell-header-minimal">
-										<h3 class="scrollytell-title">Visualizing Narrative Structure</h3>
-
-									</div>
-									<div class="scrolly-text-container">
-										<div class="step-text-content">
-											<!-- FIXED: Start from data-step="0" to match frame0 -->
-											<div class="step-text active" data-step="0">
-												<div class="step_header">Plot Order</div>
-												<p>Thomas Sutpen's life can be reduced to three events: he is born, comes to Jefferson, and dies. In the novel, these events are out of order. Sutpen arrives in Jefferson in chapter 1, dies in chapter 6, and is born in chapter 7. Looking at the narrative structure, the plot starts in the middle of Sutpen's life moves to his death and then jumps back in time to cover his birth and early life.</p>
-											</div>
-											<div class="step-text" data-step="1">
-												<div class="step_header">Story Order</div>
-												<p>Viewed in story order, the events move from the bottom left to the top right. This is because x=y.</p>
-											</div>
-
-											<div class="step-text" data-step="2">
-												<div class="step_header">All Events</div>
-												<p>Digital Yoknapatawpha has broken down <i>Absalom, Absalom!</i> into 644 individual events. These points can be plotted using the same narrative structure method.</p>
-												<p>It looks like an overwhelming jumble! </p>
-												<p>The major events provide some context as to what might be going on.</p>
-												<p class="fst-italic"> Hover over the chart to see the description of each event.</p>
-											</div>
-											<div class="step-text" data-step="3">
-												<div class="step_header">Narrated Events</div>
-												<p> The structure of the narrative becomes a bit clearer when the events are broken down by the way in which they are related to the reader.</p>  <p>Digital Yoknapatawpha calls this <i>narrative status</i>.</p>
-												<p>The narrated events mostly run in a regular pattern from left to right at the top of the chart. These are the moments when the Quentin speaks to the different narrators. </p>
-											</div>
-											<div class="step-text" data-step="4">
-												<div class="step_header">Told Events</div>
-												<p>The told events show the tales of each individual storyteller.</p>
-												<p>They make a pronounced "S" curve.</p>
-												<p>The tellers each start their stories in the deep past and make their way to the present.</p>
-												<p>Even though, they repeat, change, and omit details that occur in the other versions. The chronologies of the individual stories are actually fairly regular.</p>
-											</div>
-											<div class="step-text" data-step="5">
-												<div class="step_header">Other Events</div>
-												<p>Digital Yoknapatawpha also encodes three other types of events: Remembered, Hypothesized, and narrated+consciousness which is unique to Faulkner.</p>
-												<p>These types of events are much fewer in number, but their presence adds another layer of mediation between the tellers and their tales. </p>
-											</div>
-											<div class="step-text" data-step="6">
-												<div class="step_header">Story Order</div>
-												<p>Story order makes the distinction between narrated and told events clearer.</p>
-												<p>The narrated events all happen towards the end chronologically, when Quentin is gathering the story.</p>
-												<p>It is also notable that the bulk of the events are about the time between when Sutpen marries Ellen to when Henry shoots Charles. In part, this is because the narrators all repeat and rework the events before this major event.</p>
-											</div>
-											<div class="step-text" data-step="7">
-												<div class="step_header">Chronology by Date</div>
-												<p>Digital Yoknapatawpha also encodes likely dates for when events happened.</p>
-												<p>Ordering the events by their chronological dates changes the distances between the events because they are now determined by date and not by their chronological rank.</p>
-												<p>This heightens the distance between the story of Sutpen and Quentin's narrative present.</p>
-												<p>Past and present appear disconnected.</p>
-											</div>
-											<div class="step-text" data-step="8">
-												<div class="step_header">Chronology in Order by Date</div>
-												<p>Placing the entire chronology in order by date instead shows the continuity between past and present.</p>
-												<p>Quentin is not so comfortably removed from Sutpen as it might seem.</p>
-												<p>It also stresses the importance of the Civil War as a pivot for the narrative.</p>
-												<p>For the South, and indeed the United States more broadly, this is was a cataclysmic event whose meaning, fifty years later in Quentin's time, is still not settled.</p>
-												<p>Understanding why Henry shoots Charles cannot be disentangled from this history.</p>
+								<div class="container-piechart">
+									<figure class="chart">
+										<div class="row">
+											<div class="col-12">
+												<div id="wordchart"></div>
 											</div>
 										</div>
-									</div>
-
-									<div class="scrolly-charts-container">
-										<div class="container-piechart">
-											<figure class="chart" style="height: 465px; top: 232.5px;">
-												<div id="plotchart"></div>
-											</figure>
-										</div>
-									</div>
-									<div class="scrollytell-tiles" id="events-progress-tiles">
-										<!-- Tiles will be generated by JavaScript -->
-									</div>
-								</div>
-
-								<!-- FIXED: Start from data-step="0" to match frame indices -->
-								<div class="scroll-triggers">
-									<div class="step" data-step="0"></div>
-									<div class="step" data-step="1"></div>
-									<div class="step" data-step="2"></div>
-									<div class="step" data-step="3"></div>
-									<div class="step" data-step="4"></div>
-									<div class="step" data-step="5"></div>
-									<div class="step" data-step="6"></div>
-									<div class="step" data-step="7"></div>
-									<div class="step" data-step="8"></div>
+									</figure>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<p>For Faulkner, these long sentences are more than rhetorical pyrotechnics, they try to capture how the past continuously intrudes upon the present. Asked in an interview about why he wrote such long sentences, Faulkner contends that there is no such thing as "was" because everyone brings their past with them. His long sentences are a way to capture this sensation. In an interview he claims:</p>
+
+					<figure>
+						<div class="blockquote-outline">
+							<blockquote class="blockquote">"a man, a character in a story at any moment of action is not just himself as he is then, he is all that made him, and the long sentence is an attempt to get his past and possibly his future into the instant in which he does something"</blockquote>
+							<figcaption class="blockquote-footer">
+								<em>Faulkner in the University: Class Conferences at the University of Virginia, 1957-1958</em> <cite title="the long sentence">Vintage Books, 1965</cite>
+							</figcaption>
+						</div>
+					</figure>
+
+					<p>In a sense, the prose complements the narrative structure, which also sees the past continuously returning.</p>
+				</div>
+
+				<h2 class="content_sub_title">Neologisms</h2>
+				<div class="lesson-section">
+					<p>
+						Faulkner also concocts neologisms, new words, by combining words or adding a prefix to an existing word. There are 30 of such words and many other words that are uncommon or archaic.
+					</p>
+					<p>Often their meaning tarries between simple binaries, collapsing the neat distinctions created by language.</p>
+				</div>
+
+				<!-- NEOLOGISMS SCROLLY SECTION -->
+				<section id="language-scrolly">
+					<figure>
+						<video id="neologisms" class="object-fit-contain" muted loop>
+							<source src="media/video/neologism_large.mp4" type="video/mp4">
+						</video>
+					</figure>
+
+					<article>
+						<div class="step" data-step="1">
+							<p>They force the reader to consider their meaning.</p>
+						</div>
+						<div class="step" data-step="2">
+							<p>Is an "unorganism" alive or dead?</p>
+						</div>
+						<div class="step" data-step="3">
+							<p>How can Quentin speak in "notlanguage"?</p>
+						</div>
+						<div class="step" data-step="4">
+							<p>How can Charles be a "nothusband"?</p>
+						</div>
+					</article>
 				</section>
 
-				<h2 class="content_sub_title">Stories</h2>
 				<div class="lesson-section">
-					<p>The overlapping and disjointed versions of events capture Quentin's lived experience of exploring the past. This is not a neat linear chronology told by one authority in a history book, but the collective story of multiple voices who have shaped and reshaped the events to match their version of the truth. The tellers cannot be separated from their tales. It forces us to wonder if any version of the past can ever be true, or if it is simply another story we tell ourselves.</p>
+					<p>Faulkner's recondite vocabulary draws attention to the fact that each individual fact disclosed by the teller is composed of individual words. These words can only be understood in context.</p>
+				</div>
+
+				<h2 class="content_sub_title">Parentheticals</h2>
+				<div class="lesson-section">
+					<p>
+						Perhaps the most unique feature of the text is Faulkner's use of parentheses. There are 1278 total or 639 pairs. These parentheses occur across the text, and also nest within each other four levels deep.
+					</p>
+					<div class="my-4">
+						<ul class="text-center">
+							<li>() Level 1</li>
+							<li>(()) Level 2</li>
+							<li>((())) Level 3</li>
+							<li>(((()))) Level 4</li>
+						</ul>
+					</div>
+					<p>
+						The nestings offer a network of digressions, modifications, amplifications, and dead ends. They represent the constant search for words to tell the story of the Sutpen family.
+					</p>
+
+					<div class="container-fluid">
+						<div class="row justify-content-center">
+							<div class="col-12">
+								<div class="container-piechart">
+									<figure class="chart">
+										<div class="row">
+											<div class="col-12">
+												<div id="parenthesisChart"></div>
+											</div>
+										</div>
+									</figure>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="content_sub_title">Faulkner's Language</h2>
+				<div class="lesson-section">
+					<p>The complexity of Faulkner's language forces the reader to consider the meaning of every word, in every long sentence, throughout the entire work. One cannot pull at any thread in the novel without loosening others. The past existed as a reality, but it can only be translated into the present in and through language.</p>
 				</div>
 			</section>
-
 		</div>
 	</div>
 
-	<script>
-		// Video intersection observer for Events section
-		
-	</script>
+	
 
 </body>
 </html>

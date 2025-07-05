@@ -8,8 +8,8 @@ const CONFIG = {
     ANIMATION: {
         OPACITY_STEPS: ['50', '90', 'B0', 'FF'],
         STEP_DELAY: 70,
-        BASE_OPACITY: '33',
-        FULL_OPACITY: 'FF'
+       
+       
     },
     STEP_MAPPINGS: {
         // Characters section mappings
@@ -36,8 +36,8 @@ const CONFIG = {
 
     SCROLLYTELL: {
         CHARACTERS_STEPS: 4,
-        EVENTS_STEPS: 9
-    },
+        EVENTS_STEPS: 9,
+       },
     
 
     // Events chart configuration
@@ -70,7 +70,13 @@ const CONFIG = {
             EASING: 'cubic'
         }
     },
-
+    LANGUAGE: {
+        OPACITY: {
+            FADE_IN_THRESHOLD: 0.2,
+            FADE_OUT_THRESHOLD: 0.8,
+            ACTIVE_THRESHOLD: 0.5
+        }        
+    },
     // Unified opacity handling
     OPACITY: {
         BASE: '33',     // 20% - charts & leaves
@@ -103,6 +109,35 @@ const demographyPresentData = [
 const demographyPresentDataFiltered = demographyPresentData.filter(item =>
     item.Race !== "Indian" && item.Race !== "Multiracial Group"
 );
+
+
+const wordsPerSentenceData = [
+    {
+        x: ["<i>Moby Dick</i><br> Herman Melville", "<i>Huckleberry Finn</i><br>Mark Twain", "<i>The Great Gatsby</i><br>F. Scott Fitzgerald", "<i>Absalom, Absalom!</i><br>William Faulkner", "<i>Beloved</i><br> Toni Morrison"],
+        y: [22, 19, 14, 50, 12],
+        type: 'bar',
+        marker: {
+            color: [
+                faulknerChartStyles.colorway[0] + '80',
+                faulknerChartStyles.colorway[0] + '80',
+                faulknerChartStyles.colorway[0] + '80',
+                faulknerChartStyles.colorway[2] + 'CC',
+                faulknerChartStyles.colorway[0] + '80'
+            ],
+            line: {
+                color: [
+                    faulknerChartStyles.colorway[0],
+                    faulknerChartStyles.colorway[0],
+                    faulknerChartStyles.colorway[0],
+                    faulknerChartStyles.colorway[2],
+                    faulknerChartStyles.colorway[0]
+                ],
+                width: 1.5
+            }
+        },
+        hovertemplate: "<b>Text:</b> %{x}<br> <b>Average words per sentence: </b> %{y}<extra></extra>"
+    }
+];
 
 // Pre-structured sunburst data with proper types
 const SUNBURST_DATA = [
@@ -172,6 +207,15 @@ function debounce(func, wait) {
     };
 }
 
+function processCSVData(response, fieldMappings) {
+    const data = $.csv.toObjects(response, { headers: true });
+    const plotData = {};
+    Object.entries(fieldMappings).forEach(([key, transformer]) => {
+        plotData[key] = data.map(transformer);
+    });
+    return plotData;
+}
+
 // ==========================================================================
 // CENTRALIZED CONFIGURATIONS USING FAULKNER STYLES
 // ==========================================================================
@@ -234,6 +278,25 @@ const CHART_CONFIGS = {
     // Sunburst specific config
     SUNBURST: {
         TOTAL_COLOR: faulknerChartStyles.colorway_bw[2] // Use gray from BW colorway
+    },
+    LANGUAGE: {
+        WORDS_LAYOUT: {
+            ...faulknerBaseLayout,
+            title: { text: "Average Words per Sentence Classic American Novels" },
+            showlegend: false,
+            xaxis: { showgrid: false, title: { text: "Novel" } },
+            yaxis: { title: { text: "Words per Sentence" }, showgrid: false, zeroline: false }
+        },
+        PARENTHESIS_LAYOUT: {
+            ...faulknerBaseLayout,
+            title: { text: "Parenthesis Nesting Levels in <i>Absalom, Absalom!</i>" },
+            xaxis: { showgrid: false, zeroline: false, showline: false, tickmode: 'array' },
+            yaxis: {
+                text: "Nesting Level", showgrid: false, zeroline: false, showline: false,
+                linewidth: 0, tickmode: "array", tickvals: [0, 1, 2, 3, 4],
+                ticktext: ["Main Text", "1: ()", "2: (())", "3: ((()))", "4: (((())))"]
+            }
+        }
     }
 };
 
@@ -265,10 +328,9 @@ function waitForDependencies() {
 class EventsChartManager {
     // Data field mappings for processing
     static FIELD_MAPPINGS = {
-        'absalom_eventid': (d) => parseInt(d['absalom_eventid']) || null,
+       
         'absalom_startdate': (d) => d['absalom_startdate'],
         'absalom_summary': (d) => d['absalom_summary'],
-        'absalom_chapter': (d) => parseInt(d['absalom_chapter']) || null,
         'absalom_y_narrated': (d) => parseInt(d['absalom_y_narrated']) || null,
         'absalom_y_hypothesized': (d) => parseInt(d['absalom_y_hypothesized']) || null,
         'absalom_y_narratedconsciousness': (d) => parseInt(d['absalom_y_narratedconsciousness']) || null,
@@ -883,7 +945,7 @@ class EventsChartManager {
     makePlot() {
         $.ajax({
             type: "GET",
-            url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/sutpen_absalom_plot_major_events.csv",
+            url: "data/sutpen_absalom_plot_major_events.csv", 
             dataType: "text",
             success: (response) => {
                 const allData = this.processData(response);
@@ -1025,6 +1087,165 @@ class VideoManager {
     }
 }
 
+// After VideoManager class, add:
+class LanguageChartsManager {
+    constructor() {
+        this.languageScrollyManager = null;
+        this.initialized = false;
+    }
+
+    initializeWordsChart() {
+        const element = document.getElementById('wordchart');
+        if (!element) return;
+        Plotly.newPlot('wordchart', wordsPerSentenceData, CHART_CONFIGS.LANGUAGE.WORDS_LAYOUT, CHART_CONFIGS.PLOTLY);
+    }
+
+    processParenthesisData(response) {
+        const fieldMappings = {
+            'depth': (d) => parseInt(d['depth']) || null,
+            'start': (d) => parseInt(d['start']) || null,
+            'level_1': (d) => parseInt(d['level_1']) || null,
+            'level_2': (d) => parseInt(d['level_2']) || null,
+            'level_3': (d) => parseInt(d['level_3']) || null,
+            'level_4': (d) => parseInt(d['level_4']) || null
+        };
+        return processCSVData(response, fieldMappings);
+    }
+
+    makeParenthesisPlot() {
+        $.ajax({
+            type: "GET",
+            url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/parenthetical_staggered_wide.csv",
+            dataType: "text",
+            success: (response) => {
+                const allData = this.processParenthesisData(response);
+                this.makeParenthesisPlotly(allData);
+            }
+        });
+    }
+
+    // Add this method inside the LanguageChartsManager class:
+    makeParenthesisPlotly(data) {
+        console.log("Creating parenthesis chart with data:", data);
+
+        const { depth, level_1, level_2, level_3, level_4 } = data;
+
+        const chapter = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const chapter_marker = [1, 46000, 99402, 156765, 245268, 328114, 412488, 558423, 686037];
+
+        const x_long_break = [334038, 355880, 394110, 394224];
+        const y_long_break = [1, 2, 3, 4];
+        const break_text = [
+            '(then Shreve again, "Wait. Wait. You mean...")',
+            '("How was it?" Shreve said. "You told...',
+            "(Because there was love Mr Compson said...",
+            "(Quentin)"
+        ];
+
+        const plotData = [
+            {
+                x: level_1, y: depth, name: "Level 1: ()", type: 'scatter', mode: 'lines+markers',
+                hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+                marker: { size: 4, color: faulknerChartStyles.colorway[0] },
+                line: { width: 1, dash: 'dot', color: faulknerChartStyles.colorway[0] }
+            },
+            {
+                x: level_2, y: depth, name: "Level 2: (())", type: 'scatter', mode: 'lines+markers',
+                hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+                marker: { size: 4, color: faulknerChartStyles.colorway[1] },
+                line: { width: 1, dash: 'dot', color: faulknerChartStyles.colorway[1] }
+            },
+            {
+                x: level_3, y: depth, name: "Level 3: ((()))", type: 'scatter', mode: 'lines+markers',
+                hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+                marker: { size: 4, color: faulknerChartStyles.colorway[2] },
+                line: { width: 1, dash: 'dot', color: faulknerChartStyles.colorway[2] }
+            },
+            {
+                x: level_4, y: depth, name: "Level 4: (((())))", type: 'scatter', mode: 'lines+markers',
+                hovertemplate: " <b>Depth: </b> %{y}<extra></extra>",
+                marker: { size: 4, color: faulknerChartStyles.colorway[3] },
+                line: { width: 1, dash: 'dot', color: faulknerChartStyles.colorway[3] }
+            }
+        ];
+
+        const layout = {
+            ...CHART_CONFIGS.LANGUAGE.PARENTHESIS_LAYOUT,
+            xaxis: {
+                ...CHART_CONFIGS.LANGUAGE.PARENTHESIS_LAYOUT.xaxis,
+                tickvals: chapter_marker,
+                ticktext: chapter
+            },
+            annotations: [
+                { x: x_long_break[0], y: y_long_break[0], text: break_text[0], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left" },
+                { x: x_long_break[1], y: y_long_break[1], text: break_text[1], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left" },
+                { x: x_long_break[2], y: y_long_break[2], text: break_text[2], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left" },
+                { x: x_long_break[3], y: y_long_break[3], text: break_text[3], showarrow: false, xref: "x", yref: "y", yshift: 15, xanchor: "left" }
+            ]
+        };
+
+        Plotly.newPlot('parenthesisChart', plotData, layout, CHART_CONFIGS.PLOTLY);
+    }
+    setupLanguageScrolly() {
+        const languageScrollyElement = document.getElementById('language-scrolly');
+        if (!languageScrollyElement) return;
+
+        const scrolly = d3.select("#language-scrolly");
+        const step = scrolly.select("article").selectAll(".step");
+        const scroller = scrollama();
+
+        const calculateOpacity = (progress) => {
+            if (progress <= CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD) {
+                return progress / CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD;
+            } else if (progress >= CONFIG.LANGUAGE.OPACITY.FADE_OUT_THRESHOLD) {
+                return (1 - progress) / CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD;
+            }
+            return 1;
+        };
+
+        const handleStepProgress = (response) => {
+            const opacity = calculateOpacity(response.progress);
+            step.each(function (d, i) { // ✅ Use regular function, not arrow function
+                if (i === response.index) {
+                    d3.select(this) // ✅ Now 'this' refers to the DOM element
+                        .style("opacity", opacity)
+                        .classed("is-active", opacity > CONFIG.LANGUAGE.OPACITY.ACTIVE_THRESHOLD);
+                } else {
+                    d3.select(this)
+                        .style("opacity", 0)
+                        .classed("is-active", false);
+                }
+            });
+        };
+
+        scroller.setup({
+            step: "#language-scrolly article .step",
+            offset: CONFIG.SCROLLAMA.OFFSET,
+            progress: true,
+            debug: CONFIG.SCROLLAMA.DEBUG
+        }).onStepProgress(handleStepProgress);
+
+        this.languageScrollyManager = scroller;
+    }
+
+    init() {
+        if (this.initialized) return;
+        this.initializeWordsChart();
+        this.makeParenthesisPlot();
+        setTimeout(() => this.setupLanguageScrolly(), CONFIG.RESIZE_DELAY);
+        this.initialized = true;
+    }
+
+    resize() {
+        setTimeout(() => {
+            const wordChart = document.getElementById('wordchart');
+            const parenthesisChart = document.getElementById('parenthesisChart');
+            if (wordChart) Plotly.Plots.resize('wordchart');
+            if (parenthesisChart) Plotly.Plots.resize('parenthesisChart');
+        }, CONFIG.RESIZE_DELAY);
+    }
+}
+
 // ==========================================================================
 // MAIN APPLICATION
 // ==========================================================================
@@ -1037,6 +1258,7 @@ waitForDependencies().then(() => {
         let eventsChartManager = null;
         let videoManager = null;
         let progressManager = null;
+        let languageChartsManager = null; 
 
         window.eventsChartManager = null;
         window.updateChartHighlighting = null;
@@ -1318,7 +1540,9 @@ waitForDependencies().then(() => {
                     Plotly.Plots.resize('plotchart');
                 }
             }, CONFIG.RESIZE_DELAY);
-
+            if (languageChartsManager) {
+                languageChartsManager.resize();
+            }
             // Resize all active scrollers
             scrollyManagers.forEach(scroller => scroller.resize());
         }
@@ -1704,6 +1928,10 @@ waitForDependencies().then(() => {
             progressManager = new ScrollytellProgressManager();
             progressManager.init();
 
+            languageChartsManager = new LanguageChartsManager();
+            languageChartsManager.init();
+
+
             // Setup unified scrolly functionality
             setupUnifiedScrolly();
 
@@ -1719,33 +1947,7 @@ waitForDependencies().then(() => {
                     videoManager.destroy();
                 }
             });
-            console.log('=== Final Debug Check ===');
-            console.log('Global functions ready:', {
-                updateChartHighlighting: typeof window.updateChartHighlighting,
-                updateLegendHighlighting: typeof window.updateLegendHighlighting,
-                eventsChartManager: typeof window.eventsChartManager
-            });
-
-            const tiles = document.querySelectorAll('.progress-tile');
-            console.log('Total tiles found:', tiles.length);
-
-            if (tiles.length > 0) {
-                // Test just one tile
-                const testTile = tiles[1]; // Second tile (characters step 2)
-                console.log('Testing tile:', {
-                    step: testTile.getAttribute('data-step'),
-                    section: testTile.getAttribute('data-section'),
-                    className: testTile.className
-                });
-
-                // Add a temporary listener to see if clicks are working
-                testTile.addEventListener('click', function (e) {
-                    console.log('DIRECT CLICK DETECTED on tile:', e.target);
-                });
-
-                console.log('Simulating click...');
-                testTile.click();
-            }
+           
         }
 
         init();
