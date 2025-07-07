@@ -277,7 +277,7 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	padding: 0;
 	max-width: 50%;
 	margin: 0 auto;
-	height: 250vh; /* ✅ REDUCED from 400vh - much faster */
+	height: 400vh; /* ✅ INCREASED from 300vh for more gradual scrolling */
 }
 
 #language-scrolly figure {
@@ -285,7 +285,7 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	top: 1vh;
 	left: 0;
 	width: 100%;
-	height: 40vh;
+	height: 80vh;
 	margin: 0;
 	z-index: 0;
 	display: flex;
@@ -301,13 +301,13 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	}
 
 #language-scrolly .step {
-	margin: 0 auto 15vh auto; /* ✅ REDUCED from 30vh - tighter steps */
+	margin: 0 auto 40vh auto; /* ✅ INCREASED spacing for smoother transitions */
 	color: #fff;
 	opacity: 0;
-	transition: opacity 0.3s ease-out;
+	transition: opacity 0.5s ease-out; /* ✅ SLOWER transition */
 	position: relative;
 	z-index: 1;
-	height: 20vh; /* ✅ REDUCED from 30vh - smaller steps */
+	height: 90vh; /* ✅ INCREASED - each step covers full viewport */
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -315,11 +315,11 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 }
 
 	#language-scrolly .step:first-child {
-		margin-top: 10vh; /* ✅ REDUCED from 20vh - start sooner */
+		margin-top: 30vh; /* ✅ More space at start */
 	}
 
 	#language-scrolly .step:last-child {
-		margin-bottom: 10vh; /* ✅ REDUCED from 20vh - end sooner */
+		margin-bottom: 30vh; /* ✅ More space at end */
 	}
 
 	#language-scrolly .step p {
@@ -330,7 +330,7 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 		color: #fff;
 		margin: 0;
 		border-radius: 8px;
-		transition: all 0.3s ease;
+		transition: all 0.8s ease; /* ✅ SLOWER transition */
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 		backdrop-filter: blur(2px);
 		width: 100%;
@@ -535,29 +535,30 @@ figure.chart {
 	/* Language scrolly adjustments */
 	#language-scrolly figure {
 		top: 1vh;
-		height: 50vh;
+		height: 70vh;
 	}
 
 	#language-scrolly article {
-		height: 300vh; /* ✅ REDUCED from 450vh */
+		height: 600vh; /* ✅ INCREASED */
 	}
 
 	#language-scrolly .step {
-		margin: 0 auto 15vh auto; /* ✅ REDUCED from 30vh - tighter steps */
-		height: 20vh; /* ✅ REDUCED from 30vh - smaller steps */
+		margin: 0 auto 50vh auto; /* ✅ More spacing */
+		height: 120vh; /* ✅ LARGER interaction zones */
 	}
 
 	#language-scrolly .step:first-child {
-		margin-top: 10vh; /* ✅ REDUCED from 20vh - start sooner */
+		margin-top: 40vh;
 	}
 
 	#language-scrolly .step:last-child {
-		margin-bottom: 10vh; /* ✅ REDUCED from 20vh - end sooner */
+		margin-bottom: 40vh;
 	}
 
 	#language-scrolly .step p {
 		font-size: 1.5rem;
 		padding: 2rem;
+		transition: all 0.9s ease; /* ✅ SLOWER */
 	}
 }
 
@@ -566,7 +567,7 @@ figure.chart {
 	/* Sticky container */
 	.scrolly-sticky-container {
 		top: 3vh;
-		min-height: 50vh;
+		min-height: 100vh;
 	}
 
 	.scrolly-text-container {
@@ -636,24 +637,24 @@ figure.chart {
 	/* Language scrolly */
 	#language-scrolly figure {
 		top: 1vh;
-		height: 60vh;
+		height: 80vh;
 	}
 
 	#language-scrolly article {
-		height: 350vh; /* ✅ REDUCED from 500vh */
+		height: 800vh; /* ✅ INCREASED for very gradual scrolling */
 	}
 
 	#language-scrolly .step {
-		margin: 0 auto 20vh auto; /* ✅ REDUCED from 30vh */
-		height: 25vh; /* ✅ REDUCED from 30vh */
+			margin: 0 auto 60vh auto; /* ✅ INCREASED spacing between steps */
+		height: 150vh; /* ✅ VERY LARGE interaction zones */
 	}
 
 	#language-scrolly .step:first-child {
-		margin-top: 10vh; /* ✅ REDUCED from 20vh - start sooner */
+		margin-top: 50vh; /* ✅ More lead-in space */
 	}
 
 	#language-scrolly .step:last-child {
-		margin-bottom: 10vh; /* ✅ REDUCED from 20vh - end sooner */
+		margin-bottom: 50vh; /* ✅ More lead-out space */
 	}
 
 		#language-scrolly figure video {
@@ -665,6 +666,7 @@ figure.chart {
 		font-size: 1.5rem;
 		padding: 1.5rem;
 		max-width: 100%;
+		transition: all 1s ease; /* ✅ SLOWEST transition for desktop */
 	}
 }
 

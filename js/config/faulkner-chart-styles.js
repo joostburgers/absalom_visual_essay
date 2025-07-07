@@ -1,7 +1,7 @@
 // JavaScript source code
 //These are the global chart styles for all future Plotly Charts. This should be either in a global folder or in some location that is easy to draw from. 
 
-const faulknerChartStyles = {
+export const faulknerChartStyles = {
 
 
     colorway: [
@@ -34,7 +34,7 @@ const faulknerChartStyles = {
 
 //The following defines the base layout for all plotly charts. Plotly requires that a layout object is created and then instantiated in a plot in order for the template to be applied.
 
-const faulknerBaseLayout = {
+export const faulknerBaseLayout = {
     title: {
         text:
             "Digital Yoknapatawpha Chart"
@@ -54,7 +54,7 @@ const faulknerBaseLayout = {
 
 }
 
-const defaultConfig = {
+export const defaultConfig = {
     modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'autoscale2d'],
     displaylogo: false,
     responsive: true,
@@ -63,4 +63,4 @@ const defaultConfig = {
         filename: faulknerBaseLayout.title.text,
     }
 }
-var faulknerLayoutTemplate = { data: {}, layout: faulknerBaseLayout, defaultConfig };
+export var faulknerLayoutTemplate = { data: {}, layout: faulknerBaseLayout, defaultConfig };
