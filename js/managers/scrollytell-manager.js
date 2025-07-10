@@ -201,7 +201,6 @@ export class ScrollytellProgressManager {
         }
 
         if (stepElement) {
-
             stepElement.scrollIntoView({
                 behavior: 'auto', // INSTANT instead of smooth
                 block: 'center'
@@ -212,7 +211,6 @@ export class ScrollytellProgressManager {
             const sectionElement = document.getElementById(`${sectionName}-scrolly`) ||
                 document.getElementById(`event-scrolly`); // Special case for events
             if (sectionElement) {
-
                 sectionElement.scrollIntoView({
                     behavior: 'auto', // INSTANT
                     block: 'center'

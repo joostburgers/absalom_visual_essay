@@ -115,4 +115,3 @@ waitForDependencies().then(() => {
     console.error('❌ Error stack:', error.stack);
 });
 
-console.log('🚀 app.js execution complete');

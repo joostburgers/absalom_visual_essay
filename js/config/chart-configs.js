@@ -27,13 +27,14 @@ export const CHART_CONFIGS = {
             ...faulknerBaseLayout.font,
             size: 14
         },
-        showlegend: false,
+		showlegend: false,
         margin: { l: 75, r: 50, b: 100, t: 50, pad: 4 }
     },
 
     // Enhanced plotly config based on defaultConfig
     PLOTLY: {
         ...defaultConfig,
+		responsive: true,
         staticPlot: false
     },
 
@@ -63,14 +64,15 @@ export const CHART_CONFIGS = {
     LANGUAGE: {
         WORDS_LAYOUT: {
             ...faulknerBaseLayout,
-            title: { text: "Average Words per Sentence Classic American Novels" },
+            title: { text: "" },
             showlegend: false,
             xaxis: { showgrid: false, title: { text: "Novel" } },
-            yaxis: { title: { text: "Words per Sentence" }, showgrid: false, zeroline: false }
+            yaxis: { title: { text: "Words per Sentence" }, showgrid: false, zeroline: false },
+          
         },
         PARENTHESIS_LAYOUT: {
             ...faulknerBaseLayout,
-            title: { text: "Parenthesis Nesting Levels in <i>Absalom, Absalom!</i>" },
+            title: { text: "" },
             xaxis: { showgrid: false, zeroline: false, showline: false, tickmode: 'array' },
             yaxis: {
                 text: "Nesting Level", showgrid: false, zeroline: false, showline: false,

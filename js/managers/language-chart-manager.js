@@ -31,7 +31,7 @@ export class LanguageChartsManager {
     makeParenthesisPlot() {
         $.ajax({
             type: "GET",
-            url: "https://raw.githubusercontent.com/arundhatibala/absalom/main/data/parenthetical_staggered_wide.csv",
+            url: "./data/parenthetical_staggered_wide.csv",
             dataType: "text",
             success: (response) => {
                 const allData = this.processParenthesisData(response);

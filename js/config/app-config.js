@@ -58,8 +58,8 @@ export const CONFIG = {
     },
     LANGUAGE: {
         OPACITY: {
-            FADE_IN_THRESHOLD: 0.1,
-            FADE_OUT_THRESHOLD: 0.9,
+            FADE_IN_THRESHOLD: 0.2,
+            FADE_OUT_THRESHOLD: 0.8,
             ACTIVE_THRESHOLD: 0.3
         }
     },

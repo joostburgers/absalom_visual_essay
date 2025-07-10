@@ -45,7 +45,7 @@ export const faulknerBaseLayout = {
     showlegend: true,
     paperBackground: "rgba(255,255,255,0)",
     plotBackground: "rgba(255,255,255,0.4)",
-    margin: { l: 75, r: 50, b: 100, t: 50, pad: 4 },
+    margin: { l: 75, r: 50, b: 100, t: 0, pad: 4 },
     font: {
         family: "Georgia, 'Times New Roman', Times, serif",
         size: 14,
@@ -55,7 +55,7 @@ export const faulknerBaseLayout = {
 }
 
 export const defaultConfig = {
-    modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'autoscale2d'],
+    modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d', 'autoscale2d', 'zoomIn2d','zoomOut2d','resetScale2d'],
     displaylogo: false,
     responsive: true,
     toImageButtonOptions: {

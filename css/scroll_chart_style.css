@@ -1,6 +1,4 @@
-﻿/* MOBILE-FIRST SCROLLYTELLING CSS - Consolidated & Organized */
-
-/* ==========================================================================
+﻿/* ==========================================================================
    BASE STYLES (Mobile First - applies to all screen sizes)
    ========================================================================== */
 
@@ -23,39 +21,27 @@
 .scrolly-sticky-container {
 	position: sticky;
 	top: 1vh;
-	height: fit-content;
-	min-height: 85vh;
-	max-height: 95vh;
+	height: 95vh;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	will-change: transform;
 	z-index: 10;
 }
 
-/* Text container */
-.scrolly-text-container {
-	flex: 0 0 auto;
-	padding: 0.75rem;
-	min-height: 10rem;
-	position: relative;
-}
 
 /* Headers */
 .scrollytell-header-minimal {
+	flex: 0 0 5%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 1.5rem;
-	padding: 0;
-	background: none;
-	border: none;
-	box-shadow: none;
+	padding: 1rem;
+	margin: .5rem 0 1.5rem 0;
+	min-height: 0;
 }
 
 .scrollytell-title {
-	margin: 0;
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	font-weight: 600;
 	color: black;
 	text-align: left;
@@ -63,11 +49,11 @@
 
 /* Progress tiles */
 .scrollytell-tiles {
+	flex: 0 0 5%;
 	display: flex;
-	gap: 2rem;
+	gap: 1rem;
 	align-items: center;
 	justify-content: center;
-	margin-top: 1rem;
 	padding: 0;
 }
 
@@ -112,6 +98,14 @@
 		transition-duration: 0.1s;
 	}
 
+/* Text container */
+.scrolly-text-container {
+	flex: 0 0 35%;
+	margin: .5rem 0 1rem 0;
+	overflow: hidden;
+	position: relative;
+}
+
 /* Step text styles */
 .step-text {
 	opacity: 0;
@@ -128,6 +122,7 @@
 
 	.step-text.active {
 		opacity: 1;
+		background: rgba(52, 88, 77, 0.1);
 		transform: translateY(0);
 		pointer-events: all;
 		position: absolute;
@@ -135,10 +130,21 @@
 		left: 0.75rem;
 		right: 0.75rem;
 		z-index: 2;
+		padding: 1rem;
+		border-radius: 8px;
+		border: 1px solid rgba(52, 88, 77, 0.2);
 	}
 
+.step-text-content {
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	
+}
+
 .step_header {
-	font-size: 1.1rem;
 	font-weight: 700;
 	color: #fff;
 	text-align: left;
@@ -155,8 +161,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
-	line-height: 1.1;
-	font-size: 0.9rem;
+	line-height: 1rem;
 }
 
 .step-text.active p {
@@ -165,18 +170,17 @@
 
 /* Charts container */
 .scrolly-charts-container {
-	flex: 0 0 auto;
+	flex: 0 0 50%;
 	display: flex;
-	align-items: flex-start;
+	align-items: stretch;
 	justify-content: center;
-	padding: 0;
-	margin: 0;
-	margin-top: 0.5rem;
+	
+	overflow: hidden;
 }
 
 .container-piechart {
 	width: 100%;
-	margin-top: 0;
+	
 }
 
 /* Chart sizing - consolidated */
@@ -184,15 +188,14 @@
 #scrollychart2,
 #plotchart {
 	width: 100% !important;
-	height: 160px !important;
-	will-change: auto;
+	height: 100% !important;
+	min-height: 200px;
 }
 
 .chart-title {
-	font-size: 0.8rem;
-	font-weight: 600;
+	font-size: 1.3rem;
 	color: #333;
-	margin-bottom: 0.2rem;
+	margin-bottom: 0.5rem;
 }
 
 /* Legend styles */
@@ -211,7 +214,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		margin: 0;
+		
 		padding: 0 0.15rem;
 		min-width: auto;
 		transition: all 0.2s ease;
@@ -219,7 +222,7 @@
 
 	#legend p {
 		font-size: 0.75rem;
-		margin: 0;
+		
 		color: #000;
 		white-space: nowrap;
 	}
@@ -232,18 +235,21 @@
 
 /* Scroll triggers - section specific */
 #event-scrolly .scroll-triggers {
-	height: 600vh;
+	height: 700vh;
 	position: relative;
 	z-index: 1;
 }
 
 	#event-scrolly .scroll-triggers .step {
 		height: 60vh;
-		opacity: 0;
+		
 		pointer-events: none;
 		position: relative;
 		margin-bottom: 10vh;
+		
 	}
+
+	
 
 #characters-scrolly .scroll-triggers {
 	height: 400vh;
@@ -277,7 +283,7 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	padding: 0;
 	max-width: 50%;
 	margin: 0 auto;
-	height: 400vh; /* ✅ INCREASED from 300vh for more gradual scrolling */
+	height: 400vh;
 }
 
 #language-scrolly figure {
@@ -286,7 +292,7 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	left: 0;
 	width: 100%;
 	height: 80vh;
-	margin: 0;
+	
 	z-index: 0;
 	display: flex;
 	align-items: center;
@@ -301,13 +307,13 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	}
 
 #language-scrolly .step {
-	margin: 0 auto 40vh auto; /* ✅ INCREASED spacing for smoother transitions */
+	
 	color: #fff;
 	opacity: 0;
-	transition: opacity 0.5s ease-out; /* ✅ SLOWER transition */
+	transition: opacity 0.5s ease-out;
 	position: relative;
 	z-index: 1;
-	height: 90vh; /* ✅ INCREASED - each step covers full viewport */
+	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -315,11 +321,11 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 }
 
 	#language-scrolly .step:first-child {
-		margin-top: 30vh; /* ✅ More space at start */
+		margin-top: 30vh;
 	}
 
 	#language-scrolly .step:last-child {
-		margin-bottom: 30vh; /* ✅ More space at end */
+		margin-bottom: 30vh;
 	}
 
 	#language-scrolly .step p {
@@ -328,9 +334,9 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 		font-size: 1.2rem;
 		background-color: rgba(52, 88, 77, 0.3);
 		color: #fff;
-		margin: 0;
+		
 		border-radius: 8px;
-		transition: all 0.8s ease; /* ✅ SLOWER transition */
+		transition: all 0.8s ease;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 		backdrop-filter: blur(2px);
 		width: 100%;
@@ -349,9 +355,6 @@ section:not(#characters-scrolly):not(#event-scrolly) {
 	font-weight: 500 !important;
 }
 
-#plotchart {
-	min-height: 300px !important;
-}
 
 figure.chart {
 	display: flex;
@@ -364,13 +367,6 @@ figure.chart {
 	outline-offset: 4px;
 }
 
-
-.essay_video video {
-	margin: 25px;
-	max-width: 90%;
-}
-
-
 /* Performance optimizations */
 .scrolly-sticky-container,
 .step-text,
@@ -379,484 +375,426 @@ figure.chart {
 	backface-visibility: hidden;
 }
 
+/* Additional list styles */
+
+.activity-list-flat {
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: decimal inside;
+	margin: 0;
+	padding-left: 0;
+	vertical-align: middle;
+}
+	.activity-list-flat li {
+		/* Optional: remove default margin/padding if needed */
+		margin: 0;
+		padding: 0 0.25em 0 0;
+		flex: 0 1 auto; 
+}
+
 /* ==========================================================================
    PROGRESSIVE ENHANCEMENT - MOBILE FIRST MEDIA QUERIES
    ========================================================================== */
+		/* Small devices (landscape phones, 576px and up) */
+		@media (min-width: 576px) {
+			/* Text containers */
+			.scrolly-text-container {
+				padding: .5rem;
+			}
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-	/* Chart sizing */
-	#scrollychart1,
-	#scrollychart2,
-	#plotchart {
-		height: 200px !important;
-	}
+			.chart-title {
+				font-size: 1.1rem;
+			}
 
-	/* Text containers */
-	.scrolly-text-container {
-		padding: 1rem;
-	}
+			#legend p {
+				font-size: 1rem;
+			}
 
-	/* Typography */
-	.step_header {
-		font-size: 1.2rem;
-	}
+			/* Progress tiles */
+			.progress-tile {
+				height: 2px;
+			}
 
-	.step-text p {
-		font-size: 1rem;
-	}
+			/* Scroll triggers */
+			.scroll-triggers {
+				height: 200vh;
+			}
 
-	.chart-title {
-		font-size: 1.1rem;
-	}
+				.scroll-triggers .step {
+					height: 50vh;
+				}
 
-	#legend p {
-		font-size: 1rem;
-	}
-
-	/* Progress tiles */
-	.progress-tile {
-		height: 2px;
-	}
-
-	.scrollytell-tiles {
-		gap: 2.5rem;
-		padding: 0 1.5rem;
-	}
-
-	/* Scroll triggers */
-	.scroll-triggers {
-		height: 200vh;
-	}
-
-		.scroll-triggers .step {
-			height: 50vh;
+			/* Legend adjustments */
+			#legend ul {
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				padding: 0;
+			}
 		}
-
-	/* Legend adjustments */
-	#legend ul {
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		padding: 0;
-	}
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-	/* Sticky container adjustments */
-	.scrolly-sticky-container {
+		/* Medium devices (tablets, 768px and up) */
+		@media (min-width: 768px) {
+			/* Sticky container adjustments */
+			/*.scrolly-sticky-container {
 		top: 2vh;
 		min-height: 60vh;
 		max-height: 90vh;
-	}
+	}*/
 
-	.scrolly-text-container {
-		padding: 1.25rem;
-		max-height: none;
-		overflow-y: visible;
-	}
 
-	/* Step text positioning */
-	.step-text {
-		position: absolute;
-		top: 1rem;
-		left: 1rem;
-		right: 1rem;
-		transform: translateY(15px);
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	}
 
-		.step-text.active {
-			position: relative;
-			top: auto;
-			left: auto;
-			right: auto;
-			transform: translateY(0);
-			margin-bottom: 0.5rem;
+			/* Step text positioning */
+			.step-text {
+				position: absolute;
+				top: 1rem;
+				left: 1rem;
+				right: 1rem;
+				transform: translateY(15px);
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+				.step-text.active {
+					position: relative;
+					top: auto;
+					left: auto;
+					right: auto;
+					transform: translateY(0);
+					margin-bottom: 0.5rem;
+				}
+
+
+
+			/* Legend */
+			#legend {
+				padding: 0.75rem 0 0.5rem 0;
+			}
+
+				#legend p {
+					font-size: 1rem;
+				}
+
+				#legend li {
+					margin: 0.25rem;
+				}
+
+			/* Progress tiles */
+			.progress-tile {
+				height: 3px;
+			}
+
+			/* Scroll triggers */
+			.scroll-triggers {
+				height: 200vh;
+			}
+
+				.scroll-triggers .step {
+					height: 50vh;
+				}
+
+			/* Language scrolly adjustments */
+			#language-scrolly figure {
+				top: 1vh;
+				height: 70vh;
+			}
+
+			#language-scrolly article {
+				height: 600vh;
+			}
+
+			#language-scrolly .step {
+				height: 100vh;
+			}
+
+				#language-scrolly .step:first-child {
+					margin-top: 40vh;
+				}
+
+				#language-scrolly .step:last-child {
+					margin-bottom: 40vh;
+				}
 		}
+		/* Large devices (desktops, 992px and up) */
+		@media (min-width: 992px) {
+			/* Sticky container */
+			/*.scrolly-sticky-container {
+		top: 2vh;
+		
+	}*/
 
-	/* Typography */
-	.step_header {
-		font-size: 1.2rem;
-		margin-bottom: 0.5rem;
-	}
+			.scrolly-text-container {
+				padding: 1rem;
+			}
 
-	.step-text p {
-		line-height: 1.5;
-		margin-bottom: 0.5rem;
-	}
 
-	.scrollytell-title {
-		font-size: 1.2rem;
-	}
+			.chart-title {
+				font-size: 1.1rem;
+				margin-bottom: 0.5rem;
+			}
 
-	/* Chart sizing */
-	#scrollychart1,
-	#scrollychart2,
-	#plotchart {
-		height: 260px !important;
-	}
+			#legend {
+				padding: 1rem 0 .75rem 0;
+			}
 
-	#plotchart {
-		height: 400px !important;
-	}
+				#legend p {
+					font-size: 1rem;
+				}
 
-	.chart-title {
-		margin-bottom: 0.25rem;
-	}
+				#legend li {
+					margin: 0.5rem;
+				}
 
-	/* Legend */
-	#legend {
-		padding: 0.75rem 0 0.5rem 0;
-	}
+			/* Progress tiles */
+			.scrollytell-tiles {
+				gap: 2rem;
+			}
 
-		#legend p {
-			font-size: 1rem;
+			.progress-tile {
+				height: 4px;
+			}
+
+			/* Scroll triggers */
+			.scroll-triggers {
+				height: 400vh;
+			}
+
+				.scroll-triggers .step {
+					height: 100vh;
+				}
+
+			/* Language scrolly */
+			#language-scrolly figure {
+				top: 1vh;
+				height: 80vh;
+			}
+
+			#language-scrolly article {
+				height: 400vh;
+			}
+
+			#language-scrolly .step {
+				height: 100vh;
+			}
+
+				#language-scrolly .step:first-child {
+					margin-top: 50vh;
+				}
+
+				#language-scrolly .step:last-child {
+					margin-bottom: 50vh;
+				}
+
+
+				#language-scrolly .step p {
+					max-width: 100%;
+					transition: all 1s ease;
+				}
 		}
+		/* Extra large devices (large desktops, 1200px and up) */
+		@media (min-width: 1200px) {
 
-		#legend li {
-			margin: 0.25rem;
-		}
-
-	/* Progress tiles */
-	.progress-tile {
-		height: 3px;
-	}
-
-	/* Scroll triggers */
-	.scroll-triggers {
-		height: 200vh;
-	}
-
-		.scroll-triggers .step {
-			height: 50vh;
-		}
-
-	/* Language scrolly adjustments */
-	#language-scrolly figure {
-		top: 1vh;
-		height: 70vh;
-	}
-
-	#language-scrolly article {
-		height: 600vh; /* ✅ INCREASED */
-	}
-
-	#language-scrolly .step {
-		margin: 0 auto 50vh auto; /* ✅ More spacing */
-		height: 120vh; /* ✅ LARGER interaction zones */
-	}
-
-	#language-scrolly .step:first-child {
-		margin-top: 40vh;
-	}
-
-	#language-scrolly .step:last-child {
-		margin-bottom: 40vh;
-	}
-
-	#language-scrolly .step p {
-		font-size: 1.5rem;
-		padding: 2rem;
-		transition: all 0.9s ease; /* ✅ SLOWER */
-	}
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-	/* Sticky container */
-	.scrolly-sticky-container {
-		top: 3vh;
-		min-height: 100vh;
-	}
-
-	.scrolly-text-container {
-		padding: 1.25rem;
-	}
-
-	/* Typography */
-	.step_header {
-		font-size: 1.2rem;
-	}
-
-	.step-text p {
-		font-size: 1.1rem;
-	}
-
-	.chart-title {
-		font-size: 1.1rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.scrollytell-title-left {
-		font-size: 1.3rem;
-	}
-
-	/* Chart sizing */
-	#scrollychart1,
-	#scrollychart2,
-	#plotchart {
-		height: 290px !important;
-	}
-
-	#plotchart {
-		height: 450px !important;
-	}
-
-	/* Legend */
-	#legend {
-		padding: 1rem 0 .75rem 0;
-	}
-
-		#legend p {
-			font-size: 1rem;
-		}
-
-		#legend li {
-			margin: 0.5rem;
-		}
-
-	/* Progress tiles */
-	.scrollytell-tiles {
-		gap: 3rem;
-	}
-
-	.progress-tile {
-		height: 4px;
-	}
-
-	/* Scroll triggers */
-	.scroll-triggers {
-		height: 400vh;
-	}
-
-		.scroll-triggers .step {
-			height: 100vh;
-		}
-
-	/* Language scrolly */
-	#language-scrolly figure {
-		top: 1vh;
-		height: 80vh;
-	}
-
-	#language-scrolly article {
-		height: 800vh; /* ✅ INCREASED for very gradual scrolling */
-	}
-
-	#language-scrolly .step {
-			margin: 0 auto 60vh auto; /* ✅ INCREASED spacing between steps */
-		height: 150vh; /* ✅ VERY LARGE interaction zones */
-	}
-
-	#language-scrolly .step:first-child {
-		margin-top: 50vh; /* ✅ More lead-in space */
-	}
-
-	#language-scrolly .step:last-child {
-		margin-bottom: 50vh; /* ✅ More lead-out space */
-	}
-
-		#language-scrolly figure video {
-			width: 100%;
-			height: 100%;
-		}
-
-	#language-scrolly .step p {
-		font-size: 1.5rem;
-		padding: 1.5rem;
-		max-width: 100%;
-		transition: all 1s ease; /* ✅ SLOWEST transition for desktop */
-	}
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-	/* Typography */
-	.step_header {
-		font-size: 1.2rem;
-	}
-
-	/* Chart sizing */
-	#scrollychart1,
-	#scrollychart2,
-	#plotchart {
-		height: 320px !important;
-	}
-
-	#plotchart {
-		height: 500px !important;
-	}
-
-	/* Sticky container */
+			/*
 	.scrolly-sticky-container {
 		min-height: 45vh;
-	}
+	}*/
 
-	/* Scroll triggers */
-	.scroll-triggers {
-		height: 140vh;
-	}
+			.scroll-triggers {
+				height: 140vh;
+			}
 
-		.scroll-triggers .step {
-			height: 35vh;
+				.scroll-triggers .step {
+					height: 35vh;
+				}
 		}
-}
-
-/* ==========================================================================
+		/* ==========================================================================
    ACCESSIBILITY & SPECIAL CASES
    ========================================================================== */
+		/* Mobile responsive adjustments */
+		@media (max-width: 767px) {
+			.scrollytell-header-minimal {
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 0.75rem;
+			}
 
-/* Mobile responsive adjustments */
-@media (max-width: 767px) {
-	.scrollytell-header-minimal {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.75rem;
-	}
 
-	.scrollytell-title-left {
-		font-size: 1rem;
-	}
-
-	.progress-tile {
-		width: 16px;
-		height: 6px;
-	}
-}
-
-/* Touch devices */
-@media (hover: none) and (pointer: coarse) {
-	.step-text {
-		transition-duration: 0.2s;
-	}
-
-	#legend {
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.progress-tile:hover {
-		background-color: #d6d8db;
-		transform: none;
-	}
-
-	.progress-tile.active:hover {
-		background-color: #495057;
-	}
-}
-
-/* High-DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-	.chart-title {
-		font-size: calc(1rem - 0.05rem);
-	}
-
-	#legend p {
-		font-size: calc(0.9rem - 0.05rem);
-	}
-}
-
-/* Reduced motion accessibility */
-@media (prefers-reduced-motion: reduce) {
-	.step-text,
-	.step-text.active {
-		transition: opacity 0.2s ease;
-		transform: none;
-	}
-
-	#legend ul {
-		transition: none;
-	}
-
-	.progress-tile {
-		transition: background-color 0.2s ease;
-		transform: none;
-	}
-
-		.progress-tile:hover,
-		.progress-tile:active,
-		.progress-tile.active {
-			transform: none;
+			.progress-tile {
+				height: 6px;
+			}
 		}
+		/* Touch devices */
+		@media (hover: none) and (pointer: coarse) {
+			.step-text {
+				transition-duration: 0.2s;
+			}
 
-		.progress-tile[role="button"] {
-			animation: none;
-		}
-}
+			#legend {
+				-webkit-overflow-scrolling: touch;
+			}
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-	.step-text.active .step_header,
-	.step-text.active p {
-		color: #f0f0f0;
-	}
-
-	.chart-title {
-		color: #e0e0e0;
-	}
-
-	.scrollytell-title-left {
-		color: #f8f9fa;
-	}
-
-	.progress-tile {
-		background-color: #6c757d;
-	}
-
-		.progress-tile:hover {
-			background-color: #868e96;
-		}
-
-		.progress-tile:focus {
-			border-color: #66d9ff;
-			box-shadow: 0 0 0 2px rgba(102, 217, 255, 0.25);
-		}
-
-		.progress-tile.active {
-			background-color: #adb5bd;
-		}
+			.progress-tile:hover {
+				background-color: #d6d8db;
+				transform: none;
+			}
 
 			.progress-tile.active:hover {
-				background-color: #ced4da;
+				background-color: #495057;
 			}
-}
+		}
+		/* High-DPI displays */
+		@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+			.chart-title {
+				font-size: 1.3rem;
+			}
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-	.progress-tile {
-		border: 2px solid currentColor;
-		background-color: transparent;
-	}
+			#legend p {
+				font-size: calc(0.9rem - 0.05rem);
+			}
+		}
+		/* Reduced motion accessibility */
+		@media (prefers-reduced-motion: reduce) {
+			.step-text,
+			.step-text.active {
+				transition: opacity 0.2s ease;
+				transform: none;
+			}
 
-		.progress-tile.active {
-			background-color: currentColor;
+			#legend ul {
+				transition: none;
+			}
+
+			.progress-tile {
+				transition: background-color 0.2s ease;
+				transform: none;
+			}
+
+				.progress-tile:hover,
+				.progress-tile:active,
+				.progress-tile.active {
+					transform: none;
+				}
+
+				.progress-tile[role="button"] {
+					animation: none;
+				}
 		}
 
-		.progress-tile:focus {
-			outline: 3px solid currentColor;
-			outline-offset: 2px;
+
+
+		@media print {
+
+			html, body {
+				font-size: 13pt !important;
+				line-height: 1.5 !important;
+				color: #000 !important;
+			}
+
+			/* Hide scrolly chart containers */
+			.scrolly-charts-container,
+			.scrolly-sticky-container,
+			.scrollytell-header-minimal,
+			.scrollytell-tiles,
+			.scroll-triggers,
+			#legend {
+				display: none !important;
+			}
+
+			.container-piechart,
+			figure.chart,
+			.chart-title,
+			#scrollychart1,
+			#scrollychart2,
+			#plotchart,
+			#wordchart,
+			#parenthesisChart,
+			#sunburst {
+				page-break-inside: avoid !important;
+				break-inside: avoid !important;
+			}
+
+			/* Hide all <video> elements */
+			video {
+				display: none !important;
+			}
+
+			.container-piechart,
+			figure.chart,
+			.container-piechart > figure.chart {
+				margin-left: auto !important;
+				margin-right: auto !important;
+				display: block !important;
+				text-align: center !important;
+			}
+
+			/* Show step text */
+			.step-text {
+				display: block !important;
+				opacity: 1 !important;
+				position: static !important;
+				background: none !important;
+				color: #000 !important;
+				border: none !important;
+				box-shadow: none !important;
+				padding: 0.5em 0 !important;
+			}
+
+			/* Show other charts (not inside .scrolly-charts-container) */
+			.container-piechart,
+			figure.chart {
+				display: block !important;
+			}
+
+			.container, .row, .col, .main {
+				width: 100% !important;
+				max-width: 100% !important;
+				margin: 0 !important;
+				padding: 0 !important;
+			}
+
+			.lesson-section {
+				width: 90% !important;
+				max-width: 90% !important;
+				margin-left: auto !important;
+				margin-right: auto !important;
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+
+			#language-scrolly,
+			#language-scrolly article,
+			#language-scrolly .step {
+				height: auto !important;
+				min-height: 0 !important;
+				max-height: none !important;
+				overflow: visible !important;
+				display: block !important;
+			}
+
+				#language-scrolly .step {
+					opacity: 1 !important;
+					color: #000 !important;
+					background: none !important;
+					box-shadow: none !important;
+					position: static !important;
+					width: 100% !important;
+					margin: 1em 0 !important;
+					align-items: flex-start !important;
+					justify-content: flex-start !important;
+				}
+
+					#language-scrolly .step p {
+						background: none !important;
+						color: #000 !important;
+						box-shadow: none !important;
+						max-width: 100% !important;
+						padding: 0 !important;
+						margin: 0 0 1em 0 !important;
+						text-align: left !important;
+					}
+
+				#language-scrolly figure,
+				#language-scrolly video {
+					display: none !important;
+				}
 		}
-}
 
-/* Print styles */
-@media print {
-	.scrolly-sticky-container {
-		position: static;
-		height: auto;
-		min-height: auto;
-	}
-
-	.step-text {
-		position: static;
-		opacity: 1;
-		transform: none;
-	}
-
-	.scroll-triggers {
-		display: none;
-	}
-
-	.progress-tile {
-		display: none;
-	}
-}

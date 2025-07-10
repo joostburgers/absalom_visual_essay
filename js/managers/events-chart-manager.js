@@ -43,7 +43,7 @@ export class EventsChartManager {
         this.lastAnimatedStep = -1;
         this.animationInProgress = false;
         this.hoverstring = [];
-        // Use faulkner colorway instead of hardcoded colors
+       
         this.scatterPlotColors = [
             faulknerChartStyles.colorway[2],
             faulknerChartStyles.colorway[0],
@@ -429,19 +429,19 @@ export class EventsChartManager {
         return {
             sutpen_plot: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br>Major Events in Sutpen's Life in Plot Order" },
+                title: { text: "Major Events in Sutpen's Life in Plot Order" },
                 xaxis: this.createAxisConfig("Chapter", sutpen_x_tickvals, sutpen_x_range),
                 yaxis: this.createAxisConfig("Chronology", sutpen_y_tickvals, sutpen_y_range)
             },
             sutpen_story: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br>Major Events in Sutpen's Life in Story Order" },
+                title: { text: "Major Events in Sutpen's Life in Story Order" },
                 xaxis: this.createAxisConfig("Chapter", sutpen_x_tickvals, sutpen_x_range),
                 yaxis: this.createAxisConfig("Chronology", sutpen_y_tickvals, sutpen_y_range)
             },
             absalom_plot: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Plot Order" },
+                title: { text: "<i>Absalom, Absalom!</i> in Plot Order" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
@@ -449,7 +449,7 @@ export class EventsChartManager {
             },
             absalom_narrated: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> Narrated Events" },
+                title: { text: "<i>Absalom, Absalom!</i> Narrated Events" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
@@ -457,7 +457,7 @@ export class EventsChartManager {
             },
             absalom_narrated_told: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> Narrated and Told Events" },
+                title: { text: "<i>Absalom, Absalom!</i> Narrated and Told Events" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
@@ -465,7 +465,7 @@ export class EventsChartManager {
             },
             absalom_narrated_told_other: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> Narrated, Told, and Other Events" },
+                title: { text: "<i>Absalom, Absalom!</i> Narrated, Told, and Other Events" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
@@ -473,7 +473,7 @@ export class EventsChartManager {
             },
             absalom_story: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Story Order with Major Events" },
+                title: { text: "<i>Absalom, Absalom!</i> in Story Order with Major Events" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
@@ -481,7 +481,7 @@ export class EventsChartManager {
             },
             absalom_date: {
                 ...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-                title: { text: "<b>Narrative Structure Chart</b> <br><i>Absalom, Absalom!</i> in Date Order" },
+                title: { text: "<i>Absalom, Absalom!</i> in Date Order" },
                 showlegend: true,
                 legend: { title: { text: "Legend" } },
                 xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),

@@ -1,0 +1,249 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\css\\scroll_chart_style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:css\\scroll_chart_style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\css\\learning_module.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:css\\learning_module.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\faulkner-chart-styles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\config\\faulkner-chart-styles.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\chart-configs.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\config\\chart-configs.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\language-chart-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\managers\\language-chart-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\events-chart-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\managers\\events-chart-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\app-config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\config\\app-config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|c:\\users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\scrollytell-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{060F0039-2A6F-4ADE-8742-A61418575358}|C:\\Users\\joost\\source\\repos\\absalom_visual_essay|solutionrelative:js\\managers\\scrollytell-manager.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "app.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\app.js",
+              "RelativeDocumentMoniker": "js\\app.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\app.js",
+              "RelativeToolTip": "js\\app.js",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAiwHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T14:27:56.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "faulkner-chart-styles.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\faulkner-chart-styles.js",
+              "RelativeDocumentMoniker": "js\\config\\faulkner-chart-styles.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\faulkner-chart-styles.js",
+              "RelativeToolTip": "js\\config\\faulkner-chart-styles.js",
+              "ViewState": "AgIAACsAAAAAAAAAAAAAAEEAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T02:46:28.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "language-chart-manager.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\language-chart-manager.js",
+              "RelativeDocumentMoniker": "js\\managers\\language-chart-manager.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\language-chart-manager.js",
+              "RelativeToolTip": "js\\managers\\language-chart-manager.js",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAywA8AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T02:43:01.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "app-config.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\app-config.js",
+              "RelativeDocumentMoniker": "js\\config\\app-config.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\app-config.js",
+              "RelativeToolTip": "js\\config\\app-config.js",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAD0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T02:39:43.005Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "chart-configs.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\chart-configs.js",
+              "RelativeDocumentMoniker": "js\\config\\chart-configs.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\config\\chart-configs.js",
+              "RelativeToolTip": "js\\config\\chart-configs.js",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAEYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T01:55:33.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "events-chart-manager.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\events-chart-manager.js",
+              "RelativeDocumentMoniker": "js\\managers\\events-chart-manager.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\events-chart-manager.js",
+              "RelativeToolTip": "js\\managers\\events-chart-manager.js",
+              "ViewState": "AgIAAG8CAAAAAAAAAAAAAD0CAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-09T01:55:24.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "scrollytell-manager.js",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\scrollytell-manager.js",
+              "RelativeDocumentMoniker": "js\\managers\\scrollytell-manager.js",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\js\\managers\\scrollytell-manager.js",
+              "RelativeToolTip": "js\\managers\\scrollytell-manager.js",
+              "ViewState": "AgIAALkAAAAAAAAAAAAEwMsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-07-08T20:11:20.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "learning_module.css",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\css\\learning_module.css",
+              "RelativeDocumentMoniker": "css\\learning_module.css",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\css\\learning_module.css",
+              "RelativeToolTip": "css\\learning_module.css",
+              "ViewState": "AgIAAMcAAAAAAAAAAIAywMcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-08T01:55:58.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "scroll_chart_style.css",
+              "DocumentMoniker": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\css\\scroll_chart_style.css",
+              "RelativeDocumentMoniker": "css\\scroll_chart_style.css",
+              "ToolTip": "C:\\Users\\joost\\source\\repos\\absalom_visual_essay\\css\\scroll_chart_style.css",
+              "RelativeToolTip": "css\\scroll_chart_style.css",
+              "ViewState": "AgIAAHgBAAAAAAAAAAAwwIkBAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-07-08T01:14:58.012Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
