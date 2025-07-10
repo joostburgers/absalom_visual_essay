@@ -28,7 +28,7 @@ export const demographyPresentDataFiltered = demographyPresentData.filter(item =
 export const wordsPerSentenceData = [
     {
         x: ["<i>Moby Dick</i><br> Herman Melville", "<i>Huckleberry Finn</i><br>Mark Twain", "<i>The Great Gatsby</i><br>F. Scott Fitzgerald", "<i>Absalom, Absalom!</i><br>William Faulkner", "<i>Beloved</i><br> Toni Morrison"],
-        y: [22, 19, 14, 50, 12],
+        y: [22, 19, 14, 43, 12],
         type: 'bar',
         marker: {
             color: [

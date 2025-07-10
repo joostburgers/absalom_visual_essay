@@ -2,4 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/index.html
+# Ignore all files and folders inside any .vs directory
+**/.vs/
