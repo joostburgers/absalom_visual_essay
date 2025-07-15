@@ -36,14 +36,6 @@ export function debounce(func, wait) {
     };
 }
 
-export function processCSVData(response, fieldMappings) {
-    const data = $.csv.toObjects(response, { headers: true });
-    const plotData = {};
-    Object.entries(fieldMappings).forEach(([key, transformer]) => {
-        plotData[key] = data.map(transformer);
-    });
-    return plotData;
-}
 
 export function waitForDependencies() {
     return new Promise((resolve) => {

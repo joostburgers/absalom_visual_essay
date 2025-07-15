@@ -1,20 +1,15 @@
 ﻿import { demographyChartData, demographyPresentDataFiltered, SUNBURST_DATA } from '../data/chart-data.js';
 import { CONFIG } from '../config/app-config.js';
 import { CHART_CONFIGS } from '../config/chart-configs.js';
-import { getRaceColor, getRaceColorWithOpacity, createRaceColorArray } from '../utils/chart-utilities.js';
-// ADD THIS IMPORT:
+import { getRaceColor, getRaceColorWithOpacity} from '../utils/chart-utilities.js';
 import { faulknerBaseLayout } from '../config/faulkner-chart-styles.js';
 
-
 export function initializeCharts(chartElements, colorMappings) {
-   
-
     // Check if Plotly is available
     if (typeof Plotly === 'undefined') {
         console.error('❌ Plotly is not defined!');
         return;
     }
-    console.log('✅ Plotly is available:', Plotly);
 
     const charts = [
         {
@@ -31,60 +26,34 @@ export function initializeCharts(chartElements, colorMappings) {
         }
     ];
 
-    
-
     charts.forEach((chart, index) => {
-        console.log(`🎯 Processing chart ${index + 1}: ${chart.id}`);
-        console.log(`🎯 Element found:`, chart.element);
-        console.log(`🎯 Chart data:`, chart.data);
-        console.log(`🎯 Chart layout:`, chart.layout);
-
         if (chart.element) {
-            console.log(`🎯 Creating Plotly chart: ${chart.id}`);
             try {
                 Plotly.newPlot(chart.id, chart.data, chart.layout, CHART_CONFIGS.PLOTLY)
-                    .then(() => {
-                        console.log(`✅ Successfully created chart: ${chart.id}`);
-                    })
                     .catch(error => {
                         console.error(`❌ Error creating chart ${chart.id}:`, error);
-                        console.error(`❌ Error stack:`, error.stack);
                     });
             } catch (syncError) {
                 console.error(`❌ Synchronous error creating chart ${chart.id}:`, syncError);
-                console.error(`❌ Sync error stack:`, syncError.stack);
             }
         } else {
             console.error(`❌ Chart element not found for: ${chart.id}`);
-            console.error(`❌ Looking for element with ID: ${chart.id}`);
-            console.error(`❌ DOM element exists:`, document.getElementById(chart.id));
         }
     });
 }
 
 export function createPieData(data, chartTitle = '', colorMappings) {
-    console.log('🎯 createPieData called');
-    console.log('🎯 data:', data);
-    console.log('🎯 colorMappings:', colorMappings);
-
     if (!colorMappings) {
         console.error('❌ colorMappings is undefined!');
         return null;
     }
 
     const isChart1 = data === demographyChartData;
-    console.log('🎯 isChart1:', isChart1);
-
     const colors = isChart1 ? colorMappings.chart1?.base : colorMappings.chart2?.base;
     const borderColors = isChart1 ? colorMappings.chart1?.borders : colorMappings.chart2?.borders;
 
-    console.log('🎯 colors:', colors);
-    console.log('🎯 borderColors:', borderColors);
-
     if (!colors || !borderColors) {
         console.error('❌ Colors or borderColors missing!');
-        console.error('❌ colors:', colors);
-        console.error('❌ borderColors:', borderColors);
         return null;
     }
 
@@ -111,9 +80,9 @@ export function createPieData(data, chartTitle = '', colorMappings) {
         }
     }];
 
-    console.log('🎯 Created pie data:', pieData);
     return pieData;
 }
+
 export function createLegend(chartElements) {
     if (!chartElements.legend) {
         console.error('Legend container not found!');
@@ -224,7 +193,6 @@ export function updateLegendHighlighting(stepIndex, cachedLegendSpans) {
     }
 }
 
-// ... rest of your sunburst functions remain the same
 export function createLegendItem(item) {
     const li = document.createElement('li');
     const boxSpan = document.createElement("span");

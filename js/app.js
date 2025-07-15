@@ -34,7 +34,9 @@ waitForDependencies().then(() => {
             };
 
             const updateLegendHighlightingWithDeps = (stepIndex) => {
-                updateLegendHighlighting(stepIndex, cachedLegendSpans);
+                // Get cachedLegendSpans from the TOCManager instance
+                const legendSpans = tocManager.cachedLegendSpans;
+                updateLegendHighlighting(stepIndex, legendSpans);
             };
 
             // Initialize TOC with dependencies
