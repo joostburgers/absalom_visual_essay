@@ -16,6 +16,8 @@
 		margin-top: 2rem;
 	}
 
+/* TOC Styles */
+
 .toc-h1, .toc-h2 {
 	list-style-type: none;
 }
@@ -204,7 +206,7 @@
 
 /* Charts container */
 .scrolly-charts-container {
-	flex: 0 0 55%;
+	flex: 0 0 60%;
 	display: flex;
 	align-items: stretch;
 	justify-content: center;
@@ -223,7 +225,7 @@
 #plotchart {
 	width:100% !important;
 	height: 100% !important;
-	min-height:300px;
+	min-height:100px;
 }
 
 .chart-title {
@@ -433,6 +435,35 @@ figure.chart {
    ========================================================================== */
 		/* Small devices (landscape phones, 576px and up) */
 		@media (min-width: 576px) {
+
+			.scrollytell-header-minimal {
+				flex: 0 0 5%;
+				
+			}
+
+			.scrollytell-tiles {
+				flex: 0 0 5%;
+				
+			}
+
+			.scrolly-text-container {
+				flex: 0 0 35%;
+				
+			}
+
+			.scrolly-charts-container {
+				flex: 0 0 50%;
+				
+			}
+
+			/* Chart sizing - consolidated */
+			#scrollychart1,
+			#scrollychart2,
+			#plotchart {
+				
+				min-height: 200px;
+			}
+
 			/* Text containers */
 			.scrolly-text-container {
 				padding: .5rem;
@@ -442,6 +473,9 @@ figure.chart {
 				font-size: 1.1rem;
 			}
 
+			.step-text p {
+				line-height: 1.25rem;
+			}
 			#legend p {
 				font-size: 1rem;
 			}
@@ -469,12 +503,17 @@ figure.chart {
 		}
 		/* Medium devices (tablets, 768px and up) */
 		@media (min-width: 768px) {
-			/* Sticky container adjustments */
-			/*.scrolly-sticky-container {
-		top: 2vh;
-		min-height: 60vh;
-		max-height: 90vh;
-	}*/
+
+			
+
+			/* Chart sizing - consolidated */
+			#scrollychart1,
+			#scrollychart2,
+			#plotchart {
+				width: 100% !important;
+				height: 100% !important;
+				min-height: 200px;
+			}
 
 
 
@@ -497,7 +536,7 @@ figure.chart {
 					margin-bottom: 0.5rem;
 				}
 
-
+				
 
 			/* Legend */
 			#legend {
@@ -550,11 +589,15 @@ figure.chart {
 		}
 		/* Large devices (desktops, 992px and up) */
 		@media (min-width: 992px) {
-			/* Sticky container */
-			/*.scrolly-sticky-container {
-		top: 2vh;
-		
-	}*/
+			
+
+			/* Chart sizing - consolidated */
+			#scrollychart1,
+			#scrollychart2,
+			#plotchart {
+				
+				min-height: 300px;
+			}
 
 			.scrolly-text-container {
 				padding: 1rem;
@@ -564,6 +607,9 @@ figure.chart {
 			.chart-title {
 				font-size: 1.1rem;
 				margin-bottom: 0.5rem;
+			}
+			.step-text p {
+				line-height: 1.35rem;
 			}
 
 			#legend {
@@ -627,10 +673,19 @@ figure.chart {
 		/* Extra large devices (large desktops, 1200px and up) */
 		@media (min-width: 1200px) {
 
-			/*
-	.scrolly-sticky-container {
-		min-height: 45vh;
-	}*/
+			
+
+			/* Chart sizing - consolidated */
+			#scrollychart1,
+			#scrollychart2,
+			#plotchart {
+				
+				min-height: 300px;
+			}
+
+			.step-text p {
+				line-height:1.5rem;
+			}
 
 			.scroll-triggers {
 				height: 140vh;
@@ -785,7 +840,7 @@ figure.chart {
 				padding: 0 !important;
 			}
 
-			.lesson-section {
+			.essay-section {
 				width: 90% !important;
 				max-width: 90% !important;
 				margin-left: auto !important;
