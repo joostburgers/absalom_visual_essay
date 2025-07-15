@@ -8,7 +8,7 @@ export const CHART_CONFIGS = {
         ...faulknerBaseLayout,
         showlegend: false,
         margin: { l: 10, r: 10, b: 0, t: 0, pad: 0 },
-        title: { text: "" } // Override title for pie charts
+		title: { text: "" } // Override title for pie charts
     },
 
     // Sunburst layout using faulkner styles

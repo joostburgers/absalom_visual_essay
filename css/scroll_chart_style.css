@@ -2,6 +2,41 @@
    BASE STYLES (Mobile First - applies to all screen sizes)
    ========================================================================== */
 
+   /*lesson section show hides*/
+.essay-section {
+	
+	display: none;
+	position: relative;
+	z-index: 1;
+	background: white;
+}
+
+	.essay-section.active {
+		display: block;
+		margin-top: 2rem;
+	}
+
+.toc-h1, .toc-h2 {
+	list-style-type: none;
+}
+
+.toc-h1 {
+	padding-left: 0;
+	margin-top: 5px;
+	font-family: Geneva, Helvetica, Arial, sans-serif;
+	font-weight: 600;
+}
+
+.toc-h2 {
+	padding-left: 10px;
+}
+
+	.toc-h2 a {
+		padding-left: 0px;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		font-weight: 400;
+		color: #474646;
+	}
 /* Common scrolly section styles */
 #characters-scrolly,
 #event-scrolly {
@@ -12,7 +47,6 @@
 
 #language-scrolly {
 	position: relative;
-	background-color: #f3f3f3;
 	padding: 1rem;
 	min-height: 100vh;
 }
@@ -100,7 +134,7 @@
 
 /* Text container */
 .scrolly-text-container {
-	flex: 0 0 35%;
+	flex: 0 0 30%;
 	margin: .5rem 0 1rem 0;
 	overflow: hidden;
 	position: relative;
@@ -157,11 +191,11 @@
 
 .step-text p {
 	color: #fff;
-	margin-bottom: 0.4rem;
+	
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
-	line-height: 1rem;
+	line-height: 1.1rem;
 }
 
 .step-text.active p {
@@ -170,7 +204,7 @@
 
 /* Charts container */
 .scrolly-charts-container {
-	flex: 0 0 50%;
+	flex: 0 0 55%;
 	display: flex;
 	align-items: stretch;
 	justify-content: center;
@@ -187,9 +221,9 @@
 #scrollychart1,
 #scrollychart2,
 #plotchart {
-	width: 100% !important;
+	width:100% !important;
 	height: 100% !important;
-	min-height: 200px;
+	min-height:300px;
 }
 
 .chart-title {
