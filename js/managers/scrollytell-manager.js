@@ -1,4 +1,4 @@
-import { CONFIG, setCurrentCharactersStep, setCurrentEventsStep, currentCharactersStep, currentEventsStep } from '../config/app-config.js';
+﻿import { CONFIG, setCurrentCharactersStep, setCurrentEventsStep, currentCharactersStep, currentEventsStep } from '../config/app-config.js';
 
 
 export class ScrollytellProgressManager {
@@ -6,10 +6,12 @@ export class ScrollytellProgressManager {
         this.sections = new Map();
         this.initialized = false;
         this.clickHandlers = new Map();
-        // IMPROVED: Use longer cooldown for events due to animation complexity
+        // ✅ IMPROVED: More robust tile click tracking
         this.lastTileClickTime = 0;
-        this.tileClickCooldown = 500; // Increased to 500ms for events
-        this.lastClickedSection = null; // Track which section was clicked
+        this.tileClickCooldown = 1000; // ✅ Increased to 1 second
+        this.lastClickedSection = null;
+        this.isNavigatingToStep = false; // ✅ NEW: Flag to indicate active navigation
+        this.targetStepIndex = null; // ✅ NEW: Track target step during navigation
     }
 
     init() {
@@ -97,48 +99,68 @@ export class ScrollytellProgressManager {
         config.tilesContainer.appendChild(fragment);
     }
 
-    // ENHANCED: More sophisticated navigation with section-specific handling
+    // ✅ ENHANCED: Better navigation with proper scroll suppression
     navigateToStep(sectionName, targetStepIndex) {
-        console.log(`Navigating to ${sectionName} step ${targetStepIndex + 1}`);
+        console.log(`🎯 TILE NAVIGATION: Jumping to ${sectionName} step ${targetStepIndex + 1}`);
 
-        // Record tile click time and section for section-specific debouncing
+        // ✅ Set navigation flags to suppress scroll handlers
+        this.isNavigatingToStep = true;
+        this.targetStepIndex = targetStepIndex;
         this.lastTileClickTime = Date.now();
         this.lastClickedSection = sectionName;
 
-        //  FIXED: Use setter functions instead of direct assignment
+        // Update global step immediately
         if (sectionName === 'characters') {
             setCurrentCharactersStep(targetStepIndex);
-            console.log(`Set currentCharactersStep to: ${currentCharactersStep}`);
+            console.log(`Set currentCharactersStep to: ${targetStepIndex}`);
         } else if (sectionName === 'events') {
             setCurrentEventsStep(targetStepIndex);
-            console.log(`Set currentEventsStep to: ${currentEventsStep}`);
+            console.log(`Set currentEventsStep to: ${targetStepIndex}`);
         }
 
         // Update progress immediately
         this.updateProgress(sectionName, targetStepIndex);
 
-        // Trigger the appropriate chart/text updates
+        // Trigger the chart/text updates immediately
         if (sectionName === 'characters') {
             this.triggerCharactersStep(targetStepIndex);
         } else if (sectionName === 'events') {
             this.triggerEventsStep(targetStepIndex);
         }
 
-        // Use INSTANT scroll to avoid triggering intermediate scroll events
-        this.scrollToSectionInstant(sectionName, targetStepIndex);
+        // ✅ IMPROVED: Scroll with better timing
+        this.scrollToStepWithSuppressionTimeout(sectionName, targetStepIndex);
     }
 
-    // ENHANCED: Section-aware debouncing
+    // ✅ NEW: Scroll with proper timeout to clear navigation flags
+    scrollToStepWithSuppressionTimeout(sectionName, stepIndex) {
+        // Do the scroll
+        this.scrollToSectionInstant(sectionName, stepIndex);
+        
+        // ✅ Clear navigation flags after a delay to allow scroll to complete
+        setTimeout(() => {
+            this.isNavigatingToStep = false;
+            this.targetStepIndex = null;
+            console.log(`🎯 Navigation to ${sectionName} step ${stepIndex + 1} complete - scroll handlers re-enabled`);
+        }, this.tileClickCooldown); // Use the same timeout as debouncing
+    }
+
+    // ✅ ENHANCED: Much more robust debouncing
     wasRecentTileClick(sectionName = null) {
         const timeSinceClick = Date.now() - this.lastTileClickTime;
         const isRecent = timeSinceClick < this.tileClickCooldown;
+        
+        // ✅ IMPROVED: Multiple conditions for suppression
+        const shouldSuppress = 
+            isRecent || // Recent tile click
+            this.isNavigatingToStep || // Currently in navigation
+            (sectionName && this.lastClickedSection === sectionName && isRecent); // Section-specific recent click
 
-        // If section-specific check requested, also verify it matches
-        if (sectionName && this.lastClickedSection) {
-            return isRecent && (this.lastClickedSection === sectionName);
+        if (shouldSuppress) {
+            console.log(`🚫 Scroll handler suppressed: recent=${isRecent}, navigating=${this.isNavigatingToStep}, section=${sectionName}`);
         }
 
-        return isRecent;
+        return shouldSuppress;
     }
 
     triggerCharactersStep(stepIndex) {
@@ -169,6 +191,11 @@ export class ScrollytellProgressManager {
 
     triggerEventsStep(stepIndex) {
         // Update step text
+        console.log(`🎯 TILE CLICK: Triggering events step ${stepIndex}`);
+        console.log(`🎯 Previous events step was: ${currentEventsStep}`);
+
+
+
         const eventsStepTexts = document.querySelectorAll('#event-scrolly .step-text');
         eventsStepTexts.forEach(text => text.classList.remove('active'));
 
@@ -179,7 +206,10 @@ export class ScrollytellProgressManager {
 
         // Use the globally exposed events chart manager
         if (window.eventsChartManager && window.eventsChartManager.chartReady) {
-            window.eventsChartManager.startAnimation(stepIndex);
+          
+            console.log(`🎯 Chart manager last animated step: ${window.eventsChartManager.lastAnimatedStep}`);
+
+            window.eventsChartManager.createChart(stepIndex); // ✅ Changed method name
         } else {
             console.warn('Events chart manager not ready for tile navigation');
         }
@@ -187,43 +217,47 @@ export class ScrollytellProgressManager {
         console.log(`Events step ${stepIndex + 1} activated via tile click`);
     }
 
-    // ENHANCED: Better step element targeting for events
+    // ✅ ENHANCED: Better scroll targeting to avoid intermediate triggers
     scrollToSectionInstant(sectionName, stepIndex) {
-        // For events, be more specific about finding the right step element
+        console.log(`🎯 Scrolling to ${sectionName} step ${stepIndex}`);
+        
         let stepElement;
 
         if (sectionName === 'events') {
-            // Events section uses event-scrolly and might have different structure
             stepElement = document.querySelector(`#event-scrolly .scroll-triggers .step[data-step="${stepIndex}"]`);
         } else {
-            // Characters section
             stepElement = document.querySelector(`#${sectionName}-scrolly .scroll-triggers .step[data-step="${stepIndex}"]`);
         }
 
         if (stepElement) {
+            // ✅ IMPROVED: Use scrollIntoView with more precise timing
             stepElement.scrollIntoView({
-                behavior: 'auto', // INSTANT instead of smooth
-                block: 'center'
+                behavior: 'auto', // Instant scroll
+                block: 'center',
+                inline: 'nearest'
             });
+            
+            console.log(`✅ Scrolled to step element for ${sectionName} step ${stepIndex}`);
         } else {
-            console.warn(`Step element not found for ${sectionName} step ${stepIndex}`);
-            // Fallback to section scroll if step element not found
+            console.warn(`⚠️ Step element not found for ${sectionName} step ${stepIndex}`);
+            
+            // Fallback to section scroll
             const sectionElement = document.getElementById(`${sectionName}-scrolly`) ||
-                document.getElementById(`event-scrolly`); // Special case for events
+                document.getElementById(`event-scrolly`);
             if (sectionElement) {
                 sectionElement.scrollIntoView({
-                    behavior: 'auto', // INSTANT
+                    behavior: 'auto',
                     block: 'center'
                 });
             }
         }
     }
 
+    // ✅ ENHANCED: Add navigation state to progress updates
     updateProgress(sectionName, stepIndex) {
         const section = this.sections.get(sectionName);
         if (!section) return;
 
-        // Convert to 1-based indexing for display
         const currentStep = stepIndex + 1;
 
         // Update progress tiles
@@ -238,10 +272,10 @@ export class ScrollytellProgressManager {
             });
         }
 
-        // Store current step
         section.currentStep = currentStep;
 
-        console.log(`Progress updated for ${sectionName}: Step ${currentStep}/${section.totalSteps}`);
+        const navState = this.isNavigatingToStep ? ' (navigating)' : '';
+        console.log(`Progress updated for ${sectionName}: Step ${currentStep}/${section.totalSteps}${navState}`);
     }
 
     getSectionProgress(sectionName) {

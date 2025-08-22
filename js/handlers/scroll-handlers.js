@@ -1,4 +1,4 @@
-import { CONFIG, currentCharactersStep, currentEventsStep, setCurrentCharactersStep, setCurrentEventsStep } from '../config/app-config.js';
+﻿import { CONFIG, currentCharactersStep, currentEventsStep, setCurrentCharactersStep, setCurrentEventsStep } from '../config/app-config.js';
 
 export function handleCharactersStepEnter(response, progressManager, updateChartHighlighting, updateLegendHighlighting) {
     // ENHANCED: Section-specific debouncing
@@ -36,22 +36,21 @@ export function handleCharactersStepEnter(response, progressManager, updateChart
 }
 
 export function handleEventsStepEnter(response, progressManager, eventsChartManager) {
-    // ENHANCED: Section-specific debouncing with longer timeout for events
+    // ✅ ENHANCED: More comprehensive scroll suppression
     if (progressManager && progressManager.wasRecentTileClick('events')) {
-        console.log('Events scroll handler ignored due to recent tile click');
+        console.log('🚫 Events scroll handler suppressed due to recent tile click/navigation');
         return;
     }
 
     console.log(`Events scroll handler: response.index=${response.index}, currentEventsStep=${currentEventsStep}`);
 
-    // Only update if we're not already at this step
+    // ✅ ENHANCED: Check if we're already at this step
     if (currentEventsStep === response.index) {
         console.log('Events step already at target, skipping scroll update');
         return;
     }
 
-    console.log(`Updating events from scroll: ${currentEventsStep} -> ${response.index}`);
-    //  FIXED: Use setter function instead of direct assignment
+    console.log(`✅ Updating events from scroll: ${currentEventsStep} -> ${response.index}`);
     setCurrentEventsStep(response.index);
 
     // Rest of the handler logic...
@@ -64,7 +63,7 @@ export function handleEventsStepEnter(response, progressManager, eventsChartMana
     }
 
     if (eventsChartManager && eventsChartManager.chartReady) {
-        eventsChartManager.startAnimation(response.index);
+        eventsChartManager.createChart(response.index);
     }
 
     if (progressManager) {
