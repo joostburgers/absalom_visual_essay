@@ -54,7 +54,7 @@ export const wordsPerSentenceData = [
 ];
 
 // Pre-structured sunburst data with proper types
-export const SUNBURST_DATA = [
+export const characterSunburstData = [
     { labels: "Total", values: 418843, parents: "", ids: "", race: "", percent: "" },
     { labels: "White", values: 320567, parents: "Total", ids: "Total - White", race: "Total", percent: "77" },
     { labels: "Mixed Ancestry", values: 66452, parents: "Total", ids: "Total - Mixed Ancestry", race: "Total", percent: "16" },

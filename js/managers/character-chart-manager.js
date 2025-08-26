@@ -1,9 +1,11 @@
-﻿import { demographyChartData, demographyPresentDataFiltered, SUNBURST_DATA } from '../data/chart-data.js';
+﻿import { demographyChartData, demographyPresentDataFiltered, characterSunburstData } from '../data/chart-data.js';
 import { CONFIG } from '../config/app-config.js';
 import { CHART_CONFIGS } from '../config/chart-configs.js';
 import { getRaceColor, getRaceColorWithOpacity} from '../utils/chart-utilities.js';
 import { faulknerBaseLayout } from '../config/faulkner-chart-styles.js';
 
+
+//This manager creates the pie charts and the sunburst chart on the character page. It also manages the legend and the highlighting effects as the user scrolls through the sections. Plotly does not have a native way to animate pie charts so one is used here. It uses Plotly for rendering the charts and provides functions to update the charts based on user interaction.
 export function initializeCharts(chartElements, colorMappings) {
     // Check if Plotly is available
     if (typeof Plotly === 'undefined') {
@@ -237,9 +239,7 @@ export function createLegendItem(item) {
 
 export function generateSunburstColors(data) {
     return data.map(item => {
-        if (item.labels === "Total") {
-            return CHART_CONFIGS.SUNBURST.TOTAL_COLOR + CONFIG.OPACITY.TOTAL;
-        }
+       
 
         if (item.parents === "Total") {
             return getRaceColorWithOpacity(item.labels, CONFIG.OPACITY.PARENT);
@@ -265,7 +265,8 @@ export function createSunburstPlotData(data) {
             line: { width: 1 }
         },
         branchvalues: 'remainder',
-        hovertemplate: '%{customdata}%<extra></extra>'
+        hovertemplate: data.map(item =>
+            item.labels === "Total" ? '<extra></extra>' : '%{customdata}%<extra></extra>')
     }];
 }
 
@@ -276,7 +277,7 @@ export function createSunburstPlot() {
         return;
     }
 
-    const plotData = createSunburstPlotData(SUNBURST_DATA);
+    const plotData = createSunburstPlotData(characterSunburstData);
     Plotly.newPlot('sunburst', plotData, CHART_CONFIGS.SUNBURST_LAYOUT, CHART_CONFIGS.PLOTLY)
         .catch(error => {
             console.error('Error initializing sunburst chart:', error);

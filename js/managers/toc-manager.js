@@ -1,4 +1,10 @@
-﻿// Global state to track which sections have been initialized
+﻿//The TOC dynamically collects the title of each section and changes the visible section when a user clicks on a link in the TOC. This also means that any future edits to the headings of the sections will be automatically handled by the manager.
+
+
+// Global state to track which sections have been initialized
+
+
+
 const sectionInitialized = {
     characters: false,
     events: false,
@@ -145,7 +151,7 @@ export class TOCManager {
     }
 
     initializeEventCharts() {
-        console.log('📊 Initializing event charts...');
+     
 
         setTimeout(() => {
             const eventsSection = document.getElementById('events');
@@ -158,7 +164,7 @@ export class TOCManager {
     }
 
     initializeLanguageCharts() {
-        console.log('📝 Initializing language charts...');
+        
 
         setTimeout(() => {
             const languageSection = document.getElementById('language');

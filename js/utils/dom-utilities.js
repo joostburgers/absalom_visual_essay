@@ -1,14 +1,17 @@
 import { demographyChartData, demographyPresentDataFiltered } from '../data/chart-data.js';
 import { CONFIG } from '../config/app-config.js';
-import { createRaceColorArray, debounce } from './chart-utilities.js';
+import { createRaceColorArray} from './chart-utilities.js';
+
+//These functions help manage the layout and responsiveness of the charts and other DOM elements. Plotly has its own "responsive" charts, but in practice they often need to be manually resized when the window size changes or when other elements on the page change size. The resize forces a container resize.
+
 
 export function cacheElements() {
     return {
         chart1: document.getElementById('scrollychart1'),
         chart2: document.getElementById('scrollychart2'),
         legend: document.getElementById('legend'),
-        scrolly: d3.select("#characters-scrolly"),
-        eventsScrolly: d3.select("#event-scrolly")
+        scrolly: $("#characters-scrolly")[0],
+        eventsScrolly: $("#event-scrolly")[0]
     };
 }
 

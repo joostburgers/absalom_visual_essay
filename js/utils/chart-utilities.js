@@ -1,6 +1,8 @@
 import { faulknerChartStyles } from '../config/faulkner-chart-styles.js';
 
 
+//These utilities are general-purpose functions that can be used across different parts of the application, such as color management, debouncing, CSV processing, and waiting for dependencies to load. The color functions specifically help manage consistent color usage across charts. This is a new uniform style, I'm trying to create for all charts on DY.
+
 // Color utilities and caching
 const colorCache = new Map();
 
@@ -50,7 +52,6 @@ export function waitForDependencies() {
         const checkDependencies = () => {
             if (typeof Plotly !== 'undefined' &&
                 typeof $ !== 'undefined' &&
-                typeof d3 !== 'undefined' &&
                 typeof scrollama !== 'undefined') {
                 console.log('All external dependencies ready!');
                 resolve();
@@ -58,7 +59,7 @@ export function waitForDependencies() {
                 console.log('Still waiting for dependencies:', {
                     Plotly: typeof Plotly,
                     jQuery: typeof $,
-                    d3: typeof d3,
+                    
                     scrollama: typeof scrollama
                 });
                 setTimeout(checkDependencies, 50);

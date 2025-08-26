@@ -1,22 +1,21 @@
 ﻿import { CONFIG, currentCharactersStep, currentEventsStep, setCurrentCharactersStep, setCurrentEventsStep } from '../config/app-config.js';
 
+
+// Scrollama has its own set of step handlers for scrolling up and down the page and keeping track of which step is active. The possibility of "clicking" through the steps using the buttons under the chart required additional step handlers. These step handlers need to be aware of whether the user has recently clicked a button to navigate to a specific step, in which case the scroll handlers should not trigger any updates. This is managed through the ProgressManager class, which tracks recent tile clicks and suppresses scroll events accordingly.
+
+
 export function handleCharactersStepEnter(response, progressManager, updateChartHighlighting, updateLegendHighlighting) {
-    // ENHANCED: Section-specific debouncing
+    
     if (progressManager && progressManager.wasRecentTileClick('characters')) {
         console.log('Characters scroll handler ignored due to recent tile click');
         return;
     }
 
-    console.log(`Characters scroll handler: response.index=${response.index}, currentCharactersStep=${currentCharactersStep}`);
-
     // Only update if we're not already at this step
     if (currentCharactersStep === response.index) {
-        console.log('Characters step already at target, skipping scroll update');
-        return;
+          return;
     }
 
-    console.log(`Updating characters from scroll: ${currentCharactersStep} -> ${response.index}`);
-    //  FIXED: Use setter function instead of direct assignment
     setCurrentCharactersStep(response.index);
 
     const stepTexts = document.querySelectorAll('#characters-scrolly .step-text');
@@ -36,21 +35,20 @@ export function handleCharactersStepEnter(response, progressManager, updateChart
 }
 
 export function handleEventsStepEnter(response, progressManager, eventsChartManager) {
-    // ✅ ENHANCED: More comprehensive scroll suppression
+
     if (progressManager && progressManager.wasRecentTileClick('events')) {
         console.log('🚫 Events scroll handler suppressed due to recent tile click/navigation');
         return;
     }
 
-    console.log(`Events scroll handler: response.index=${response.index}, currentEventsStep=${currentEventsStep}`);
 
-    // ✅ ENHANCED: Check if we're already at this step
+
+    // Check if we're already at this step
     if (currentEventsStep === response.index) {
         console.log('Events step already at target, skipping scroll update');
         return;
     }
 
-    console.log(`✅ Updating events from scroll: ${currentEventsStep} -> ${response.index}`);
     setCurrentEventsStep(response.index);
 
     // Rest of the handler logic...
@@ -71,9 +69,10 @@ export function handleEventsStepEnter(response, progressManager, eventsChartMana
     }
 }
 
+//The piecharts and the event chart work along many of the same principles and are setup here through one unified scroll. The language chart ended up being too much of an edge case to include here.
 export function setupUnifiedScrolly(chartElements, scrollyManagers, progressManager, eventsChartManager, updateChartHighlighting, updateLegendHighlighting) {
     // Characters section scrolly
-    if (chartElements.scrolly && chartElements.scrolly.node()) {
+    if (chartElements.scrolly) {
         const charactersScroller = scrollama();
         charactersScroller
             .setup({
@@ -87,7 +86,7 @@ export function setupUnifiedScrolly(chartElements, scrollyManagers, progressMana
     }
 
     // Events section scrolly
-    if (chartElements.eventsScrolly && chartElements.eventsScrolly.node()) {
+    if (chartElements.eventsScrolly) {
         const eventsScroller = scrollama();
 
         eventsScroller

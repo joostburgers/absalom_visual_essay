@@ -83,7 +83,7 @@ waitForDependencies().then(() => {
                 }
             });
 
-            console.log('✅ App initialization complete');
+            console.log(' App initialization complete');
 
         } catch (error) {
             console.error('❌ Error during app initialization:', error);

@@ -1,4 +1,6 @@
-// Configuration constants
+// Configuration constants for the overall app. This includes animation settings, step mappings, scrollama settings, debounce delays, styling constants, and specific configurations for different chart types. It also creates a globally exposed variable to deal with the current step in the scrollytelling process.
+
+
 export const CONFIG = {
     ANIMATION: {
         OPACITY_STEPS: ['50', '90', 'B0', 'FF'],
@@ -27,35 +29,7 @@ export const CONFIG = {
         CHARACTERS_STEPS: 4,
         EVENTS_STEPS: 9,
     },
-    EVENTS: {
-        CHART_RANGES: {
-            SUTPEN_X: [0.5, 9],
-            SUTPEN_Y: [0.5, 3.5],
-            ABSALOM_X: [-25, 660],
-            ABSALOM_Y: [-50, 699]
-        },
-        TICK_VALUES: {
-            SUTPEN_X: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            SUTPEN_Y: [1, 2, 3],
-            ABSALOM_X: [1, 40, 93, 150, 236, 287, 375, 496, 621],
-            ABSALOM_X_TEXT: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            ABSALOM_Y: [100, 200, 300, 400, 500, 600, 700]
-        },
-        MARKER_SIZES: {
-            SMALL: 5,
-            LARGE: 20
-        },
-        OPACITIES: {
-            LOW: 0.2,
-            MEDIUM: 0.5,
-            HIGH: 0.8
-        },
-        ANIMATION: {
-            FAST_DURATION: 500,
-            SLOW_DURATION: 200,
-            EASING: 'cubic'
-        }
-    },
+
     LANGUAGE: {
         OPACITY: {
             FADE_IN_THRESHOLD: 0.2,

@@ -1,6 +1,9 @@
 // ==========================================================================
 // VIDEO INTERSECTION OBSERVER
 // ==========================================================================
+
+//Helper class to play the video when the user scrolls down on the events page.
+
 export class VideoManager {
     constructor() {
         this.videos = new Map();

@@ -1,6 +1,7 @@
 import { CONFIG } from './app-config.js';
-import { faulknerBaseLayout, defaultConfig, faulknerChartStyles } from './faulkner-chart-styles.js';
+import { faulknerBaseLayout, defaultConfig } from './faulkner-chart-styles.js';
 
+// Chart configurations leveraging Faulkner styles and application constants. Most of the visuals on the pages can be modified here.
 
 export const CHART_CONFIGS = {
     // Base layout optimized for character charts
@@ -57,10 +58,33 @@ export const CHART_CONFIGS = {
         }
     },
 
-    // Sunburst specific config
-    SUNBURST: {
-        TOTAL_COLOR: faulknerChartStyles.colorway_bw[2] // Use gray from BW colorway
+
+    EVENTS: {
+        CHART_RANGES: {
+            SUTPEN_X: [0.5, 9],
+            SUTPEN_Y: [0.5, 3.5],
+            ABSALOM_X: [-25, 660],
+            ABSALOM_Y: [-50, 699]
+        },
+        TICK_VALUES: {
+            SUTPEN_X: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            SUTPEN_Y: [1, 2, 3],
+            ABSALOM_X: [1, 40, 93, 150, 236, 287, 375, 496, 621],
+            ABSALOM_X_TEXT: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            ABSALOM_Y: [100, 200, 300, 400, 500, 600, 700]
+        },
+        MARKER_SIZES: {
+            SMALL: 5,
+            LARGE: 20
+        },
+        OPACITIES: {
+            LOW: 0.2,
+            MEDIUM: 0.5,
+            HIGH: 0.8
+        }
     },
+
+
     LANGUAGE: {
         WORDS_LAYOUT: {
             ...faulknerBaseLayout,

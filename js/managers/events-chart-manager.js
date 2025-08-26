@@ -1,14 +1,33 @@
-﻿import { CONFIG } from '../config/app-config.js';
-
+﻿
 import { CHART_CONFIGS } from '../config/chart-configs.js';
 import { faulknerChartStyles } from '../config/faulkner-chart-styles.js';
 
 // ==========================================================================
-// EVENTS CHART FUNCTIONALITY (Refactored and Optimized)
+// EVENTS CHART FUNCTIONALITY
 // ==========================================================================
+
+//This extensive class deals with the event charts, which visualize the chronology of events in Absalom, Absalom! and Sutpen's life. It includes data processing, trace creation, frame building, layout configuration, and animation handling. As the unique juxtaposition of charts did not conform to Plotly's native animation capabilities, a custom animation system was developed to handle the transitions between different chart states. This includes fading in traces with staggered delays to create a smooth visual effect. The class also includes robust error handling and validation to ensure data integrity and user feedback in case of issues.
+
 export class EventsChartManager {
 	// Data field mappings for processing
-	// Clean FIELD_MAPPINGS (remove unused fields):
+
+	static ANIMATION_CONFIG = {
+		STAGGER_DELAY: 80,
+		ANIMATION_STEPS: 8,
+		STEP_DURATION: 50
+	};
+
+	static DATE_AXIS_CONFIG = {
+		TICK_VALUES: [1800, 1820, 1840, 1860, 1880, 1900, 1920],
+		TICK_TEXT: ['1800', '1820', '1840', '1860', '1880', '1900', '1920'],
+		RANGE: [1800, 1920]
+	};
+
+
+
+
+
+
 	static FIELD_MAPPINGS = {
 		'absalom_startdate': (d) => d['absalom_startdate'],
 		'absalom_summary': (d) => d['absalom_summary'],
@@ -34,9 +53,9 @@ export class EventsChartManager {
 		'absalom_major_event_date': (d) => d['absalom_major_event_date']
 	};
 
-	// Remove createInvisibleTrace method entirely (lines ~155-157)
+	
 
-	// Clean createSutpenFrames (remove debug logs and commented code):
+	
 	createSutpenFrames(data, layouts) {
 		const { x_sutpen_plot, x_sutpen_story, y_sutpen, sutpen_label, textposition_sutpen_plot, textposition_sutpen_story } = data;
 
@@ -68,7 +87,7 @@ export class EventsChartManager {
 		];
 	}
 
-	// Clean createCombinedAndDateFrames (remove debug logs):
+
 	createCombinedAndDateFrames(data, layouts) {
 		const {
 			absalom_x_story, absalom_x_plot, absalom_y_narrated, absalom_y_told, absalom_y_other,
@@ -115,81 +134,59 @@ export class EventsChartManager {
 	}
 
 	// ========== TRACE BUILDER METHODS ==========
-	createMarkerTrace(x, y, color, name, options = {}) {
+	createTrace(type, x, y, color, name, options = {}) {
+		const isTextTrace = type === 'text';
 		const defaults = {
-			size: CONFIG.EVENTS.MARKER_SIZES.SMALL,
-			opacity: CONFIG.EVENTS.OPACITIES.MEDIUM,
+			size: isTextTrace ? CHART_CONFIGS.EVENTS.MARKER_SIZES.LARGE : CHART_CONFIGS.EVENTS.MARKER_SIZES.SMALL,
+			opacity: isTextTrace ? CHART_CONFIGS.EVENTS.OPACITIES.HIGH : CHART_CONFIGS.EVENTS.OPACITIES.MEDIUM,
 			visible: true,
-			useGrayBorder: true,
-			customdata: null
+			useGrayBorder: !isTextTrace,
+			hoverTemplate: isTextTrace ? "<b>Major Event: </b>%{text}<extra></extra>" : this.hoverstring,
+			...options
 		};
-		const opts = { ...defaults, ...options };
 
 		const trace = {
 			type: "scatter",
-			mode: "markers",
+			mode: isTextTrace ? "markers+text" : "markers",
 			x, y, name,
-			visible: opts.visible,
+			visible: defaults.visible,
 			marker: {
 				color,
-				opacity: opts.opacity,
-				size: opts.size,
+				opacity: defaults.opacity,
+				size: defaults.size,
 				line: {
 					width: 1,
-					color: opts.useGrayBorder ? 'rgba(88, 88, 88, 0.26)' : color
+					color: defaults.useGrayBorder ? 'rgba(88, 88, 88, 0.26)' : color
 				}
 			},
-			hovertemplate: opts.customdata ?
-				`<b>Date: </b>%{customdata}<br><b>Page: </b>%{meta}<extra></extra>` :
-				this.hoverstring
+			hovertemplate: defaults.hoverTemplate
 		};
 
-		// ✅ Add customdata and meta if provided
-		if (opts.customdata) {
-			trace.customdata = opts.customdata;
-			trace.meta = opts.meta || []; // For page numbers, etc.
+		if (isTextTrace) {
+			trace.text = options.text;
+			trace.textposition = options.textposition;
+		}
+
+		if (defaults.customdata) {
+			trace.customdata = defaults.customdata;
+			trace.meta = defaults.meta || [];
 		}
 
 		return trace;
+	}
 
+	// Then simplify the existing methods:
+	createMarkerTrace(x, y, color, name, options = {}) {
+		return this.createTrace('marker', x, y, color, name, options);
 	}
 
 	createTextTrace(x, y, text, textposition, color, name, options = {}) {
-		const defaults = {
-			size: CONFIG.EVENTS.MARKER_SIZES.LARGE,
-			opacity: CONFIG.EVENTS.OPACITIES.HIGH,
-			visible: true,
-			hoverTemplate: "<b>Major Event: </b>%{text}<extra></extra>",
-			useGrayBorder: false,
-			customdata: null // ✅ Add customdata option
-		};
-		const opts = { ...defaults, ...options };
-
-		const trace = {
-			type: "scatter",
-			mode: "markers+text",
-			x, y, text, textposition, name,
-			visible: opts.visible,
-			marker: {
-				size: opts.size,
-				color,
-				opacity: opts.opacity,
-				line: {
-					width: 1,
-					color: opts.useGrayBorder ? 'rgba(88, 88, 88, 0.26)' : color
-				}
-			},
-			hovertemplate: opts.hoverTemplate
-		};
-
-
-		if (opts.customdata) {
-			trace.customdata = opts.customdata;
-		}
-
-		return trace;
+		return this.createTrace('text', x, y, color, name, {
+			...options,
+			text,
+			textposition
+		});
 	}
-
 
 	// ========== DATA PROCESSING ==========
 	createHoverStrings(data) {
@@ -247,8 +244,7 @@ export class EventsChartManager {
 					textposition_sutpen_plot, this.scatterPlotColors[0],
 					"Major Events"
 				),
-				//this.createInvisibleTrace(),
-				//this.createInvisibleTrace()
+			
 			],
 			layout: layouts.sutpen_plot
 		};
@@ -264,9 +260,7 @@ export class EventsChartManager {
 						textposition_sutpen_story, this.scatterPlotColors[0],
 						"Major Events"
 					),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace()
+					
 				],
 				layout: layouts.sutpen_story
 			}
@@ -290,8 +284,7 @@ export class EventsChartManager {
 						absalom_textposition_plot, this.scatterPlotColors[0],
 						"Major Events"
 					),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace()
+					
 				],
 				layout: layouts.absalom_plot
 			},
@@ -304,9 +297,7 @@ export class EventsChartManager {
 						absalom_x_plot, absalom_y_narrated, this.scatterPlotColors[2],
 						"Narrated"
 					),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace()
+					
 				],
 				layout: layouts.absalom_narrated
 			},
@@ -317,14 +308,13 @@ export class EventsChartManager {
 				data: [
 					this.createMarkerTrace(
 						absalom_x_plot, absalom_y_narrated, this.scatterPlotColors[2],
-						"Narrated", { opacity: CONFIG.EVENTS.OPACITIES.LOW }
+						"Narrated", { opacity: CHART_CONFIGS.EVENTS.OPACITIES.LOW }
 					),
 					this.createMarkerTrace(
 						absalom_x_plot, absalom_y_told, this.scatterPlotColors[3],
 						"Told"
 					),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace()
+					
 				],
 				layout: layouts.absalom_narrated_told
 			},
@@ -335,17 +325,17 @@ export class EventsChartManager {
 				data: [
 					this.createMarkerTrace(
 						absalom_x_plot, absalom_y_narrated, this.scatterPlotColors[2],
-						"Narrated", { opacity: CONFIG.EVENTS.OPACITIES.LOW }
+						"Narrated", { opacity: CHART_CONFIGS.EVENTS.OPACITIES.LOW }
 					),
 					this.createMarkerTrace(
 						absalom_x_plot, absalom_y_told, this.scatterPlotColors[3],
-						"Told", { opacity: CONFIG.EVENTS.OPACITIES.LOW }
+						"Told", { opacity: CHART_CONFIGS.EVENTS.OPACITIES.LOW }
 					),
 					this.createMarkerTrace(
 						absalom_x_plot, absalom_y_other, this.scatterPlotColors[4],
 						"Other"
 					),
-					//this.createInvisibleTrace()
+				
 				],
 				layout: layouts.absalom_narrated_told_other
 			}
@@ -370,11 +360,11 @@ export class EventsChartManager {
 				data: [
 					this.createMarkerTrace(
 						absalom_x_story, absalom_y_narrated, this.scatterPlotColors[2],
-						"Narrated", { opacity: CONFIG.EVENTS.OPACITIES.LOW }
+						"Narrated", { opacity: CHART_CONFIGS.EVENTS.OPACITIES.LOW }
 					),
 					this.createMarkerTrace(
 						absalom_x_story, absalom_y_told, this.scatterPlotColors[3],
-						"Told", { opacity: CONFIG.EVENTS.OPACITIES.LOW }
+						"Told", { opacity: CHART_CONFIGS.EVENTS.OPACITIES.LOW }
 					),
 					this.createMarkerTrace(
 						absalom_x_story, absalom_y_other, this.scatterPlotColors[4],
@@ -397,8 +387,8 @@ export class EventsChartManager {
 						absalom_x_plot, absalom_startdate_decimal, this.scatterPlotColors[5],
 						"Date Order",
 						{
-							customdata: absalom_startdate, // ✅ Pass original dates
-							meta: absalom_pagenumber       // ✅ Pass page numbers
+							customdata: absalom_startdate, // Pass original dates
+							meta: absalom_pagenumber       // Pass page numbers
 						}
 					),
 					this.createTextTrace(
@@ -410,8 +400,7 @@ export class EventsChartManager {
 							hoverTemplate: "<b>Date: </b>%{customdata}<br><b>Major Event: </b>%{text}<extra></extra>"
 						}
 					),
-					//this.createInvisibleTrace(),
-					//this.createInvisibleTrace()
+				
 				],
 				layout: layouts.absalom_date
 			},
@@ -442,25 +431,9 @@ export class EventsChartManager {
 	}
 
 	// ========== MAIN FRAME CREATION ==========
-	createFrames(x_sutpen_plot, y_sutpen, sutpen_label, textposition_sutpen_plot,
-		x_sutpen_story, textposition_sutpen_story, absalom_x_plot, absalom_y_all, absalom_major_event,
-		absalom_label, absalom_pagenumber, absalom_textposition_plot, absalom_y_narrated, absalom_y_told, absalom_y_other,
-		absalom_x_story, absalom_startdate, absalom_major_event_date,
-		absalom_startdate_decimal, absalom_major_event_date_decimal, hoverstring, layouts) {
-
+	createFrames(data, layouts) {
 		// Store hover strings for trace builders
-		this.hoverstring = hoverstring;
-
-		// ✅ Add absalom_pagenumber to the data object
-		const data = {
-			x_sutpen_plot, y_sutpen, sutpen_label, textposition_sutpen_plot,
-			x_sutpen_story, textposition_sutpen_story, absalom_x_plot, absalom_y_all,
-			absalom_major_event, absalom_label, absalom_pagenumber, absalom_textposition_plot,
-			absalom_y_narrated, absalom_y_told, absalom_y_other, absalom_x_story,
-			absalom_startdate, absalom_major_event_date,
-			absalom_startdate_decimal, absalom_major_event_date_decimal
-
-		};
+		this.hoverstring = data.hoverstring || this.hoverstring;
 
 		return [
 			...this.createSutpenFrames(data, layouts),
@@ -486,107 +459,89 @@ export class EventsChartManager {
 	createLayouts(sutpen_x_tickvals, sutpen_y_tickvals, sutpen_x_range, sutpen_y_range,
 		absalom_x_tickvals, absalom_x_ticktext, absalom_x_range, absalom_y_tickvals, absalom_y_range) {
 
+		// Helper to create standard Absalom layout base
+		const createAbsalomBase = (title) => ({
+			...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
+			title: { text: title },
+			showlegend: true,
+			legend: { title: { text: "Legend" } },
+			xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext)
+		});
+
+		// Helper for standard chronology yaxis
+		const createChronologyYAxis = (tickvals, range) => ({
+			...this.createAxisConfig("Chronology", tickvals, range),
+			type: 'linear'
+		});
+
+		// Helper for flexible chronology yaxis (used in multiple Absalom charts)
+		const createFlexibleYAxis = (tickvals, range) => ({
+			...this.createAxisConfig("Chronology", tickvals, range),
+			type: 'linear',
+			autotick: true,
+			tickformat: '',
+			tickmode: 'array',
+			dtick: null
+		});
+
 		return {
+			// Sutpen layouts (simpler, keep as-is)
 			sutpen_plot: {
 				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
 				title: { text: "Major Events in Sutpen's Life in Plot Order" },
 				xaxis: this.createAxisConfig("Chapter", sutpen_x_tickvals, sutpen_x_range),
-				yaxis: { ...this.createAxisConfig("Chronology", sutpen_y_tickvals, sutpen_y_range), type: 'linear' }
+				yaxis: createChronologyYAxis(sutpen_y_tickvals, sutpen_y_range)
 			},
 			sutpen_story: {
 				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
 				title: { text: "Major Events in Sutpen's Life in Story Order" },
 				xaxis: this.createAxisConfig("Chapter", sutpen_x_tickvals, sutpen_x_range),
-				yaxis: { ...this.createAxisConfig("Chronology", sutpen_y_tickvals, sutpen_y_range), type: 'linear' }
+				yaxis: createChronologyYAxis(sutpen_y_tickvals, sutpen_y_range)
 			},
+
+			// Absalom layouts with explicit configurations
 			absalom_plot: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> in Plot Order" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
-				yaxis: { ...this.createAxisConfig("Chronology", absalom_y_tickvals, absalom_y_range), type: 'linear' }
+				...createAbsalomBase("<i>Absalom, Absalom!</i> in Plot Order"),
+				yaxis: createChronologyYAxis(absalom_y_tickvals, absalom_y_range)
 			},
 			absalom_narrated: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> Narrated Events" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
-				yaxis: {
-					...this.createAxisConfig("Chronology", absalom_y_tickvals, absalom_y_range),
-					type: 'linear',
-					autotick: true,
-					tickformat: '',
-					tickmode: 'array',
-					dtick: null
-				}
+				...createAbsalomBase("<i>Absalom, Absalom!</i> Narrated Events"),
+				yaxis: createFlexibleYAxis(absalom_y_tickvals, absalom_y_range)
 			},
 			absalom_narrated_told: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> Narrated and Told Events" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
-				yaxis: {
-					...this.createAxisConfig("Chronology", absalom_y_tickvals, absalom_y_range), type: 'linear',
-					autotick: true,
-					tickformat: '',
-					tickmode: 'array',
-					dtick: null
-				}
+				...createAbsalomBase("<i>Absalom, Absalom!</i> Narrated and Told Events"),
+				yaxis: createFlexibleYAxis(absalom_y_tickvals, absalom_y_range)
 			},
 			absalom_narrated_told_other: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> Narrated, Told, and Other Events" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
-				yaxis: {
-					...this.createAxisConfig("Chronology", absalom_y_tickvals, absalom_y_range), type: 'linear', autotick: true,
-					tickformat: '',
-					tickmode: 'array',
-					dtick: null
-				}
+				...createAbsalomBase("<i>Absalom, Absalom!</i> Narrated, Told, and Other Events"),
+				yaxis: createFlexibleYAxis(absalom_y_tickvals, absalom_y_range)
 			},
 			absalom_story: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> in Story Order with Major Events" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
-				yaxis: {
-					...this.createAxisConfig("Chronology", absalom_y_tickvals, absalom_y_range), type: 'linear', autotick: true,
-					tickformat: '',
-					tickmode: 'array',
-					dtick: null
-				}
+				...createAbsalomBase("<i>Absalom, Absalom!</i> in Story Order with Major Events"),
+				yaxis: createFlexibleYAxis(absalom_y_tickvals, absalom_y_range)
 			},
+
+			// Date layout is unique, keep explicit
 			absalom_date: {
-				...CHART_CONFIGS.EVENTS_LAYOUT_BASE,
-				title: { text: "<i>Absalom, Absalom!</i> in Date Order" },
-				showlegend: true,
-				legend: { title: { text: "Legend" } },
-				xaxis: this.createAxisConfig("Chapter", absalom_x_tickvals, absalom_x_range, absalom_x_ticktext),
+				...createAbsalomBase("<i>Absalom, Absalom!</i> in Date Order"),
 				yaxis: {
 					title: { text: "Date" },
 					type: 'linear',
 					showgrid: false,
 					tickmode: 'array',
-					tickvals: [1800, 1820, 1840, 1860, 1880, 1900, 1920],
-					ticktext: ['1800', '1820', '1840', '1860', '1880', '1900', '1920'],
-					range: [1800, 1920],
+					tickvals: EventsChartManager.DATE_AXIS_CONFIG.TICK_VALUES,
+					ticktext: EventsChartManager.DATE_AXIS_CONFIG.TICK_TEXT,
+					range: EventsChartManager.DATE_AXIS_CONFIG.RANGE,
 					zeroline: false
 				}
 			}
 		};
 	}
-
-	// ✅ ADD this new method to replace startAnimation
+	// 
 	createChart(stepIndex) {
 		console.log(`🔄 Chart creation requested for step ${stepIndex}`);
 
-		// ✅ CANCEL any in-progress animations
+		// CANCEL any in-progress animations
 		this.cancelCurrentAnimations();
 
 		if (!this.chartReady) {
@@ -594,10 +549,10 @@ export class EventsChartManager {
 			return;
 		}
 
-		console.log(`🔄 Creating new chart for step ${stepIndex}`);
+		
 		this.animationInProgress = true;
-		this.currentAnimationId = Date.now(); // ✅ Store the ID once
-		const animationId = this.currentAnimationId; // ✅ Use this stored value for comparisons
+		this.currentAnimationId = Date.now(); //  Store the ID once
+		const animationId = this.currentAnimationId; //  Use this stored value for comparisons
 
 		// Get the frame data
 		const frameData = this.frames?.find(frame => frame.name === `frame${stepIndex}`);
@@ -608,15 +563,7 @@ export class EventsChartManager {
 			return;
 		}
 
-		console.log(`🔍 Frame ${stepIndex} data:`, frameData.data.map((trace, i) => ({
-			index: i,
-			type: trace.type,
-			mode: trace.mode,
-			visible: trace.visible,
-			hasMarker: !!trace.marker,
-			hasText: trace.mode?.includes('text')
-		})));
-
+		
 
 		// Create chart with invisible traces
 		const invisibleData = frameData.data.map(trace => {
@@ -642,20 +589,20 @@ export class EventsChartManager {
 			responsive: true,
 			displayModeBar: false
 		}).then(() => {
-			// ✅ FIXED: Use stored animationId for comparison
+			// Use stored animationId for comparison
 			if (this.currentAnimationId !== animationId) {
 				console.log('🚫 Animation cancelled before fade-in started');
 				return Promise.reject('Animation cancelled');
 			}
 
-			// ✅ STEP 2: Animate traces to visible (fade-in effect)
-			return this.animateTracesFadeIn(frameData.data, animationId); // ✅ Pass the stored ID
+			// STEP 2: Animate traces to visible (fade-in effect)
+			return this.animateTracesFadeIn(frameData.data, animationId); //  Pass the stored ID
 		}).then(() => {
-			// ✅ FIXED: Use stored animationId for comparison
+			//  FIXED: Use stored animationId for comparison
 			if (this.currentAnimationId === animationId) {
 				this.lastAnimatedStep = stepIndex;
 				this.animationInProgress = false;
-				console.log(`✅ Chart recreated with fade-in for step ${stepIndex}`);
+				console.log(` Chart recreated with fade-in for step ${stepIndex}`);
 			}
 		}).catch(error => {
 			if (error !== 'Animation cancelled') {
@@ -665,7 +612,7 @@ export class EventsChartManager {
 		});
 	}
 
-	// ✅ FIXED: Less aggressive cancellation - only cancel if really needed
+	// Less aggressive cancellation - only cancel if really needed
 	cancelCurrentAnimations() {
 		if (this.pendingAnimations.size > 0) {
 			console.log(`🚫 Cancelling ${this.pendingAnimations.size} pending animation(s)`);
@@ -685,17 +632,15 @@ export class EventsChartManager {
 		this.animationInProgress = false;
 	}
 
-	// ✅ FIXED: Use the passed animationId consistently
+	// FIXED: Use the passed animationId consistently
 	async animateTracesFadeIn(originalData, animationId) {
-		const staggerDelay = 80;
-		const animationSteps = 8;
-		const stepDuration = 50;
+		const { STAGGER_DELAY, ANIMATION_STEPS, STEP_DURATION } = EventsChartManager.ANIMATION_CONFIG;
 
 		for (let i = 0; i < originalData.length; i++) {
 			const trace = originalData[i];
 			if (trace.visible === false) continue;
 
-			// ✅ FIXED: Use passed animationId
+			// Use passed animationId
 			if (this.currentAnimationId !== animationId) {
 				console.log('🚫 Trace animation cancelled during loop');
 				return Promise.reject('Animation cancelled');
@@ -703,25 +648,25 @@ export class EventsChartManager {
 
 			// Start each trace animation with stagger delay
 			const timeoutId = setTimeout(() => {
-				// ✅ FIXED: Use passed animationId
+				// Use passed animationId
 				if (this.currentAnimationId !== animationId) {
 					console.log('🚫 Trace animation timeout cancelled');
 					return;
 				}
 
-				console.log(`🎨 Starting smooth fade-in for trace ${i}`);
-				this.smoothFadeTrace(i, trace, animationSteps, stepDuration, animationId);
+				
+				this.smoothFadeTrace(i, trace, ANIMATION_STEPS, STEP_DURATION, animationId);
 
 				// Remove from pending set
 				this.pendingAnimations.delete(timeoutId);
-			}, i * staggerDelay);
+			}, i * STAGGER_DELAY);
 
 			// Track this timeout so we can cancel it if needed
 			this.pendingAnimations.add(timeoutId);
 		}
 
 		// Wait for all animations to complete
-		const totalTime = (originalData.length - 1) * staggerDelay + (animationSteps * stepDuration);
+		const totalTime = (originalData.length - 1) * STAGGER_DELAY + (ANIMATION_STEPS * STEP_DURATION);
 		return new Promise(resolve => {
 			const finalTimeoutId = setTimeout(() => {
 				this.pendingAnimations.delete(finalTimeoutId);
@@ -731,14 +676,14 @@ export class EventsChartManager {
 		});
 	}
 
-	// ✅ FIXED: Use passed animationId consistently
+	// Use passed animationId consistently
 	smoothFadeTrace(traceIndex, trace, steps, stepDuration, animationId) {
 		const targetOpacity = 1;
 		const targetMarkerOpacity = trace.marker?.opacity || 1;
 
 		for (let step = 1; step <= steps; step++) {
 			const timeoutId = setTimeout(() => {
-				// ✅ FIXED: Use passed animationId
+				// Use passed animationId
 				if (this.currentAnimationId !== animationId) {
 					console.log('🚫 Smooth fade step cancelled');
 					return;
@@ -770,9 +715,9 @@ export class EventsChartManager {
 		}
 	}
 
-	// ✅ ENHANCED: Cleanup method
+	// Cleanup method
 	destroy() {
-		this.cancelCurrentAnimations(); // ✅ Cancel animations before destroying
+		this.cancelCurrentAnimations(); // Cancel animations before destroying
 
 		if (this.chartReady) {
 			Plotly.purge('plotchart');
@@ -784,7 +729,7 @@ export class EventsChartManager {
 	}
 
 	reset() {
-		this.cancelCurrentAnimations(); // ✅ Cancel animations on reset
+		this.cancelCurrentAnimations(); //  Cancel animations on reset
 		this.lastAnimatedStep = -1;
 		this.animationInProgress = false;
 	}
@@ -794,44 +739,24 @@ export class EventsChartManager {
 		try {
 			this.validateData(data);
 
-			const sutpen_x_tickvals = CONFIG.EVENTS.TICK_VALUES.SUTPEN_X;
-			const sutpen_y_tickvals = CONFIG.EVENTS.TICK_VALUES.SUTPEN_Y;
-			const sutpen_x_range = CONFIG.EVENTS.CHART_RANGES.SUTPEN_X;
-			const sutpen_y_range = CONFIG.EVENTS.CHART_RANGES.SUTPEN_Y;
-
-			const absalom_x_range = CONFIG.EVENTS.CHART_RANGES.ABSALOM_X;
-			const absalom_y_range = CONFIG.EVENTS.CHART_RANGES.ABSALOM_Y;
-			const absalom_x_tickvals = CONFIG.EVENTS.TICK_VALUES.ABSALOM_X;
-			const absalom_x_ticktext = CONFIG.EVENTS.TICK_VALUES.ABSALOM_X_TEXT;
-			const absalom_y_tickvals = CONFIG.EVENTS.TICK_VALUES.ABSALOM_Y;
-
 			// Data extraction
-			const x_sutpen_plot = data['x_sutpen_plot'];
-			const y_sutpen = data['y_sutpen'];
-			const x_sutpen_story = data['x_sutpen_story'];
-			const textposition_sutpen_plot = data['textposition_sutpen_plot'];
-			const sutpen_label = data['sutpen_label'];
-			const textposition_sutpen_story = data['textposition_sutpen_story'];
-			const absalom_y_all = data['absalom_y_all'];
-			const absalom_x_plot = data['absalom_x_plot'];
-			const absalom_x_story = data['absalom_x_story'];
-			const absalom_label = data['absalom_label'];
-			const absalom_textposition_plot = data['absalom_textposition_plot'];
-			const absalom_y_narrated = data['absalom_y_narrated'];
-			const absalom_y_told = data['absalom_y_told'];
-			const absalom_y_other = data['absalom_y_other'];
-			const absalom_major_event = data['absalom_major_event'];
-			const absalom_summary = data['absalom_summary'];
-			const absalom_startdate = data['absalom_startdate'];
-			const absalom_sentence_words = data['absalom_sentence_words'];
-			const absalom_pagenumber = data['absalom_pagenumber'];
-			const absalom_orderwithinpage = data['absalom_orderwithinpage'];
-			const absalom_major_event_date = data['absalom_major_event_date'];
-			const absalom_startdate_decimal = data['absalom_startdate_decimal'];
-			const absalom_major_event_date_decimal = data['absalom_major_event_date_decimal'];
+			const {
+				x_sutpen_plot, y_sutpen, x_sutpen_story, textposition_sutpen_plot,
+				sutpen_label, textposition_sutpen_story, absalom_y_all, absalom_x_plot,
+				absalom_x_story, absalom_label, absalom_textposition_plot,
+				absalom_y_narrated, absalom_y_told, absalom_y_other, absalom_major_event,
+				absalom_summary, absalom_startdate, absalom_sentence_words,
+				absalom_pagenumber, absalom_orderwithinpage, absalom_major_event_date,
+				absalom_startdate_decimal, absalom_major_event_date_decimal
+			} = data;
+
+
+			const { TICK_VALUES, CHART_RANGES, OPACITIES, MARKER_SIZES } = CHART_CONFIGS.EVENTS;
 
 			// Create hover strings
 			this.createHoverStrings(data);
+
+
 
 
 			const plotData = [{
@@ -841,8 +766,8 @@ export class EventsChartManager {
 				y: y_sutpen,
 				marker: {
 					color: this.scatterPlotColors[0],
-					opacity: CONFIG.EVENTS.OPACITIES.HIGH,
-					size: CONFIG.EVENTS.MARKER_SIZES.LARGE,
+					opacity: OPACITIES.HIGH,
+					size: MARKER_SIZES.LARGE,
 					line: {
 						width: 1,
 						color: this.scatterPlotColors[0]
@@ -851,9 +776,11 @@ export class EventsChartManager {
 				text: sutpen_label,
 				textposition: textposition_sutpen_plot
 			}];
-
-			const layouts = this.createLayouts(sutpen_x_tickvals, sutpen_y_tickvals, sutpen_x_range, sutpen_y_range,
-				absalom_x_tickvals, absalom_x_ticktext, absalom_x_range, absalom_y_tickvals, absalom_y_range);
+			const layouts = this.createLayouts(
+				TICK_VALUES.SUTPEN_X, TICK_VALUES.SUTPEN_Y, CHART_RANGES.SUTPEN_X, CHART_RANGES.SUTPEN_Y,
+				TICK_VALUES.ABSALOM_X, TICK_VALUES.ABSALOM_X_TEXT, CHART_RANGES.ABSALOM_X,
+				TICK_VALUES.ABSALOM_Y, CHART_RANGES.ABSALOM_Y
+			);
 
 			await Plotly.newPlot('plotchart', {
 				data: plotData,
@@ -864,11 +791,7 @@ export class EventsChartManager {
 				}
 			});
 
-			this.frames = this.createFrames(x_sutpen_plot, y_sutpen, sutpen_label, textposition_sutpen_plot,
-				x_sutpen_story, textposition_sutpen_story, absalom_x_plot, absalom_y_all, absalom_major_event,
-				absalom_label, absalom_pagenumber, absalom_textposition_plot, absalom_y_narrated, absalom_y_told, absalom_y_other,
-				absalom_x_story, absalom_startdate, absalom_major_event_date,
-				absalom_startdate_decimal, absalom_major_event_date_decimal, this.hoverstring, layouts);
+			this.frames = this.createFrames(data, layouts);
 
 			this.chartReady = true;
 
@@ -896,7 +819,6 @@ export class EventsChartManager {
 			this.chartReady = false;
 		});
 	}
-
 
 
 }

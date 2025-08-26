@@ -6,12 +6,12 @@ export class ScrollytellProgressManager {
         this.sections = new Map();
         this.initialized = false;
         this.clickHandlers = new Map();
-        // ✅ IMPROVED: More robust tile click tracking
+        //  IMPROVED: More robust tile click tracking
         this.lastTileClickTime = 0;
-        this.tileClickCooldown = 1000; // ✅ Increased to 1 second
+        this.tileClickCooldown = 1000; //  Increased to 1 second
         this.lastClickedSection = null;
-        this.isNavigatingToStep = false; // ✅ NEW: Flag to indicate active navigation
-        this.targetStepIndex = null; // ✅ NEW: Track target step during navigation
+        this.isNavigatingToStep = false; //  NEW: Flag to indicate active navigation
+        this.targetStepIndex = null; //  NEW: Track target step during navigation
     }
 
     init() {
@@ -99,11 +99,11 @@ export class ScrollytellProgressManager {
         config.tilesContainer.appendChild(fragment);
     }
 
-    // ✅ ENHANCED: Better navigation with proper scroll suppression
+    //  ENHANCED: Better navigation with proper scroll suppression
     navigateToStep(sectionName, targetStepIndex) {
         console.log(`🎯 TILE NAVIGATION: Jumping to ${sectionName} step ${targetStepIndex + 1}`);
 
-        // ✅ Set navigation flags to suppress scroll handlers
+        //  Set navigation flags to suppress scroll handlers
         this.isNavigatingToStep = true;
         this.targetStepIndex = targetStepIndex;
         this.lastTileClickTime = Date.now();
@@ -128,16 +128,16 @@ export class ScrollytellProgressManager {
             this.triggerEventsStep(targetStepIndex);
         }
 
-        // ✅ IMPROVED: Scroll with better timing
+        //  IMPROVED: Scroll with better timing
         this.scrollToStepWithSuppressionTimeout(sectionName, targetStepIndex);
     }
 
-    // ✅ NEW: Scroll with proper timeout to clear navigation flags
+    //  NEW: Scroll with proper timeout to clear navigation flags
     scrollToStepWithSuppressionTimeout(sectionName, stepIndex) {
         // Do the scroll
         this.scrollToSectionInstant(sectionName, stepIndex);
         
-        // ✅ Clear navigation flags after a delay to allow scroll to complete
+        //  Clear navigation flags after a delay to allow scroll to complete
         setTimeout(() => {
             this.isNavigatingToStep = false;
             this.targetStepIndex = null;
@@ -145,12 +145,12 @@ export class ScrollytellProgressManager {
         }, this.tileClickCooldown); // Use the same timeout as debouncing
     }
 
-    // ✅ ENHANCED: Much more robust debouncing
+    //  ENHANCED: Much more robust debouncing
     wasRecentTileClick(sectionName = null) {
         const timeSinceClick = Date.now() - this.lastTileClickTime;
         const isRecent = timeSinceClick < this.tileClickCooldown;
         
-        // ✅ IMPROVED: Multiple conditions for suppression
+        //  IMPROVED: Multiple conditions for suppression
         const shouldSuppress = 
             isRecent || // Recent tile click
             this.isNavigatingToStep || // Currently in navigation
@@ -209,7 +209,7 @@ export class ScrollytellProgressManager {
           
             console.log(`🎯 Chart manager last animated step: ${window.eventsChartManager.lastAnimatedStep}`);
 
-            window.eventsChartManager.createChart(stepIndex); // ✅ Changed method name
+            window.eventsChartManager.createChart(stepIndex); //  Changed method name
         } else {
             console.warn('Events chart manager not ready for tile navigation');
         }
@@ -217,7 +217,7 @@ export class ScrollytellProgressManager {
         console.log(`Events step ${stepIndex + 1} activated via tile click`);
     }
 
-    // ✅ ENHANCED: Better scroll targeting to avoid intermediate triggers
+    //  ENHANCED: Better scroll targeting to avoid intermediate triggers
     scrollToSectionInstant(sectionName, stepIndex) {
         console.log(`🎯 Scrolling to ${sectionName} step ${stepIndex}`);
         
@@ -230,14 +230,14 @@ export class ScrollytellProgressManager {
         }
 
         if (stepElement) {
-            // ✅ IMPROVED: Use scrollIntoView with more precise timing
+            //  IMPROVED: Use scrollIntoView with more precise timing
             stepElement.scrollIntoView({
                 behavior: 'auto', // Instant scroll
                 block: 'center',
                 inline: 'nearest'
             });
             
-            console.log(`✅ Scrolled to step element for ${sectionName} step ${stepIndex}`);
+            console.log(` Scrolled to step element for ${sectionName} step ${stepIndex}`);
         } else {
             console.warn(`⚠️ Step element not found for ${sectionName} step ${stepIndex}`);
             
@@ -253,7 +253,7 @@ export class ScrollytellProgressManager {
         }
     }
 
-    // ✅ ENHANCED: Add navigation state to progress updates
+    //  ENHANCED: Add navigation state to progress updates
     updateProgress(sectionName, stepIndex) {
         const section = this.sections.get(sectionName);
         if (!section) return;

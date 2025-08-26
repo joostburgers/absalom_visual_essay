@@ -3,7 +3,9 @@ import { wordsPerSentenceData } from '../data/chart-data.js';
 import { processCSVData } from '../utils/chart-utilities.js';
 import { CHART_CONFIGS } from '../config/chart-configs.js';
 import { faulknerChartStyles } from '../config/faulkner-chart-styles.js';
-// After VideoManager class, add:
+
+//The LanguageCharts Manager handles the initialization and management of language-related charts and scrollytelling interactions on the webpage. The scrollytelling interaction for the language chart is a bit different, because no clicking is possible, so it simply uses the functionality provided by scrollama.
+
 export class LanguageChartsManager {
     constructor() {
         this.languageScrollyManager = null;
@@ -105,40 +107,35 @@ export class LanguageChartsManager {
         const languageScrollyElement = document.getElementById('language-scrolly');
         if (!languageScrollyElement) return;
 
-        const scrolly = d3.select("#language-scrolly");
-        const step = scrolly.select("article").selectAll(".step");
+        const $scrolly = $("#language-scrolly");
+        const $steps = $scrolly.find("article .step");
         const scroller = scrollama();
 
+        const stepElements = $steps.toArray();
+
         const calculateOpacity = (progress) => {
-            console.log('🔧 Progress:', progress, 'Fade in:', CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD, 'Fade out:', CONFIG.LANGUAGE.OPACITY.FADE_OUT_THRESHOLD);
-            
+                      
             if (progress <= CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD) {
                 // Fade in: 0 to 1 as progress goes from 0 to FADE_IN_THRESHOLD
                 const opacity = progress / CONFIG.LANGUAGE.OPACITY.FADE_IN_THRESHOLD;
-                console.log('🔧 Fade IN - Progress:', progress, 'Opacity:', opacity);
                 return opacity;
             } else if (progress >= CONFIG.LANGUAGE.OPACITY.FADE_OUT_THRESHOLD) {
-                // ✅ FIXED: Use correct denominator for fade out
                 const opacity = (1 - progress) / (1 - CONFIG.LANGUAGE.OPACITY.FADE_OUT_THRESHOLD);
-                console.log('🔧 Fade OUT - Progress:', progress, 'Opacity:', opacity);
                 return Math.max(0, opacity); // Ensure opacity doesn't go negative
             }
             // Full opacity in the middle
-            console.log('🔧 Full opacity - Progress:', progress);
             return 1;
         };
 
         const handleStepProgress = (response) => {
             const opacity = calculateOpacity(response.progress);
-            step.each(function(d, i) {
+            stepElements.forEach((element, i) => {
                 if (i === response.index) {
-                    d3.select(this)
-                        .style("opacity", opacity)
-                        .classed("is-active", opacity > CONFIG.LANGUAGE.OPACITY.ACTIVE_THRESHOLD);
+                    element.style.opacity = opacity;
+                    element.classList.toggle('is-active', opacity > CONFIG.LANGUAGE.OPACITY.ACTIVE_THRESHOLD);
                 } else {
-                    d3.select(this)
-                        .style("opacity", 0)
-                        .classed("is-active", false);
+                    element.style.opacity = 0;
+                    element.classList.remove('is-active');
                 }
             });
         };
